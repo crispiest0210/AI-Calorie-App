@@ -7,10 +7,36 @@
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "ios": { "supportsTablet": true, "bundleIdentifier": "dev.nutritiontracker.app" },
-    "android": { "package": "dev.nutritiontracker.app", "edgeToEdgeEnabled": true },
-    "plugins": ["expo-router", "expo-sqlite"],
-    "experiments": { "typedRoutes": true },
-    "extra": { "catalogVersion": "fixtures-seed" }
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "dev.nutritiontracker.app",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Scan a barcode to look up a packaged food. Photos are never taken or stored."
+      }
+    },
+    "android": {
+      "package": "dev.nutritiontracker.app",
+      "edgeToEdgeEnabled": true
+    },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Scan a barcode to look up a packaged food. Photos are never taken or stored."
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "catalogVersion": "fixtures-seed",
+      "apiBaseUrl": "",
+      "supabaseUrl": "",
+      "supabaseAnonKey": ""
+    }
   }
 }

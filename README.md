@@ -4,8 +4,8 @@ A local-first calorie and macro tracker. Every nutrient number on screen traces
 to a named database record; nothing is estimated or inferred.
 
 Built from the [Product & Architecture Spec](https://claude.ai/artifact/27veyRAvDFfsyEg52tw4b9).
-This repository implements **Milestone 1 — Phase 1, the Offline MVP**, together
-with the Phase 0 foundations it stands on.
+This repository implements **Phases 0–2**: the foundations, the offline MVP, and
+accounts, sync and barcode.
 
 ---
 
@@ -26,11 +26,15 @@ network and no telemetry.
 | F8 Offline logging and search | Done — there is no network code in the app at all |
 | F12 History | Done as a 30-day list; charts are Phase 3 |
 | Quick add (calories without a food) | Done |
-| F9 barcode · F10 accounts and sync · F11 recipes · F13 photo · F14 export | Not in Milestone 1 |
+| F9 Barcode scan → branded food | Done |
+| F10 Account and multi-device sync | Done |
+| F14 Export and account deletion | Done |
+| F11 recipes · F13 photo analysis | Not yet — Phases 3 and 4 |
 
-Phase 2 has a head start: every user-data write already records itself in an
-`outbox` table inside the same transaction, so nothing logged offline today is
-invisible to sync when it arrives.
+An account is optional. Everything works without one; signing in adds sync and
+barcode lookup and nothing else. Anything logged before signing in is already
+in the outbox, so the first sync adopts it — that is the local-to-account
+upgrade, with no separate migration step.
 
 ## Layout
 
@@ -38,7 +42,8 @@ invisible to sync when it arrives.
 packages/core        nutrition engine: nutrient codes, decimal math, unit
                      conversion, totals, goals, normalization, formatting
 packages/db          SQLite schema (checked-in SQL), Drizzle mirror,
-                     repositories, the day reader
+                     repositories, the day reader, the client sync engine
+apps/api             Hono API on Postgres: sync, catalog, barcode, export
 packages/tokens      design tokens (light/dark, spacing, type, motion)
 apps/mobile          Expo Router app (iOS + Android from one codebase)
 tools/fdc-import     builds the bundled offline catalog from USDA/OFF data
@@ -59,10 +64,26 @@ catalog into place; everything after that is local reads and writes.
 
 ```bash
 pnpm -r run typecheck
-pnpm -r run test            # 205 tests across engine, database, importer, UI
+pnpm -r run test            # 253 tests: engine, database, importer, UI, API
 pnpm --filter @nt/core test:coverage   # 100% branches — the Phase 0 gate
 pnpm lint
 ```
+
+The API tests need a real Postgres, because row-level security is what they
+check and nothing in memory enforces it. They start an embedded server on their
+own; set `DATABASE_URL` to use one you already have, which is what CI does.
+
+### Running with an account
+
+Accounts are off until the app knows where to talk to. Fill in `expo.extra` in
+`apps/mobile/app.json`:
+
+```json
+{ "apiBaseUrl": "https://…", "supabaseUrl": "https://….supabase.co", "supabaseAnonKey": "…" }
+```
+
+With those blank the app runs in local mode, which is a supported state rather
+than a degraded one.
 
 ## The decisions worth knowing
 
@@ -85,6 +106,18 @@ that.
 
 **Goals are dated.** Editing goals opens a new profile effective today; a day
 read later is still scored against the goals that applied when it was logged.
+
+**Sync is an outbox and a cursor, not a CRDT.** Each write records itself in an
+`outbox` row inside the same transaction, so a crash cannot lose a change.
+Push assigns every row the next value of one global sequence; pull asks for
+everything above the device's cursor. Conflicts are row-level last-writer-wins
+by server arrival order — single-user data is nearly append-only, and field
+level merging was cut for that reason (review R6).
+
+**Row-level security is the second layer, not the only one.** The API checks
+the JWT, and then Postgres checks again: the API connects as a role that does
+not own the tables, and every user table has a policy keyed to the caller.
+Thirteen tests attack that boundary directly as a second user.
 
 **The catalog rebuild is byte-reproducible.** Row ids are derived from provider
 and source reference rather than from the clock, so CI can prove the committed
@@ -141,7 +174,10 @@ with reasons.
 | Repository | `packages/db/test` | outbox atomicity, tombstones and undo, snapshot immutability, goal versioning |
 | Schema drift | `packages/db/test/schema-drift.test.ts` | the SQL migrations and the Drizzle mirror cannot diverge |
 | Importer | `tools/fdc-import/test` | quarantine, barcode uniqueness, size budget, byte-reproducibility |
-| Component | `apps/mobile/__tests__` | accessibility labels, the adjustable gram stepper, over-target copy |
+| Component | `apps/mobile/__tests__` | accessibility labels, the adjustable gram stepper, over-target copy, safe-area insets, database reactivity |
+| API integration | `apps/api/test/api.test.ts` | every endpoint, problem+json, idempotency, rate limits |
+| Security — RLS | `apps/api/test/rls.test.ts` | user B reads and writes nothing of user A, as SQL and through the API |
+| Convergence | `apps/api/test/convergence.test.ts` | two devices, offline edits on both, identical totals; tombstones; export round-trip |
 
 CI additionally bundles the app with Metro, because a broken import resolves
 fine in `tsc` and fails on device.
@@ -156,9 +192,27 @@ Copy states facts ("120 kcal over"), never judgements.
 VoiceOver and TalkBack passes are a manual gate before the phase ships and have
 not been run in this environment.
 
+## Deviations from the spec, and why
+
+**Export returns the document, not a signed URL to a zip.** The spec has
+`GET /v1/me/export` hand back a link to object storage. There is no bucket in
+this milestone — that arrives with photo analysis in Phase 4 — so the endpoint
+returns the JSON document directly, with the log entries also rendered as CSV
+inside it. The round-trip test asserts the exported numbers reproduce the
+totals the app showed.
+
+**Sign-in is a one-time code by email.** Sign in with Apple and Google are the
+same Supabase flow with a provider token, but both need native configuration
+and a development build to test honestly. Email codes work in Expo Go today;
+the other two are a config change, not a rewrite.
+
 ## Not verified here
 
-The app bundles for iOS and Android and every automated test passes, but it has
-not been run on a simulator or device in this environment. The speed targets
-(5.4) and performance budgets (2.13) need a real device, as does the
-accessibility checklist.
+Every automated test passes and the app bundles for iOS and Android, but:
+
+- It has not been run against a real Supabase project. Auth is exercised with
+  locally-signed HS256 tokens, which is exactly what Supabase issues, but the
+  hosted `/auth/v1/otp` flow has not been hit for real.
+- Barcode scanning has not been tested against a physical barcode.
+- The speed targets (5.4), performance budgets (2.13) and the VoiceOver /
+  TalkBack checklist still need a real device.

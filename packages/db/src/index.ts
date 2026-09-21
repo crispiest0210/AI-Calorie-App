@@ -10,3 +10,4 @@ export * as settings from './repositories/settings';
 export * as outboxRepo from './repositories/outbox';
 export type { FoodDetail, FoodSummary } from './repositories/foods';
 export type { EntryView } from './repositories/entries';
+export * as sync from './sync/index';

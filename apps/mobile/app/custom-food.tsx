@@ -25,7 +25,8 @@ export default function CustomFoodScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ mealSlot?: string; date?: string }>();
 
-  const releaseId = useDbQuery((database) => foodsRepo.activeSourceRelease(database, 'fdc'), []);
+  // A custom food is attributed to the person who typed it, not to USDA.
+  const releaseId = useDbQuery((database) => foodsRepo.activeSourceRelease(database, 'user'), []);
   const [name, setName] = useState('');
   const [brand, setBrand] = useState('');
   const [basis, setBasis] = useState<LabelBasis>('per_serving');
@@ -63,7 +64,11 @@ export default function CustomFoodScreen() {
         setError(`Check those numbers — ${quarantineReasons[0]}.`);
         return;
       }
-      const id = foodsRepo.createCustomFood(db, food, { sourceReleaseId: releaseId ?? 'user', synced: true });
+      if (releaseId === null) {
+        setError('The food catalog is still loading. Try again in a moment.');
+        return;
+      }
+      const id = foodsRepo.createCustomFood(db, food, { sourceReleaseId: releaseId, synced: true });
       successFeedback();
       router.replace({ pathname: '/amount', params: { foodId: id, mealSlot: params.mealSlot, date: params.date } });
     } catch (err) {

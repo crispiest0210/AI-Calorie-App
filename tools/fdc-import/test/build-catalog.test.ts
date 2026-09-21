@@ -57,7 +57,8 @@ describe('buildCatalog', () => {
     const db = new Database(out, { readonly: true });
     const releases = db.prepare('select provider, is_active from source_release').all() as { provider: string; is_active: number }[];
     expect(releases.every((r) => r.is_active === 1)).toBe(true);
-    expect(new Set(releases.map((r) => r.provider))).toEqual(new Set(['fdc', 'off']));
+    // 'user' is shipped so a custom food has somewhere to attribute itself.
+    expect(new Set(releases.map((r) => r.provider))).toEqual(new Set(['fdc', 'off', 'user']));
 
     const hits = db.prepare(`select food.name from food_fts join food on food.id = food_fts.food_id where food_fts match '"broc"*' limit 5`).all();
     expect(hits.length).toBeGreaterThan(0);

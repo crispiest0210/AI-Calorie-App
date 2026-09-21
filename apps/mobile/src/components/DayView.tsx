@@ -29,6 +29,7 @@ import { WaterRow } from './WaterRow';
 import { MealSection } from './MealSection';
 import { Toast } from './Toast';
 import { DayHeader } from './DayHeader';
+import { SyncBadge } from './SyncBadge';
 
 export function DayView({ date, showDateNav }: { date: LocalDate; showDateNav: boolean }) {
   const db = useDb();
@@ -85,6 +86,12 @@ export function DayView({ date, showDateNav }: { date: LocalDate; showDateNav: b
             onChange={setSelectedDate}
             canGoForward={date < localDateOf()}
           />
+        )}
+
+        {showDateNav && (
+          <View style={{ paddingHorizontal: spacing.lg, paddingTop: spacing.xs }}>
+            <SyncBadge />
+          </View>
         )}
 
         <Card style={{ alignItems: 'center', gap: spacing.lg }}>

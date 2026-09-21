@@ -14,3 +14,4 @@ export * from './dates';
 export * from './ids';
 export * as schemas from './schemas';
 export * from './fdc-adapters';
+export * from './sync-contracts';

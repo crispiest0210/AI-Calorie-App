@@ -160,6 +160,7 @@ export default function LogSheet() {
           backgroundColor: colors.surface,
         }}
       >
+        <ActionButton label="Scan" hint="Look up a packaged food by its barcode" onPress={() => router.replace({ pathname: '/scan', params: { mealSlot, date } })} />
         <ActionButton label="Quick add" hint="Log calories without a food" onPress={() => router.replace({ pathname: '/quick-add', params: { mealSlot, date } })} />
         <ActionButton label="New food" hint="Type in a nutrition label" onPress={() => router.replace({ pathname: '/custom-food', params: { mealSlot, date } })} />
       </Row>

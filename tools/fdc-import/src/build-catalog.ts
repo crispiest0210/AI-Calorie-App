@@ -80,7 +80,7 @@ export function buildCatalog(records: readonly SourcedRecord[], options: Options
   }
 
   const releases = new Map<string, string>();
-  const releaseFor = (provider: 'fdc' | 'off') => {
+  const releaseFor = (provider: 'fdc' | 'off' | 'user') => {
     const existing = releases.get(provider);
     if (existing) return existing;
     const id = stableId('release', `${provider}:${options.version}`);
@@ -88,7 +88,7 @@ export function buildCatalog(records: readonly SourcedRecord[], options: Options
       .values({
         id,
         provider,
-        dataset: provider === 'fdc' ? options.source : 'barcode_cache',
+        dataset: provider === 'fdc' ? options.source : provider === 'off' ? 'barcode_cache' : 'custom',
         version: options.version,
         releasedOn: /^\d{4}-\d{2}-\d{2}$/.test(options.version) ? options.version : null,
         importedAt: now,
@@ -99,6 +99,10 @@ export function buildCatalog(records: readonly SourcedRecord[], options: Options
     releases.set(provider, id);
     return id;
   };
+
+  // Foods the user types in are their own provenance, not USDA's. The release
+  // row has to exist before one can be saved, so the catalog ships with it.
+  releaseFor('user');
 
   const report: BuildReport = { imported: 0, quarantined: [], warnings: 0, bytes: 0, byTier: {} };
   const seenGtin = new Set<string>();

@@ -8,6 +8,27 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+
+    # The API and RLS tests need a real Postgres: row-level security is the
+    # thing under test and no in-memory substitute enforces it. Locally the
+    # harness starts an embedded server instead.
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nutrition
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/nutrition
+
     steps:
       - uses: actions/checkout@v4
 
@@ -29,8 +50,9 @@ jobs:
         run: pnpm lint
 
       # Engine unit, property and golden tests; repository and sync-outbox
-      # tests; catalog import tests. Coverage thresholds live in each package's
-      # vitest config — packages/core must stay at 100% branches (Phase 0 gate).
+      # tests; catalog import tests; API integration, RLS and two-device
+      # convergence tests. Coverage thresholds live in each package's vitest
+      # config — packages/core must stay at 100% branches (Phase 0 gate).
       - name: Test
         run: pnpm -r run test
 
