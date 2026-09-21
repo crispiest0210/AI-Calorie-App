@@ -90,3 +90,30 @@ export function codeForFdcNutrientId(fdcId: number): NutrientCode | null {
   }
   return null;
 }
+
+/**
+ * Categories surfaced first when browsing for a meal. These are the source's
+ * own names — USDA's FNDDS groups foods by what people actually eat, and SR
+ * Legacy carries the named restaurant items — so nothing here is invented.
+ * Every other category is still reachable; this is only the order.
+ */
+export const FEATURED_MEAL_CATEGORIES: readonly string[] = [
+  'Burgers',
+  'Pizza',
+  'Chicken fillet sandwiches',
+  'Deli and cured meat sandwiches',
+  'Egg/breakfast sandwiches',
+  'Burritos and tacos',
+  'Fast Foods',
+  'Restaurant Foods',
+  'Coffee',
+  'Rice mixed dishes',
+  'Pasta mixed dishes, excludes macaroni and cheese',
+  'Meat mixed dishes',
+  'Poultry mixed dishes',
+  'Chicken, whole pieces',
+  'Eggs and omelets',
+  'Soups, broth-based',
+  'French fries and other fried white potatoes',
+  'Smoothies and grain drinks',
+];

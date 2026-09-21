@@ -222,6 +222,25 @@ describe('normalizeFdcFood', () => {
     expect(result.warnings[0]).toContain('vitamin_c_mg');
   });
 
+  it('drops a portion whose label is only a source code or a placeholder', () => {
+    const result = normalizeFdcFood({
+      ...baseFdc,
+      foodPortions: [
+        { portionDescription: '10043', gramWeight: 158 },
+        { portionDescription: 'Quantity not specified', gramWeight: 145 },
+        { amount: 1, modifier: '61479', gramWeight: 50 },
+        { portionDescription: '1 hamburger', gramWeight: 145 },
+      ],
+    });
+    expect(result.ok && result.food.portions).toEqual([{ label: '1 hamburger', gramWeight: '145', source: 'fdc' }]);
+  });
+
+  it('carries the source’s own food grouping through', () => {
+    expect(normalizeFdcFood({ ...baseFdc, category: '  Burgers  ' })).toMatchObject({ food: { category: 'Burgers' } });
+    expect(normalizeFdcFood({ ...baseFdc, category: '  ' })).toMatchObject({ food: { category: null } });
+    expect(normalizeFdcFood(baseFdc)).toMatchObject({ food: { category: null } });
+  });
+
   it('drops portions with no weight or no label', () => {
     const result = normalizeFdcFood({
       ...baseFdc,

@@ -238,6 +238,7 @@ describe('two devices', () => {
         qualityTier: 'user',
         sourceRef: 'user',
         densityGPerMl: null,
+        category: null,
         nutrients: [
           { code: 'energy_kcal', amountPer100g: '450', derivation: 'reported' },
           { code: 'protein_g', amountPer100g: '12.5', derivation: 'reported' },

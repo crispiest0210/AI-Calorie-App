@@ -1,0 +1,893 @@
+{
+ "foods": [
+  {
+   "fdcId": 2707176,
+   "description": "Duck egg, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 11.96
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 18.55
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.36
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 224
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.88
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 60
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.6
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 208
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 264
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 828
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 4.927
+    }
+   ]
+  },
+  {
+   "fdcId": 2707177,
+   "description": "Goose egg, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 12.94
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 18.09
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.27
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 224
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.89
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 57
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.4
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 197
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 256
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 799
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 4.847
+    }
+   ]
+  },
+  {
+   "fdcId": 2707153,
+   "description": "Egg, whole, cooked, NS as to cooking method",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 11.84
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 13.86
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.92
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 176
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.19
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 46
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.6
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 126
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 195
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 392
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.636
+    }
+   ]
+  },
+  {
+   "fdcId": 173423,
+   "description": "Egg, whole, cooked, fried",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.89
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 207
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13.6
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 401
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 4.32
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 14.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.83
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.4
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 62
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 152
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 821
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 196
+    }
+   ]
+  },
+  {
+   "fdcId": 172185,
+   "description": "Egg, whole, cooked, omelet",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.6
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 313
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.32
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.48
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 155
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 11.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.64
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.31
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 48
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 117
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 643
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 154
+    }
+   ]
+  },
+  {
+   "fdcId": 172186,
+   "description": "Egg, whole, cooked, poached",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 143
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 597
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 138
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 9.47
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.71
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.37
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 56
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 12.5
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.75
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 297
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 370
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.11
+    }
+   ]
+  },
+  {
+   "fdcId": 172187,
+   "description": "Egg, whole, cooked, scrambled",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 1.39
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.31
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 145
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.99
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 277
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.33
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 11
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.61
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 66
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 132
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 621
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 149
+    }
+   ]
+  },
+  {
+   "fdcId": 169732,
+   "description": "Noodles, egg, enriched, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 578
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.419
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 25.2
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 138
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.47
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 2.07
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.4
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 12
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 38
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.54
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.2
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 29
+    }
+   ]
+  },
+  {
+   "fdcId": 2707203,
+   "description": "Egg omelet or scrambled egg, made with cooking spray",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 12.24
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 10.61
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.15
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 149
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.2
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 48
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.65
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 130
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 243
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 406
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.209
+    }
+   ]
+  },
+  {
+   "fdcId": 2707171,
+   "description": "Egg, white, cooked, fat added",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.99
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 5.72
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.21
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 100
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.67
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.08
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 153
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 282
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.496
+    }
+   ]
+  },
+  {
+   "fdcId": 2707170,
+   "description": "Egg, white, cooked, no added fat",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.67
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.35
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 52
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.71
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.08
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 163
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 281
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 2707169,
+   "description": "Egg, white, cooked, NS as to fat",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.99
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 5.72
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.21
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 100
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.67
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.08
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 153
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 282
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.496
+    }
+   ]
+  }
+ ]
+}

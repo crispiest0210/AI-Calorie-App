@@ -95,6 +95,7 @@ describe('buildCatalog', () => {
           qualityTier: 'crowd' as const,
           sourceRef: name,
           densityGPerMl: null,
+          category: null,
           nutrients: [{ code: 'energy_kcal' as const, amountPer100g: '100', derivation: 'reported' as const }],
           portions: [],
         },

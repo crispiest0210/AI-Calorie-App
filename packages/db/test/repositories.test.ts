@@ -104,6 +104,44 @@ describe('food search', () => {
   });
 });
 
+describe('meal browsing', () => {
+  function withCategories() {
+    const { db } = freshDb();
+    for (let i = 0; i < 4; i += 1) {
+      catalogFood(db, `Hamburger variant ${i}`, { energy_kcal: '250' }, { category: 'Burgers' });
+    }
+    catalogFood(db, 'Hamburger, NFS', { energy_kcal: '254' }, { category: 'Burgers' });
+    for (let i = 0; i < 3; i += 1) {
+      catalogFood(db, `Coffee variant ${i}`, { energy_kcal: '2' }, { category: 'Coffee' });
+    }
+    catalogFood(db, 'Lonely food', { energy_kcal: '100' }, { category: 'Obscure things' });
+    catalogFood(db, 'Uncategorised', { energy_kcal: '100' });
+    return db;
+  }
+
+  it('lists categories with featured ones first', () => {
+    const db = withCategories();
+    const categories = foods.mealCategories(db);
+    expect(categories[0]).toMatchObject({ category: 'Burgers', count: 5, featured: true });
+    expect(categories[1]).toMatchObject({ category: 'Coffee', count: 3, featured: true });
+  });
+
+  it('leaves out categories too thin to browse, and foods with none', () => {
+    const db = withCategories();
+    const names = foods.mealCategories(db).map((c) => c.category);
+    expect(names).not.toContain('Obscure things');
+    expect(names.every((n) => n !== null)).toBe(true);
+  });
+
+  it('lists a category’s foods, plainest first', () => {
+    const db = withCategories();
+    const names = foods.foodsInCategory(db, 'Burgers').map((f) => f.name);
+    expect(names[0]).toBe('Hamburger, NFS');
+    expect(names).toHaveLength(5);
+    expect(foods.foodsInCategory(db, 'Nothing here')).toEqual([]);
+  });
+});
+
 describe('food detail', () => {
   it('returns nutrients and portions together', () => {
     const { db } = freshDb();

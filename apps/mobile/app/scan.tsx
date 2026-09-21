@@ -75,6 +75,7 @@ export default function ScanScreen() {
               qualityTier: food.qualityTier,
               sourceRef: food.source.sourceRef ?? gtin,
               densityGPerMl: food.densityGPerMl,
+              category: null,
               nutrients: Object.entries(food.nutrientsPer100g).map(([code, amount]) => ({
                 code: code as never,
                 amountPer100g: amount as string,

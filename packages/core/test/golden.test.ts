@@ -91,6 +91,27 @@ describe('golden: FoodData Central', () => {
     }
   });
 
+  it('never offers a portion whose label is a source code or a placeholder', () => {
+    // FNDDS writes the portion description as a numeric code, and uses a
+    // literal "Quantity not specified" row where no serving is stated. Neither
+    // means anything to a person, so neither may reach the picker.
+    for (const { sourceRef, result } of fdc) {
+      if (!result.ok) continue;
+      for (const portion of result.food.portions) {
+        expect(portion.label, sourceRef).not.toMatch(/^\d+$/);
+        expect(portion.label.toLowerCase(), sourceRef).not.toBe('quantity not specified');
+        expect(portion.label.trim(), sourceRef).not.toBe('');
+      }
+    }
+  });
+
+  it('gives most records at least one household serving to log by', () => {
+    const ok = fdc.filter((r) => r.result.ok);
+    const detailed = ok.filter((r) => r.result.ok && r.result.food.portions.length > 0);
+    // Search-hit fixtures carry no portions at all; the detail records do.
+    expect(detailed.length).toBeGreaterThan(0);
+  });
+
   it('stores every value as a plain decimal string', () => {
     for (const { result } of fdc) {
       if (!result.ok) continue;

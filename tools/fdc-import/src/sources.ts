@@ -33,6 +33,17 @@ function jsonFiles(dir: string): string[] {
   return readdirSync(dir).filter((f) => f.endsWith('.json')).sort().map((f) => path.join(dir, f));
 }
 
+/**
+ * Bulk files name their dataset in the wrapping key, and the rows inside do
+ * not repeat it — so the key is where `dataType` comes from.
+ */
+const BULK_DATA_TYPES: Record<string, string> = {
+  FoundationFoods: 'Foundation',
+  SRLegacyFoods: 'SR Legacy',
+  SurveyFoods: 'Survey (FNDDS)',
+  BrandedFoods: 'Branded',
+};
+
 /** FDC hands the same food back as a search hit, a detail record, or a bulk row. */
 export function fdcRecordsFrom(body: unknown): { ref: string; result: NormalizeResult }[] {
   const out: { ref: string; result: NormalizeResult }[] = [];
@@ -51,11 +62,12 @@ export function fdcRecordsFrom(body: unknown): { ref: string; result: NormalizeR
     return out;
   }
   // Bulk downloads nest under the dataset name, e.g. { FoundationFoods: [...] }.
-  for (const value of Object.values(obj)) {
+  for (const [key, value] of Object.entries(obj)) {
     if (!Array.isArray(value)) continue;
+    const dataType = BULK_DATA_TYPES[key];
     for (const record of value as FdcDetailRecord[]) {
       if (typeof record?.fdcId !== 'number') continue;
-      push(record, true);
+      push(dataType === undefined ? record : { ...record, dataType: record.dataType ?? dataType }, true);
     }
   }
   return out;

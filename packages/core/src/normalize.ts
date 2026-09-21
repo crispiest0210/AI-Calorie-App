@@ -44,6 +44,8 @@ export interface CanonicalFood {
   qualityTier: QualityTier;
   sourceRef: string;
   densityGPerMl: Num | null;
+  /** The source's own grouping, e.g. "Burgers". Used to browse by meal. */
+  category: string | null;
   nutrients: CanonicalNutrient[];
   portions: CanonicalPortion[];
 }
@@ -149,6 +151,8 @@ export interface FdcFoodRecord {
   householdServingFullText?: string | null;
   /** Branded records may report per serving; per 100 g is assumed otherwise. */
   nutrientBasis?: 'per_100g' | 'per_serving';
+  /** FNDDS "wweia" grouping, or the Foundation/SR Legacy food category. */
+  category?: string | null;
 }
 
 export function qualityTierForFdcDataType(dataType: string): QualityTier | null {
@@ -166,11 +170,21 @@ export function qualityTierForFdcDataType(dataType: string): QualityTier | null 
   }
 }
 
+/**
+ * FNDDS uses a numeric code where a label should be ("10043"), and a literal
+ * "Quantity not specified" row for records with no stated serving. Neither
+ * tells a person anything, so neither becomes a portion — and no portion is
+ * invented to replace them (spec 2.6.5).
+ */
+const UNUSABLE_PORTION = /^(quantity not specified|\d+)$/i;
+
 function fdcPortionLabel(row: FdcPortionRow): string {
-  if (row.portionDescription) return row.portionDescription.trim();
+  const described = row.portionDescription?.trim();
+  if (described) return UNUSABLE_PORTION.test(described) ? '' : described;
   const words = [row.measureUnitName, row.modifier]
     .filter((p): p is string => typeof p === 'string' && p !== '' && p !== 'undetermined')
-    .map((p) => p.trim());
+    .map((p) => p.trim())
+    .filter((p) => !UNUSABLE_PORTION.test(p));
   // "1" on its own says nothing; a portion needs a unit or a modifier to be useful.
   if (words.length === 0) return '';
   return `${row.amount ?? 1} ${words.join(' ')}`;
@@ -266,6 +280,7 @@ export function normalizeFdcFood(record: FdcFoodRecord): NormalizeResult {
       qualityTier: tier,
       sourceRef,
       densityGPerMl: null,
+      category: record.category?.trim() || null,
       nutrients,
       portions,
     },
@@ -367,6 +382,7 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
       qualityTier: 'crowd',
       sourceRef,
       densityGPerMl: null,
+      category: null,
       nutrients,
       portions,
     },

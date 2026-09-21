@@ -23,7 +23,8 @@ describe('migrations', () => {
     const tables = sqlite.prepare("select name from sqlite_master where type='table' order by name").all() as { name: string }[];
     expect(tables.map((t) => t.name)).toContain('log_entry');
     expect(tables.map((t) => t.name)).toContain('food_fts');
-    expect(sqlite.prepare('select count(*) as n from schema_migration').get()).toEqual({ n: 1 });
+    // One row per checked-in migration file.
+    expect(sqlite.prepare('select count(*) as n from schema_migration').get()).toEqual({ n: MIGRATIONS.length });
     void db;
   });
 

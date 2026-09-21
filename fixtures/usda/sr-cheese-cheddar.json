@@ -1,0 +1,883 @@
+{
+ "foods": [
+  {
+   "fdcId": 2705709,
+   "description": "Cheese, Cheddar",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 23.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 34
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.44
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 409
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.33
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 707
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.16
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 77
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 654
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 100
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 19.2
+    }
+   ]
+  },
+  {
+   "fdcId": 2705710,
+   "description": "Cheese, Cheddar, reduced fat",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 27.35
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 20.41
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.67
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 316
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.26
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 761
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.12
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 63
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 628
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 76
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 12.602
+    }
+   ]
+  },
+  {
+   "fdcId": 2705773,
+   "description": "Cheese spread, American or Cheddar cheese base",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 16.41
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 21.23
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.73
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 290
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 7.32
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 562
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.33
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 242
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1625
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 55
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 13.327
+    }
+   ]
+  },
+  {
+   "fdcId": 2705797,
+   "description": "Cheese sandwich, cheddar cheese, on white bread",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 15.14
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 16.11
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 29.95
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 325
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.28
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.4
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 415
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.04
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 101
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 534
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 41
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.389
+    }
+   ]
+  },
+  {
+   "fdcId": 2705798,
+   "description": "Cheese sandwich, cheddar cheese, on wheat bread",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 16.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 16.34
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 27.72
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 323
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.2
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.2
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 386
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.92
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 143
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 528
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.1
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 41
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.329
+    }
+   ]
+  },
+  {
+   "fdcId": 169901,
+   "description": "Cheese, american cheddar, imitation",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 7.74
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 16.7
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 36
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.79
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1000
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.33
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1340
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 14
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 11.6
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 239
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 562
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 242
+    }
+   ]
+  },
+  {
+   "fdcId": 2705739,
+   "description": "Cheese, Cheddar, reduced sodium",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 24.35
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 32.62
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.91
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 398
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.49
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 703
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.72
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 112
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 21
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 100
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 20.768
+    }
+   ]
+  },
+  {
+   "fdcId": 170899,
+   "description": "Cheese, cheddar, sharp, sliced",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 24.2
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1720
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.16
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 644
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 99
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 19.4
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 33.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.13
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 410
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.27
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 711
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 76
+    }
+   ]
+  },
+  {
+   "fdcId": 2705804,
+   "description": "Grilled cheese sandwich, cheddar cheese, on white bread",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13.38
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 23.26
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 26.38
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 368
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 2.92
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.2
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 367
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 91
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 541
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 53
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 11.299
+    }
+   ]
+  },
+  {
+   "fdcId": 2705805,
+   "description": "Grilled cheese sandwich, cheddar cheese, on wheat bread",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 14.4
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 23.46
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 24.42
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 366
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 2.85
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 342
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.69
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 128
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 536
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.1
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 53
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 11.247
+    }
+   ]
+  },
+  {
+   "fdcId": 2705711,
+   "description": "Cheese, Cheddar, nonfat or fat free",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 32.14
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.14
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 157
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 893
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 66
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1000
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 18
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 171295,
+   "description": "Cheese, cheddar, nonfat or fat free",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.14
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 157
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 893
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 66
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 32.1
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 657
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1000
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 18
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  }
+ ]
+}

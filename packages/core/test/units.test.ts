@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { availableUnits, gramsToUnit, resolveGrams, type FoodMeasureInfo } from '../src/units';
+import { availableUnits, defaultAmount, gramsToUnit, resolveGrams, type FoodMeasureInfo } from '../src/units';
 
 const cup = { id: 'p1', label: '1 cup, cooked', gramWeight: '158', source: 'fdc' as const };
 const rice: FoodMeasureInfo = { densityGPerMl: null, portions: [cup] };
@@ -29,10 +29,16 @@ describe('resolveGrams', () => {
 });
 
 describe('unit pickers', () => {
-  it('offers only units the food supports', () => {
-    expect(availableUnits(rice)).toEqual(['g', 'portion']);
+  it('offers only units the food supports, servings first', () => {
+    expect(availableUnits(rice)).toEqual(['portion', 'g']);
     expect(availableUnits(milk)).toEqual(['g', 'ml']);
     expect(availableUnits({ densityGPerMl: null, portions: [] })).toEqual(['g']);
+  });
+
+  it('opens on the source’s serving, and falls back to grams', () => {
+    expect(defaultAmount(rice)).toEqual({ unit: 'portion', portionId: 'p1', value: '1' });
+    expect(defaultAmount(milk)).toEqual({ unit: 'g', portionId: null, value: '100' });
+    expect(defaultAmount({ densityGPerMl: null, portions: [] })).toEqual({ unit: 'g', portionId: null, value: '100' });
   });
 
   it('converts grams back for the amount field', () => {

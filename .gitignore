@@ -10,3 +10,4 @@ data/fdc/
 *.sqlite-journal
 !apps/mobile/assets/catalog.sqlite
 .DS_Store
+data/fdc/*.done

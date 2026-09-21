@@ -46,6 +46,7 @@ export function catalogFood(db: Db, name: string, per100g: Record<string, string
     qualityTier: 'lab',
     sourceRef: name,
     densityGPerMl: null,
+    category: null,
     nutrients: Object.entries(per100g).map(([code, amountPer100g]) => ({ code: code as never, amountPer100g, derivation: 'reported' as const })),
     portions: [],
     ...extra,

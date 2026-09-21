@@ -1,0 +1,888 @@
+{
+ "foods": [
+  {
+   "fdcId": 175237,
+   "description": "Beans, black, mature seeds, cooked, boiled, with salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 552
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.7
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.32
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.1
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 237
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.86
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.139
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.54
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 23.7
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 132
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 27
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 355
+    }
+   ]
+  },
+  {
+   "fdcId": 175239,
+   "description": "Beans, black turtle, mature seeds, cooked, boiled, with salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.3
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 544
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.32
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.35
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 24.4
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 130
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 55
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 433
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.089
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.85
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 239
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.18
+    }
+   ]
+  },
+  {
+   "fdcId": 173735,
+   "description": "Beans, black, mature seeds, cooked, boiled, without salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 552
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.32
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 27
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 355
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.54
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 23.7
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 132
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.86
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.7
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.1
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.139
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 2707395,
+   "description": "Black bean salad",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.08
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.85
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 12.61
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 94
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.53
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.4
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 20
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.9
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 211
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 350
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 4.4
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.567
+    }
+   ]
+  },
+  {
+   "fdcId": 2707404,
+   "description": "Black bean sauce",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 6.28
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 8.45
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 17.36
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 168
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 9.26
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.6
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 27
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.26
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 307
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 5843
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.263
+    }
+   ]
+  },
+  {
+   "fdcId": 2707366,
+   "description": "Black beans with meat",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.61
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 6.81
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 19.06
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 177
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.36
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 7
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 24
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.95
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 328
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 275
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 11
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.155
+    }
+   ]
+  },
+  {
+   "fdcId": 2707359,
+   "description": "Black beans, NFS",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.23
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 7.01
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 22.04
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 181
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.3
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.1
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 25
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.96
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 330
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 217
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.999
+    }
+   ]
+  },
+  {
+   "fdcId": 175187,
+   "description": "Beans, black turtle, mature seeds, cooked, boiled, without salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.3
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 24.4
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 544
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 130
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.32
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.35
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 55
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 433
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.18
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.85
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 3
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.089
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 2709871,
+   "description": "Bean sprouts, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 6.93
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.08
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 116
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 2.83
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.3
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 56
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.8
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 299
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 126
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 6.3
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 2
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.306
+    }
+   ]
+  },
+  {
+   "fdcId": 2707367,
+   "description": "Fava beans, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.06
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 6.88
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 18.26
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 161
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 1.69
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 34
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.4
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 249
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 220
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.3
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.931
+    }
+   ]
+  },
+  {
+   "fdcId": 2707389,
+   "description": "Mung beans, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 6.52
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 6.86
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 17.8
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 156
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 1.86
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 7.1
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 25
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.31
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 247
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 218
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.9
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.977
+    }
+   ]
+  },
+  {
+   "fdcId": 2707370,
+   "description": "Pink beans, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.42
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 6.96
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 25.94
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 197
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.34
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.9
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 49
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.15
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 472
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 218
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.987
+    }
+   ]
+  }
+ ]
+}

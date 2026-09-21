@@ -13,7 +13,8 @@
     "lint": "eslint .",
     "catalog:seed": "pnpm --filter @nt/fdc-import run seed",
     "catalog:import": "pnpm --filter @nt/fdc-import run import",
-    "catalog:build": "pnpm --filter @nt/fdc-import run seed"
+    "catalog:build": "pnpm --filter @nt/fdc-import run import",
+    "catalog:fetch": "pnpm --filter @nt/fdc-import run fetch:bulk"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

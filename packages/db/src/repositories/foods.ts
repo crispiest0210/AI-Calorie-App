@@ -4,6 +4,7 @@
  */
 import { and, desc, eq, isNull, sql } from 'drizzle-orm';
 import {
+  FEATURED_MEAL_CATEGORIES,
   uuidv7,
   type CanonicalFood,
   type NutrientMap,
@@ -22,6 +23,7 @@ export interface FoodSummary {
   kind: FoodKind;
   qualityTier: QualityTier;
   energyPer100g: string | null;
+  category?: string | null;
 }
 
 export interface FoodDetail extends FoodSummary {
@@ -166,6 +168,59 @@ export function myFoods(db: Db, limit = 50): FoodSummary[] {
   `);
 }
 
+export interface FoodCategory {
+  category: string;
+  count: number;
+  featured: boolean;
+}
+
+/**
+ * Categories to browse when looking for a meal rather than an ingredient.
+ * Featured ones lead; everything else follows by how much it holds, so the
+ * long tail stays reachable without being in the way.
+ */
+export function mealCategories(db: Db, limit = 60): FoodCategory[] {
+  const rows = db.all<{ category: string; count: number }>(sql`
+    select category, count(*) as count
+    from food
+    where category is not null and deleted_at is null and superseded_by is null
+    group by category
+    having count(*) >= 3
+    order by count desc
+  `);
+
+  const byName = new Map(rows.map((row) => [row.category, row.count]));
+  const featured: FoodCategory[] = [];
+  for (const name of FEATURED_MEAL_CATEGORIES) {
+    const count = byName.get(name);
+    if (count === undefined) continue;
+    featured.push({ category: name, count, featured: true });
+    byName.delete(name);
+  }
+
+  const rest = [...byName.entries()]
+    .map(([category, count]) => ({ category, count, featured: false }))
+    .sort((a, b) => b.count - a.count);
+
+  return [...featured, ...rest].slice(0, limit);
+}
+
+export function foodsInCategory(db: Db, category: string, limit = 60): FoodSummary[] {
+  return db.all<FoodSummary>(sql`
+    select food.id, food.name, food.brand, food.kind, food.quality_tier as "qualityTier",
+           food.category, ${ENERGY} as "energyPer100g"
+    from food
+    where food.category = ${category}
+      and food.deleted_at is null
+      and food.superseded_by is null
+    order by
+      case when upper(food.name) like '%, NFS' then 0 else 1 end,
+      length(food.name) asc,
+      food.name asc
+    limit ${limit}
+  `);
+}
+
 export function foodDetail(db: Db, id: string): FoodDetail | null {
   const row = db.select().from(food).where(and(eq(food.id, id), isNull(food.deletedAt))).get();
   if (!row) return null;
@@ -221,6 +276,7 @@ export function insertFood(tx: Writer, canonical: CanonicalFood, options: Insert
       sourceRef: canonical.sourceRef,
       qualityTier: canonical.qualityTier,
       densityGPerMl: canonical.densityGPerMl,
+      category: canonical.category,
       supersededBy: null,
       serverRev: null,
       updatedAt: synced ? now : null,

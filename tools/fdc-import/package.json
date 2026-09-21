@@ -10,7 +10,8 @@
     "fetch:off": "node src/fetch-off.mjs",
     "prune": "node src/prune-fixtures.mjs",
     "seed": "tsx src/build-catalog.ts --source=fixtures",
-    "import": "tsx src/build-catalog.ts --source=bulk"
+    "import": "tsx src/build-catalog.ts --source=bulk",
+    "fetch:bulk": "node src/fetch-bulk.mjs"
   },
   "dependencies": {
     "@nt/core": "workspace:*",

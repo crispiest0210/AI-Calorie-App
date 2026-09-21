@@ -20,8 +20,9 @@ export interface FdcSearchHit {
 
 export interface FdcDetailRecord {
   fdcId: number;
-  description: string;
+  /** Bulk survey rows carry no dataType; the loader supplies it. */
   dataType: string;
+  description: string;
   foodNutrients?: ReadonlyArray<{ nutrient?: { id: number; unitName: string } | null; amount?: number | string | null }>;
   foodPortions?: ReadonlyArray<{
     amount?: number | null;
@@ -36,6 +37,18 @@ export interface FdcDetailRecord {
   servingSize?: number | null;
   servingSizeUnit?: string | null;
   householdServingFullText?: string | null;
+  /** FNDDS grouping; Foundation and SR Legacy use `foodCategory` instead. */
+  wweiaFoodCategory?: { wweiaFoodCategoryDescription?: string | null } | null;
+  foodCategory?: { description?: string | null } | string | null;
+}
+
+function categoryOf(record: { wweiaFoodCategory?: { wweiaFoodCategoryDescription?: string | null } | null; foodCategory?: { description?: string | null } | string | null }): string | null {
+  const wweia = record.wweiaFoodCategory?.wweiaFoodCategoryDescription;
+  if (typeof wweia === 'string' && wweia.trim() !== '') return wweia.trim();
+  const category = record.foodCategory;
+  if (typeof category === 'string') return category.trim() || null;
+  const described = category?.description;
+  return typeof described === 'string' && described.trim() !== '' ? described.trim() : null;
 }
 
 function head(record: FdcSearchHit | FdcDetailRecord) {
@@ -58,7 +71,7 @@ export function fromFdcSearchHit(hit: FdcSearchHit): FdcFoodRecord {
     amount: n.value ?? null,
     unitName: n.unitName,
   }));
-  return { ...head(hit), foodNutrients };
+  return { ...head(hit), category: null, foodNutrients };
 }
 
 export function fromFdcDetail(record: FdcDetailRecord): FdcFoodRecord {
@@ -74,5 +87,5 @@ export function fromFdcDetail(record: FdcDetailRecord): FdcFoodRecord {
     measureUnitName: p.measureUnit?.name ?? null,
     gramWeight: p.gramWeight,
   }));
-  return { ...head(record), foodNutrients, foodPortions };
+  return { ...head(record), category: categoryOf(record), foodNutrients, foodPortions };
 }

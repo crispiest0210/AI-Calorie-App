@@ -62,12 +62,34 @@ export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsR
   }
 }
 
-/** Units the Amount step may offer for a food, in picker order. */
+/**
+ * Units the Amount step may offer, in picker order. A household serving comes
+ * first when the source gives one, because "1 hamburger" is what someone
+ * actually ate; grams stay one tap away for when they weighed it.
+ */
 export function availableUnits(food: FoodMeasureInfo): AmountUnit[] {
-  const units: AmountUnit[] = ['g'];
-  if (food.densityGPerMl !== null) units.push('ml');
+  const units: AmountUnit[] = [];
   if (food.portions.length > 0) units.push('portion');
+  units.push('g');
+  if (food.densityGPerMl !== null) units.push('ml');
   return units;
+}
+
+export interface DefaultAmount {
+  unit: AmountUnit;
+  portionId: string | null;
+  value: Num;
+}
+
+/**
+ * What the Amount step opens on: one of the source's servings when there is
+ * one, otherwise 100 g. No serving is ever invented to fill the gap — a food
+ * whose source lists no portion is logged in grams (spec 2.6.5).
+ */
+export function defaultAmount(food: FoodMeasureInfo): DefaultAmount {
+  const portion = food.portions[0];
+  if (portion !== undefined) return { unit: 'portion', portionId: portion.id, value: '1' };
+  return { unit: 'g', portionId: null, value: '100' };
 }
 
 /** Grams → the amount to show back in a given unit (inverse of resolveGrams). */

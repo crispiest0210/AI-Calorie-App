@@ -62,6 +62,7 @@ export function customFoodFromLabel(input: CustomFoodInput): { food: CanonicalFo
       qualityTier: 'user',
       sourceRef: input.sourceRef ?? 'user',
       densityGPerMl: input.densityGPerMl ?? null,
+      category: null,
       nutrients,
       portions,
     },

@@ -24,6 +24,7 @@ describe('FDC wire shapes', () => {
       servingSize: null,
       servingSizeUnit: null,
       householdServingFullText: null,
+      category: null,
       foodNutrients: [
         { nutrientId: 1008, amount: 123, unitName: 'KCAL' },
         { nutrientId: 1003, amount: null, unitName: 'G' },
@@ -33,6 +34,15 @@ describe('FDC wire shapes', () => {
 
   it('tolerates a hit with no nutrient array', () => {
     expect(fromFdcSearchHit({ fdcId: 1, description: 'x', dataType: 'Foundation' }).foodNutrients).toEqual([]);
+  });
+
+  it('reads the category from either shape of food grouping', () => {
+    expect(fromFdcDetail({ fdcId: 1, description: 'Burger', dataType: 'Survey (FNDDS)', wweiaFoodCategory: { wweiaFoodCategoryDescription: 'Burgers' } }).category).toBe('Burgers');
+    expect(fromFdcDetail({ fdcId: 1, description: 'Rice', dataType: 'SR Legacy', foodCategory: { description: 'Cereal Grains' } }).category).toBe('Cereal Grains');
+    expect(fromFdcDetail({ fdcId: 1, description: 'Rice', dataType: 'SR Legacy', foodCategory: 'Cereal Grains' }).category).toBe('Cereal Grains');
+    expect(fromFdcDetail({ fdcId: 1, description: 'Rice', dataType: 'SR Legacy' }).category).toBeNull();
+    expect(fromFdcDetail({ fdcId: 1, description: 'Rice', dataType: 'SR Legacy', foodCategory: { description: '  ' } }).category).toBeNull();
+    expect(fromFdcDetail({ fdcId: 1, description: 'Rice', dataType: 'SR Legacy', wweiaFoodCategory: { wweiaFoodCategoryDescription: ' ' }, foodCategory: '' }).category).toBeNull();
   });
 
   it('maps a detail record, including the portions only it carries', () => {

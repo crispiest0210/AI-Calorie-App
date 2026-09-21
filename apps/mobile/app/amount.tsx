@@ -3,7 +3,7 @@
  * source actually supports, a live nutrient preview, and the source badge.
  * Entering logs and closes.
  */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
@@ -12,6 +12,7 @@ import {
   MEAL_SLOT_LABELS,
   NUTRIENT_DEFS,
   availableUnits,
+  defaultAmount,
   formatWithUnit,
   gramsToUnit,
   localDateOf,
@@ -31,7 +32,7 @@ import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { SourceBadge } from '@/components/SourceBadge';
 
-const UNIT_LABELS: Record<AmountUnit, string> = { g: 'grams', ml: 'mL', portion: 'portion', kcal: 'cal' };
+const UNIT_LABELS: Record<AmountUnit, string> = { g: 'grams', ml: 'mL', portion: 'servings', kcal: 'cal' };
 
 const FAILURE_COPY: Record<string, string> = {
   amount_not_positive: 'Enter an amount above zero.',
@@ -53,9 +54,37 @@ export default function AmountScreen() {
   const [mealSlot, setMealSlot] = useState<MealSlot>(
     MEAL_SLOTS.includes(params.mealSlot as MealSlot) ? (params.mealSlot as MealSlot) : 'breakfast',
   );
-  const [unit, setUnit] = useState<AmountUnit>((lastAmount?.amountUnit as AmountUnit) ?? 'g');
-  const [portionId, setPortionId] = useState<string | null>(lastAmount?.portionId ?? null);
-  const [value, setValue] = useState<string>(lastAmount?.amountValue ?? '100');
+
+  /**
+   * How the amount is seeded, in order of what the person most likely means:
+   * what they logged last for this food, else one of the source's servings,
+   * else 100 g. Grams are always one tap away in the picker.
+   */
+  const seed = useMemo(() => {
+    if (lastAmount !== null) {
+      return {
+        unit: lastAmount.amountUnit as AmountUnit,
+        portionId: lastAmount.portionId,
+        value: lastAmount.amountValue,
+      };
+    }
+    return food === null ? { unit: 'g' as AmountUnit, portionId: null, value: '100' } : defaultAmount(food);
+  }, [lastAmount, food]);
+
+  const [unit, setUnit] = useState<AmountUnit>(seed.unit);
+  const [portionId, setPortionId] = useState<string | null>(seed.portionId);
+  const [value, setValue] = useState<string>(seed.value);
+  const [seeded, setSeeded] = useState(false);
+
+  // The food and its portions arrive from the first database read, which lands
+  // after the first render, so the seed is applied once it is actually known.
+  useEffect(() => {
+    if (seeded || food === null) return;
+    setUnit(seed.unit);
+    setPortionId(seed.portionId);
+    setValue(seed.value);
+    setSeeded(true);
+  }, [seeded, food, seed]);
 
   const units = useMemo(() => (food === null ? ['g' as const] : availableUnits(food)), [food]);
   const resolved = useMemo(() => {
@@ -139,11 +168,11 @@ export default function AmountScreen() {
           }}
         />
 
-        {unit === 'portion' && (
+        {unit === 'portion' && food.portions.length > 0 && (
           <SegmentedControl
-            label="Portion"
+            label="Serving"
             options={food.portions.map((p) => ({ value: p.id, label: `${p.label} · ${p.gramWeight} g` }))}
-            value={portionId ?? food.portions[0]?.id ?? ''}
+            value={portionId ?? food.portions[0]!.id}
             onChange={setPortionId}
           />
         )}

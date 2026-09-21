@@ -18,7 +18,7 @@ network and no telemetry.
 | --- | --- |
 | F1 Goals: energy, macros (g or % of energy), fiber min, sodium max, water — dated and versioned | Done |
 | F2 Search foods; Recent, Frequent and My foods tabs | Done (local FTS5) |
-| F3 Log a food in grams, mL or a database portion | Done |
+| F3 Log a food by serving, in grams, or in mL | Done — opens on the source's serving |
 | F4 Meal slots; copy a meal from yesterday | Done |
 | F5 Today: totals, remaining, per-meal breakdown | Done |
 | F6 Water quick-adds and custom amounts | Done |
@@ -55,8 +55,15 @@ fixtures/            committed USDA + Open Food Facts records: the golden test
 
 ```bash
 pnpm install
-pnpm catalog:build          # rebuilds apps/mobile/assets/catalog.sqlite
 pnpm --filter @nt/mobile start
+```
+
+The bundled catalog is committed, so this works on a fresh clone. To rebuild it
+from source:
+
+```bash
+pnpm catalog:fetch    # ~17 MB of pinned USDA releases into data/fdc
+pnpm catalog:build    # → apps/mobile/assets/catalog.sqlite
 ```
 
 Then press `i` or `a` in the Expo CLI. The first launch copies the bundled
@@ -100,6 +107,13 @@ nutrients still come from `food_nutrient`.
 any day containing such an entry is shown as *incomplete* rather than quietly
 summing a smaller number.
 
+**Servings come from the source or not at all.** The Amount step opens on one
+of the food's own household servings — "1 hamburger", "1 cup, cooked" — with
+grams one tap away. Where the source lists no serving, the step opens on 100 g
+rather than inventing one (spec 2.6.5). FNDDS writes some portion labels as
+numeric codes and uses a literal "Quantity not specified" row; both are dropped,
+because neither tells a person anything.
+
 **Entries snapshot their food.** A log entry copies the per-100 g values it used.
 A later catalog update never changes a past day — there is a test for exactly
 that.
@@ -125,44 +139,38 @@ and source reference rather than from the clock, so CI can prove the committed
 
 ## Food data
 
-The bundled catalog holds **464 foods**: 408 USDA Foundation, 36 FNDDS/SR
-Legacy, and 20 Open Food Facts products, built from the records under
-`fixtures/`.
+The bundled catalog holds **13,566 foods** from three pinned USDA releases:
 
-Ten records were quarantined rather than served — real USDA rows whose
+| Dataset | Foods | What it is good for |
+| --- | --- | --- |
+| Foundation 2026-04-30 | 395 | lab-analyzed whole foods |
+| SR Legacy 2018-04 | 7,793 | ingredients, and named restaurant items |
+| FNDDS (survey) 2024-10-31 | 5,430 | what people actually eat: burgers, sandwiches, coffee |
+
+**98% of foods carry at least one household serving**, which is what makes
+logging by serving the default rather than a nicety.
+
+22 records were quarantined rather than served — mostly real USDA rows whose
 carbohydrate-by-difference is negative, which is plausible as research data and
 not as a food you log. `apps/mobile/assets/catalog-quarantine.json` lists them
 with reasons.
 
+The releases are pinned in `tools/fdc-import/src/fetch-bulk.mjs`. Bumping one
+moves every nutrient number in the app, so it belongs in a commit of its own.
+CI refetches them and rebuilds, and fails if the result differs from the
+committed file byte for byte.
+
+`fixtures/` keeps a small committed slice of real records for the golden tests,
+and `pnpm catalog:seed` builds a working catalog from it with no network at all.
+
 - USDA FoodData Central — public domain (CC0).
 - Open Food Facts — ODbL; attributed in Settings.
 
-### Two known gaps in the seeded data
+### Size
 
-1. **No household portions yet.** Portions ("1 cup, cooked") live only in FDC's
-   *detail* endpoint, and the seeding run hit the `DEMO_KEY` rate limit before
-   reaching it. The Amount step therefore offers grams for every food and
-   portions for none. Fixing it is one command with a free key:
-
-   ```bash
-   FDC_API_KEY=<your key> pnpm --filter @nt/fdc-import run fetch:usda
-   pnpm --filter @nt/fdc-import run prune
-   pnpm catalog:build
-   ```
-
-   Portions are read from the source's portion table only — the app never
-   invents one (spec 2.6.5), which is why grams-only is the honest state until
-   that data is in hand.
-
-2. **464 foods, not ~10k.** Production uses the monthly bulk download, which the
-   importer already supports:
-
-   ```bash
-   # after unzipping the FDC JSON files into data/fdc/
-   pnpm catalog:import -- --dir=data/fdc
-   ```
-
-   The builder fails the build if the result exceeds the 15 MB budget.
+6.34 MB in the app download, 22.4 MB on disk. Spec 2.3 budgets the catalog at
+"< 15 MB compressed" and 2.13 budgets the whole download at 60 MB; the build
+fails if the compressed size goes over, and reports both numbers.
 
 ## Tests
 
@@ -174,6 +182,7 @@ with reasons.
 | Repository | `packages/db/test` | outbox atomicity, tombstones and undo, snapshot immutability, goal versioning |
 | Schema drift | `packages/db/test/schema-drift.test.ts` | the SQL migrations and the Drizzle mirror cannot diverge |
 | Importer | `tools/fdc-import/test` | quarantine, barcode uniqueness, size budget, byte-reproducibility |
+| Meal browsing | `packages/db/test` | featured categories first, thin categories hidden, plainest food first |
 | Component | `apps/mobile/__tests__` | accessibility labels, the adjustable gram stepper, over-target copy, safe-area insets, database reactivity |
 | API integration | `apps/api/test/api.test.ts` | every endpoint, problem+json, idempotency, rate limits |
 | Security — RLS | `apps/api/test/rls.test.ts` | user B reads and writes nothing of user A, as SQL and through the API |

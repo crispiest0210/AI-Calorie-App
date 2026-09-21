@@ -37,6 +37,7 @@ export const food = sqliteTable(
     sourceRef: text('source_ref'),
     qualityTier: text('quality_tier').notNull(),
     densityGPerMl: text('density_g_per_ml'),
+    category: text('category'),
     supersededBy: text('superseded_by'),
     serverRev: integer('server_rev'),
     updatedAt: integer('updated_at'),

@@ -4,7 +4,7 @@
  * is the two-tap path in the speed targets (5.4).
  */
 import { useCallback, useMemo, useState } from 'react';
-import { TextInput, View } from 'react-native';
+import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { MEAL_SLOTS, MEAL_SLOT_LABELS, localDateOf, type MealSlot } from '@nt/core';
@@ -18,11 +18,12 @@ import { Row } from '@/components/Button';
 import { FoodRow } from '@/components/FoodRow';
 import { SegmentedControl } from '@/components/SegmentedControl';
 
-type Tab = 'recent' | 'frequent' | 'mine';
+type Tab = 'recent' | 'frequent' | 'meals' | 'mine';
 
 const TABS: { value: Tab; label: string }[] = [
   { value: 'recent', label: 'Recent' },
   { value: 'frequent', label: 'Frequent' },
+  { value: 'meals', label: 'Meals' },
   { value: 'mine', label: 'My foods' },
 ];
 
@@ -48,14 +49,21 @@ export default function LogSheet() {
     (database) => (debouncedQuery.trim() === '' ? null : foodsRepo.searchFoods(database, debouncedQuery)),
     [debouncedQuery],
   );
+  const [category, setCategory] = useState<string | null>(null);
   const recents = useDbQuery((database) => foodsRepo.recentFoods(database), []);
   const frequents = useDbQuery((database) => foodsRepo.frequentFoods(database, Date.now() - FREQUENT_WINDOW_MS), []);
   const mine = useDbQuery((database) => foodsRepo.myFoods(database), []);
+  const categories = useDbQuery((database) => foodsRepo.mealCategories(database), []);
+  const categoryFoods = useDbQuery(
+    (database) => (category === null ? [] : foodsRepo.foodsInCategory(database, category)),
+    [category],
+  );
 
   const list: FoodSummary[] = useMemo(() => {
     if (results !== null) return results;
+    if (tab === 'meals') return category === null ? [] : categoryFoods;
     return tab === 'recent' ? recents : tab === 'frequent' ? frequents : mine;
-  }, [results, tab, recents, frequents, mine]);
+  }, [results, tab, category, categoryFoods, recents, frequents, mine]);
 
   const openAmount = useCallback(
     (foodId: string) => {
@@ -126,7 +134,25 @@ export default function LogSheet() {
           onChange={setMealSlot}
         />
 
-        {!showingResults && <SegmentedControl label="Show" options={TABS} value={tab} onChange={setTab} />}
+        {!showingResults && (
+          <SegmentedControl
+            label="Show"
+            options={TABS}
+            value={tab}
+            onChange={(next) => {
+              setTab(next);
+              setCategory(null);
+            }}
+          />
+        )}
+
+        {!showingResults && tab === 'meals' && (
+          <MealCategories
+            categories={categories}
+            selected={category}
+            onSelect={(next) => setCategory(next === category ? null : next)}
+          />
+        )}
       </View>
 
       <FlashList
@@ -143,9 +169,15 @@ export default function LogSheet() {
         ItemSeparatorComponent={() => <View style={{ height: 1, backgroundColor: colors.border, marginLeft: spacing.lg }} />}
         ListEmptyComponent={
           <View style={{ padding: spacing.xl, gap: spacing.sm }}>
-            <Text tone="muted">{showingResults ? 'No foods match that search.' : 'Nothing here yet.'}</Text>
+            <Text tone="muted">
+              {showingResults ? 'No foods match that search.'
+                : tab === 'meals' ? 'Pick a kind of meal above.'
+                : 'Nothing here yet.'}
+            </Text>
             <Text variant="caption" tone="faint">
-              {showingResults ? 'Add it as your own food from a label.' : 'Log something and it shows up here.'}
+              {showingResults ? 'Add it as your own food from a label.'
+                : tab === 'meals' ? 'These are USDA’s own groupings of what people actually eat.'
+                : 'Log something and it shows up here.'}
             </Text>
           </View>
         }
@@ -164,6 +196,53 @@ export default function LogSheet() {
         <ActionButton label="Quick add" hint="Log calories without a food" onPress={() => router.replace({ pathname: '/quick-add', params: { mealSlot, date } })} />
         <ActionButton label="New food" hint="Type in a nutrition label" onPress={() => router.replace({ pathname: '/custom-food', params: { mealSlot, date } })} />
       </Row>
+    </View>
+  );
+}
+
+/** Meal categories as chips: featured ones first, then the long tail. */
+function MealCategories({
+  categories,
+  selected,
+  onSelect,
+}: {
+  categories: readonly { category: string; count: number; featured: boolean }[];
+  selected: string | null;
+  onSelect: (category: string) => void;
+}) {
+  const { colors } = useTheme();
+  return (
+    <View accessibilityRole="radiogroup" accessibilityLabel="Kind of meal" style={{ gap: spacing.sm }}>
+      <Text variant="label" tone="muted">
+        Kind of meal
+      </Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: spacing.sm, paddingRight: spacing.lg }}>
+        {categories.map((entry) => {
+          const isSelected = entry.category === selected;
+          return (
+            <Pressable
+              key={entry.category}
+              onPress={() => onSelect(entry.category)}
+              accessibilityRole="radio"
+              accessibilityState={{ selected: isSelected }}
+              accessibilityLabel={`${entry.category}, ${entry.count} foods`}
+              style={{
+                minHeight: MIN_TOUCH_TARGET,
+                justifyContent: 'center',
+                paddingHorizontal: spacing.lg,
+                borderRadius: radii.pill,
+                borderWidth: 1,
+                borderColor: isSelected ? colors.accent : colors.border,
+                backgroundColor: isSelected ? colors.accentMuted : colors.surface,
+              }}
+            >
+              <Text variant="label" tone={isSelected ? 'accent' : 'muted'}>
+                {entry.category}
+              </Text>
+            </Pressable>
+          );
+        })}
+      </ScrollView>
     </View>
   );
 }
