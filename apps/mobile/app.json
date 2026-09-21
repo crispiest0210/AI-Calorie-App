@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "Nutrition Tracker",
+    "slug": "nutrition-tracker",
+    "scheme": "nutritiontracker",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": { "supportsTablet": true, "bundleIdentifier": "dev.nutritiontracker.app" },
+    "android": { "package": "dev.nutritiontracker.app", "edgeToEdgeEnabled": true },
+    "plugins": ["expo-router", "expo-sqlite"],
+    "experiments": { "typedRoutes": true },
+    "extra": { "catalogVersion": "fixtures-seed" }
+  }
+}

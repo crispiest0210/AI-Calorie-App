@@ -1,0 +1,25 @@
+{
+  "name": "@nt/fdc-import",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "fetch:usda": "node src/fetch-usda.mjs",
+    "fetch:off": "node src/fetch-off.mjs",
+    "prune": "node src/prune-fixtures.mjs",
+    "seed": "tsx src/build-catalog.ts --source=fixtures",
+    "import": "tsx src/build-catalog.ts --source=bulk"
+  },
+  "dependencies": {
+    "@nt/core": "workspace:*",
+    "@nt/db": "workspace:*"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^11.7.0",
+    "drizzle-orm": "^0.38.3",
+    "tsx": "^4.19.2",
+    "@types/better-sqlite3": "^7.6.12"
+  }
+}
