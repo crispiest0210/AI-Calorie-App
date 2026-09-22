@@ -103,6 +103,7 @@ export default function SettingsScreen() {
       <Card style={{ gap: spacing.md }}>
         <Text variant="title">Settings</Text>
         <Button label="Goals" variant="secondary" onPress={() => router.push('/goals')} />
+        <Button label="Recipes" variant="secondary" onPress={() => router.push('/recipes')} />
       </Card>
 
       <Card style={{ gap: spacing.md }}>

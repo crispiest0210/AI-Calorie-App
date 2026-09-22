@@ -63,6 +63,9 @@ export default function RootLayout() {
                 <Stack.Screen name="day/[date]" options={{ title: 'Day' }} />
                 <Stack.Screen name="sign-in" options={{ presentation: 'modal', title: 'Sign in' }} />
                 <Stack.Screen name="scan" options={{ presentation: 'modal', title: 'Scan a barcode' }} />
+            <Stack.Screen name="recipes" options={{ title: 'Recipes' }} />
+            <Stack.Screen name="recipe/[id]" options={{ title: 'Recipe' }} />
+            <Stack.Screen name="provenance" options={{ presentation: 'modal', title: 'Where this comes from' }} />
               </Stack>
             </SyncProvider>
           </SessionProvider>

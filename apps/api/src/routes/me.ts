@@ -46,7 +46,17 @@ export async function exportAll(sql: Sql, userId: string): Promise<ExportDocumen
                                                           'gramWeight', p.gram_weight::text,
                                                           'source', p.source, 'position', p.position)
                                         order by p.position)
-                        from food_portion p where p.food_id = f.id), '[]'::json) as portions
+                        from food_portion p where p.food_id = f.id), '[]'::json) as portions,
+              (select json_build_object('servings', m.servings::text,
+                                        'totalCookedGrams', m.total_cooked_grams::text,
+                                        'ingredients',
+                                        coalesce((select json_agg(json_build_object('id', i.id,
+                                                                                    'ingredientFoodId', i.ingredient_food_id,
+                                                                                    'grams', i.grams::text,
+                                                                                    'position', i.position)
+                                                                  order by i.position)
+                                                  from recipe_ingredient i where i.recipe_food_id = f.id), '[]'::json))
+               from recipe_meta m where m.food_id = f.id) as recipe
        from food f where f.owner_user_id = $1 order by f.name`,
       [userId],
     )

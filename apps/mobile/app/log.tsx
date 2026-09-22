@@ -8,7 +8,7 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { MEAL_SLOTS, MEAL_SLOT_LABELS, localDateOf, type MealSlot } from '@nt/core';
-import { foods as foodsRepo, entries as entriesRepo, type FoodSummary } from '@nt/db';
+import { foods as foodsRepo, entries as entriesRepo, recipes as recipesRepo, type FoodSummary } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { MIN_TOUCH_TARGET, radii, spacing, typography, useTheme } from '@/theme';
 import { successFeedback } from '@/hooks/useHaptics';
@@ -33,7 +33,9 @@ export default function LogSheet() {
   const db = useDb();
   const router = useRouter();
   const { colors } = useTheme();
-  const params = useLocalSearchParams<{ date?: string; mealSlot?: string }>();
+  const params = useLocalSearchParams<{ date?: string; mealSlot?: string; pickFor?: string }>();
+  /** When set, this sheet is picking an ingredient for a recipe, not logging. */
+  const pickForRecipe = params.pickFor ?? null;
   const date = params.date ?? localDateOf();
   const [mealSlot, setMealSlot] = useState<MealSlot>(
     MEAL_SLOTS.includes(params.mealSlot as MealSlot) ? (params.mealSlot as MealSlot) : 'breakfast',
@@ -45,9 +47,10 @@ export default function LogSheet() {
   // short enough that results feel live.
   const debouncedQuery = useDebounced(query, 150);
 
+  const tooShort = debouncedQuery.trim().length > 0 && debouncedQuery.trim().length < foodsRepo.MIN_SEARCH_LENGTH;
   const results = useDbQuery(
-    (database) => (debouncedQuery.trim() === '' ? null : foodsRepo.searchFoods(database, debouncedQuery)),
-    [debouncedQuery],
+    (database) => (debouncedQuery.trim() === '' || tooShort ? null : foodsRepo.searchFoods(database, debouncedQuery)),
+    [debouncedQuery, tooShort],
   );
   const [category, setCategory] = useState<string | null>(null);
   const recents = useDbQuery((database) => foodsRepo.recentFoods(database), []);
@@ -67,9 +70,17 @@ export default function LogSheet() {
 
   const openAmount = useCallback(
     (foodId: string) => {
+      if (pickForRecipe !== null) {
+        // Ingredients start at 100 g and are adjusted on the recipe itself,
+        // which is where the effect on the totals is visible.
+        recipesRepo.addIngredient(db, pickForRecipe, foodId, '100');
+        successFeedback();
+        router.back();
+        return;
+      }
       router.push({ pathname: '/amount', params: { foodId, mealSlot, date } });
     },
-    [router, mealSlot, date],
+    [db, pickForRecipe, router, mealSlot, date],
   );
 
   /** One-tap re-log: reuse the last amount this food was logged with. */
@@ -127,12 +138,18 @@ export default function LogSheet() {
           ]}
         />
 
-        <SegmentedControl
-          label="Meal"
-          options={MEAL_SLOTS.map((slot) => ({ value: slot, label: MEAL_SLOT_LABELS[slot] }))}
-          value={mealSlot}
-          onChange={setMealSlot}
-        />
+        {pickForRecipe === null ? (
+          <SegmentedControl
+            label="Meal"
+            options={MEAL_SLOTS.map((slot) => ({ value: slot, label: MEAL_SLOT_LABELS[slot] }))}
+            value={mealSlot}
+            onChange={setMealSlot}
+          />
+        ) : (
+          <Text variant="caption" tone="muted">
+            Pick an ingredient. It starts at 100 g and you set the amount on the recipe.
+          </Text>
+        )}
 
         {!showingResults && (
           <SegmentedControl
@@ -162,7 +179,7 @@ export default function LogSheet() {
           <FoodRow
             food={item}
             subtitle={showingResults || tab !== 'recent' ? undefined : 'tap to repeat'}
-            onPress={() => (showingResults || tab === 'mine' ? openAmount(item.id) : quickLog(item))}
+            onPress={() => (pickForRecipe !== null || showingResults || tab === 'mine' ? openAmount(item.id) : quickLog(item))}
             onLongPress={() => openAmount(item.id)}
           />
         )}
@@ -183,6 +200,7 @@ export default function LogSheet() {
         }
       />
 
+      {pickForRecipe === null && (
       <Row
         gap={spacing.md}
         style={{
@@ -196,6 +214,7 @@ export default function LogSheet() {
         <ActionButton label="Quick add" hint="Log calories without a food" onPress={() => router.replace({ pathname: '/quick-add', params: { mealSlot, date } })} />
         <ActionButton label="New food" hint="Type in a nutrition label" onPress={() => router.replace({ pathname: '/custom-food', params: { mealSlot, date } })} />
       </Row>
+      )}
     </View>
   );
 }

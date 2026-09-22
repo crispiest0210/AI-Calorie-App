@@ -78,7 +78,10 @@ export default function EntryDetailScreen() {
           </Text>
         )}
         <View style={{ flexDirection: 'row', gap: spacing.sm, alignItems: 'center' }}>
-          <SourceBadge tier={entry.qualityTier ?? (entry.entryKind === 'quick_add' ? 'user' : null)} />
+          <SourceBadge
+            tier={entry.qualityTier ?? (entry.entryKind === 'quick_add' ? 'user' : null)}
+            onPress={() => router.push({ pathname: '/provenance', params: { entryId: entry.id } })}
+          />
           <Text variant="caption" tone="faint">
             logged {formatTimeOfDay(entry.loggedAt)}
           </Text>
@@ -121,13 +124,13 @@ export default function EntryDetailScreen() {
         <Text variant="label" tone="muted">
           {entry.entryKind === 'quick_add'
             ? 'You typed these values; nothing was looked up.'
-            : `Snapshot of the source record taken when this was logged, so later catalog updates never change this day.`}
+            : 'Snapshot of the source record taken when this was logged, so later catalog updates never change this day.'}
         </Text>
-        {food?.sourceRef != null && (
-          <Text variant="caption" tone="faint">
-            Source record {food.sourceRef}
-          </Text>
-        )}
+        <Button
+          label="See every source"
+          variant="secondary"
+          onPress={() => router.push({ pathname: '/provenance', params: { entryId: entry.id } })}
+        />
       </Card>
 
       <View style={{ padding: spacing.lg, gap: spacing.md }}>

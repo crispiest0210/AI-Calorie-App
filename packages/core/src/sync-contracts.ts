@@ -75,6 +75,26 @@ export const syncFood = z.object({
       position: z.number().int(),
     }),
   ),
+  /**
+   * Present only for a recipe. It rides with the food for the same reason its
+   * nutrients do: a recipe that arrives without its ingredients cannot be
+   * edited, and one that arrives without its nutrients cannot be logged (R3).
+   */
+  recipe: z
+    .object({
+      servings: numericString,
+      totalCookedGrams: numericString.nullable(),
+      ingredients: z.array(
+        z.object({
+          id: z.string().uuid(),
+          ingredientFoodId: z.string().uuid(),
+          grams: numericString,
+          position: z.number().int(),
+        }),
+      ),
+    })
+    .nullable()
+    .optional(),
 });
 
 export const syncRow = z.discriminatedUnion('table', [

@@ -4,8 +4,8 @@ A local-first calorie and macro tracker. Every nutrient number on screen traces
 to a named database record; nothing is estimated or inferred.
 
 Built from the [Product & Architecture Spec](https://claude.ai/artifact/27veyRAvDFfsyEg52tw4b9).
-This repository implements **Phases 0–2**: the foundations, the offline MVP, and
-accounts, sync and barcode.
+This repository implements **Phases 0–3**: the foundations, the offline MVP,
+accounts and sync, and recipes, trends and the performance pass.
 
 ---
 
@@ -29,7 +29,9 @@ network and no telemetry.
 | F9 Barcode scan → branded food | Done |
 | F10 Account and multi-device sync | Done |
 | F14 Export and account deletion | Done |
-| F11 recipes · F13 photo analysis | Not yet — Phases 3 and 4 |
+| F11 Recipes: ingredients, yield, per-serving nutrition | Done |
+| F12 7 and 30-day trends against the goals of each day | Done |
+| F13 Photo analysis | Not yet — Phase 4 |
 
 An account is optional. Everything works without one; signing in adds sync and
 barcode lookup and nothing else. Anything logged before signing in is already
@@ -128,6 +130,20 @@ everything above the device's cursor. Conflicts are row-level last-writer-wins
 by server arrival order — single-user data is nearly append-only, and field
 level merging was cut for that reason (review R6).
 
+**A recipe is a food.** It carries `kind = 'recipe'`, its nutrients are
+computed from its ingredients and recomputed on every change, and it gets a
+"1 serving" portion from its yield. Everything downstream — logging, snapshots,
+totals, sync — treats it as an ordinary food and needs to know nothing about
+recipes. Its generated serving row is updated in place rather than replaced,
+because entries logged against it hold that portion's id.
+
+**Charts carry their meaning three ways.** Over-target bars cross the target
+line, are hatched, and say "over target" when read aloud. The chart colours are
+their own tokens, not the UI accent: the accent is deliberately low-chroma and
+reads grey at mark size, and accent-vs-over failed a colourblindness check. The
+replacements were chosen by running the palette validator against each surface
+(`packages/tokens/src/index.ts` records the numbers).
+
 **Row-level security is the second layer, not the only one.** The API checks
 the JWT, and then Postgres checks again: the API connects as a role that does
 not own the tables, and every user table has a policy keyed to the caller.
@@ -183,6 +199,8 @@ fails if the compressed size goes over, and reports both numbers.
 | Schema drift | `packages/db/test/schema-drift.test.ts` | the SQL migrations and the Drizzle mirror cannot diverge |
 | Importer | `tools/fdc-import/test` | quarantine, barcode uniqueness, size budget, byte-reproducibility |
 | Meal browsing | `packages/db/test` | featured categories first, thin categories hidden, plainest food first |
+| Recipes | `packages/db/test/recipes.test.ts` | recompute on every change, yield and servings, a logged day unmoved by later edits |
+| Performance | `packages/db/test/performance.test.ts` | the 2.13 budgets against the real 13.5k catalog, with a query-plan check |
 | Component | `apps/mobile/__tests__` | accessibility labels, the adjustable gram stepper, over-target copy, safe-area insets, database reactivity |
 | API integration | `apps/api/test/api.test.ts` | every endpoint, problem+json, idempotency, rate limits |
 | Security — RLS | `apps/api/test/rls.test.ts` | user B reads and writes nothing of user A, as SQL and through the API |
@@ -200,6 +218,24 @@ Copy states facts ("120 kcal over"), never judgements.
 
 VoiceOver and TalkBack passes are a manual gate before the phase ships and have
 not been run in this environment.
+
+## Performance
+
+The budgets in spec 2.13 are enforced by `packages/db/test/performance.test.ts`
+against the real catalog, at a tenth of the spec's numbers — the spec's are for
+a mid-range phone, and the headroom is what makes them survivable there.
+
+Two things were needed to hold the search budget once the catalog grew to
+13.5k foods:
+
+- Energy is looked up only for the rows that survive the ranking limit. Doing
+  it per candidate cost one subquery for every match, which took a broad query
+  to 103 ms.
+- A query must be at least two characters. A single letter matches thousands of
+  foods and says almost nothing; the cheapest way to stay in budget is not to
+  run it.
+
+Worst case went from 103 ms to 9 ms with identical ranking.
 
 ## Deviations from the spec, and why
 
@@ -223,5 +259,9 @@ Every automated test passes and the app bundles for iOS and Android, but:
   locally-signed HS256 tokens, which is exactly what Supabase issues, but the
   hosted `/auth/v1/otp` flow has not been hit for real.
 - Barcode scanning has not been tested against a physical barcode.
-- The speed targets (5.4), performance budgets (2.13) and the VoiceOver /
-  TalkBack checklist still need a real device.
+- The speed targets (5.4) and the VoiceOver / TalkBack checklist still need a
+  real device. The 2.13 budgets are measured, but on a developer machine
+  against a slowdown assumption, not on the mid-range Android the spec names.
+- Motion is stubbed out under Jest: Reanimated 4 cannot be imported in that
+  environment, so `apps/mobile/__mocks__` stands in for it and animation itself
+  is only verified by running the app.

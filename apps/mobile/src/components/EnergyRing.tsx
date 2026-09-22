@@ -5,11 +5,18 @@
  * pattern, and a text label — because colour alone is not a signal (spec 5.5),
  * and the whole ring carries a text alternative for screen readers (5.6).
  */
+import { useEffect } from 'react';
 import { View } from 'react-native';
+import Animated, { useAnimatedProps, useSharedValue, withSpring } from 'react-native-reanimated';
 import Svg, { Circle } from 'react-native-svg';
 import { energyA11yLabel, formatEnergy } from '@nt/core';
 import { spacing, useTheme } from '../theme';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 import { Text } from './Text';
+
+/** Spec 5.5: springs are used on the ring and nowhere else. */
+const AnimatedCircle = Animated.createAnimatedComponent(Circle);
+const SPRING = { damping: 18, stiffness: 120, mass: 0.6 };
 
 const SIZE = 168;
 const STROKE = 14;
@@ -27,8 +34,20 @@ export interface EnergyRingProps {
 
 export function EnergyRing({ consumed, target, remaining, ratio, incomplete }: EnergyRingProps) {
   const { colors } = useTheme();
+  const reduceMotion = useReducedMotion();
   const over = ratio !== null && ratio > 1;
   const filled = Math.min(Math.max(ratio ?? 0, 0), 1);
+
+  // The arc settles into its new length when an entry lands. With Reduce
+  // Motion on it simply appears there.
+  const progress = useSharedValue(filled);
+  useEffect(() => {
+    progress.value = reduceMotion ? filled : withSpring(filled, SPRING);
+  }, [filled, reduceMotion, progress]);
+
+  const arcProps = useAnimatedProps(() => ({
+    strokeDasharray: [CIRCUMFERENCE * progress.value, CIRCUMFERENCE],
+  }));
 
   return (
     <View
@@ -39,17 +58,31 @@ export function EnergyRing({ consumed, target, remaining, ratio, incomplete }: E
     >
       <Svg width={SIZE} height={SIZE} style={{ position: 'absolute' }}>
         <Circle cx={SIZE / 2} cy={SIZE / 2} r={RADIUS} stroke={colors.track} strokeWidth={STROKE} fill="none" />
-        <Circle
-          cx={SIZE / 2}
-          cy={SIZE / 2}
-          r={RADIUS}
-          stroke={over ? colors.over : colors.accent}
-          strokeWidth={STROKE}
-          strokeLinecap={over ? 'butt' : 'round'}
-          fill="none"
-          strokeDasharray={over ? '6 5' : `${CIRCUMFERENCE * filled} ${CIRCUMFERENCE}`}
-          transform={`rotate(-90 ${SIZE / 2} ${SIZE / 2})`}
-        />
+        {over ? (
+          <Circle
+            cx={SIZE / 2}
+            cy={SIZE / 2}
+            r={RADIUS}
+            stroke={colors.over}
+            strokeWidth={STROKE}
+            strokeLinecap="butt"
+            fill="none"
+            strokeDasharray="6 5"
+            transform={`rotate(-90 ${SIZE / 2} ${SIZE / 2})`}
+          />
+        ) : (
+          <AnimatedCircle
+            cx={SIZE / 2}
+            cy={SIZE / 2}
+            r={RADIUS}
+            stroke={colors.accent}
+            strokeWidth={STROKE}
+            strokeLinecap="round"
+            fill="none"
+            animatedProps={arcProps}
+            transform={`rotate(-90 ${SIZE / 2} ${SIZE / 2})`}
+          />
+        )}
       </Svg>
       <Text variant="display" numeric>
         {formatEnergy(consumed)}

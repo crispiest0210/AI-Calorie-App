@@ -32,8 +32,17 @@ export interface FoodDetail extends FoodSummary {
   sourceReleaseId: string;
   densityGPerMl: string | null;
   nutrientsPer100g: NutrientMap;
+  /** How each value came to be, for the provenance sheet. */
+  derivations: Partial<Record<keyof NutrientMap, string>>;
   portions: Portion[];
 }
+
+/**
+ * A single letter matches thousands of foods, costs an order of magnitude more
+ * to rank, and tells us almost nothing about what the person wants. Two is
+ * where a query starts to mean something.
+ */
+export const MIN_SEARCH_LENGTH = 2;
 
 /**
  * FTS5 treats punctuation and words like NEAR as operators, so the user's text
@@ -46,6 +55,7 @@ export function toFtsQuery(input: string): string | null {
     .split(/[^\p{L}\p{N}]+/u)
     .filter((t) => t.length > 0);
   if (tokens.length === 0) return null;
+  if (tokens.join('').length < MIN_SEARCH_LENGTH) return null;
   return tokens.map((t) => `"${t}"*`).join(' AND ');
 }
 
@@ -80,7 +90,6 @@ export function searchFoods(db: Db, query: string, limit = 30): FoodSummary[] {
     with matched as (
       select food.id, food.name, food.brand, food.kind,
              food.quality_tier as "qualityTier",
-             ${ENERGY} as "energyPer100g",
              lower(trim(food.name)) as norm,
              case when instr(food.name, ',') > 0
                   then lower(trim(substr(food.name, 1, instr(food.name, ',') - 1)))
@@ -103,21 +112,31 @@ export function searchFoods(db: Db, query: string, limit = 30): FoodSummary[] {
         order by tier_rank, relevance
       ) as duplicate_rank
       from matched
+    ),
+    ranked as (
+      select id, name, brand, kind, "qualityTier"
+      from deduped
+      where duplicate_rank = 1
+      order by
+        case kind when 'custom' then 0 when 'recipe' then 1 else 2 end,
+        case when head = ${needle} then 0
+             when head like ${needle + '%'} then 1
+             when lower(name) like ${needle + '%'} then 2
+             else 3 end,
+        case when upper(name) like '%, NFS' then 0 else 1 end,
+        length(name) asc,
+        tier_rank asc,
+        relevance asc
+      limit ${limit}
     )
-    select id, name, brand, kind, "qualityTier", "energyPer100g"
-    from deduped
-    where duplicate_rank = 1
-    order by
-      case kind when 'custom' then 0 when 'recipe' then 1 else 2 end,
-      case when head = ${needle} then 0
-           when head like ${needle + '%'} then 1
-           when lower(name) like ${needle + '%'} then 2
-           else 3 end,
-      case when upper(name) like '%, NFS' then 0 else 1 end,
-      length(name) asc,
-      tier_rank asc,
-      relevance asc
-    limit ${limit}
+    -- Energy is read only for the rows that survived the limit. Doing it in
+    -- the match set instead costs one subquery per candidate, which is what
+    -- pushed a broad query past the 100 ms budget in 2.13.
+    select ranked.*, (
+      select amount_per_100g from food_nutrient fn
+      where fn.food_id = ranked.id and fn.nutrient_code = 'energy_kcal'
+    ) as "energyPer100g"
+    from ranked
   `);
 }
 
@@ -227,19 +246,25 @@ export function foodDetail(db: Db, id: string): FoodDetail | null {
   const nutrients = db.select().from(foodNutrient).where(eq(foodNutrient.foodId, id)).all();
   const portions = db.select().from(foodPortion).where(eq(foodPortion.foodId, id)).orderBy(foodPortion.position).all();
   const map: NutrientMap = {};
-  for (const n of nutrients) map[n.nutrientCode as keyof NutrientMap] = n.amountPer100g;
+  const derivations: Partial<Record<keyof NutrientMap, string>> = {};
+  for (const n of nutrients) {
+    map[n.nutrientCode as keyof NutrientMap] = n.amountPer100g;
+    derivations[n.nutrientCode as keyof NutrientMap] = n.derivation;
+  }
   return {
     id: row.id,
     name: row.name,
     brand: row.brand,
     kind: row.kind as FoodKind,
     qualityTier: row.qualityTier as QualityTier,
+    category: row.category,
     gtin: row.gtin,
     sourceRef: row.sourceRef,
     sourceReleaseId: row.sourceReleaseId,
     densityGPerMl: row.densityGPerMl,
     energyPer100g: map.energy_kcal ?? null,
     nutrientsPer100g: map,
+    derivations,
     portions: portions.map((p) => ({ id: p.id, label: p.label, gramWeight: p.gramWeight, source: p.source as Portion['source'] })),
   };
 }
@@ -326,6 +351,24 @@ export function lastAmountFor(db: Db, foodId: string): { amountValue: string; am
       where food_id = ${foodId} and deleted_at is null
       order by logged_at desc
       limit 1
+    `) ?? null
+  );
+}
+
+export interface SourceReleaseRow {
+  id: string;
+  provider: string;
+  dataset: string | null;
+  version: string | null;
+  releasedOn: string | null;
+}
+
+/** The release a food's values came from, for the provenance sheet. */
+export function sourceRelease(db: Db, id: string): SourceReleaseRow | null {
+  return (
+    db.get<SourceReleaseRow>(sql`
+      select id, provider, dataset, version, released_on as "releasedOn"
+      from source_release where id = ${id}
     `) ?? null
   );
 }

@@ -5,7 +5,7 @@
  */
 import { eq } from 'drizzle-orm';
 import { parseNutrientMap, type SyncRow, type SyncedTable } from '@nt/core';
-import { food, foodNutrient, foodPortion, goalProfile, goalTarget, logEntry, waterEntry, waterPreset } from '../schema';
+import { food, foodNutrient, foodPortion, goalProfile, goalTarget, logEntry, recipeIngredient, recipeMeta, waterEntry, waterPreset } from '../schema';
 import { parseJson, type Db } from '../db';
 
 /** Reads one row by id and shapes it for the wire; null if it has vanished. */
@@ -92,6 +92,13 @@ export function serializeRow(db: Db, table: SyncedTable, id: string): SyncRow | 
       if (row.kind !== 'custom' && row.kind !== 'recipe') return null;
       const nutrients = db.select().from(foodNutrient).where(eq(foodNutrient.foodId, id)).all();
       const portions = db.select().from(foodPortion).where(eq(foodPortion.foodId, id)).orderBy(foodPortion.position).all();
+
+      const meta = row.kind === 'recipe' ? db.select().from(recipeMeta).where(eq(recipeMeta.foodId, id)).get() : undefined;
+      const ingredients =
+        row.kind === 'recipe'
+          ? db.select().from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, id)).orderBy(recipeIngredient.position).all()
+          : [];
+
       return {
         table: 'food',
         row: {
@@ -105,6 +112,19 @@ export function serializeRow(db: Db, table: SyncedTable, id: string): SyncRow | 
           densityGPerMl: row.densityGPerMl,
           nutrients: nutrients.map((n) => ({ nutrientCode: n.nutrientCode, amountPer100g: n.amountPer100g, derivation: n.derivation })),
           portions: portions.map((p) => ({ id: p.id, label: p.label, gramWeight: p.gramWeight, source: p.source, position: p.position })),
+          recipe:
+            meta === undefined
+              ? null
+              : {
+                  servings: meta.servings,
+                  totalCookedGrams: meta.totalCookedGrams,
+                  ingredients: ingredients.map((i) => ({
+                    id: i.id,
+                    ingredientFoodId: i.ingredientFoodId,
+                    grams: i.grams,
+                    position: i.position,
+                  })),
+                },
           updatedAt: row.updatedAt ?? 0,
           deletedAt: row.deletedAt,
         },

@@ -28,6 +28,7 @@ import {
   goals as goalsRepo,
   outboxRepo,
   readDay,
+  recipes,
   runMigrations,
   schema,
   sync as syncClient,
@@ -256,6 +257,51 @@ describe('two devices', () => {
     expect(arrived!.nutrientsPer100g).toEqual({ energy_kcal: '450', protein_g: '12.5' });
     expect(arrived!.portions).toEqual([{ id: expect.any(String), label: '1 bowl (60 g)', gramWeight: '60', source: 'user' }]);
     expect(arrived!.qualityTier).toBe('user');
+  });
+
+  it('carries a recipe across with its ingredients and computed nutrients', async () => {
+    const phone = newDevice();
+    const tablet = newDevice();
+
+    const recipeId = recipes.createRecipe(phone, { name: 'Chicken and rice', servings: '2', sourceReleaseId: USER_RELEASE });
+    recipes.addIngredient(phone, recipeId, RICE_ID, '200');
+    recipes.addIngredient(phone, recipeId, CHICKEN_ID, '300');
+
+    await syncDevice(phone, USER_A);
+    await syncDevice(tablet, USER_A);
+
+    const arrived = recipes.readRecipe(tablet, recipeId);
+    expect(arrived).not.toBeNull();
+    expect(arrived!.servings).toBe('2');
+    expect(arrived!.ingredients.map((i) => i.grams)).toEqual(['200', '300']);
+
+    // The nutrients travelled with it, so it is loggable the moment it lands
+    // without the second device having to recompute anything.
+    const detail = foodsRepo.foodDetail(tablet, recipeId)!;
+    // (200 x 129 + 300 x 165) / 100 = 753 kcal over 500 g
+    expect(detail.nutrientsPer100g.energy_kcal).toBe('150.6');
+    expect(detail.portions[0]!.label).toBe('1 serving');
+    expect(detail.qualityTier).toBe('computed');
+  });
+
+  it('carries an edited recipe back the other way', async () => {
+    const phone = newDevice();
+    const tablet = newDevice();
+
+    const recipeId = recipes.createRecipe(phone, { name: 'Chicken and rice', servings: '2', sourceReleaseId: USER_RELEASE });
+    recipes.addIngredient(phone, recipeId, RICE_ID, '200');
+    await syncDevice(phone, USER_A);
+    await syncDevice(tablet, USER_A);
+
+    recipes.updateRecipe(tablet, recipeId, { servings: '4' });
+    recipes.addIngredient(tablet, recipeId, CHICKEN_ID, '300');
+    await syncDevice(tablet, USER_A);
+    await syncDevice(phone, USER_A);
+
+    const back = recipes.readRecipe(phone, recipeId)!;
+    expect(back.servings).toBe('4');
+    expect(back.ingredients).toHaveLength(2);
+    expect(foodsRepo.foodDetail(phone, recipeId)!.portions[0]!.gramWeight).toBe('125');
   });
 
   it('carries dated goal profiles so a past day keeps its targets', async () => {

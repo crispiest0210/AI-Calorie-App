@@ -26,6 +26,17 @@ export interface Palette {
   track: string;
   danger: string;
   scrim: string;
+  /**
+   * Chart marks are their own steps, not the UI accent. The UI accent is
+   * deliberately low-chroma, which reads as grey at chart-mark size, and the
+   * accent/over pair sits too close for a deutan viewer to separate. These
+   * two were picked by running the palette validator against each surface:
+   * light passes every check but adjacent-pair CVD (ΔE 7.5, inside the 6–8
+   * band that is permitted with secondary encoding — over-target bars also
+   * cross the target line, carry a hatch, and are labelled); dark passes all.
+   */
+  chartMark: string;
+  chartOver: string;
 }
 
 export const lightPalette: Palette = {
@@ -48,6 +59,8 @@ export const lightPalette: Palette = {
   track: '#E8E7E3',
   danger: '#9B2C2C',
   scrim: 'rgba(22, 21, 15, 0.35)',
+  chartMark: '#1F7A4D',
+  chartOver: '#B04A1E',
 };
 
 export const darkPalette: Palette = {
@@ -70,6 +83,8 @@ export const darkPalette: Palette = {
   track: '#2B2A27',
   danger: '#E88C8C',
   scrim: 'rgba(0, 0, 0, 0.55)',
+  chartMark: '#3FA87E',
+  chartOver: '#CE763C',
 };
 
 /** 4 pt base scale; layouts stay airy rather than dense. */
