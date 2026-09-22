@@ -1,0 +1,105 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    # The API and RLS tests need a real Postgres: row-level security is the
+    # thing under test and no in-memory substitute enforces it. Locally the
+    # harness starts an embedded server instead.
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nutrition
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/nutrition
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm -r run typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      # Engine unit, property and golden tests; repository and sync-outbox
+      # tests; catalog import tests; API integration, RLS and two-device
+      # convergence tests. Coverage thresholds live in each package's vitest
+      # config — packages/core must stay at 100% branches (Phase 0 gate).
+      - name: Test
+        run: pnpm -r run test
+
+      - name: Engine coverage
+        run: pnpm --filter @nt/core run test:coverage
+
+      # The bundled catalog is built from pinned public FDC releases, with no
+      # API key. Rebuilding it must reproduce the committed file byte for byte,
+      # which is what proves the catalog matches the data it claims to hold.
+      - name: Fetch pinned FDC datasets
+        run: pnpm catalog:fetch
+
+      - name: Rebuild bundled catalog
+        run: pnpm catalog:build
+
+      - name: Catalog is reproducible
+        run: git diff --exit-code --stat -- apps/mobile/assets || (echo "Rebuilt catalog differs from the committed one" && exit 1)
+
+      # The offline path: a clone with no network can still build a working
+      # catalog from the committed fixture slice.
+      - name: Fixture catalog still builds
+        run: pnpm catalog:seed -- --out=/tmp/fixture-catalog.sqlite
+
+  bundle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      # Catches anything Metro cannot resolve, which typecheck alone misses.
+      - name: Bundle the app
+        run: pnpm --filter @nt/mobile exec expo export --platform ios --output-dir /tmp/export
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # The FDC key is deactivated by USDA if it appears in a public repo.
+      - name: Secret scan
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

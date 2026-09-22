@@ -1,0 +1,868 @@
+{
+ "foods": [
+  {
+   "fdcId": 170903,
+   "description": "Yogurt, Greek, plain, lowfat",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.92
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.94
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 73
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 115
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 141
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.95
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 305
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.04
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 34
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.8
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 10
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.23
+    }
+   ]
+  },
+  {
+   "fdcId": 2705424,
+   "description": "Yogurt, Greek, nonfat milk, plain",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.37
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.64
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 59
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.27
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 111
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 141
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 36
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.108
+    }
+   ]
+  },
+  {
+   "fdcId": 171312,
+   "description": "Yogurt, Greek, nonfat, plain, CHOBANI",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.145
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.53
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 226
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.2
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.03
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 37
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.24
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.43
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 54
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 112
+    }
+   ]
+  },
+  {
+   "fdcId": 171304,
+   "description": "Yogurt, Greek, plain, whole milk",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 35
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 13
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 4
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 100
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 141
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.98
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 97
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 406
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2705422,
+   "description": "Yogurt, Greek, whole milk, plain",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.78
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.39
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.75
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 94
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.25
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 111
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 147
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 34
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 17
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.39
+    }
+   ]
+  },
+  {
+   "fdcId": 171309,
+   "description": "Yogurt, Greek, whole, plain, CHOBANI",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.01
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 111
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.24
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 15
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.8
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.03
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 35
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.6
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.46
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.24
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 82
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 343
+    }
+   ]
+  },
+  {
+   "fdcId": 2705423,
+   "description": "Yogurt, Greek, low fat milk, plain",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.36
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.6
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 67
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.24
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 110
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 140
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 36
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 8
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.726
+    }
+   ]
+  },
+  {
+   "fdcId": 2705421,
+   "description": "Yogurt, Greek, NS as to type of milk, plain",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.36
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.6
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 67
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.24
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 110
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 140
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 36
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 8
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.726
+    }
+   ]
+  },
+  {
+   "fdcId": 170894,
+   "description": "Yogurt, Greek, plain, nonfat (Includes foods for USDA's Food Distribution Program)",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.2
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 246
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.117
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 36
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.39
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.6
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 59
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 3.24
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 110
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 141
+    }
+   ]
+  },
+  {
+   "fdcId": 2705441,
+   "description": "Yogurt, Greek, with oats",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.22
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.67
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 20.02
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 149
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 10.74
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.5
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 89
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.66
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 161
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 58
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.838
+    }
+   ]
+  },
+  {
+   "fdcId": 2705464,
+   "description": "Baby Toddler yogurt, plain",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.82
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.48
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.57
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 78
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 4.09
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 127
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 164
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 42
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.5
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 14
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.32
+    }
+   ]
+  },
+  {
+   "fdcId": 175227,
+   "description": "SILK Plain soy yogurt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.4
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 13
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.64
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 13.2
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.22
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.76
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 9.69
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 66
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 5.29
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 132
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 276
+    }
+   ]
+  }
+ ]
+}

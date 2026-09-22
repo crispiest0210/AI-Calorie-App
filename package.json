@@ -1,0 +1,29 @@
+{
+  "name": "nutrition-tracker",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@12.5.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r run typecheck",
+    "test": "pnpm -r run test",
+    "test:coverage": "pnpm --filter @nt/core run test:coverage",
+    "lint": "eslint .",
+    "catalog:seed": "pnpm --filter @nt/fdc-import run seed",
+    "catalog:import": "pnpm --filter @nt/fdc-import run import",
+    "catalog:build": "pnpm --filter @nt/fdc-import run import",
+    "catalog:fetch": "pnpm --filter @nt/fdc-import run fetch:bulk"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.2",
+    "@vitest/coverage-v8": "^2.1.8",
+    "eslint": "^9.17.0",
+    "globals": "^17.12.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1",
+    "vitest": "^2.1.8"
+  }
+}

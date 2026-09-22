@@ -1,0 +1,2389 @@
+[
+ {
+  "fdcId": 2708356,
+  "description": "Rice noodles, cooked",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 1.78
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.2
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 23.9
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 107
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.03
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 1
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 4
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.14
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 4
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 250
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.023
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "40049",
+    "portionDescription": "1 oz, dry, yields",
+    "gramWeight": 100
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 175
+   },
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 175
+   }
+  ]
+ },
+ {
+  "fdcId": 168914,
+  "description": "Rice noodles, cooked",
+  "dataType": "SR Legacy",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 108
+   },
+   {
+    "nutrient": {
+     "id": 1062,
+     "unitName": "kJ"
+    },
+    "amount": 454
+   },
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 1.79
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.2
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 24.01
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 1
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.03
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 4
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.14
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 4
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 19
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.023
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   }
+  ],
+  "foodPortions": [
+   {
+    "amount": 1,
+    "modifier": "cup",
+    "gramWeight": 176
+   }
+  ]
+ },
+ {
+  "fdcId": 2708402,
+  "description": "Rice, cooked, NFS",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.67
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.28
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 28
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 129
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.05
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0.4
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 10
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.19
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 35
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 245
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.077
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 158
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 118
+   }
+  ]
+ },
+ {
+  "fdcId": 2708416,
+  "description": "Rice, cooked, with milk",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 5.13
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 2.31
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 25
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 144
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 4.91
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0.3
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 133
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.03
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 183
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 357
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 9
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 1.29
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 200
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 150
+   }
+  ]
+ },
+ {
+  "fdcId": 168897,
+  "description": "Wild rice, cooked",
+  "dataType": "SR Legacy",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 101
+   },
+   {
+    "nutrient": {
+     "id": 1062,
+     "unitName": "kJ"
+    },
+    "amount": 423
+   },
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 3.99
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.34
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 21.34
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 1.8
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.73
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 3
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.6
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 101
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 3
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.049
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   }
+  ],
+  "foodPortions": [
+   {
+    "amount": 1,
+    "modifier": "cup",
+    "gramWeight": 164
+   }
+  ]
+ },
+ {
+  "fdcId": 2708422,
+  "description": "Rice, white, cooked, glutinous",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.01
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.19
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 21
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 96
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.05
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 1
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 2
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.14
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 10
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 227
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.039
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 130
+   },
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 174
+   }
+  ]
+ },
+ {
+  "fdcId": 2710789,
+  "description": "Rice, brown, cooked, as ingredient",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.45
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 1.12
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 25.9
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 124
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.22
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 1
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 5
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.4
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 80
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 3
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.2
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "30009",
+    "portionDescription": "1 fl oz (with ice)",
+    "gramWeight": 23
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 248
+   },
+   {
+    "modifier": "30001",
+    "portionDescription": "1 fl oz (no ice)",
+    "gramWeight": 31
+   },
+   {
+    "modifier": "30008",
+    "portionDescription": "1 fl oz (NFS)",
+    "gramWeight": 31
+   }
+  ]
+ },
+ {
+  "fdcId": 2709032,
+  "description": "Rice, cooked with coconut milk",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 3.57
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 17.2
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 26.6
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 267
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 3.34
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 1.9
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 19
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 2.34
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 219
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 182
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 1.3
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 15.2
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "10205",
+    "portionDescription": "1 cup",
+    "gramWeight": 200
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 150
+   }
+  ]
+ },
+ {
+  "fdcId": 2708417,
+  "description": "Rice, sweet, cooked with honey",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.52
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.26
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 31.1
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 139
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 4.89
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0.4
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 10
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.14
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 36
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 344
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.072
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 131
+   },
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 175
+   }
+  ]
+ },
+ {
+  "fdcId": 2710788,
+  "description": "Rice, white, cooked, as ingredient",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.54
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.37
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 29
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 130
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.04
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 4
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.25
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 28
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 3
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.065
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "30009",
+    "portionDescription": "1 fl oz (with ice)",
+    "gramWeight": 23
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 248
+   },
+   {
+    "modifier": "30001",
+    "portionDescription": "1 fl oz (no ice)",
+    "gramWeight": 31
+   },
+   {
+    "modifier": "30008",
+    "portionDescription": "1 fl oz (NFS)",
+    "gramWeight": 31
+   }
+  ]
+ },
+ {
+  "fdcId": 2708404,
+  "description": "Rice, white, cooked, made with oil",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.6
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 3.12
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 27.2
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 151
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.05
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0.4
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 10
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.16
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 34
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 238
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.455
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 163
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 122
+   }
+  ]
+ },
+ {
+  "fdcId": 2708408,
+  "description": "Rice, white, cooked, no added fat",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 2.67
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.28
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 28
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 129
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.05
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0.4
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 10
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.19
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 35
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 245
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.077
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 118
+   },
+   {
+    "modifier": "10043",
+    "portionDescription": "1 cup, cooked",
+    "gramWeight": 158
+   }
+  ]
+ },
+ {
+  "fdcId": 174608,
+  "description": "Chicken breast, roll, oven-roasted",
+  "dataType": "SR Legacy",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 134
+   },
+   {
+    "nutrient": {
+     "id": 1062,
+     "unitName": "kJ"
+    },
+    "amount": 562
+   },
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 14.59
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 7.65
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 1.79
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.43
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 6
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.32
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 324
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 883
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 2.48
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 39
+   }
+  ],
+  "foodPortions": [
+   {
+    "amount": 1,
+    "modifier": "serving 2 oz",
+    "gramWeight": 56
+   }
+  ]
+ },
+ {
+  "fdcId": 172963,
+  "description": "Chicken breast, oven-roasted, fat-free, sliced",
+  "dataType": "SR Legacy",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 79
+   },
+   {
+    "nutrient": {
+     "id": 1062,
+     "unitName": "kJ"
+    },
+    "amount": 332
+   },
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 16.79
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 0.39
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 2.17
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.1
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 6
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.32
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 67
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 1087
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.13
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 36
+   }
+  ],
+  "foodPortions": [
+   {
+    "amount": 1,
+    "modifier": "serving 2 slices",
+    "gramWeight": 42
+   }
+  ]
+ },
+ {
+  "fdcId": 171075,
+  "description": "Chicken, broilers or fryers, breast, meat and skin, cooked, roasted",
+  "dataType": "SR Legacy",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 197
+   },
+   {
+    "nutrient": {
+     "id": 1062,
+     "unitName": "kJ"
+    },
+    "amount": 824
+   },
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 29.8
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 7.78
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 14
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.07
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 245
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 71
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 2.19
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 84
+   }
+  ],
+  "foodPortions": [
+   {
+    "amount": 0.5,
+    "modifier": "breast, bone removed",
+    "gramWeight": 98
+   },
+   {
+    "amount": 1,
+    "modifier": "unit (yield from 1 lb ready-to-cook chicken)",
+    "gramWeight": 58
+   },
+   {
+    "amount": 1,
+    "modifier": "cup, chopped or diced",
+    "gramWeight": 140
+   }
+  ]
+ },
+ {
+  "fdcId": 171477,
+  "description": "Chicken, broilers or fryers, breast, meat only, cooked, roasted",
+  "dataType": "SR Legacy",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 165
+   },
+   {
+    "nutrient": {
+     "id": 1062,
+     "unitName": "kJ"
+    },
+    "amount": 690
+   },
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 31.02
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 3.57
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 15
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 1.04
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 256
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 74
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 1.01
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 85
+   }
+  ],
+  "foodPortions": [
+   {
+    "amount": 1,
+    "modifier": "cup, chopped or diced",
+    "gramWeight": 140
+   },
+   {
+    "amount": 1,
+    "modifier": "unit (yield from 1 lb ready-to-cook chicken)",
+    "gramWeight": 52
+   },
+   {
+    "amount": 0.5,
+    "modifier": "breast, bone and skin removed",
+    "gramWeight": 86
+   }
+  ]
+ },
+ {
+  "fdcId": 2705955,
+  "description": "Chicken breast, baked, broiled, or roasted, skin eaten, from raw",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 26.2
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 8.8
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 192
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 7
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.53
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 298
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 336
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 97
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 2.29
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "60453",
+    "portionDescription": "1 breast quarter (yield after cooking, bone removed)",
+    "gramWeight": 155
+   },
+   {
+    "modifier": "62138",
+    "portionDescription": "1 small or thin slice",
+    "gramWeight": 30
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 130
+   },
+   {
+    "modifier": "64700",
+    "portionDescription": "1 large breast",
+    "gramWeight": 145
+   },
+   {
+    "modifier": "64698",
+    "portionDescription": "1 small breast",
+    "gramWeight": 110
+   },
+   {
+    "modifier": "40040",
+    "portionDescription": "1 oz, cooked",
+    "gramWeight": 28.35
+   },
+   {
+    "modifier": "64699",
+    "portionDescription": "1 medium breast",
+    "gramWeight": 130
+   },
+   {
+    "modifier": "61398",
+    "portionDescription": "1 medium slice",
+    "gramWeight": 60
+   },
+   {
+    "modifier": "10049",
+    "portionDescription": "1 cup, cooked, diced",
+    "gramWeight": 135
+   },
+   {
+    "modifier": "61039",
+    "portionDescription": "1 large or thick slice",
+    "gramWeight": 85
+   }
+  ]
+ },
+ {
+  "fdcId": 2705956,
+  "description": "Chicken breast, baked, broiled, or roasted, skin not eaten, from raw",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 30.2
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 3.52
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 161
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 7
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.45
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 359
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 360
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 98
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 0.756
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "60453",
+    "portionDescription": "1 breast quarter (yield after cooking, bone removed)",
+    "gramWeight": 155
+   },
+   {
+    "modifier": "10049",
+    "portionDescription": "1 cup, cooked, diced",
+    "gramWeight": 135
+   },
+   {
+    "modifier": "64698",
+    "portionDescription": "1 small breast",
+    "gramWeight": 105
+   },
+   {
+    "modifier": "61398",
+    "portionDescription": "1 medium slice",
+    "gramWeight": 60
+   },
+   {
+    "modifier": "61039",
+    "portionDescription": "1 large or thick slice",
+    "gramWeight": 85
+   },
+   {
+    "modifier": "62138",
+    "portionDescription": "1 small or thin slice",
+    "gramWeight": 30
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 120
+   },
+   {
+    "modifier": "40040",
+    "portionDescription": "1 oz, cooked",
+    "gramWeight": 28.35
+   },
+   {
+    "modifier": "64700",
+    "portionDescription": "1 large breast",
+    "gramWeight": 135
+   },
+   {
+    "modifier": "64699",
+    "portionDescription": "1 medium breast",
+    "gramWeight": 120
+   }
+  ]
+ },
+ {
+  "fdcId": 2706087,
+  "description": "Chicken, chicken roll, roasted",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 26.7
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 6.33
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 164
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 15
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.73
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 278
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 499
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 112
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 1.57
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "61935",
+    "portionDescription": "1 slice",
+    "gramWeight": 28
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 85
+   },
+   {
+    "modifier": "10066",
+    "portionDescription": "1 cup, diced",
+    "gramWeight": 135
+   },
+   {
+    "modifier": "51000",
+    "portionDescription": "1 cubic inch",
+    "gramWeight": 17
+   }
+  ]
+ },
+ {
+  "fdcId": 2705961,
+  "description": "Chicken breast, baked, broiled, or roasted with marinade, skin eaten, from raw",
+  "dataType": "Survey (FNDDS)",
+  "foodNutrients": [
+   {
+    "nutrient": {
+     "id": 1003,
+     "unitName": "g"
+    },
+    "amount": 25.3
+   },
+   {
+    "nutrient": {
+     "id": 1004,
+     "unitName": "g"
+    },
+    "amount": 10.4
+   },
+   {
+    "nutrient": {
+     "id": 1005,
+     "unitName": "g"
+    },
+    "amount": 0.31
+   },
+   {
+    "nutrient": {
+     "id": 1008,
+     "unitName": "kcal"
+    },
+    "amount": 204
+   },
+   {
+    "nutrient": {
+     "id": 2000,
+     "unitName": "g"
+    },
+    "amount": 0.28
+   },
+   {
+    "nutrient": {
+     "id": 1079,
+     "unitName": "g"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1087,
+     "unitName": "mg"
+    },
+    "amount": 8
+   },
+   {
+    "nutrient": {
+     "id": 1089,
+     "unitName": "mg"
+    },
+    "amount": 0.55
+   },
+   {
+    "nutrient": {
+     "id": 1092,
+     "unitName": "mg"
+    },
+    "amount": 290
+   },
+   {
+    "nutrient": {
+     "id": 1093,
+     "unitName": "mg"
+    },
+    "amount": 399
+   },
+   {
+    "nutrient": {
+     "id": 1162,
+     "unitName": "mg"
+    },
+    "amount": 0
+   },
+   {
+    "nutrient": {
+     "id": 1253,
+     "unitName": "mg"
+    },
+    "amount": 94
+   },
+   {
+    "nutrient": {
+     "id": 1258,
+     "unitName": "g"
+    },
+    "amount": 2.46
+   }
+  ],
+  "foodPortions": [
+   {
+    "modifier": "40040",
+    "portionDescription": "1 oz, cooked",
+    "gramWeight": 28.35
+   },
+   {
+    "modifier": "60453",
+    "portionDescription": "1 breast quarter (yield after cooking, bone removed)",
+    "gramWeight": 155
+   },
+   {
+    "modifier": "64699",
+    "portionDescription": "1 medium breast",
+    "gramWeight": 130
+   },
+   {
+    "modifier": "64698",
+    "portionDescription": "1 small breast",
+    "gramWeight": 110
+   },
+   {
+    "modifier": "90000",
+    "portionDescription": "Quantity not specified",
+    "gramWeight": 130
+   },
+   {
+    "modifier": "61398",
+    "portionDescription": "1 medium slice",
+    "gramWeight": 60
+   },
+   {
+    "modifier": "62138",
+    "portionDescription": "1 small or thin slice",
+    "gramWeight": 30
+   },
+   {
+    "modifier": "10049",
+    "portionDescription": "1 cup, cooked, diced",
+    "gramWeight": 135
+   },
+   {
+    "modifier": "64700",
+    "portionDescription": "1 large breast",
+    "gramWeight": 145
+   },
+   {
+    "modifier": "61039",
+    "portionDescription": "1 large or thick slice",
+    "gramWeight": 85
+   }
+  ]
+ }
+]

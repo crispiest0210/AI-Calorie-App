@@ -1,0 +1,156 @@
+[
+  {
+    "sourceRef": "2727566",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727567",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727568",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727569",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727570",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727571",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727575",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2727576",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2747656",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "2747673",
+    "provider": "fdc",
+    "reasons": [
+      "carb_g is negative"
+    ]
+  },
+  {
+    "sourceRef": "167611",
+    "provider": "fdc",
+    "reasons": [
+      "protein + fat + carbs 100.16 g exceeds 100 g per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "167702",
+    "provider": "fdc",
+    "reasons": [
+      "protein + fat + carbs 100.11 g exceeds 100 g per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "171400",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "171401",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "172340",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "172341",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "172342",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "172343",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "173577",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "173578",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "2710166",
+    "provider": "fdc",
+    "reasons": [
+      "energy_kcal 902 exceeds 900 per 100 g"
+    ]
+  },
+  {
+    "sourceRef": "2710185",
+    "provider": "fdc",
+    "reasons": [
+      "protein + fat + carbs 100.11 g exceeds 100 g per 100 g"
+    ]
+  }
+]

@@ -1,0 +1,21 @@
+import { useEffect, useState } from 'react';
+import { AccessibilityInfo } from 'react-native';
+
+/** Spec 5.5: all motion respects the system Reduce Motion setting. */
+export function useReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    AccessibilityInfo.isReduceMotionEnabled().then((value) => {
+      if (active) setReduced(value);
+    });
+    const subscription = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduced);
+    return () => {
+      active = false;
+      subscription.remove();
+    };
+  }, []);
+
+  return reduced;
+}

@@ -1,0 +1,10497 @@
+{
+ "foods": [
+  {
+   "fdcId": 323121,
+   "description": "Frankfurter, beef, unheated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 28
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.89
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 314
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 15
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 343
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 11.4
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1310
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 11.7
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.14
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 872
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.26
+    }
+   ]
+  },
+  {
+   "fdcId": 2003592,
+   "description": "Grape juice, purple, with added vitamin C, from concentrate, shelf stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0409
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 49.8
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 4.02
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 45.6
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.288
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.74
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.258
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 15.6
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 66.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 64.5
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 14
+    }
+   ]
+  },
+  {
+   "fdcId": 2003593,
+   "description": "Grape juice, white, with added vitamin C, from concentrate, shelf stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.119
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 49
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 7.19
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 55.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.265
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.32
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.0938
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 15.8
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 66.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 64.6
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 14.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2003595,
+   "description": "Grapefruit juice, red, not fortified, not from concentrate, refrigerated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0153
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 128
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1.03
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 24.1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.267
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 8.88
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.57
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 9.1
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 41.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 39.8
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 7.12
+    }
+   ]
+  },
+  {
+   "fdcId": 325287,
+   "description": "Grapefruit juice, white, canned or bottled, unsweetened",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 39.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.55
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 157
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.2
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.59
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 37
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 141
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 7.72
+    }
+   ]
+  },
+  {
+   "fdcId": 2758977,
+   "description": "Grapefruit, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 156
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 38
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.652
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 21.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 7.98
+    }
+   ]
+  },
+  {
+   "fdcId": 2346413,
+   "description": "Grapes, green, seedless, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.199
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 218
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 3.17
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 3.02
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.232
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.9
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 80.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.899
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 18.6
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 71.9
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 16.1
+    }
+   ]
+  },
+  {
+   "fdcId": 2346412,
+   "description": "Grapes, red, seedless, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.162
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 229
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 3.31
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.164
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 10.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 85.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.914
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 20.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 77.2
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 17.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2727585,
+   "description": "Green onion, (scallion), bulb and greens, root removed, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.04
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 232
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 9.95
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 59.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.62
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.669
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2747656,
+   "description": "Halibut, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 430
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 108
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.592
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": -0.0602
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 19.1
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 81.3
+    }
+   ]
+  },
+  {
+   "fdcId": 332397,
+   "description": "Ham, sliced, pre-packaged, deli meat (96%fat free, water added)",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.12
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 443
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.58
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1040
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 16.7
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.73
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.27
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 106
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 425
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 5
+    }
+   ]
+  },
+  {
+   "fdcId": 746952,
+   "description": "Ham, sliced, restaurant",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.25
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.86
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 484
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1030
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.68
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.2
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 19.6
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.36
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 121
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 507
+    }
+   ]
+  },
+  {
+   "fdcId": 321358,
+   "description": "Hummus, commercial",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.22
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.35
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 960
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.4
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 438
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 17.1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 14.9
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 229
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 41
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 289
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.34
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 13.9
+    }
+   ]
+  },
+  {
+   "fdcId": 2727588,
+   "description": "Juice, pomegranate, from concentrate, shelf-stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0309
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 166
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 4.04
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 11
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 13.3
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 2727587,
+   "description": "Juice, prune, shelf-stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.444
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 216
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 10.3
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.2
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 14.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.423
+    }
+   ]
+  },
+  {
+   "fdcId": 2727589,
+   "description": "Juice, tart cherry, from concentrate, shelf-stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.203
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 170
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1.36
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.2
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 10.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.147
+    }
+   ]
+  },
+  {
+   "fdcId": 326196,
+   "description": "Kale, frozen, cooked, boiled, drained, without salt",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.21
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.3
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 36
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 150
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 144
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.94
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 151
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.84
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 16
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 17.8
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.12
+    }
+   ]
+  },
+  {
+   "fdcId": 747693,
+   "description": "Ketchup, restaurant",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.55
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 14
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.43
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 249
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 949
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 21.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.11
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 26.8
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 117
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 488
+    }
+   ]
+  },
+  {
+   "fdcId": 2710830,
+   "description": "Khorasan, grain, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.87
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 450
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 3.94
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 2.8
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 10.5
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 24.1
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 371
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 14.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 71.8
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 348
+    }
+   ]
+  },
+  {
+   "fdcId": 2710831,
+   "description": "Kiwifruit (kiwi), green, peeled, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0366
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 302
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 2.28
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 58.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.64
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.13
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 24.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 8.56
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.01
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 13.8
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 65.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 58.5
+    }
+   ]
+  },
+  {
+   "fdcId": 2727570,
+   "description": "Lamb, ground, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.64
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 272
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 75
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 53.4
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 18.6
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6.58
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 17.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": -0.251
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 237
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 242
+    }
+   ]
+  },
+  {
+   "fdcId": 2727584,
+   "description": "Leeks, bulb and greens, root removed, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.761
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 319
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 17.7
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 51.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.15
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.47
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3
+    }
+   ]
+  },
+  {
+   "fdcId": 2644283,
+   "description": "Lentils, dry",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 7.16
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 949
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.92
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 61.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 23.6
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 62.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 360
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 351
+    }
+   ]
+  },
+  {
+   "fdcId": 2346388,
+   "description": "Lettuce, iceberg, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0332
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 139
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 16.1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.0738
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 14.2
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.742
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.37
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 17.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 14.5
+    }
+   ]
+  },
+  {
+   "fdcId": 2346391,
+   "description": "Lettuce, leaf, green, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.32
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 277
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 28.9
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 15.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.156
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 39.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.07
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.09
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 22
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 18.5
+    }
+   ]
+  },
+  {
+   "fdcId": 2346390,
+   "description": "Lettuce, leaf, red, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.402
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 321
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 24.9
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 9.34
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.106
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 42.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.883
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.26
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 17.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 14.7
+    }
+   ]
+  },
+  {
+   "fdcId": 2346389,
+   "description": "Lettuce, romaine, green, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.267
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 260
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 23
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.0712
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 27.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.977
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.06
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 20.8
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 17.5
+    }
+   ]
+  },
+  {
+   "fdcId": 2747657,
+   "description": "Lobster, tail only, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.173
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 213
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 509
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.367
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 71.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.886
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 58.8
+    }
+   ]
+  },
+  {
+   "fdcId": 2759004,
+   "description": "Lunchmeat, chicken breast, sliced",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.703
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.14
+    }
+   ]
+  },
+  {
+   "fdcId": 2759002,
+   "description": "Lunchmeat, ham, black forest, sliced",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.46
+    }
+   ]
+  },
+  {
+   "fdcId": 2759003,
+   "description": "Lunchmeat, roast beef, sliced, prepackaged",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.79
+    }
+   ]
+  },
+  {
+   "fdcId": 2759001,
+   "description": "Lunchmeat, turkey, oven roasted, sliced",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.02
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.987
+    }
+   ]
+  },
+  {
+   "fdcId": 2747658,
+   "description": "Mahi mahi, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0517
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 408
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 51.9
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.377
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 19.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.287
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 83.7
+    }
+   ]
+  },
+  {
+   "fdcId": 2710832,
+   "description": "Mandarin, seedless, peeled, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 167
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 21.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.458
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.33
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 62
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.04
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 13.4
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 55.6
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 9.12
+    }
+   ]
+  },
+  {
+   "fdcId": 2710834,
+   "description": "Mango, Ataulfo, peeled, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 204
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 168
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.681
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.29
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 10
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 11.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.688
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 17.4
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 78.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 70.6
+    }
+   ]
+  },
+  {
+   "fdcId": 2710833,
+   "description": "Mango, Tommy Atkins, peeled, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 165
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 25.5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.572
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.75
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 12.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 10.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.562
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 15.3
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 68.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 61.6
+    }
+   ]
+  },
+  {
+   "fdcId": 2758986,
+   "description": "Mayonnaise, Regular",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 11.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2710816,
+   "description": "Melons, honeydew, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 209
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 21.2
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 15.7
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.216
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6.58
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 7.03
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.531
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.15
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 36.7
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 32.9
+    }
+   ]
+  },
+  {
+   "fdcId": 746772,
+   "description": "Milk, lowfat, fluid, 1% milkfat, with added vitamin A and vitamin D",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 159
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 39
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.38
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.95
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 179
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.568
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.18
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 43
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 126
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.96
+    }
+   ]
+  },
+  {
+   "fdcId": 746776,
+   "description": "Milk, nonfat, fluid, with added vitamin A and vitamin D (fat free or skim)",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 41
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 167
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.08
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.43
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.92
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 34
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 144
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.049
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 3
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 132
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 5.05
+    }
+   ]
+  },
+  {
+   "fdcId": 746778,
+   "description": "Milk, reduced fat, fluid, 2% milkfat, with added vitamin A and vitamin D",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.36
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 209
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.11
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.9
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 50
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 126
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 159
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.9
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 39
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.89
+    }
+   ]
+  },
+  {
+   "fdcId": 746782,
+   "description": "Milk, whole, 3.25% milkfat, with added vitamin D",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 12
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.63
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 60
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 1.86
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 38
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.27
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 123
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 150
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 251
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.81
+    }
+   ]
+  },
+  {
+   "fdcId": 2512379,
+   "description": "Millet, whole grain",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.53
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 214
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.19
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 3.33
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.62
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 74.4
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 376
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 381
+    }
+   ]
+  },
+  {
+   "fdcId": 2003603,
+   "description": "Mushroom, beech",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.739
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 376
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.891
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.449
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0.432
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.18
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.76
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 39.8
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 33
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.14
+    }
+   ]
+  },
+  {
+   "fdcId": 2003601,
+   "description": "Mushroom, crimini",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.312
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 380
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 4.57
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.197
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.09
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.01
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 30.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 23.7
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.78
+    }
+   ]
+  },
+  {
+   "fdcId": 2003600,
+   "description": "Mushroom, enoki",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.28
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 402
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.417
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.245
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 1.43
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.42
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.14
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 44.4
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 36.7
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.94
+    }
+   ]
+  },
+  {
+   "fdcId": 2003599,
+   "description": "Mushroom, king oyster",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.338
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 294
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.771
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.308
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 46.4
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 38.5
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.01
+    }
+   ]
+  },
+  {
+   "fdcId": 1999626,
+   "description": "Mushroom, lion's mane",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.688
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 443
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.336
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.256
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.59
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 42.7
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 35.1
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.38
+    }
+   ]
+  },
+  {
+   "fdcId": 2003602,
+   "description": "Mushroom, maitake",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.209
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 260
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.345
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.265
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.6
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 37.6
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 31
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.07
+    }
+   ]
+  },
+  {
+   "fdcId": 1999627,
+   "description": "Mushroom, oyster",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.698
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 282
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1.13
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.188
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.94
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 41
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 33.3
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.85
+    }
+   ]
+  },
+  {
+   "fdcId": 2003604,
+   "description": "Mushroom, pioppini",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.486
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 392
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.24
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.76
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 39.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 31.2
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.75
+    }
+   ]
+  },
+  {
+   "fdcId": 2003598,
+   "description": "Mushroom, portabella",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.139
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 349
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 5.31
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.312
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 3.24
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.75
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.66
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 32.4
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 26
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.88
+    }
+   ]
+  },
+  {
+   "fdcId": 1999628,
+   "description": "Mushrooms, shiitake",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.144
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 243
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.936
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.195
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 0.766
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.17
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 44.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 36.4
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.17
+    }
+   ]
+  },
+  {
+   "fdcId": 1999629,
+   "description": "Mushrooms, white button",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.227
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 373
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 6.44
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.371
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 5.46
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.89
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.08
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 31.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 24.9
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.72
+    }
+   ]
+  },
+  {
+   "fdcId": 326698,
+   "description": "Mustard, prepared, yellow",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.25
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.4
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 254
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.3
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.59
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1100
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.252
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.38
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.3
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 61
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 63
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 150
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.42
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 6.39
+    }
+   ]
+  },
+  {
+   "fdcId": 323294,
+   "description": "Nuts, almonds, dry roasted, with salt added",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 273
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 684
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 57.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 16.2
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 620
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 2590
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.17
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 20.4
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 4.56
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 11
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 256
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.17
+    }
+   ]
+  },
+  {
+   "fdcId": 2346393,
+   "description": "Nuts, almonds, whole, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.74
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 733
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 51.1
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 10.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 254
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 20
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 21.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 626
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 584
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.78
+    }
+   ]
+  },
+  {
+   "fdcId": 2515373,
+   "description": "Nuts, brazilnuts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.47
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 592
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 57.4
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.98
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 168
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 15
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 21.6
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 664
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 621
+    }
+   ]
+  },
+  {
+   "fdcId": 2515374,
+   "description": "Nuts, cashew nuts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 5.99
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 638
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 4.76
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 38.9
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.1
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 42
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 17.4
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 36.3
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 565
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 533
+    }
+   ]
+  },
+  {
+   "fdcId": 2515375,
+   "description": "Nuts, hazelnuts or filberts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.46
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 636
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 53.5
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.41
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 135
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 26.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 641
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 602
+    }
+   ]
+  },
+  {
+   "fdcId": 2515378,
+   "description": "Nuts, macadamia nuts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.88
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 373
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 64.9
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 7.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 52.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.79
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 24.1
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 712
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 669
+    }
+   ]
+  },
+  {
+   "fdcId": 2346395,
+   "description": "Nuts, pecans, halves, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.37
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 360
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 73.3
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.79
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 54.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 12.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.96
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 750
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 700
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 6.46
+    }
+   ]
+  },
+  {
+   "fdcId": 2346392,
+   "description": "Nuts, pine nuts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 5.36
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 655
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 61.3
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.94
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 8.74
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 18.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 15.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 689
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 643
+    }
+   ]
+  },
+  {
+   "fdcId": 2515379,
+   "description": "Nuts, pistachio nuts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.46
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 947
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 45
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 6.97
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 117
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 20.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 27.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 598
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 561
+    }
+   ]
+  },
+  {
+   "fdcId": 2346394,
+   "description": "Nuts, walnuts, English, halves, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.24
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 424
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 69.7
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.21
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 88.3
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 10.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 14.6
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 730
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 679
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 6.05
+    }
+   ]
+  },
+  {
+   "fdcId": 2257046,
+   "description": "Oat milk, unsweetened, plain, refrigerated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 148
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.261
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 148
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 42
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 2.75
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.797
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.1
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 48.3
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.32
+    }
+   ]
+  },
+  {
+   "fdcId": 2346396,
+   "description": "Oats, whole grain, rolled, old fashioned",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 4.34
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 350
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.668
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 5.89
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 10.4
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 45.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 68.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 382
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 379
+    }
+   ]
+  },
+  {
+   "fdcId": 2346397,
+   "description": "Oats, whole grain, steel cut",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.8
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 376
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.311
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 5.8
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 12
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 51.3
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 69.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 12.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 381
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 379
+    }
+   ]
+  },
+  {
+   "fdcId": 748278,
+   "description": "Oil, canola",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 6.61
+    }
+   ]
+  },
+  {
+   "fdcId": 330458,
+   "description": "Oil, coconut",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 82.5
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.05
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 3480
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 99.1
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 833
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.84
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 748323,
+   "description": "Oil, corn",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 13.4
+    }
+   ]
+  },
+  {
+   "fdcId": 1750351,
+   "description": "Oil, olive, extra light",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 15.8
+    }
+   ]
+  },
+  {
+   "fdcId": 748608,
+   "description": "Oil, olive, extra virgin",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 15.4
+    }
+   ]
+  },
+  {
+   "fdcId": 1750348,
+   "description": "Oil, peanut",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 16.2
+    }
+   ]
+  },
+  {
+   "fdcId": 1750350,
+   "description": "Oil, safflower",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 7.65
+    }
+   ]
+  },
+  {
+   "fdcId": 748366,
+   "description": "Oil, soybean",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 14.9
+    }
+   ]
+  },
+  {
+   "fdcId": 1750349,
+   "description": "Oil, sunflower",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.99
+    }
+   ]
+  },
+  {
+   "fdcId": 332791,
+   "description": "Olives, green, Manzanilla, stuffed with pimiento",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 43
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1620
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 121
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.31
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 12.9
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.15
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 4.32
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.3
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.96
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 130
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 543
+    }
+   ]
+  },
+  {
+   "fdcId": 324317,
+   "description": "Onion rings, breaded, par fried, frozen, prepared, heated in oven",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 135
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 14.4
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 36.3
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 288
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 1.6
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.15
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 374
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1210
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.4
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.14
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.52
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 28
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.5
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 34
+    }
+   ]
+  },
+  {
+   "fdcId": 2003591,
+   "description": "Orange juice, no pulp, not fortified, from concentrate, refrigerated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0646
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 180
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 5.23
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 26.9
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.325
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 12.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.734
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 10.3
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 47.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 45.7
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 8.28
+    }
+   ]
+  },
+  {
+   "fdcId": 2003597,
+   "description": "Orange juice, no pulp, not fortified, not from concentrate, refrigerated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0706
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 183
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.075
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 30.5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.356
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.29
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.812
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 10
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 46.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 45
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 8.08
+    }
+   ]
+  },
+  {
+   "fdcId": 2747659,
+   "description": "Parsnips, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.505
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 493
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.491
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 10.5
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 11.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.538
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.35
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 44.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 87.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.27
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 19.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2758998,
+   "description": "Pasta, dry, enriched, spaghetti",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.89
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 237
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 18.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2759000,
+   "description": "Pasta, dry, whole grain, spaghetti ",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 4.52
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 427
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 4.58
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 28.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2727577,
+   "description": "Pawpaw, peeled, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0747
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 221
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.351
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 27.6
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.91
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.15
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 14.1
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2262072,
+   "description": "Peanut butter, creamy",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 6.32
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 49.8
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.85
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 654
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 221
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.42
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 49.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 24
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 22.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 632
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 589
+    }
+   ]
+  },
+  {
+   "fdcId": 2758989,
+   "description": "Peanut butter, Creamy",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.18
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 9.98
+    }
+   ]
+  },
+  {
+   "fdcId": 2515376,
+   "description": "Peanuts, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.55
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 636
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1.49
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 43.3
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.01
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 49.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 23.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 26.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 588
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 551
+    }
+   ]
+  },
+  {
+   "fdcId": 2710836,
+   "description": "Pear, Anjou, green, with skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 122
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.398
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 5.51
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.371
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.64
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.99
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 63.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.312
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 14.8
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 57.3
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 8.53
+    }
+   ]
+  },
+  {
+   "fdcId": 2644291,
+   "description": "Peas, green, sweet, canned, sodium added, sugar added, drained and rinsed",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.14
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 109
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 207
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.15
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 5.95
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 28.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 80.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.73
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 12.7
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 77.8
+    }
+   ]
+  },
+  {
+   "fdcId": 2759006,
+   "description": "Pepperoni, beef and pork, sliced",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 15.8
+    }
+   ]
+  },
+  {
+   "fdcId": 2747660,
+   "description": "Peppers, banana or Hungarian wax, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.162
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 177
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.71
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 112
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.131
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.79
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.82
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.723
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.97
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 23.9
+    }
+   ]
+  },
+  {
+   "fdcId": 2258588,
+   "description": "Peppers, bell, green, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.186
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 163
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 99.5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.106
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.942
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.5
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.715
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.78
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 22.9
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 19.7
+    }
+   ]
+  },
+  {
+   "fdcId": 2258591,
+   "description": "Peppers, bell, orange, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.365
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 201
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 158
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.156
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.967
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.9
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 31.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.882
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.7
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 27.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2258590,
+   "description": "Peppers, bell, red, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.353
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 213
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 142
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.126
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.16
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6.36
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.65
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.896
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 31.3
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 27
+    }
+   ]
+  },
+  {
+   "fdcId": 2258589,
+   "description": "Peppers, bell, yellow, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.36
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 197
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 139
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.121
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.07
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6.69
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.819
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 30.8
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 26.6
+    }
+   ]
+  },
+  {
+   "fdcId": 2747661,
+   "description": "Peppers, jalapeno, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0376
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 167
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.7
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 89.9
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.149
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.72
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 10.1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.08
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.621
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 24.1
+    }
+   ]
+  },
+  {
+   "fdcId": 2747662,
+   "description": "Peppers, poblano, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.117
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 192
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 128
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.68
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.191
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.07
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 8.37
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.14
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.43
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 28
+    }
+   ]
+  },
+  {
+   "fdcId": 2747663,
+   "description": "Peppers, serrano, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0572
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 224
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.52
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 94.6
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.141
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.52
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 12.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.14
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.856
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 29.2
+    }
+   ]
+  },
+  {
+   "fdcId": 324653,
+   "description": "Pickles, cucumber, dill or kosher dill",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 50
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 808
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 54
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 112
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.43
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.99
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.48
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.23
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 2.1
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 12
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.28
+    }
+   ]
+  },
+  {
+   "fdcId": 2346398,
+   "description": "Pineapple, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.054
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 137
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 58.6
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.211
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.935
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 12.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 14.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.461
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 60.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 54
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 11.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2710843,
+   "description": "Plantains, overripe, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.315
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 408
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 19.1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.99
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.79
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 3.9
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 130
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.17
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 29.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 117
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 19.2
+    }
+   ]
+  },
+  {
+   "fdcId": 2710817,
+   "description": "Plantains, ripe, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.319
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 396
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 20.1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.893
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.12
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 3.82
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 136
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.16
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 31
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 123
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 14.2
+    }
+   ]
+  },
+  {
+   "fdcId": 2710818,
+   "description": "Plantains, underripe, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.334
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 406
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 18.5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.685
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.53
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.83
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.23
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 33.6
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 145
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 145
+    }
+   ]
+  },
+  {
+   "fdcId": 2710837,
+   "description": "Plum, black, with skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 186
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 1.82
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.282
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.35
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.03
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 52.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.578
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 13.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 58.7
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 7.96
+    }
+   ]
+  },
+  {
+   "fdcId": 2758978,
+   "description": "Plums, dried (prunes), uncooked",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.747
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 788
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.85
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 6.25
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 31.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2727576,
+   "description": "Pork, belly, with skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.382
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 208
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 66.6
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 49.7
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 35.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.2
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 15.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": -0.705
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 380
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 385
+    }
+   ]
+  },
+  {
+   "fdcId": 2727575,
+   "description": "Pork, chop, center cut, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.421
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 366
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 57.3
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 39.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 5.48
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.12
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": -0.562
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 22.8
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 138
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 145
+    }
+   ]
+  },
+  {
+   "fdcId": 749420,
+   "description": "Pork, cured, bacon, cooked, restaurant",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 12.6
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 36.5
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 13
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.28
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 557
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1830
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.14
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 40.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.1
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 500
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 2090
+    }
+   ]
+  },
+  {
+   "fdcId": 2514745,
+   "description": "Pork, ground, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.788
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 318
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 71.2
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 53.6
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 17.5
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 5.86
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 17.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 228
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 233
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 6.28
+    }
+   ]
+  },
+  {
+   "fdcId": 2646168,
+   "description": "Pork, loin, boneless, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.452
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 361
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 55.9
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 40.2
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.28
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 9.47
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.11
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 21.1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 168
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 174
+    }
+   ]
+  },
+  {
+   "fdcId": 2646169,
+   "description": "Pork, loin, tenderloin, boneless, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.929
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 397
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 59.6
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 41.4
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.866
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.9
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.53
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 119
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 21.6
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 125
+    }
+   ]
+  },
+  {
+   "fdcId": 2346403,
+   "description": "Potatoes, gold, without skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.373
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 446
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 2.24
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 23.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.264
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 13.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 5.94
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 73.5
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.81
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 16
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 71.6
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.645
+    }
+   ]
+  },
+  {
+   "fdcId": 2346402,
+   "description": "Potatoes, red, without skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.391
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 472
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 2.86
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 21.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.248
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 13.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 5.13
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.06
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 16.3
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 75.6
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 73.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.664
+    }
+   ]
+  },
+  {
+   "fdcId": 2346401,
+   "description": "Potatoes, russet, without skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.384
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 450
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 2.74
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 10.9
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.36
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 14.9
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 17.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.27
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 83.4
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 81
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.526
+    }
+   ]
+  },
+  {
+   "fdcId": 2747664,
+   "description": "Radicchio, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.401
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 335
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 8.08
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.25
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 6.18
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.143
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.11
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 30.9
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 26.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.31
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.96
+    }
+   ]
+  },
+  {
+   "fdcId": 2747665,
+   "description": "Radishes, red, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 198
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 51.2
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.64
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 17.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.0831
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.31
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 21.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.06
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.656
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 19.6
+    }
+   ]
+  },
+  {
+   "fdcId": 2758980,
+   "description": "Raisins, dark, seedless",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.84
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 936
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 13.2
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.68
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 51.5
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 66
+    }
+   ]
+  },
+  {
+   "fdcId": 2758979,
+   "description": "Raisins, golden, seedless",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.25
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 869
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 13.3
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 2.61
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.01
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 59
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 68.7
+    }
+   ]
+  },
+  {
+   "fdcId": 2346410,
+   "description": "Raspberries, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.45
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 156
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 23
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.188
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.4
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 12.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.01
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 57.3
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 51.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.68
+    }
+   ]
+  },
+  {
+   "fdcId": 2758984,
+   "description": "Refried beans, canned (pinto)",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.87
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.642
+    }
+   ]
+  },
+  {
+   "fdcId": 2758985,
+   "description": "Refried beans, canned, vegetarian",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.91
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 31
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.54
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 337
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 281
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.224
+    }
+   ]
+  },
+  {
+   "fdcId": 334536,
+   "description": "Restaurant, Chinese, fried rice, without meat",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 11
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 69
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.19
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 32.5
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 174
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 361
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.493
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 729
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.84
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.46
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.62
+    }
+   ]
+  },
+  {
+   "fdcId": 746774,
+   "description": "Restaurant, Chinese, sweet and sour pork",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.88
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1090
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.07
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 304
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 2.3
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 24
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.68
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 13.6
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 25.5
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 260
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 46
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 152
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 10.3
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 23
+    }
+   ]
+  },
+  {
+   "fdcId": 334720,
+   "description": "Restaurant, Latino, pupusas con frijoles (pupusas, bean)",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.59
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 959
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.8
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.46
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 305
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.19
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 9.01
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 31.5
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 229
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 51
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 305
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.3
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 30.7
+    }
+   ]
+  },
+  {
+   "fdcId": 334628,
+   "description": "Restaurant, Latino, tamale, pork",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.38
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 728
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.4
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.87
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 473
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 20
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.69
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 9.04
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 15.8
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 174
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 75
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 152
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.46
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 15.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2758975,
+   "description": "Rhubarb, stalk, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 265
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 6.93
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.43
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 32.9
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.635
+    }
+   ]
+  },
+  {
+   "fdcId": 2710825,
+   "description": "Rice, black, unenriched, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.12
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 256
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.44
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.18
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 14.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.57
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 77.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 370
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 361
+    }
+   ]
+  },
+  {
+   "fdcId": 2512380,
+   "description": "Rice, brown, long grain, unenriched, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.24
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 250
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.31
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 4.3
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.02
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 8.06
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.25
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 76.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 366
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 368
+    }
+   ]
+  },
+  {
+   "fdcId": 2710838,
+   "description": "Rice, red, unenriched, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.2
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 245
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.438
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.44
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.2
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.22
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.56
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 76.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 370
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 360
+    }
+   ]
+  },
+  {
+   "fdcId": 2512381,
+   "description": "Rice, white, long grain, unenriched, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.14
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 82.3
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.462
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.03
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 2.77
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.149
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 4.46
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 80.3
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 7.04
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 359
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 370
+    }
+   ]
+  },
+  {
+   "fdcId": 2727580,
+   "description": "Rutabaga, peeled, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.137
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 267
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 4.59
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 42
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 6.01
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.888
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.9
+    }
+   ]
+  },
+  {
+   "fdcId": 2758987,
+   "description": "Salad dressing, Italian dressing, commercial, regular",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.62
+    }
+   ]
+  },
+  {
+   "fdcId": 2759005,
+   "description": "Salami, hard, sliced",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 13
+    }
+   ]
+  },
+  {
+   "fdcId": 746775,
+   "description": "Salt, table, iodized",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 38700
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 50
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 2
+    }
+   ]
+  },
+  {
+   "fdcId": 332282,
+   "description": "Sauce, pasta, spaghetti/marinara, ready-to-serve",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 27
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 319
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.48
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.05
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 45
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.17
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.78
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 419
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.41
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 186
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 5.5
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 7.31
+    }
+   ]
+  },
+  {
+   "fdcId": 746777,
+   "description": "Sauce, salsa, ready-to-serve",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 656
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 122
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.42
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.44
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.74
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 258
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 28
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 29
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.19
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.81
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 5.66
+    }
+   ]
+  },
+  {
+   "fdcId": 746779,
+   "description": "Sausage, breakfast sausage, beef, pre-cooked, unprepared",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 28.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.37
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 328
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 35
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 263
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 19.2
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 61
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 11.3
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1370
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.55
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 866
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13.3
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "fdcId": 746780,
+   "description": "Sausage, Italian, pork, mild, cooked, pan-fried",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 26.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.15
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 322
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 12
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 310
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 80
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 9.15
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 18.2
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1350
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.29
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 766
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 1.46
+    }
+   ]
+  },
+  {
+   "fdcId": 746781,
+   "description": "Sausage, pork, chorizo, link or ground, cooked, pan-fried",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 28.1
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 37
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.34
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 435
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 983
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 107
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 19.3
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 9.45
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.63
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 346
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1450
+    }
+   ]
+  },
+  {
+   "fdcId": 746783,
+   "description": "Sausage, turkey, breakfast links, mild, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 16.7
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 706
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.17
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 599
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 78
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.53
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 10.4
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.93
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 169
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 32
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 310
+    }
+   ]
+  },
+  {
+   "fdcId": 2747666,
+   "description": "Scallops, bay, Patagonian, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.172
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 292
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 252
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.419
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 14
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 16.4
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.28
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 78.5
+    }
+   ]
+  },
+  {
+   "fdcId": 2747667,
+   "description": "Scallops, sea, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.213
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 245
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 313
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.493
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 10.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 66.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 13.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.97
+    }
+   ]
+  },
+  {
+   "fdcId": 2747668,
+   "description": "Sea bass, Chilean, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 236
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 109
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 16.6
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6.82
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 14.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.139
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 209
+    }
+   ]
+  },
+  {
+   "fdcId": 2515380,
+   "description": "Seeds, pumpkin seeds (pepitas), raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 8.36
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 691
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 40
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 5.08
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 37.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 29.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 18.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 555
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 515
+    }
+   ]
+  },
+  {
+   "fdcId": 325524,
+   "description": "Seeds, sunflower seed kernels, dry roasted, with salt added",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 10.3
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 532
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 56.1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 17.1
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 612
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 78
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 689
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 5.36
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 5.21
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 21
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 2560
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.14
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 14.9
+    }
+   ]
+  },
+  {
+   "fdcId": 2515381,
+   "description": "Seeds, sunflower seed, kernel, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 4.37
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 657
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 48.4
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 7.22
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 116
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 18.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 24.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 609
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 571
+    }
+   ]
+  },
+  {
+   "fdcId": 2262073,
+   "description": "Sesame butter, creamy",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.37
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 116
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 408
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 63.6
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.97
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 62.4
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 14.2
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 19.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 697
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 648
+    }
+   ]
+  },
+  {
+   "fdcId": 2727586,
+   "description": "Shallots, bulb, peeled, root removed, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.332
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 252
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 3.64
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 26.1
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.35
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.38
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.2
+    }
+   ]
+  },
+  {
+   "fdcId": 2747669,
+   "description": "Snapper, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.201
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 349
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 93.1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.569
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 13.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 20.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.441
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 89.5
+    }
+   ]
+  },
+  {
+   "fdcId": 2747670,
+   "description": "Snow crab, legs only, frozen  ",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.276
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 193
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 728
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.294
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 97.8
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 69.2
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 15.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.11
+    }
+   ]
+  },
+  {
+   "fdcId": 2710839,
+   "description": "Sorghum bran, white, unenriched, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 14.2
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 852
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 2.92
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 9.26
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 35
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 61.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 11.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 68.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 403
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 365
+    }
+   ]
+  },
+  {
+   "fdcId": 2710840,
+   "description": "Sorghum flour, white, pearled, unenriched, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.22
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 274
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.24
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.3
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.89
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 364
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 73.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 350
+    }
+   ]
+  },
+  {
+   "fdcId": 2710841,
+   "description": "Sorghum grain, white, pearled, unenriched, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.04
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 274
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 3.26
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.92
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.45
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 74.9
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 370
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 338
+    }
+   ]
+  },
+  {
+   "fdcId": 2710842,
+   "description": "Sorghum, whole grain, white, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.9
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 367
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.329
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.22
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 8.27
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 14.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 73.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.1
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 373
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 341
+    }
+   ]
+  },
+  {
+   "fdcId": 2257044,
+   "description": "Soy milk, sweetened, plain, refrigerated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 155
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.367
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 118
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 39.4
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.96
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.78
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 40.7
+    }
+   ]
+  },
+  {
+   "fdcId": 1999630,
+   "description": "Soy milk, unsweetened, plain, shelf stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 101
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.542
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 158
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 34.3
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.314
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 2.12
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.55
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.29
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 38.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 38.5
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 0.557
+    }
+   ]
+  },
+  {
+   "fdcId": 1999632,
+   "description": "Spinach, baby",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.26
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 582
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 111
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 26.5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.619
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 68.4
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.85
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 26.6
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 20.7
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 1.56
+    }
+   ]
+  },
+  {
+   "fdcId": 1999633,
+   "description": "Spinach, mature",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.05
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 460
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 107
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 30.3
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.604
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.59
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 66.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.91
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 2.64
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 27.6
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 21.6
+    }
+   ]
+  },
+  {
+   "fdcId": 2727578,
+   "description": "Squash, pie pumpkin, peeled, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0632
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 472
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.312
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 10.1
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.14
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.854
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.3
+    }
+   ]
+  },
+  {
+   "fdcId": 2727579,
+   "description": "Squash, spaghetti, peeled, seeded, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0312
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 267
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.312
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 5.55
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.6
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.01
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.792
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2685568,
+   "description": "Squash, summer, green, zucchini, includes skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.194
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 226
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.205
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.752
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 20.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.984
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 19
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 16
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.27
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 15
+    }
+   ]
+  },
+  {
+   "fdcId": 2685569,
+   "description": "Squash, summer, yellow, includes skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.137
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 220
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.135
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.956
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 22.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.891
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 22
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 19
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.39
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 17
+    }
+   ]
+  },
+  {
+   "fdcId": 2685571,
+   "description": "Squash, winter, acorn, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.308
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 332
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.182
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 2.64
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 24.8
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 48.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.25
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 10.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 42
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 7
+    }
+   ]
+  },
+  {
+   "fdcId": 2685570,
+   "description": "Squash, winter, butternut, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.213
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 329
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.168
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.96
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 21.7
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.15
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 10.5
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 48.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 41.7
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 7.6
+    }
+   ]
+  },
+  {
+   "fdcId": 2747671,
+   "description": "Squid (calamari), frozen, tubes only",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 9.48
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 272
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.551
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 10.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.81
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.932
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 43.9
+    }
+   ]
+  },
+  {
+   "fdcId": 2346409,
+   "description": "Strawberries, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.255
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 161
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 59.6
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.22
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.96
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.641
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 36.4
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 32.7
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.86
+    }
+   ]
+  },
+  {
+   "fdcId": 746784,
+   "description": "Sugars, granulated",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1610
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.05
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.32
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 385
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 99.6
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 99.8
+    }
+   ]
+  },
+  {
+   "fdcId": 2346404,
+   "description": "Sweet potatoes, orange flesh, without skin, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.398
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 486
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 14.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.375
+    },
+    {
+     "nutrientId": 2033,
+     "unitName": "G",
+     "value": 4.44
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 22.3
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 17.3
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.58
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 79
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 77.4
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 6.06
+    }
+   ]
+  },
+  {
+   "fdcId": 2758990,
+   "description": "Sweetened condensed milk",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 4.82
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 54.1
+    }
+   ]
+  },
+  {
+   "fdcId": 2747672,
+   "description": "Swordfish, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0962
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 414
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 56.9
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 8.12
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 3.62
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 19.2
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.45
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 152
+    }
+   ]
+  },
+  {
+   "fdcId": 2727582,
+   "description": "Tomatillos, dehusked, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.245
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 239
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0.311
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 2.18
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.14
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.87
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.06
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.7
+    }
+   ]
+  },
+  {
+   "fdcId": 2003596,
+   "description": "Tomato juice, with added ingredients, from concentrate, shelf stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.299
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 198
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 236
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 49.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.288
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.74
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.859
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.32
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 23.3
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 19.9
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.57
+    }
+   ]
+  },
+  {
+   "fdcId": 2685580,
+   "description": "Tomato, paste, canned, without salt added",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.18
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 972
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 61.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.732
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.7
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 36.8
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 104
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.23
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 20.2
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 88.5
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 11.7
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 18.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2685582,
+   "description": "Tomato, puree, canned",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.24
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 416
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 29.4
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.265
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.97
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 17.6
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 40.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.58
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.04
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 34.8
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.31
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 10.4
+    }
+   ]
+  },
+  {
+   "fdcId": 1999634,
+   "description": "Tomato, roma",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.103
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 193
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 17.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.425
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.971
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 9.96
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.696
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.84
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 22
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 19
+    }
+   ]
+  },
+  {
+   "fdcId": 2685579,
+   "description": "Tomato, sauce, canned, with salt added",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.11
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 356
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 417
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.382
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.64
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 17.1
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 29.1
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.35
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 6.33
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 34.2
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.52
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 9.2
+    }
+   ]
+  },
+  {
+   "fdcId": 333281,
+   "description": "Tomatoes, canned, red, ripe, diced",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 30
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.57
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 198
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 125
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.5
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.99
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.84
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.32
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 18
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 76
+    }
+   ]
+  },
+  {
+   "fdcId": 2685581,
+   "description": "Tomatoes, crushed, canned",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.27
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 346
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 140
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.398
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.94
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 19.2
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 37.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 1.44
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.14
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 32.3
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.74
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 9.1
+    }
+   ]
+  },
+  {
+   "fdcId": 2685578,
+   "description": "Tomatoes, whole, canned, solids and liquids, with salt added",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.929
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 203
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 112
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.206
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.872
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 19.8
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.61
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.868
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.29
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 22.5
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 19.1
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 7.7
+    }
+   ]
+  },
+  {
+   "fdcId": 2758997,
+   "description": "Tortilla, corn, shelf stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.791
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 168
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 34.9
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 35.2
+    }
+   ]
+  },
+  {
+   "fdcId": 2758996,
+   "description": "Tortilla, wheat flour, shelf stable",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 3.43
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 136
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 730
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 138
+    }
+   ]
+  },
+  {
+   "fdcId": 2747673,
+   "description": "Tuna, ahi or yellowfin, frozen, wild caught",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.591
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 420
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 94.4
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.388
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 3.19
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 24.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": -0.104
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 102
+    }
+   ]
+  },
+  {
+   "fdcId": 746785,
+   "description": "Turkey, ground, 93% lean, 7% fat, pan-broiled crumbles",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 31
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 304
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 11.6
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.56
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 90
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 104
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.97
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 27.1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 220
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 922
+    }
+   ]
+  },
+  {
+   "fdcId": 2514747,
+   "description": "Turkey, ground, 93% lean/ 7% fat, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.09
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 246
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 82.3
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 80.2
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 9.59
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 23.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 17.3
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 153
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 158
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.26
+    }
+   ]
+  },
+  {
+   "fdcId": 2747674,
+   "description": "Turnips, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 262
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 12.8
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 5.09
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 26.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.119
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.92
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 32.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 7.27
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.953
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 34
+    }
+   ]
+  },
+  {
+   "fdcId": 2747675,
+   "description": "Watermelon, seedless, flesh only, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.0213
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 117
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 7.2
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 6.46
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.86
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.871
+    }
+   ]
+  },
+  {
+   "fdcId": 2747676,
+   "description": "Watermelon, seedless, rind only, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 272
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 3.76
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 7.09
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 2.22
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.54
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 16.9
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 0.531
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.17
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 19.4
+    }
+   ]
+  },
+  {
+   "fdcId": 2710821,
+   "description": "Wild rice, dry, raw",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.53
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 299
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1.01
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.7
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.26
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7.97
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 12.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 75.7
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 369
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 359
+    }
+   ]
+  },
+  {
+   "fdcId": 330137,
+   "description": "Yogurt, Greek, plain, nonfat",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.07
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 10.3
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 256
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 5
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.108
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 36
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.37
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 3.64
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 61
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 111
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 141
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.27
+    }
+   ]
+  },
+  {
+   "fdcId": 2259794,
+   "description": "Yogurt, Greek, plain, whole milk",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 147
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 33.8
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 16.8
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.39
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.39
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 111
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 4.75
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.78
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 93.7
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 94.5
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 3.25
+    }
+   ]
+  },
+  {
+   "fdcId": 330415,
+   "description": "Yogurt, Greek, strawberry, nonfat",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.15
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 12.2
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 83
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 97
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 133
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 8.06
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 347
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.6
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.09
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 32
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.2
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 4
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.103
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 11.5
+    },
+    {
+     "nutrientId": 1050,
+     "unitName": "G",
+     "value": 12
+    }
+   ]
+  },
+  {
+   "fdcId": 2647437,
+   "description": "Yogurt, plain, nonfat",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 210
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 3.38
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 51.5
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.0875
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 167
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.23
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 8.08
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 50
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 50.1
+    }
+   ]
+  },
+  {
+   "fdcId": 2259793,
+   "description": "Yogurt, plain, whole milk",
+   "dataType": "Foundation",
+   "foodNutrients": [
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 164
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 41.8
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 14.2
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.32
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 4.48
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 127
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 5.57
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 3.82
+    },
+    {
+     "nutrientId": 2047,
+     "unitName": "KCAL",
+     "value": 78
+    },
+    {
+     "nutrientId": 2048,
+     "unitName": "KCAL",
+     "value": 77.3
+    },
+    {
+     "nutrientId": 1063,
+     "unitName": "G",
+     "value": 4.09
+    }
+   ]
+  }
+ ]
+}

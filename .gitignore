@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+.expo/
+.env
+.env.local
+data/fdc/
+*.sqlite
+*.sqlite-journal
+!apps/mobile/assets/catalog.sqlite
+.DS_Store
+data/fdc/*.done

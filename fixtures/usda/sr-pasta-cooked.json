@@ -1,0 +1,868 @@
+{
+ "foods": [
+  {
+   "fdcId": 2708357,
+   "description": "Pasta, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.76
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.92
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 30.68
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 157
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.56
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.27
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 232
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.175
+    }
+   ]
+  },
+  {
+   "fdcId": 2708351,
+   "description": "Pasta, vegetable, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.52
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.11
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 26.55
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 128
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 1.15
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.3
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 11
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.49
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 31
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 99
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.016
+    }
+   ]
+  },
+  {
+   "fdcId": 2708358,
+   "description": "Pasta, whole grain, cooked",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.95
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.7
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 29.89
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 148
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.75
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 3.9
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 13
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.71
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 95
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 235
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.242
+    }
+   ]
+  },
+  {
+   "fdcId": 169751,
+   "description": "Pasta, cooked, enriched, with added salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.93
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.28
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 131
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 655
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.176
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 30.6
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 157
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    }
+   ]
+  },
+  {
+   "fdcId": 172014,
+   "description": "Pasta, cooked, unenriched, with added salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.8
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.93
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 30.6
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 157
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 655
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 131
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.176
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.5
+    }
+   ]
+  },
+  {
+   "fdcId": 169728,
+   "description": "Pasta, fresh-refrigerated, plain, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 548
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.14
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.15
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 33
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.15
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.05
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 24.9
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 131
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 24
+    }
+   ]
+  },
+  {
+   "fdcId": 169730,
+   "description": "Pasta, fresh-refrigerated, spinach, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 544
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.06
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.11
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 33
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.217
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.94
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 25
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 130
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 18
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 37
+    }
+   ]
+  },
+  {
+   "fdcId": 168900,
+   "description": "Pasta, gluten-free, corn, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 527
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.102
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 2.63
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 4.8
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.25
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.73
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 27.9
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 126
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 31
+    }
+   ]
+  },
+  {
+   "fdcId": 168901,
+   "description": "Pasta, homemade, made with egg, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 544
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 1.74
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 23.5
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 130
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 10
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 21
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.28
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.16
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 83
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 41
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.408
+    }
+   ]
+  },
+  {
+   "fdcId": 169737,
+   "description": "Pasta, cooked, enriched, without added salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.93
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.8
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.28
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 30.9
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 158
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.176
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 660
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1
+    }
+   ]
+  },
+  {
+   "fdcId": 168928,
+   "description": "Pasta, cooked, unenriched, without added salt",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.93
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 5.8
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 1.8
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 1
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 30.9
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 158
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.56
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 7
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 44
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 660
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.176
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.5
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 168902,
+   "description": "Pasta, homemade, made without egg, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 519
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 4.37
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.13
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 74
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 0.14
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 0.98
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 25.1
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 124
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 6
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 19
+    }
+   ]
+  }
+ ]
+}

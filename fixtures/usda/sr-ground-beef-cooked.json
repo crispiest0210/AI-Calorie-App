@@ -1,0 +1,903 @@
+{
+ "foods": [
+  {
+   "fdcId": 169447,
+   "description": "Beef, ground, patties, frozen, cooked, broiled",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 21.8
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 11
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 305
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 23
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.42
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 77
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 84
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 295
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.8
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1240
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 172161,
+   "description": "Beef, ground, unspecified fat content, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 14.5
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0.62
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 25
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 353
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.67
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 85
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 84
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 5.6
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 25.1
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 240
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1010
+    }
+   ]
+  },
+  {
+   "fdcId": 2705854,
+   "description": "Beef, ground",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 25.55
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 16.82
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 261
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 24
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.47
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 302
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 381
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 87
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 6.455
+    }
+   ]
+  },
+  {
+   "fdcId": 171506,
+   "description": "Turkey, Ground, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 27.4
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.52
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 78
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 93
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.67
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 850
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 28
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 294
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 203
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 10.4
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 2705855,
+   "description": "Beef, ground, patty",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 25.45
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 18.18
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 272
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 27
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.41
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 294
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 383
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 87
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 6.95
+    }
+   ]
+  },
+  {
+   "fdcId": 2705853,
+   "description": "Beef, ground, raw",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 18.44
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 14.88
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 213
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 15
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.07
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 293
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 373
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 67
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 5.67
+    }
+   ]
+  },
+  {
+   "fdcId": 172544,
+   "description": "Lamb, ground, cooked, broiled",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 97
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 8.12
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 24.8
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.79
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 81
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 22
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 339
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 19.6
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 283
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1180
+    }
+   ]
+  },
+  {
+   "fdcId": 167903,
+   "description": "Pork, fresh, ground, cooked",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1240
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 20.8
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 297
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 22
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 362
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 25.7
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 94
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 7.72
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.7
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.29
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 73
+    }
+   ]
+  },
+  {
+   "fdcId": 175291,
+   "description": "Veal, ground, cooked, broiled",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 720
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 17
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 337
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 7.56
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 172
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 103
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 3.04
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 0.99
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 83
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 24.4
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 174032,
+   "description": "Beef, ground, 85% lean meat / 15% fat, patty, cooked, broiled",
+   "dataType": "SR Legacy",
+   "foodNutrients": [
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0
+    },
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 25.9
+    },
+    {
+     "nutrientId": 1062,
+     "unitName": "kJ",
+     "value": 1040
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.6
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 72
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 88
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 15.4
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 250
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 18
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 318
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 5.9
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 0
+    }
+   ]
+  },
+  {
+   "fdcId": 2706748,
+   "description": "Beef, ground, with egg and onion",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 21.86
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 14.54
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 1.05
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 228
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 0.54
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.1
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 26
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 2.12
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 270
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 732
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 0.5
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 104
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 5.503
+    }
+   ]
+  },
+  {
+   "fdcId": 2709088,
+   "description": "Spanish rice with ground beef",
+   "dataType": "Survey (FNDDS)",
+   "foodNutrients": [
+    {
+     "nutrientId": 1003,
+     "unitName": "G",
+     "value": 9.68
+    },
+    {
+     "nutrientId": 1004,
+     "unitName": "G",
+     "value": 6.91
+    },
+    {
+     "nutrientId": 1005,
+     "unitName": "G",
+     "value": 14.79
+    },
+    {
+     "nutrientId": 1008,
+     "unitName": "KCAL",
+     "value": 163
+    },
+    {
+     "nutrientId": 2000,
+     "unitName": "G",
+     "value": 1.17
+    },
+    {
+     "nutrientId": 1079,
+     "unitName": "G",
+     "value": 0.8
+    },
+    {
+     "nutrientId": 1087,
+     "unitName": "MG",
+     "value": 23
+    },
+    {
+     "nutrientId": 1089,
+     "unitName": "MG",
+     "value": 1.56
+    },
+    {
+     "nutrientId": 1092,
+     "unitName": "MG",
+     "value": 181
+    },
+    {
+     "nutrientId": 1093,
+     "unitName": "MG",
+     "value": 346
+    },
+    {
+     "nutrientId": 1162,
+     "unitName": "MG",
+     "value": 8.4
+    },
+    {
+     "nutrientId": 1253,
+     "unitName": "MG",
+     "value": 28
+    },
+    {
+     "nutrientId": 1258,
+     "unitName": "G",
+     "value": 2.277
+    }
+   ]
+  }
+ ]
+}
