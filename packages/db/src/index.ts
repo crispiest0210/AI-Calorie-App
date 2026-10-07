@@ -12,3 +12,4 @@ export type { FoodDetail, FoodSummary } from './repositories/foods';
 export type { EntryView } from './repositories/entries';
 export * as sync from './sync/index';
 export * as recipes from './repositories/recipes';
+export * as matcher from './repositories/matcher';

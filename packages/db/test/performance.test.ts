@@ -42,10 +42,25 @@ function percentile(samples: number[], fraction: number): number {
   return sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * fraction))]!;
 }
 
+/**
+ * Best of a few runs, after a warmup.
+ *
+ * A single timing sample measures whatever else the machine was doing — these
+ * tests share a CPU with four other packages' suites. The minimum over a few
+ * repetitions is the closest thing to a property of the code, which is what a
+ * regression test should be watching.
+ */
+const REPEATS = 5;
+
 function timed(work: () => unknown): number {
-  const start = performance.now();
-  work();
-  return performance.now() - start;
+  work(); // warm the statement cache and the page cache
+  let best = Infinity;
+  for (let i = 0; i < REPEATS; i += 1) {
+    const start = performance.now();
+    work();
+    best = Math.min(best, performance.now() - start);
+  }
+  return best;
 }
 
 describe.runIf(existsSync(CATALOG))('performance budgets', () => {

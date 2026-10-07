@@ -15,3 +15,5 @@ export * from './ids';
 export * as schemas from './schemas';
 export * from './fdc-adapters';
 export * from './sync-contracts';
+export * from './photo';
+export * from './matching';

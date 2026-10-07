@@ -10,6 +10,7 @@
     "dev": "tsx watch src/server.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.127.0",
     "@nt/core": "workspace:*",
     "hono": "^4.6.14",
     "jose": "^5.9.6",
@@ -18,12 +19,12 @@
   },
   "devDependencies": {
     "@hono/node-server": "^1.13.7",
-    "@types/pg": "^8.11.10",
-    "embedded-postgres": "^17.4.0-beta.15",
-    "tsx": "^4.19.2",
     "@nt/db": "workspace:*",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/pg": "^8.11.10",
     "better-sqlite3": "^11.7.0",
     "drizzle-orm": "^0.38.3",
-    "@types/better-sqlite3": "^7.6.12"
+    "embedded-postgres": "^17.4.0-beta.15",
+    "tsx": "^4.19.2"
   }
 }

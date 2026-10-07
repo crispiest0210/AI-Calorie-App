@@ -5,7 +5,7 @@
  */
 import { Hono } from 'hono';
 import type { Pool } from 'pg';
-import { pullResponse, pushRequest } from '@nt/core';
+import { MATCH_THRESHOLD, pullResponse, pushRequest } from '@nt/core';
 import { bearerToken, verifyToken, type AuthConfig, type AuthenticatedUser } from './auth';
 import { withUser } from './db';
 import { ApiError, problemResponse } from './errors';
@@ -14,6 +14,9 @@ import { replay, remember } from './idempotency';
 import * as sync from './routes/sync';
 import * as foods from './routes/foods';
 import * as me from './routes/me';
+import * as photos from './routes/photos';
+import * as matching from './routes/matching';
+import type { MealImageAnalyzer } from './vision/adapter';
 
 export interface AppDeps {
   pool: Pool;
@@ -21,6 +24,12 @@ export interface AppDeps {
   limiter?: RateLimiter;
   /** Upstream barcode lookup; omitted in tests and offline development. */
   fetchBarcode?: (gtin: string) => Promise<Awaited<ReturnType<typeof foods.detail>> | null>;
+  /** Photo analysis; absent means the photo routes report it unavailable. */
+  analyzer?: MealImageAnalyzer;
+  /** Reads an uploaded image back for analysis. */
+  readImage?: (storagePath: string) => Promise<{ bytes: Uint8Array; mediaType: 'image/jpeg' | 'image/png' | 'image/webp' }>;
+  /** Hands out a signed upload URL for the private bucket. */
+  createUploadUrl?: (storagePath: string) => Promise<{ uploadUrl: string; expiresAt: string }>;
 }
 
 type Env = { Variables: { user: AuthenticatedUser } };
@@ -98,6 +107,78 @@ export function createApp(deps: AppDeps) {
     return c.json(pullResponse.parse(result));
   });
 
+  app.post('/v1/photos/upload-url', async (c) => {
+    const user = c.get('user');
+    if (deps.createUploadUrl === undefined) throw new ApiError('upstream_unavailable', 'photo analysis is not configured');
+
+    const analysisId = crypto.randomUUID();
+    const storagePath = `${user.id}/${analysisId}.jpg`;
+    const signed = await deps.createUploadUrl(storagePath);
+    await withUser(deps.pool, user.id, (sql) => photos.createAnalysis(sql, user.id, analysisId, storagePath));
+    return c.json({ analysisId, uploadUrl: signed.uploadUrl, expiresAt: signed.expiresAt });
+  });
+
+  app.post('/v1/photo-analyses/:id/run', async (c) => {
+    const user = c.get('user');
+    if (deps.analyzer === undefined || deps.readImage === undefined) {
+      throw new ApiError('upstream_unavailable', 'photo analysis is not configured');
+    }
+    const analysisId = c.req.param('id');
+
+    const storagePath = await withUser(deps.pool, user.id, async (sql) => {
+      // The quota is taken before the model is called, so a failed analysis
+      // still costs the caller a slot — otherwise a bad image is free to retry
+      // forever (review item R12).
+      await photos.checkQuota(sql, user.id, new Date().toISOString().slice(0, 10));
+      const { rows } = await sql.query<{ storage_path: string | null }>(
+        'select storage_path from photo_analysis where id = $1 and user_id = $2',
+        [analysisId, user.id],
+      );
+      if (rows[0] === undefined) throw new ApiError('not_found', 'no such analysis');
+      if (rows[0].storage_path === null) throw new ApiError('not_found', 'this image has been deleted');
+      return rows[0].storage_path;
+    });
+
+    const image = await deps.readImage(storagePath);
+    const outcome = await withUser(deps.pool, user.id, (sql) =>
+      photos.runAnalysis(sql, user.id, analysisId, {
+        analyzer: deps.analyzer!,
+        image,
+        matchThreshold: MATCH_THRESHOLD,
+        match: (label, preparation) => matching.matchLabel(sql, label, preparation),
+      }),
+    );
+    // Thrown out here, after the transaction recording the failure committed.
+    if (!outcome.ok) throw photos.failureToProblem(outcome.failure);
+    return c.json(outcome.draft);
+  });
+
+  app.get('/v1/photo-analyses/:id', async (c) => {
+    const user = c.get('user');
+    const draft = await withUser(deps.pool, user.id, (sql) => photos.readDraft(sql, user.id, c.req.param('id')));
+    return c.json(draft);
+  });
+
+  app.post('/v1/photo-analyses/:id/resolve', async (c) => {
+    const user = c.get('user');
+    const body = (await c.req.json().catch(() => ({}))) as { status?: string; keepImage?: boolean };
+    if (body.status !== 'confirmed' && body.status !== 'abandoned') {
+      throw new ApiError('validation_failed', 'status must be confirmed or abandoned');
+    }
+    await withUser(deps.pool, user.id, (sql) =>
+      photos.resolveAnalysis(sql, user.id, c.req.param('id'), body.status as 'confirmed' | 'abandoned', {
+        keepImage: body.keepImage === true,
+      }),
+    );
+    return c.body(null, 204);
+  });
+
+  app.delete('/v1/photos/:id', async (c) => {
+    const user = c.get('user');
+    await withUser(deps.pool, user.id, (sql) => photos.deleteImageNow(sql, user.id, c.req.param('id')));
+    return c.body(null, 204);
+  });
+
   app.get('/v1/me/export', async (c) => {
     const user = c.get('user');
     const document = await withUser(deps.pool, user.id, (sql) => me.exportAll(sql, user.id));
@@ -114,3 +195,4 @@ export function createApp(deps: AppDeps) {
 }
 
 export type App = ReturnType<typeof createApp>;
+
