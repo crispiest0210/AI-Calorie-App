@@ -20,7 +20,7 @@ export async function remember(sql: Sql, userId: string, key: string | undefined
   if (key === undefined || key === '') return;
   await sql.query(
     `insert into idempotency_key (key, user_id, response) values ($1, $2, $3)
-     on conflict (key) do update set response = excluded.response, created_at = now()`,
+     on conflict (user_id, key) do update set response = excluded.response, created_at = now()`,
     [key, userId, JSON.stringify(response)],
   );
 }

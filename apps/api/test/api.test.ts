@@ -133,3 +133,17 @@ describe('rate limits', () => {
     expect(await res.json()).toMatchObject({ code: 'rate_limited' });
   });
 });
+
+describe('sync push idempotency', () => {
+  it('keeps one user’s Idempotency-Key from colliding with another’s', async () => {
+    const push = (user: string) =>
+      h.request(user, '/v1/sync/push', {
+        method: 'POST',
+        headers: { 'idempotency-key': 'shared-key' },
+        body: JSON.stringify({ changes: [] }),
+      });
+    expect((await push(USER_A)).status).toBe(200);
+    expect((await push(USER_B)).status).toBe(200);
+    expect((await push(USER_A)).status).toBe(200);
+  });
+});
