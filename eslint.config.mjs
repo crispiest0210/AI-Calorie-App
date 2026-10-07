@@ -25,7 +25,7 @@ export default tseslint.config(
   {
     // Metro config is CommonJS, Jest mocks are require-based, and Metro asset
     // resolution (`require('…/catalog.sqlite')`) only works through require.
-    files: ['**/*.mjs', '**/scripts/**', '**/metro.config.js', '**/jest.setup.ts', 'apps/mobile/src/db/provider.tsx'],
+    files: ['**/*.mjs', '**/scripts/**', '**/metro.config.js', '**/jest.setup.ts', '**/__mocks__/**', 'apps/mobile/src/db/provider.tsx'],
     rules: { '@typescript-eslint/no-require-imports': 'off' },
   },
 );

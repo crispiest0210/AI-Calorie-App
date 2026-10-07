@@ -1,0 +1,76 @@
+{
+  "setName": "fixture-harness-check",
+  "responses": [
+    {
+      "mealId": "rice-and-broccoli",
+      "model": "hand-written",
+      "promptVersion": "fixture",
+      "recordedAt": "2026-09-22T00:00:00.000Z",
+      "latencyMs": 4200,
+      "raw": {
+        "is_food": true,
+        "notes": "Rice is partly under the broccoli.",
+        "items": [
+          {
+            "label": "white rice",
+            "preparation": "cooked",
+            "identification_confidence": 0.86,
+            "portion_grams": { "estimate": 150, "low": 110, "high": 200 },
+            "portion_basis": "compared to the fork",
+            "occluded": true
+          },
+          {
+            "label": "broccoli",
+            "preparation": "raw",
+            "identification_confidence": 0.93,
+            "portion_grams": { "estimate": 70, "low": 50, "high": 100 }
+          }
+        ]
+      }
+    },
+    {
+      "mealId": "burger",
+      "model": "hand-written",
+      "promptVersion": "fixture",
+      "recordedAt": "2026-09-22T00:00:00.000Z",
+      "latencyMs": 3100,
+      "raw": {
+        "is_food": true,
+        "items": [
+          {
+            "label": "hamburger",
+            "identification_confidence": 0.91,
+            "portion_grams": { "estimate": 170, "low": 130, "high": 220 },
+            "portion_basis": "standard bun diameter"
+          }
+        ]
+      }
+    },
+    {
+      "mealId": "fried-egg",
+      "model": "hand-written",
+      "promptVersion": "fixture",
+      "recordedAt": "2026-09-22T00:00:00.000Z",
+      "latencyMs": 2800,
+      "raw": {
+        "is_food": true,
+        "items": [
+          {
+            "label": "fried egg",
+            "preparation": "fried",
+            "identification_confidence": 0.88,
+            "portion_grams": { "estimate": 50, "low": 40, "high": 60 }
+          }
+        ]
+      }
+    },
+    {
+      "mealId": "not-food",
+      "model": "hand-written",
+      "promptVersion": "fixture",
+      "recordedAt": "2026-09-22T00:00:00.000Z",
+      "latencyMs": 1500,
+      "raw": { "is_food": false, "items": [], "notes": "This is a photograph of a bicycle." }
+    }
+  ]
+}

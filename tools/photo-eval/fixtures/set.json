@@ -1,0 +1,29 @@
+{
+  "name": "fixture-harness-check",
+  "catalogVersion": "2018-04+2024-10-31+2026-04-30",
+  "meals": [
+    {
+      "id": "rice-and-broccoli",
+      "isFood": true,
+      "items": [
+        { "foodId": "b95524dc-c4b8-510b-bb66-84ee8ee1e1d3", "grams": 158, "note": "one cup cooked, weighed; the model says \"white rice\" so a white-rice row is what a person would confirm" },
+        { "foodId": "1ec7b91f-2d93-5b72-9a0d-7be90b46a297", "grams": 85, "note": "raw florets" }
+      ]
+    },
+    {
+      "id": "burger",
+      "isFood": true,
+      "items": [{ "foodId": "29c828ec-e552-5aaf-a7cf-cb30af1059a8", "grams": 145 }]
+    },
+    {
+      "id": "fried-egg",
+      "isFood": true,
+      "items": [{ "foodId": "a6cd9f65-d59d-560b-9fcb-a3da6e26710d", "grams": 46 }]
+    },
+    {
+      "id": "not-food",
+      "isFood": false,
+      "items": []
+    }
+  ]
+}

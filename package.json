@@ -14,7 +14,8 @@
     "catalog:seed": "pnpm --filter @nt/fdc-import run seed",
     "catalog:import": "pnpm --filter @nt/fdc-import run import",
     "catalog:build": "pnpm --filter @nt/fdc-import run import",
-    "catalog:fetch": "pnpm --filter @nt/fdc-import run fetch:bulk"
+    "catalog:fetch": "pnpm --filter @nt/fdc-import run fetch:bulk",
+    "eval:photo": "pnpm --filter @nt/photo-eval run eval"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",

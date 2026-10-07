@@ -129,6 +129,23 @@ async function upsertFood(sql: Sql, userId: string, row: Extract<SyncRow, { tabl
       [portion.id, row.id, portion.label, portion.gramWeight, portion.source, portion.position],
     );
   }
+
+  if (row.recipe != null) {
+    await sql.query(
+      `insert into recipe_meta (food_id, total_cooked_grams, servings) values ($1,$2,$3)
+       on conflict (food_id) do update set
+         total_cooked_grams = excluded.total_cooked_grams, servings = excluded.servings`,
+      [row.id, row.recipe.totalCookedGrams, row.recipe.servings],
+    );
+    await sql.query('delete from recipe_ingredient where recipe_food_id = $1', [row.id]);
+    for (const ingredient of row.recipe.ingredients) {
+      await sql.query(
+        `insert into recipe_ingredient (id, recipe_food_id, ingredient_food_id, grams, position)
+         values ($1,$2,$3,$4,$5)`,
+        [ingredient.id, row.id, ingredient.ingredientFoodId, ingredient.grams, ingredient.position],
+      );
+    }
+  }
   return rows[0]!.server_rev;
 }
 
@@ -282,6 +299,11 @@ async function readRow(sql: Sql, table: SyncedTable, id: string): Promise<(SyncR
   if (r === undefined) return null;
   const nutrients = await sql.query(`select nutrient_code, amount_per_100g, derivation from food_nutrient where food_id = $1`, [id]);
   const portions = await sql.query(`select id, label, gram_weight, source, position from food_portion where food_id = $1 order by position`, [id]);
+  const meta = await sql.query(`select total_cooked_grams, servings from recipe_meta where food_id = $1`, [id]);
+  const ingredients = await sql.query(
+    `select id, ingredient_food_id, grams, position from recipe_ingredient where recipe_food_id = $1 order by position`,
+    [id],
+  );
   return {
     table: 'food',
     serverRev: r.server_rev,
@@ -306,6 +328,19 @@ async function readRow(sql: Sql, table: SyncedTable, id: string): Promise<(SyncR
         source: p.source,
         position: p.position,
       })),
+      recipe:
+        meta.rows[0] === undefined
+          ? null
+          : {
+              servings: String(meta.rows[0].servings),
+              totalCookedGrams: meta.rows[0].total_cooked_grams === null ? null : String(meta.rows[0].total_cooked_grams),
+              ingredients: ingredients.rows.map((i) => ({
+                id: i.id,
+                ingredientFoodId: i.ingredient_food_id,
+                grams: String(i.grams),
+                position: i.position,
+              })),
+            },
       updatedAt: r.updated_at.getTime(),
       deletedAt: epochMs(r.deleted_at),
     },

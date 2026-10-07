@@ -9,6 +9,9 @@ import type { Sql } from '../db';
 
 export const MAX_SEARCH_LIMIT = 25;
 
+/** Matches the device: a single letter is not a query worth ranking. */
+export const MIN_SEARCH_LENGTH = 2;
+
 const CITATIONS: Record<string, (ref: string) => string> = {
   fdc: (ref) => `https://fdc.nal.usda.gov/food-details/${ref}/nutrients`,
   off: (ref) => `https://world.openfoodfacts.org/product/${ref}`,
@@ -16,14 +19,12 @@ const CITATIONS: Record<string, (ref: string) => string> = {
 
 export async function search(sql: Sql, query: string, limit = MAX_SEARCH_LIMIT): Promise<FoodSearchResult[]> {
   const needle = query.trim().toLowerCase();
-  if (needle === '') return [];
+  if (needle.length < MIN_SEARCH_LENGTH) return [];
   const capped = Math.min(Math.max(limit, 1), MAX_SEARCH_LIMIT);
 
   const { rows } = await sql.query(
     `with matched as (
        select f.id, f.name, f.brand, f.kind, f.quality_tier,
-              (select amount_per_100g from food_nutrient n
-                where n.food_id = f.id and n.nutrient_code = 'energy_kcal') as energy,
               lower(trim(f.name)) as norm,
               case when position(',' in f.name) > 0
                    then lower(trim(substr(f.name, 1, position(',' in f.name) - 1)))
@@ -42,19 +43,27 @@ export async function search(sql: Sql, query: string, limit = MAX_SEARCH_LIMIT):
          order by tier_rank, sim desc
        ) as duplicate_rank
        from matched
+     ),
+     ranked as (
+       select id, name, brand, kind, quality_tier
+       from deduped
+       where duplicate_rank = 1
+       order by
+         case kind when 'custom' then 0 when 'recipe' then 1 else 2 end,
+         case when head = $1 then 0
+              when head like $2 then 1
+              when lower(name) like $2 then 2
+              else 3 end,
+         case when upper(name) like '%, NFS' then 0 else 1 end,
+         length(name) asc, tier_rank asc, sim desc
+       limit $3
      )
-     select id, name, brand, kind, quality_tier, energy
-     from deduped
-     where duplicate_rank = 1
-     order by
-       case kind when 'custom' then 0 when 'recipe' then 1 else 2 end,
-       case when head = $1 then 0
-            when head like $2 then 1
-            when lower(name) like $2 then 2
-            else 3 end,
-       case when upper(name) like '%, NFS' then 0 else 1 end,
-       length(name) asc, tier_rank asc, sim desc
-     limit $3`,
+     -- Energy is read only for the rows that survived the limit.
+     select ranked.*, (
+       select amount_per_100g from food_nutrient n
+       where n.food_id = ranked.id and n.nutrient_code = 'energy_kcal'
+     ) as energy
+     from ranked`,
     [needle, `${needle}%`, capped],
   );
 

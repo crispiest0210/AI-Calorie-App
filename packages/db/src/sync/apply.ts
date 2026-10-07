@@ -6,7 +6,7 @@
  */
 import { eq } from 'drizzle-orm';
 import type { SyncRow } from '@nt/core';
-import { food, foodNutrient, foodPortion, goalProfile, goalTarget, logEntry, waterEntry, waterPreset } from '../schema';
+import { food, foodNutrient, foodPortion, goalProfile, goalTarget, logEntry, recipeIngredient, recipeMeta, waterEntry, waterPreset } from '../schema';
 import type { Writer } from '../db';
 
 export interface ApplyContext {
@@ -153,6 +153,25 @@ export function applyRow(tx: Writer, change: SyncRow & { serverRev: number }, co
         tx.insert(foodPortion)
           .values({ id: portion.id, foodId: row.id, label: portion.label, gramWeight: portion.gramWeight, source: portion.source, position: portion.position })
           .run();
+      }
+
+      if (row.recipe != null) {
+        const meta = { foodId: row.id, servings: row.recipe.servings, totalCookedGrams: row.recipe.totalCookedGrams };
+        tx.insert(recipeMeta).values(meta).onConflictDoUpdate({ target: recipeMeta.foodId, set: meta }).run();
+        tx.delete(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, row.id)).run();
+        for (const ingredient of row.recipe.ingredients) {
+          tx.insert(recipeIngredient)
+            .values({
+              id: ingredient.id,
+              recipeFoodId: row.id,
+              ingredientFoodId: ingredient.ingredientFoodId,
+              grams: ingredient.grams,
+              position: ingredient.position,
+              serverRev: change.serverRev,
+              updatedAt: row.updatedAt,
+            })
+            .run();
+        }
       }
       return;
     }

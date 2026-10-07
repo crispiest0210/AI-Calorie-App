@@ -137,9 +137,9 @@ export default function AmountScreen() {
             {food.brand}
           </Text>
         )}
-        <SourceBadge tier={food.qualityTier} />
+        <SourceBadge tier={food.qualityTier} onPress={() => router.push({ pathname: '/provenance', params: { foodId: food.id } })} />
         <Text variant="caption" tone="faint">
-          {food.sourceRef === null ? 'Your own entry' : `Source record ${food.sourceRef}`}
+          {food.sourceRef === null ? 'Your own entry' : `Source record ${food.sourceRef} · tap the badge for the full source`}
         </Text>
       </Card>
 
