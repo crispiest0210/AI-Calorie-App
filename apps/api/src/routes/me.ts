@@ -87,7 +87,15 @@ export async function deleteAccount(sql: Sql, userId: string, tokenIssuedAt: num
   }
   // Custom foods cascade to their nutrients and portions.
   await sql.query('delete from food where owner_user_id = $1', [userId]);
-  for (const table of ['log_entry', 'water_entry', 'water_preset', 'goal_profile', 'user_settings', 'idempotency_key', 'sync_watermark']) {
+  // Photo drafts: rows with no stored image can go now. Rows that still point
+  // at an image are made due immediately so the retention sweeper removes the
+  // object; deleting the row first would orphan it in storage.
+  await sql.query('delete from photo_analysis where user_id = $1 and storage_path is null', [userId]);
+  await sql.query(
+    `update photo_analysis set image_expires_at = $2 where user_id = $1 and image_deleted_at is null`,
+    [userId, new Date(now)],
+  );
+  for (const table of ['photo_analysis_quota', 'log_entry', 'water_entry', 'water_preset', 'goal_profile', 'user_settings', 'idempotency_key', 'sync_watermark']) {
     await sql.query(`delete from ${table} where user_id = $1`, [userId]);
   }
 }

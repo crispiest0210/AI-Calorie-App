@@ -420,8 +420,20 @@ describe('export', () => {
     expect(refused.status).toBe(401);
     expect((await h.pool.query('select count(*)::int as n from log_entry')).rows[0].n).toBe(1);
 
+    const photoId = '00000000-0000-4000-8000-0000000000a1';
+    const keptId = '00000000-0000-4000-8000-0000000000a2';
+    await h.pool.query(
+      `insert into photo_analysis (id, user_id, status, storage_path) values ($1,$3,'pending',null), ($2,$3,'pending','a/b.jpg')`,
+      [photoId, keptId, USER_A],
+    );
+    await h.pool.query(`insert into photo_analysis_quota (user_id, local_day, used) values ($1, '2026-01-01', 2)`, [USER_A]);
+
     const accepted = await h.request(USER_A, '/v1/me', { method: 'DELETE' });
     expect(accepted.status).toBe(204);
+    expect((await h.pool.query('select count(*)::int as n from photo_analysis_quota')).rows[0].n).toBe(0);
+    const photos = (await h.pool.query('select id, image_expires_at from photo_analysis')).rows;
+    expect(photos.map((r) => r.id)).toEqual([keptId]);
+    expect(photos[0].image_expires_at).not.toBeNull();
     expect((await h.pool.query('select count(*)::int as n from log_entry')).rows[0].n).toBe(0);
   });
 });
