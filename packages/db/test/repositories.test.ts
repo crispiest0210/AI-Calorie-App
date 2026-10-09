@@ -319,6 +319,30 @@ describe('water', () => {
     expect(water.waterTotalMl(db, '2020-01-01')).toBe(0);
   });
 
+  it('totals water per day over an inclusive range, ignoring deleted entries', () => {
+    const { db } = freshDb();
+    const noon = (day: string) => new Date(`${day}T12:00:00`);
+    water.addWater(db, 250, noon('2024-03-01'));
+    water.addWater(db, 500, noon('2024-03-02'));
+    water.addWater(db, 300, noon('2024-03-02'));
+    const gone = water.addWater(db, 750, noon('2024-03-02'));
+    water.addWater(db, 400, noon('2024-03-04'));
+    water.deleteWater(db, gone);
+
+    expect(water.waterTotalsForRange(db, '2024-03-01', '2024-03-03')).toEqual({ '2024-03-01': 250, '2024-03-02': 800 });
+    expect(water.waterTotalsForRange(db, '2024-03-05', '2024-03-09')).toEqual({});
+  });
+
+  it('queues water writes and deletes for sync', () => {
+    const { db } = freshDb();
+    const id = water.addWater(db, 250);
+    water.deleteWater(db, id);
+    expect(outbox.pending(db).map((r) => [r.tableName, r.rowId, r.op])).toEqual([
+      ['water_entry', id, 'upsert'],
+      ['water_entry', id, 'delete'],
+    ]);
+  });
+
   it('seeds quick-add presets once', () => {
     const { db } = freshDb();
     water.ensureDefaultPresets(db);
