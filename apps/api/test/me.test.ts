@@ -63,6 +63,14 @@ describe('GET /v1/me/export', () => {
     expect(doc.csv.logEntries).toContain('"Rice, cooked ""NFS"""');
     expect(doc.csv.logEntries).toContain('"line one\nline two"');
   });
+
+  it('quotes CSV fields that contain a carriage return', async () => {
+    await addEntry(USER_A, ENTRY_A, 'Rice', 'line one\rline two');
+
+    const doc = await json<ExportDoc>(await h.request(USER_A, '/v1/me/export'));
+
+    expect(doc.csv.logEntries).toContain('"line one\rline two"');
+  });
 });
 
 describe('DELETE /v1/me', () => {

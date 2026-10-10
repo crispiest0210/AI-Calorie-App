@@ -25,7 +25,7 @@ function toCsv(rows: Record<string, unknown>[], columns: string[]): string {
   const escape = (value: unknown): string => {
     if (value === null || value === undefined) return '';
     const text = typeof value === 'object' ? JSON.stringify(value) : String(value);
-    return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+    return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
   };
   return [columns.join(','), ...rows.map((row) => columns.map((c) => escape(row[c])).join(','))].join('\n');
 }
