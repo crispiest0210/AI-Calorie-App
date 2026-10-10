@@ -4,7 +4,7 @@
  * responses we hope never to see.
  */
 import { describe, expect, it, vi } from 'vitest';
-import type Anthropic from '@anthropic-ai/sdk';
+import Anthropic from '@anthropic-ai/sdk';
 import { MODEL_OUTPUT_SCHEMA, findNutrientFields, ANALYSIS_PROMPT } from '@nt/core';
 import { AnalysisError } from '../src/vision/adapter';
 import { ClaudeMealImageAnalyzer, DEFAULT_MODEL } from '../src/vision/claude';
@@ -129,6 +129,37 @@ describe('the response', () => {
     const create = vi.fn().mockRejectedValue(new Error('socket hang up'));
     const analyzer = new ClaudeMealImageAnalyzer({ client: { messages: { create } } as unknown as Anthropic });
     await expect(analyzer.analyzeMealImage(IMAGE)).rejects.toMatchObject({ kind: 'upstream' });
+  });
+
+  it('reports a model timeout as a timeout, not a generic upstream failure', async () => {
+    const create = vi.fn().mockRejectedValue(new Anthropic.APIConnectionTimeoutError());
+    const analyzer = new ClaudeMealImageAnalyzer({ client: { messages: { create } } as unknown as Anthropic });
+    await expect(analyzer.analyzeMealImage(IMAGE)).rejects.toMatchObject({ kind: 'timeout' });
+  });
+
+  it('reports an API error by status only', async () => {
+    const error = new Anthropic.APIError(529, { message: 'secret detail' }, 'secret detail', new Headers());
+    const create = vi.fn().mockRejectedValue(error);
+    const analyzer = new ClaudeMealImageAnalyzer({ client: { messages: { create } } as unknown as Anthropic });
+    const failure = await analyzer.analyzeMealImage(IMAGE).catch((e: unknown) => e);
+    expect(failure).toBeInstanceOf(AnalysisError);
+    expect(failure).toMatchObject({ kind: 'upstream' });
+    expect((failure as Error).message).toContain('529');
+    expect((failure as Error).message).not.toContain('secret detail');
+  });
+
+  it('passes the configured timeout to the request', async () => {
+    const create = vi.fn().mockResolvedValue({
+      content: [{ type: 'text', text: JSON.stringify(GOOD) }],
+      stop_reason: 'end_turn',
+      usage: { input_tokens: 1, output_tokens: 1 },
+    });
+    const analyzer = new ClaudeMealImageAnalyzer({
+      client: { messages: { create } } as unknown as Anthropic,
+      timeoutMs: 1234,
+    });
+    await analyzer.analyzeMealImage(IMAGE);
+    expect(create.mock.calls[0]![1]).toEqual({ timeout: 1234 });
   });
 
   it('caps text fields so a long string cannot ride along', async () => {
