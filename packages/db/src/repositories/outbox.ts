@@ -3,7 +3,7 @@
  * row it describes (spec 2.10). Phase 1 never drains the queue — it exists so
  * that nothing logged offline today is invisible to sync when it arrives.
  */
-import { and, asc, eq, inArray } from 'drizzle-orm';
+import { and, asc, count, eq, inArray } from 'drizzle-orm';
 import { outbox } from '../schema';
 import type { Writer } from '../db';
 
@@ -19,7 +19,7 @@ export function pending(db: Writer, limit = 200) {
 }
 
 export function pendingCount(db: Writer): number {
-  return db.select().from(outbox).all().length;
+  return db.select({ n: count() }).from(outbox).get()?.n ?? 0;
 }
 
 export function clear(db: Writer, seqs: readonly number[]): void {

@@ -411,4 +411,27 @@ describe('outbox', () => {
     outbox.clearFor(db, 'log_entry', id);
     expect(outbox.pendingCount(db)).toBe(1);
   });
+
+  it('returns pending rows oldest first, capped by the limit', () => {
+    const { db } = freshDb();
+    outbox.enqueue(db, 'water_entry', 'a', 'upsert', 1);
+    outbox.enqueue(db, 'water_entry', 'b', 'upsert', 2);
+    outbox.enqueue(db, 'water_entry', 'c', 'delete', 3);
+    expect(outbox.pending(db).map((r) => r.rowId)).toEqual(['a', 'b', 'c']);
+    expect(outbox.pending(db, 2).map((r) => r.rowId)).toEqual(['a', 'b']);
+    expect(outbox.pendingCount(db)).toBe(3);
+  });
+
+  it('clears every queued op for one row without touching others or other tables', () => {
+    const { db } = freshDb();
+    outbox.enqueue(db, 'water_entry', 'a', 'upsert');
+    outbox.enqueue(db, 'water_entry', 'a', 'delete');
+    outbox.enqueue(db, 'water_entry', 'b', 'upsert');
+    outbox.enqueue(db, 'log_entry', 'a', 'upsert');
+    outbox.clearFor(db, 'water_entry', 'a');
+    expect(outbox.pending(db).map((r) => [r.tableName, r.rowId])).toEqual([
+      ['water_entry', 'b'],
+      ['log_entry', 'a'],
+    ]);
+  });
 });
