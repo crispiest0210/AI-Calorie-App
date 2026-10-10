@@ -34,6 +34,14 @@ export interface AppDeps {
 
 type Env = { Variables: { user: AuthenticatedUser } };
 
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+/** Postgres rejects a malformed uuid with an error; to the caller it is simply not found. */
+function idParam(value: string): string {
+  if (!UUID.test(value)) throw new ApiError('not_found', 'no such resource');
+  return value;
+}
+
 export function createApp(deps: AppDeps) {
   const app = new Hono<Env>();
   const limiter = deps.limiter ?? new RateLimiter();
@@ -77,7 +85,7 @@ export function createApp(deps: AppDeps) {
 
   app.get('/v1/foods/:id', async (c) => {
     const user = c.get('user');
-    const food = await withUser(deps.pool, user.id, (sql) => foods.detail(sql, c.req.param('id')));
+    const food = await withUser(deps.pool, user.id, (sql) => foods.detail(sql, idParam(c.req.param('id'))));
     return c.json(food);
   });
 
@@ -123,7 +131,7 @@ export function createApp(deps: AppDeps) {
     if (deps.analyzer === undefined || deps.readImage === undefined) {
       throw new ApiError('upstream_unavailable', 'photo analysis is not configured');
     }
-    const analysisId = c.req.param('id');
+    const analysisId = idParam(c.req.param('id'));
 
     const storagePath = await withUser(deps.pool, user.id, async (sql) => {
       // The quota is taken before the model is called, so a failed analysis
@@ -155,7 +163,7 @@ export function createApp(deps: AppDeps) {
 
   app.get('/v1/photo-analyses/:id', async (c) => {
     const user = c.get('user');
-    const draft = await withUser(deps.pool, user.id, (sql) => photos.readDraft(sql, user.id, c.req.param('id')));
+    const draft = await withUser(deps.pool, user.id, (sql) => photos.readDraft(sql, user.id, idParam(c.req.param('id'))));
     return c.json(draft);
   });
 
@@ -166,7 +174,7 @@ export function createApp(deps: AppDeps) {
       throw new ApiError('validation_failed', 'status must be confirmed or abandoned');
     }
     await withUser(deps.pool, user.id, (sql) =>
-      photos.resolveAnalysis(sql, user.id, c.req.param('id'), body.status as 'confirmed' | 'abandoned', {
+      photos.resolveAnalysis(sql, user.id, idParam(c.req.param('id')), body.status as 'confirmed' | 'abandoned', {
         keepImage: body.keepImage === true,
       }),
     );
@@ -175,7 +183,7 @@ export function createApp(deps: AppDeps) {
 
   app.delete('/v1/photos/:id', async (c) => {
     const user = c.get('user');
-    await withUser(deps.pool, user.id, (sql) => photos.deleteImageNow(sql, user.id, c.req.param('id')));
+    await withUser(deps.pool, user.id, (sql) => photos.deleteImageNow(sql, user.id, idParam(c.req.param('id'))));
     return c.body(null, 204);
   });
 
