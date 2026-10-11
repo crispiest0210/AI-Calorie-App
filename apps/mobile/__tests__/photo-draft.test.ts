@@ -3,8 +3,19 @@
  * see it: the draft's calories come from the catalog food they accepted, never
  * from the model.
  */
-import { draftEnergy, canConfirm, needsResolving, toConfirmedEntries, type ReviewItem } from '@/photo/draft';
-import type { FoodDetail } from '@nt/db';
+import {
+  draftEnergy,
+  canConfirm,
+  needsResolving,
+  toConfirmedEntries,
+  toReviewItems,
+  type ReviewItem,
+  type ServerDraft,
+  type ServerDraftItem,
+} from '@/photo/draft';
+import { foods as foodsRepo, type Db, type FoodDetail } from '@nt/db';
+
+jest.mock('@nt/db', () => ({ foods: { foodDetail: jest.fn() } }));
 
 const food = (id: string, energy: string): FoodDetail => ({
   id,
@@ -115,5 +126,49 @@ describe('what gets logged', () => {
 
   it('logs nothing for an unresolved item', () => {
     expect(toConfirmedEntries([item({ food: null, chosenFoodId: null })])).toEqual([]);
+  });
+});
+
+describe('building the review list', () => {
+  const foodDetail = foodsRepo.foodDetail as jest.Mock;
+  const db = {} as Db;
+  const serverItem = (overrides: Partial<ServerDraftItem> = {}): ServerDraftItem => {
+    const { chosenFoodId, grams, gramsUntouched, food, ...base } = item();
+    void chosenFoodId; void grams; void gramsUntouched; void food;
+    return { ...base, ...overrides };
+  };
+  const draftOf = (...items: ServerDraftItem[]): ServerDraft => ({
+    analysisId: 'a1',
+    status: 'complete',
+    model: null,
+    notes: null,
+    items,
+  });
+
+  beforeEach(() => {
+    foodDetail.mockReset();
+    foodDetail.mockImplementation((_db: Db, id: string) => food(id, '130'));
+  });
+
+  it('pre-selects the top candidate of a confident match and starts at the estimate', () => {
+    const [review] = toReviewItems(db, draftOf(serverItem()));
+    expect(review?.chosenFoodId).toBe('rice');
+    expect(review?.food?.id).toBe('rice');
+    expect(review?.grams).toBe('150');
+    expect(review?.gramsUntouched).toBe(true);
+  });
+
+  it('leaves an unsure match for the user, even when a candidate scored well', () => {
+    const unsure = serverItem({ identification: { confidence: 0.4, band: 'unsure' } });
+    const [review] = toReviewItems(db, draftOf(unsure));
+    expect(review?.chosenFoodId).toBeNull();
+    expect(review?.food).toBeNull();
+    expect(foodDetail).not.toHaveBeenCalled();
+  });
+
+  it('leaves an unmatched item unresolved', () => {
+    const reviews = toReviewItems(db, draftOf(serverItem({ matchStatus: 'unmatched', candidates: [] })));
+    expect(reviews[0]?.chosenFoodId).toBeNull();
+    expect(canConfirm(reviews)).toBe(false);
   });
 });
