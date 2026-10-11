@@ -41,6 +41,11 @@ export interface AmountInput {
   portionId?: string | null;
 }
 
+/** A density of zero (or less) is as good as no density: it can neither convert nor be divided by. */
+function hasDensity(food: FoodMeasureInfo): food is FoodMeasureInfo & { densityGPerMl: Num } {
+  return food.densityGPerMl !== null && dec(food.densityGPerMl).greaterThan(0);
+}
+
 export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsResult {
   const value = dec(amount.value);
   if (!value.greaterThan(0)) return { ok: false, reason: 'amount_not_positive' };
@@ -49,7 +54,7 @@ export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsR
     case 'g':
       return { ok: true, grams: num(value), provenance: 'user' };
     case 'ml': {
-      if (food.densityGPerMl === null) return { ok: false, reason: 'density_unknown' };
+      if (!hasDensity(food)) return { ok: false, reason: 'density_unknown' };
       return { ok: true, grams: num(mul(value, food.densityGPerMl)), provenance: 'user' };
     }
     case 'portion': {
@@ -71,7 +76,7 @@ export function availableUnits(food: FoodMeasureInfo): AmountUnit[] {
   const units: AmountUnit[] = [];
   if (food.portions.length > 0) units.push('portion');
   units.push('g');
-  if (food.densityGPerMl !== null) units.push('ml');
+  if (hasDensity(food)) units.push('ml');
   return units;
 }
 
@@ -99,7 +104,7 @@ export function gramsToUnit(grams: NumericInput, unit: AmountUnit, food: FoodMea
     case 'g':
       return num(g);
     case 'ml':
-      return food.densityGPerMl === null ? null : num(g.div(dec(food.densityGPerMl)));
+      return hasDensity(food) ? num(g.div(dec(food.densityGPerMl))) : null;
     case 'portion': {
       const portion = food.portions.find((p) => p.id === portionId);
       return portion ? num(g.div(dec(portion.gramWeight))) : null;

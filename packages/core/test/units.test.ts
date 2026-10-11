@@ -50,3 +50,13 @@ describe('unit pickers', () => {
     expect(gramsToUnit('150', 'kcal', rice)).toBeNull();
   });
 });
+
+describe('a zero density', () => {
+  const broken: FoodMeasureInfo = { densityGPerMl: '0', portions: [] };
+
+  it('is treated like a missing density rather than yielding 0 g or Infinity', () => {
+    expect(resolveGrams({ value: '200', unit: 'ml' }, broken)).toEqual({ ok: false, reason: 'density_unknown' });
+    expect(availableUnits(broken)).toEqual(['g']);
+    expect(gramsToUnit('206', 'ml', broken)).toBeNull();
+  });
+});
