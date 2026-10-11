@@ -107,7 +107,8 @@ export function gramsToUnit(grams: NumericInput, unit: AmountUnit, food: FoodMea
       return hasDensity(food) ? num(g.div(dec(food.densityGPerMl))) : null;
     case 'portion': {
       const portion = food.portions.find((p) => p.id === portionId);
-      return portion ? num(g.div(dec(portion.gramWeight))) : null;
+      // A zero-gram portion cannot be divided by; treat it as unknown like a zero density.
+      return portion && dec(portion.gramWeight).greaterThan(0) ? num(g.div(dec(portion.gramWeight))) : null;
     }
     case 'kcal':
       return null;

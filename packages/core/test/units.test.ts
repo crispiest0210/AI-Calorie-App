@@ -60,3 +60,11 @@ describe('a zero density', () => {
     expect(gramsToUnit('206', 'ml', broken)).toBeNull();
   });
 });
+
+describe('a zero-gram portion', () => {
+  const broken: FoodMeasureInfo = { densityGPerMl: null, portions: [{ id: 'p0', label: 'empty', gramWeight: '0', source: 'user' }] };
+
+  it('is not divided by when converting grams back', () => {
+    expect(gramsToUnit('100', 'portion', broken, 'p0')).toBeNull();
+  });
+});
