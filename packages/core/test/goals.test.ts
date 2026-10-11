@@ -34,6 +34,12 @@ describe('goal profiles', () => {
     expect(profileForDate([], '2026-09-20')).toBeNull();
   });
 
+  it('applies a profile from its effective date and ignores input order', () => {
+    expect(profileForDate([newer, profile], '2026-09-15')?.id).toBe('g2');
+    expect(profileForDate([newer, profile], '2026-09-14')?.id).toBe('g1');
+    expect(profileForDate([profile], '2026-09-01')?.id).toBe('g1');
+  });
+
   it('reads the energy target off a profile', () => {
     expect(energyTargetOf(profile)).toBe('2100');
     expect(energyTargetOf(null)).toBeNull();
@@ -128,7 +134,12 @@ describe('waterProgress', () => {
     expect(waterProgress(1500, 2500)).toEqual({ consumedMl: 1500, targetMl: 2500, remainingMl: 1000, ratio: 0.6 });
   });
 
+  it('goes negative on remaining and above 1 on ratio once the target is passed', () => {
+    expect(waterProgress(3000, 2500)).toEqual({ consumedMl: 3000, targetMl: 2500, remainingMl: -500, ratio: 1.2 });
+  });
+
   it('reports no target when none is set', () => {
+    expect(waterProgress(1500, -100)).toMatchObject({ targetMl: null, remainingMl: null, ratio: null });
     expect(waterProgress(1500, null)).toMatchObject({ targetMl: null, ratio: null });
     expect(waterProgress(1500, 0)).toMatchObject({ targetMl: null, ratio: null });
   });
