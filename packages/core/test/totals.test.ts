@@ -65,6 +65,14 @@ describe('totals', () => {
     expect(totals.incomplete).toContain('protein_g');
   });
 
+  it('honors a custom always-report code list instead of the core six', () => {
+    const totals = sumNutrients([{ fiber_g: '1.1' }, { fiber_g: '2.2' }], { codes: ['fiber_g', 'sodium_mg'] });
+    expect(Object.keys(totals.values)).toEqual(['fiber_g', 'sodium_mg']);
+    expect(totals.values.fiber_g).toBe('3.3');
+    expect(totals.values.sodium_mg).toBe('0');
+    expect(totals.incomplete).toEqual(['sodium_mg']);
+  });
+
   it('reports non-core codes only when something carries them', () => {
     expect(sumNutrients([{ energy_kcal: '1' }]).values.sugars_g).toBeUndefined();
     expect(sumNutrients([{ sugars_g: '4' }]).values.sugars_g).toBe('4');
