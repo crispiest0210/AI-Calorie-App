@@ -79,6 +79,6 @@ describe('normalizePortion', () => {
   });
 
   it('swaps an inverted range', () => {
-    expect(normalizePortion({ estimate: 150, low: 200, high: 100 })).toMatchObject({ low: '100', high: '200' });
+    expect(normalizePortion({ estimate: 150, low: 200, high: 100 })).toMatchObject({ low: '100', high: '200', repaired: true });
   });
 });

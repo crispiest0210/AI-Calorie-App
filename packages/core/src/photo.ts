@@ -176,7 +176,7 @@ export function normalizePortion(portion: z.infer<typeof portionGrams>): Normali
   const estimate = dec(portion.estimate);
   let low = dec(Math.min(portion.low, portion.high));
   let high = dec(Math.max(portion.low, portion.high));
-  let repaired = low.greaterThan(high);
+  let repaired = portion.low > portion.high;
 
   if (estimate.lessThan(low)) {
     low = estimate;
