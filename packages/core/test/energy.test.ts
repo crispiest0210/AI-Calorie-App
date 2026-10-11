@@ -21,4 +21,19 @@ describe('energy', () => {
     expect(resolveEnergy({ macros: { protein_g: '10', carb_g: '0', fat_g: '0' } })).toEqual({ kcal: '40', derivation: 'derived' });
     expect(resolveEnergy({ macros: {} })).toEqual({ kcal: null, derivation: null });
   });
+
+  it('treats a reported zero as a real value, not a missing one', () => {
+    expect(resolveEnergy({ kcal: '0', kj: '418.4', macros: { protein_g: '10', carb_g: '0', fat_g: '0' } })).toEqual({
+      kcal: '0',
+      derivation: 'reported',
+    });
+    expect(resolveEnergy({ kcal: null, kj: '0', macros: {} })).toEqual({ kcal: '0', derivation: 'converted' });
+  });
+
+  it('falls through to Atwater when kj is null and macros are complete', () => {
+    expect(resolveEnergy({ kcal: null, kj: null, macros: { protein_g: '1', carb_g: '1', fat_g: '1' } })).toEqual({
+      kcal: '17',
+      derivation: 'derived',
+    });
+  });
 });
