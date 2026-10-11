@@ -9,6 +9,11 @@ import type { AmountUnit } from './units';
 
 const GROUPED = new Intl.NumberFormat('en-US', { maximumFractionDigits: 1 });
 
+/** Group-format a rounded number; a value that rounds to zero never shows as "-0". */
+function formatRounded(value: number): string {
+  return GROUPED.format(value === 0 ? 0 : value);
+}
+
 /** Decimal places a code is shown with; grams gain a decimal below 10 g. */
 export function displayDecimals(code: NutrientCode, value: NumericInput): number {
   const unit = NUTRIENT_DEFS[code].unit;
@@ -22,7 +27,7 @@ export function roundForDisplay(value: NumericInput, code: NutrientCode): number
 
 export function formatNutrient(value: NumericInput | null | undefined, code: NutrientCode): string {
   if (value === null || value === undefined) return '—';
-  return GROUPED.format(roundForDisplay(value, code));
+  return formatRounded(roundForDisplay(value, code));
 }
 
 export function formatWithUnit(value: NumericInput | null | undefined, code: NutrientCode): string {
@@ -39,11 +44,11 @@ export function formatGrams(grams: NumericInput | null | undefined): string {
   if (grams === null || grams === undefined) return '—';
   const d = dec(grams);
   const places = d.abs().lessThan(10) ? 1 : 0;
-  return GROUPED.format(d.toDecimalPlaces(places, Decimal.ROUND_HALF_EVEN).toNumber());
+  return formatRounded(d.toDecimalPlaces(places, Decimal.ROUND_HALF_EVEN).toNumber());
 }
 
 export function formatMl(ml: NumericInput | null | undefined): string {
-  return ml === null || ml === undefined ? '—' : GROUPED.format(dec(ml).toDecimalPlaces(0, Decimal.ROUND_HALF_EVEN).toNumber());
+  return ml === null || ml === undefined ? '—' : formatRounded(dec(ml).toDecimalPlaces(0, Decimal.ROUND_HALF_EVEN).toNumber());
 }
 
 export function formatAmount(value: NumericInput, unit: AmountUnit, portionLabel?: string): string {

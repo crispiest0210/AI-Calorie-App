@@ -65,3 +65,12 @@ describe('accessible and non-shaming copy', () => {
     expect(overBySummary('0', 'energy_kcal')).toBeNull();
   });
 });
+
+describe('negative zero', () => {
+  it('never renders a value that rounds to zero as "-0"', () => {
+    expect(formatEnergy('-0.3')).toBe('0');
+    expect(formatGrams('-0.04')).toBe('0');
+    expect(formatMl('-0.2')).toBe('0');
+    expect(formatNutrient('-0.4', 'protein_g')).toBe('-0.4');
+  });
+});
