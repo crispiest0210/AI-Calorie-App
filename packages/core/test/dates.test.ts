@@ -7,6 +7,8 @@ describe('local dates', () => {
     expect(isLocalDate('2026-02-30')).toBe(false);
     expect(isLocalDate('2026-9-20')).toBe(false);
     expect(isLocalDate('nope')).toBe(false);
+    expect(isLocalDate('0050-01-01')).toBe(true);
+    expect(isLocalDate('0100-02-29')).toBe(false);
   });
 
   it('reads the device calendar date and offset', () => {

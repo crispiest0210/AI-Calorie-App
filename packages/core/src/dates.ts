@@ -8,10 +8,17 @@ export type LocalDate = string; // YYYY-MM-DD
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
+// Date.UTC maps years 0-99 onto 1900-1999, which would make '0050-01-01' fail validation.
+function utcMs(y: number, m: number, d: number): number {
+  const date = new Date(0);
+  date.setUTCFullYear(y, m - 1, d);
+  return date.getTime();
+}
+
 export function isLocalDate(value: string): value is LocalDate {
   if (!DATE_RE.test(value)) return false;
   const [y, m, d] = value.split('-').map(Number) as [number, number, number];
-  const date = new Date(Date.UTC(y, m - 1, d));
+  const date = new Date(utcMs(y, m, d));
   return date.getUTCFullYear() === y && date.getUTCMonth() === m - 1 && date.getUTCDate() === d;
 }
 
@@ -31,14 +38,14 @@ export function tzOffsetMinutesOf(instant: Date = new Date()): number {
 
 export function addDays(date: LocalDate, days: number): LocalDate {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
-  const shifted = new Date(Date.UTC(y, m - 1, d + days));
+  const shifted = new Date(utcMs(y, m, d + days));
   return `${shifted.getUTCFullYear()}-${pad(shifted.getUTCMonth() + 1)}-${pad(shifted.getUTCDate())}`;
 }
 
 export function daysBetween(from: LocalDate, to: LocalDate): number {
   const parse = (s: LocalDate) => {
     const [y, m, d] = s.split('-').map(Number) as [number, number, number];
-    return Date.UTC(y, m - 1, d);
+    return utcMs(y, m, d);
   };
   return Math.round((parse(to) - parse(from)) / 86_400_000);
 }
@@ -59,7 +66,7 @@ export function formatDayLabel(date: LocalDate, today: LocalDate): string {
   if (delta === 1) return 'Yesterday';
   if (delta === -1) return 'Tomorrow';
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
-  const dt = new Date(Date.UTC(y, m - 1, d));
+  const dt = new Date(utcMs(y, m, d));
   return `${WEEKDAYS[dt.getUTCDay()]}, ${MONTHS[m - 1]} ${d}`;
 }
 
