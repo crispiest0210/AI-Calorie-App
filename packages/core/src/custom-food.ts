@@ -2,7 +2,7 @@
  * Custom foods typed from a nutrition label (F7). The user is the source, so
  * the tier is "You" and per-serving values are converted to per 100 g here.
  */
-import { dec, num, type Num, type NumericInput } from './decimal';
+import { dec, num, tryDec, type Decimal, type Num, type NumericInput } from './decimal';
 import type { NutrientCode } from './nutrients';
 import { nutrientCodesOf, type NutrientMap } from './nutrient-map';
 import type { CanonicalFood, CanonicalNutrient, CanonicalPortion } from './normalize';
@@ -25,6 +25,13 @@ export interface CustomFoodInput {
 
 export class CustomFoodError extends Error {}
 
+/** Parses typed label text, so a bad entry surfaces as a CustomFoodError rather than a raw DecimalError. */
+function parseLabelNumber(value: NumericInput, what: string): Decimal {
+  const parsed = tryDec(value);
+  if (parsed === null) throw new CustomFoodError(`${what} is not a number`);
+  return parsed;
+}
+
 export function customFoodFromLabel(input: CustomFoodInput): { food: CanonicalFood; quarantineReasons: string[] } {
   const name = input.name.trim();
   if (name === '') throw new CustomFoodError('a custom food needs a name');
@@ -34,7 +41,8 @@ export function customFoodFromLabel(input: CustomFoodInput): { food: CanonicalFo
   const portions: CanonicalPortion[] = [];
   let factor = dec(1);
   if (input.basis === 'per_serving') {
-    const servingGrams = input.servingGrams === null || input.servingGrams === undefined ? null : dec(input.servingGrams);
+    const servingGrams =
+      input.servingGrams === null || input.servingGrams === undefined ? null : parseLabelNumber(input.servingGrams, 'the serving weight');
     if (servingGrams === null || !servingGrams.greaterThan(0)) {
       throw new CustomFoodError('per-serving values need a serving weight in grams');
     }
@@ -48,7 +56,7 @@ export function customFoodFromLabel(input: CustomFoodInput): { food: CanonicalFo
 
   const nutrients: CanonicalNutrient[] = codes.map((code) => ({
     code,
-    amountPer100g: num(dec(input.values[code] as Num).times(factor)),
+    amountPer100g: num(parseLabelNumber(input.values[code] as Num, code).times(factor)),
     derivation: input.basis === 'per_serving' ? 'converted' : 'reported',
   }));
 
