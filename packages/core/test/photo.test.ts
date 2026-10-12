@@ -55,6 +55,16 @@ describe('modelResult', () => {
     expect(bad({ portion_grams: { estimate: 6000, low: 1, high: 6000 } })).toBe(false);
     expect(bad({ label: '' })).toBe(false);
   });
+
+  it('caps text fields at 200 characters and items at 20', () => {
+    const result = (patch: object, items = [item]) => modelResult.safeParse({ is_food: true, items, ...patch }).success;
+    expect(modelResult.safeParse({ is_food: true, items: [{ ...item, label: 'a'.repeat(200) }] }).success).toBe(true);
+    expect(modelResult.safeParse({ is_food: true, items: [{ ...item, label: 'a'.repeat(201) }] }).success).toBe(false);
+    expect(modelResult.safeParse({ is_food: true, items: [{ ...item, preparation: 'a'.repeat(201) }] }).success).toBe(false);
+    expect(result({ notes: 'a'.repeat(201) })).toBe(false);
+    expect(result({}, Array.from({ length: 20 }, () => item))).toBe(true);
+    expect(result({}, Array.from({ length: 21 }, () => item))).toBe(false);
+  });
 });
 
 describe('model-facing definitions', () => {
