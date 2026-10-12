@@ -34,6 +34,22 @@ describe('computeRecipe', () => {
     expect(result.incompleteCodes).toEqual(['fiber_g']);
   });
 
+  it('keeps a reported zero and drops a code only a later ingredient reports', () => {
+    const result = computeRecipe({
+      ingredients: [rice, { ...chicken, nutrientsPer100g: { ...chicken.nutrientsPer100g, fiber_g: '1' } }],
+      servings: 1,
+    });
+    // chicken reports carb_g as 0 and rice reports 28: still a computed value.
+    expect(result.per100g.carb_g).toBe('11.2');
+    expect(result.per100g.fiber_g).toBeUndefined();
+    expect(result.incompleteCodes).toEqual(['fiber_g']);
+  });
+
+  it('refuses negative servings and negative cooked weight', () => {
+    expect(() => computeRecipe({ ingredients: [rice], servings: -1 })).toThrow(RecipeError);
+    expect(() => computeRecipe({ ingredients: [rice], totalCookedGrams: '-5', servings: 1 })).toThrow(RecipeError);
+  });
+
   it('refuses recipes it cannot compute', () => {
     expect(() => computeRecipe({ ingredients: [], servings: 1 })).toThrow(RecipeError);
     expect(() => computeRecipe({ ingredients: [rice], servings: 0 })).toThrow(RecipeError);
