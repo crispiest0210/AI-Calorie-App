@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { NUTRIENT_DEFS, customFoodFromLabel, num, type LabelBasis, type NutrientMap } from '@nt/core';
+import { NUTRIENT_DEFS, customFoodFromLabel, type LabelBasis, type NutrientMap } from '@nt/core';
 import { foods as foodsRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { spacing } from '@/theme';
@@ -41,15 +41,14 @@ export default function CustomFoodScreen() {
     (basis === 'per_100g' || Number.parseFloat(servingGrams) > 0);
 
   const save = () => {
-    const typed: NutrientMap = {};
-    for (const code of FIELDS) {
-      const raw = values[code];
-      if (raw === undefined || raw.trim() === '') continue;
-      if (!Number.isFinite(Number.parseFloat(raw))) continue;
-      typed[code] = num(raw);
-    }
-
     try {
+      // Blank fields are skipped; anything else goes to core as typed so a
+      // value like "12abc" is reported by name instead of throwing here.
+      const typed: NutrientMap = {};
+      for (const code of FIELDS) {
+        const raw = values[code]?.trim();
+        if (raw) typed[code] = raw;
+      }
       const { food, quarantineReasons } = customFoodFromLabel({
         name,
         brand,
