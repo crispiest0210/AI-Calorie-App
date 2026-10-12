@@ -8,6 +8,15 @@ describe('tokenizeLabel', () => {
 });
 
 describe('scoreCandidate', () => {
+  it('lets a label made only of preparation words match on them', () => {
+    expect(scoreCandidate('grilled', undefined, 'Chicken, grilled')).toBeGreaterThan(0);
+    expect(scoreCandidate('grilled', undefined, 'Chicken, raw')).toBe(0);
+  });
+
+  it('matches non-ASCII food words', () => {
+    expect(scoreCandidate('phở bò', undefined, 'Phở bò')).toBeGreaterThan(MATCH_THRESHOLD);
+  });
+
   it('scores zero when no food word matches, even if preparation does', () => {
     expect(scoreCandidate('grilled salmon', undefined, 'Chicken, grilled')).toBe(0);
   });
@@ -36,6 +45,10 @@ describe('scoreCandidate', () => {
 describe('matchQueries', () => {
   it('goes from the full label to food words to the last food word', () => {
     expect(matchQueries('grilled chicken breast')).toEqual(['grilled chicken breast', 'chicken breast', 'breast']);
+  });
+
+  it('offers only the label when it is made entirely of preparation words', () => {
+    expect(matchQueries('grilled')).toEqual(['grilled']);
   });
 
   it('does not repeat itself for a single plain word', () => {
