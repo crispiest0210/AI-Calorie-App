@@ -49,6 +49,7 @@ describe('customFoodFromLabel', () => {
   it('reports non-numeric typed values as CustomFoodError naming the field', () => {
     expect(() => customFoodFromLabel({ name: 'x', basis: 'per_100g', values: { energy_kcal: 'abc' } })).toThrow(/energy_kcal is not a number/);
     expect(() => customFoodFromLabel({ name: 'x', basis: 'per_100g', values: { protein_g: '' } })).toThrow(CustomFoodError);
+    expect(() => customFoodFromLabel({ name: 'x', basis: 'per_100g', values: { fat_g: '12abc' } })).toThrow(/fat_g is not a number/);
     expect(() => customFoodFromLabel({ name: 'x', basis: 'per_serving', servingGrams: 'lots', values: { energy_kcal: '1' } })).toThrow(
       /serving weight is not a number/,
     );
