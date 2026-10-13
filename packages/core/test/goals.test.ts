@@ -103,6 +103,13 @@ describe('goalProgress', () => {
     expect(goalProgress(sumNutrients([{ fat_g: '60' }]), resolved)).toMatchObject({ reference: '50', state: 'over_target' });
   });
 
+  it('reads a range against its high edge once the low edge is reached', () => {
+    const range = resolveTarget({ nutrientCode: 'fat_g', kind: 'range', value: null, valueLow: '50', valueHigh: '70', basis: 'absolute' }, null);
+    expect(goalProgress(sumNutrients([{ fat_g: '60' }]), range)).toMatchObject({ reference: '70', remaining: '10', state: 'under_target' });
+    expect(goalProgress(sumNutrients([{ fat_g: '70' }]), range)).toMatchObject({ remaining: '0', state: 'at_target' });
+    expect(goalProgress(sumNutrients([{ fat_g: '75' }]), range)).toMatchObject({ remaining: '-5', state: 'over_target' });
+  });
+
   it('marks a goal unknown when nothing anchors it', () => {
     const resolved = resolveTarget(profile.targets[1]!, null);
     expect(goalProgress(totals, resolved)).toMatchObject({ state: 'unknown', reference: null, remaining: null, ratio: null });
