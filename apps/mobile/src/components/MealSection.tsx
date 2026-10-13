@@ -2,7 +2,7 @@
 import { Pressable, View } from 'react-native';
 import { MEAL_SLOT_LABELS, formatEnergy, type MealSlot, type NutrientTotals } from '@nt/core';
 import type { EntryView } from '@nt/db';
-import { radii, spacing, useTheme } from '../theme';
+import { MIN_TOUCH_TARGET, radii, spacing, useTheme } from '../theme';
 import { Text } from './Text';
 import { EntryRow } from './EntryRow';
 
@@ -48,12 +48,17 @@ export function MealSection({ slot, entries, totals, onAdd, onCopyYesterday, onO
               Nothing logged yet.
             </Text>
             <View style={{ flexDirection: 'row', gap: spacing.lg }}>
-              <Pressable onPress={onAdd} accessibilityRole="button">
+              <Pressable onPress={onAdd} accessibilityRole="button" style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}>
                 <Text variant="label" tone="accent">
                   Add food
                 </Text>
               </Pressable>
-              <Pressable onPress={onCopyYesterday} accessibilityRole="button" accessibilityHint="Copies this meal from yesterday">
+              <Pressable
+                onPress={onCopyYesterday}
+                accessibilityRole="button"
+                accessibilityHint="Copies this meal from yesterday"
+                style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}
+              >
                 <Text variant="label" tone="accent">
                   Copy from yesterday
                 </Text>
