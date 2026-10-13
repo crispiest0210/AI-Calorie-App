@@ -137,8 +137,8 @@ async function main(): Promise<void> {
   if (options.live) {
     console.error(
       'Live mode calls the model once per meal and costs money.\n' +
-        'It is not wired into this runner yet: record responses with\n' +
-        '  pnpm --filter @nt/api run record-eval -- --set=<dir>\n' +
+        'It is not wired into this runner yet. Add recorded responses under\n' +
+        '  <set>/recordings/ (see fixtures/recordings/hand-written.json)\n' +
         'and then replay them here.',
     );
     process.exit(2);

@@ -19,7 +19,10 @@ anything comes from running `--live` against real photos.
    eating it. An eyeballed weight measures the labeller, not the model.
 2. For each photo add an entry to `set.json` with the catalog `foodId` you
    would have picked and the weighed `grams`.
-3. Record model responses once (`record-eval`), then replay them forever.
+3. Record model responses once, then replay them forever. The recorder is not
+   built yet: `pnpm eval:photo -- --live` currently stops and says so. Until
+   it is, a recording is a JSON file under `recordings/` in the shape of
+   `recordings/hand-written.json`.
 
 `catalogVersion` exists because a food id only means something against one
 catalog build. Rebuild the catalog and the ids move; re-point the set.

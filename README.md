@@ -4,8 +4,9 @@ A local-first calorie and macro tracker. Every nutrient number on screen traces
 to a named database record; nothing is estimated or inferred.
 
 Built from the [Product & Architecture Spec](https://claude.ai/artifact/27veyRAvDFfsyEg52tw4b9).
-This repository implements **Phases 0–3**: the foundations, the offline MVP,
-accounts and sync, and recipes, trends and the performance pass.
+This repository implements **Phases 0–4**: the foundations, the offline MVP,
+accounts and sync, recipes, trends and the performance pass, and the photo
+analysis beta. Phase 5 (production hardening) is next.
 
 ---
 
@@ -31,10 +32,10 @@ network and no telemetry.
 | F14 Export and account deletion | Done |
 | F11 Recipes: ingredients, yield, per-serving nutrition | Done |
 | F12 7 and 30-day trends against the goals of each day | Done |
-| F13 Photo analysis | Not yet — Phase 4 |
+| F13 Photo analysis | Done (beta) — photo → draft → review → log, with scheduled image deletion |
 
-An account is optional. Everything works without one; signing in adds sync and
-barcode lookup and nothing else. Anything logged before signing in is already
+An account is optional. Everything works without one; signing in adds sync,
+barcode lookup and photo analysis, and nothing else. Anything logged before signing in is already
 in the outbox, so the first sync adopts it — that is the local-to-account
 upgrade, with no separate migration step.
 
@@ -45,10 +46,13 @@ packages/core        nutrition engine: nutrient codes, decimal math, unit
                      conversion, totals, goals, normalization, formatting
 packages/db          SQLite schema (checked-in SQL), Drizzle mirror,
                      repositories, the day reader, the client sync engine
-apps/api             Hono API on Postgres: sync, catalog, barcode, export
+apps/api             Hono API on Postgres: sync, catalog, barcode, export,
+                     photo analysis, the image store and the retention sweeper
 packages/tokens      design tokens (light/dark, spacing, type, motion)
 apps/mobile          Expo Router app (iOS + Android from one codebase)
 tools/fdc-import     builds the bundled offline catalog from USDA/OFF data
+tools/photo-eval     scores photo analysis: match accuracy, gram error,
+                     unmatched rate, and "no nutrient field from the model"
 fixtures/            committed USDA + Open Food Facts records: the golden test
                      set and the seed catalog's source
 ```
@@ -73,7 +77,7 @@ catalog into place; everything after that is local reads and writes.
 
 ```bash
 pnpm -r run typecheck
-pnpm -r run test            # 253 tests: engine, database, importer, UI, API
+pnpm -r run test            # 504 tests: engine, database, importer, eval, UI, API
 pnpm --filter @nt/core test:coverage   # 100% branches — the Phase 0 gate
 pnpm lint
 ```
@@ -94,6 +98,28 @@ Accounts are off until the app knows where to talk to. Fill in `expo.extra` in
 With those blank the app runs in local mode, which is a supported state rather
 than a degraded one.
 
+### Running the API
+
+`apps/api/src/server.ts` wires the app, the image store, the vision model and
+the retention sweeper from the environment:
+
+```bash
+DATABASE_URL=postgres://…            # connects as the non-owner API role
+SUPABASE_JWT_SECRET=…                # verifies access tokens
+SUPABASE_URL=https://….supabase.co   # photo storage — both of these or neither
+SUPABASE_SERVICE_ROLE_KEY=…
+PHOTO_BUCKET=meal-photos             # optional; a private bucket
+ANTHROPIC_API_KEY=…                  # the vision model; absent disables analysis
+PHOTO_MODEL=…                        # optional model override
+pnpm --filter @nt/api dev            # listens on :8787 (PORT to change)
+```
+
+Apply `apps/api/migrations` first (`migrate()` in `apps/api/src/migrate.ts`
+runs them in order, as the tests do). Without the storage or model variables
+the photo routes answer `upstream_unavailable` and everything else works.
+With storage configured the server runs the retention sweep on start and then
+every 15 minutes.
+
 ## The decisions worth knowing
 
 **Nutrient values are decimal strings, never floats.** `packages/core/src/decimal.ts`
@@ -101,9 +127,39 @@ is the only place arithmetic happens. Two devices that see the same entries
 produce byte-identical totals (review item R13), and a stray `parseFloat` on a
 nutrient value is a lint error.
 
-**AI supplies no numbers.** There is no model call anywhere in this milestone.
-When photo analysis lands in Phase 4, the model proposes *what* and *how much*;
-nutrients still come from `food_nutrient`.
+**AI supplies no numbers.** The model proposes *what* is on the plate and *how
+much* of it; every nutrient still comes from `food_nutrient`. That holds three
+ways: the structured-output schema in `packages/core/src/photo.ts` has no
+nutrient field at all, so the model cannot return one; the API validates the
+response and `findNutrientFields` rejects any that slips in; and no column in
+`photo_analysis` or `photo_analysis_item` can hold a nutrient value. The model
+gets no tools, so text in a photo has nothing to act on.
+
+**A photo becomes a draft, never an entry.** `POST /v1/photo-analyses/:id/run`
+asks the model for labels and gram ranges, matches each label against the
+catalog (Postgres full-text for candidates, then the same ranking the device
+uses, with preparation words as boosts), and stores up to three candidate
+foods per item. Below the match threshold an item
+comes back *unmatched* and the app makes the person search or remove it —
+there is no "use the AI estimate" fallback. Confidence is shown as *Likely /
+Possible / Unsure*, the header shows a kcal range until every item is
+accepted, and nothing is logged until Confirm. Entries keep an *Estimated*
+badge until their grams are edited (`ai_estimate` → `ai_adjusted`).
+
+**Photos are deleted by a job, not by good intentions.** The device resizes
+to 1568 px and strips metadata before upload; the original never leaves the
+phone. The server copy lives in a private bucket at `user_id/analysis_id.jpg`.
+Resolving a draft starts a 24-hour clock; a draft nobody resolves is
+abandoned after 24 hours. The retention sweeper (`apps/api/src/retention.ts`)
+removes due images from the bucket and only *then* marks the rows deleted, so
+a storage outage leaves them due for the next run instead of forgotten.
+"Delete image now" and account deletion go through the same store; account
+deletion removes the images before the rows, inside one transaction, so a
+failure rolls everything back and a retry is safe. A person can opt into
+keeping a photo (`keepImage`), and it is still removed when the account is.
+
+**Photo analysis is metered.** Thirty analyses per user per day, counted
+before the model is called, so a failing image is not free to retry forever.
 
 **Missing is not zero.** A nutrient a source does not report stays absent, and
 any day containing such an entry is shown as *incomplete* rather than quietly
@@ -205,6 +261,12 @@ fails if the compressed size goes over, and reports both numbers.
 | API integration | `apps/api/test/api.test.ts` | every endpoint, problem+json, idempotency, rate limits |
 | Security — RLS | `apps/api/test/rls.test.ts` | user B reads and writes nothing of user A, as SQL and through the API |
 | Convergence | `apps/api/test/convergence.test.ts` | two devices, offline edits on both, identical totals; tombstones; export round-trip |
+| Photo boundary | `packages/core/test/photo.test.ts`, `apps/api/test/vision.test.ts` | the schema has no nutrient field, a nutrient in the output fails, portion ranges are repaired, timeouts and refusals are typed |
+| Photo drafts | `apps/api/test/photos.test.ts` | catalog matching, unmatched items, nothing written to the log, failures recorded, daily quota, another user refused |
+| Retention | `apps/api/test/retention.test.ts` | images removed from the bucket on schedule, abandoned drafts, kept photos, storage outages retried, delete-now, account deletion |
+| Image store | `apps/api/test/storage.test.ts` | the Supabase Storage calls: signed upload, read, batch delete, error mapping |
+| Photo review | `apps/mobile/__tests__/photo-draft.test.ts` | unsure and unmatched items block Confirm, kcal range vs single number, the Estimated provenance |
+| Photo eval | `tools/photo-eval/test` | top-1/top-3 match accuracy, gram error, unmatched rate, regression against a baseline |
 
 CI additionally bundles the app with Metro, because a broken import resolves
 fine in `tsc` and fails on device.
@@ -240,11 +302,18 @@ Worst case went from 103 ms to 9 ms with identical ranking.
 ## Deviations from the spec, and why
 
 **Export returns the document, not a signed URL to a zip.** The spec has
-`GET /v1/me/export` hand back a link to object storage. There is no bucket in
-this milestone — that arrives with photo analysis in Phase 4 — so the endpoint
-returns the JSON document directly, with the log entries also rendered as CSV
-inside it. The round-trip test asserts the exported numbers reproduce the
-totals the app showed.
+`GET /v1/me/export` hand back a link to object storage. The bucket that
+arrived with photo analysis holds meal photos only, and the export is small
+enough to return directly: the JSON document, with the log entries also
+rendered as CSV inside it. The round-trip test asserts the exported numbers
+reproduce the totals the app showed. Photo drafts and images are not in the
+export.
+
+**Signed upload URLs last two hours, not five minutes.** Spec 2.8 asks for
+5-minute signed URLs. Supabase fixes signed *upload* URLs at two hours and
+offers no setting, so the API reports the real expiry rather than the wished
+one. Each URL is still single-object and single-analysis, and the bucket is
+private.
 
 **Sign-in is a one-time code by email.** Sign in with Apple and Google are the
 same Supabase flow with a provider token, but both need native configuration
@@ -259,6 +328,18 @@ Every automated test passes and the app bundles for iOS and Android, but:
   locally-signed HS256 tokens, which is exactly what Supabase issues, but the
   hosted `/auth/v1/otp` flow has not been hit for real.
 - Barcode scanning has not been tested against a physical barcode.
+- Photo analysis has not been run against a real model or real Supabase
+  Storage. The model adapter is tested against a mocked SDK and the store
+  against a recorded fake of its REST API; the sweeper is tested against real
+  Postgres with an in-memory store.
+- **The Phase 4 eval baseline is not recorded.** The spec's set is 100
+  personal meal photos with weighed portions, which only the owner can
+  collect. `tools/photo-eval/fixtures` holds a few hand-written meals that
+  prove the harness works and say nothing about any model. `--live` mode is
+  not wired into the runner yet.
+- The app does not yet tell the server when someone backs out of a review
+  screen (the sweeper abandons the draft after 24 hours instead), and the
+  "keep my photos" opt-in exists in the API but has no switch in Settings.
 - The speed targets (5.4) and the VoiceOver / TalkBack checklist still need a
   real device. The 2.13 budgets are measured, but on a developer machine
   against a slowdown assumption, not on the mid-range Android the spec names.

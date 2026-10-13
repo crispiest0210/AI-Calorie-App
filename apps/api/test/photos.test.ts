@@ -9,6 +9,8 @@ import { confidenceBand, type ModelResult } from '@nt/core';
 import { withService, withUser } from '../src/db';
 import * as photos from '../src/routes/photos';
 import * as matching from '../src/routes/matching';
+import { runRetentionSweep } from '../src/retention';
+import { MemoryImageStore } from '../src/storage';
 import { AnalysisError, type MealImageAnalyzer } from '../src/vision/adapter';
 import { insertCatalogFood, json, startHarness, USER_A, USER_B, type Harness } from './harness';
 
@@ -17,6 +19,8 @@ let h: Harness;
 const ANALYSIS = '55555555-5555-4555-8555-555555555551';
 const RICE = '66666666-6666-4666-8666-666666666661';
 const BROCCOLI = '66666666-6666-4666-8666-666666666662';
+
+const PATH_A = `${USER_A}/${ANALYSIS}.jpg`;
 
 const IMAGE = { bytes: new Uint8Array([1]), mediaType: 'image/jpeg' as const };
 
@@ -218,11 +222,30 @@ describe('retention', () => {
   });
 
   it('deletes on request, idempotently', async () => {
-    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS));
+    const store = new MemoryImageStore();
+    store.put(PATH_A, IMAGE.bytes);
+    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS, store));
+    expect(store.objects.has(PATH_A)).toBe(false);
     const first = await h.pool.query('select image_deleted_at from photo_analysis where id = $1', [ANALYSIS]);
-    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS));
+    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS, store));
     const second = await h.pool.query('select image_deleted_at from photo_analysis where id = $1', [ANALYSIS]);
     expect(second.rows[0].image_deleted_at.getTime()).toBe(first.rows[0].image_deleted_at.getTime());
+  });
+
+  it('leaves a delete the store refused for the sweeper, rather than forgetting the file', async () => {
+    const store = new MemoryImageStore();
+    store.put(PATH_A, IMAGE.bytes);
+    store.failing = true;
+    const outcome = await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS, store));
+    expect(outcome.removed).toBe(false);
+
+    const { rows } = await h.pool.query('select storage_path, image_deleted_at from photo_analysis where id = $1', [ANALYSIS]);
+    expect(rows[0]).toMatchObject({ storage_path: PATH_A, image_deleted_at: null });
+
+    store.failing = false;
+    const report = await runRetentionSweep(h.pool, store);
+    expect(report.deleted).toBe(1);
+    expect(store.objects.has(PATH_A)).toBe(false);
   });
 });
 
@@ -237,7 +260,10 @@ describe('another user', () => {
       withUser(h.pool, USER_B, (sql) => photos.resolveAnalysis(sql, USER_B, ANALYSIS, 'confirmed')),
     ).rejects.toMatchObject({ code: 'not_found' });
 
-    await withUser(h.pool, USER_B, (sql) => photos.deleteImageNow(sql, USER_B, ANALYSIS));
+    const store = new MemoryImageStore();
+    store.put(PATH_A, IMAGE.bytes);
+    await withUser(h.pool, USER_B, (sql) => photos.deleteImageNow(sql, USER_B, ANALYSIS, store));
+    expect(store.objects.has(PATH_A)).toBe(true);
     const { rows } = await h.pool.query('select storage_path from photo_analysis where id = $1', [ANALYSIS]);
     expect(rows[0].storage_path).not.toBeNull();
   });

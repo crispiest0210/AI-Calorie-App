@@ -9,6 +9,7 @@
 import { confidenceBand, normalizePortion, type ModelResult } from '@nt/core';
 import { ApiError } from '../errors';
 import type { Sql } from '../db';
+import type { ImageStore } from '../storage';
 import { AnalysisError, type MealImage, type MealImageAnalyzer } from '../vision/adapter';
 
 /** Review item R12: cost control, and a ceiling on abuse. */
@@ -232,13 +233,35 @@ export async function resolveAnalysis(
   if (rowCount === 0) throw new ApiError('not_found', 'no such analysis');
 }
 
-export async function deleteImageNow(sql: Sql, userId: string, analysisId: string, now = new Date()): Promise<void> {
-  // Idempotent by design (spec 4.2): deleting an already-deleted image is fine.
-  await sql.query(
-    `update photo_analysis set image_deleted_at = coalesce(image_deleted_at, $3), storage_path = null
-     where id = $1 and user_id = $2`,
+/**
+ * "Delete image now" (spec 4.2). The row is made due first, so if the store
+ * cannot be reached the sweeper still removes the image on its next run; it
+ * is only recorded as deleted once the store has removed it. Idempotent: an
+ * image already gone, or one that is not the caller's, is a no-op.
+ */
+export async function deleteImageNow(
+  sql: Sql,
+  userId: string,
+  analysisId: string,
+  store: ImageStore,
+  now = new Date(),
+): Promise<{ removed: boolean }> {
+  const { rows } = await sql.query<{ storage_path: string }>(
+    `update photo_analysis set image_expires_at = $3
+     where id = $1 and user_id = $2 and image_deleted_at is null and storage_path is not null
+     returning storage_path`,
     [analysisId, userId, now],
   );
+  const storagePath = rows[0]?.storage_path;
+  if (storagePath === undefined) return { removed: true };
+
+  try {
+    await store.remove([storagePath]);
+  } catch {
+    return { removed: false };
+  }
+  await markImagesDeleted(sql, [analysisId], now);
+  return { removed: true };
 }
 
 export interface SweepResult {
@@ -250,7 +273,8 @@ export interface SweepResult {
  * The retention sweeper (spec 2.8, review item R5). Two jobs: abandon drafts
  * nobody ever resolved, and delete images whose retention has run out. It
  * returns the storage paths so the caller can remove the objects; a row is
- * only marked deleted once that has happened.
+ * only marked deleted once that has happened. `runRetentionSweep` in
+ * `../retention` is the caller that does both.
  */
 export async function sweepExpiredImages(sql: Sql, now = new Date()): Promise<SweepResult> {
   const abandonBefore = new Date(now.getTime() - ABANDON_AFTER_HOURS * 3600_000);
