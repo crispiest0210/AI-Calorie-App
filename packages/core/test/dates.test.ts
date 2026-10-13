@@ -34,6 +34,13 @@ describe('local dates', () => {
     expect(lastNDays('2026-09-20', 3)).toEqual(['2026-09-18', '2026-09-19', '2026-09-20']);
   });
 
+  it('builds trend windows across month, year and leap-day boundaries', () => {
+    expect(lastNDays('2026-09-20', 0)).toEqual([]);
+    expect(lastNDays('2026-09-20', 1)).toEqual(['2026-09-20']);
+    expect(lastNDays('2027-01-02', 4)).toEqual(['2026-12-30', '2026-12-31', '2027-01-01', '2027-01-02']);
+    expect(lastNDays('2028-03-01', 3)).toEqual(['2028-02-28', '2028-02-29', '2028-03-01']);
+  });
+
   it('labels days the way the header does', () => {
     expect(formatDayLabel('2026-09-20', '2026-09-20')).toBe('Today');
     expect(formatDayLabel('2026-09-19', '2026-09-20')).toBe('Yesterday');
