@@ -49,6 +49,7 @@ describe('display rounding', () => {
 
   it('formats a draft range', () => {
     expect(formatRange('520', '780', 'energy_kcal')).toBe('520–780 cal');
+    expect(formatRange('4.25', '12.5', 'protein_g')).toBe('4.2–12 g');
   });
 });
 
@@ -57,12 +58,15 @@ describe('accessible and non-shaming copy', () => {
     expect(energyA11yLabel('1420', '2100', '680')).toBe('Energy: 1,420 of 2,100 cal, 680 remaining');
     expect(energyA11yLabel('2220', '2100', '-120')).toBe('Energy: 2,220 of 2,100 cal, 120 over');
     expect(energyA11yLabel('1420', null, null)).toBe('Energy: 1,420 cal, no target set');
+    expect(energyA11yLabel('2100', '2100', '0')).toBe('Energy: 2,100 of 2,100 cal, 0 remaining');
   });
 
   it('states an overshoot plainly, or not at all', () => {
     expect(overBySummary('-120', 'energy_kcal')).toBe('120 cal over');
     expect(overBySummary('680', 'energy_kcal')).toBeNull();
     expect(overBySummary('0', 'energy_kcal')).toBeNull();
+    expect(overBySummary('-4.25', 'protein_g')).toBe('4.2 g over');
+    expect(overBySummary('-12.4', 'protein_g')).toBe('12 g over');
   });
 });
 
