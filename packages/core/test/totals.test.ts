@@ -110,4 +110,10 @@ describe('totals', () => {
     expect(macroEnergyShares(sumNutrients([]))).toEqual({});
     expect(macroEnergyShares({ values: { energy_kcal: '100' }, incomplete: [] })).toEqual({});
   });
+
+  it('omits macros that no entry reported from the energy shares', () => {
+    const totals = { values: { energy_kcal: '200', protein_g: '10' }, incomplete: [] };
+    expect(macroEnergyShares(totals)).toEqual({ protein_g: 0.2 });
+    expect(macroEnergyShares({ values: { energy_kcal: '0', protein_g: '10' }, incomplete: [] })).toEqual({});
+  });
 });
