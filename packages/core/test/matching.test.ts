@@ -74,6 +74,16 @@ describe('rankCandidates', () => {
     expect(result).toEqual({ candidates: [], status: 'unmatched' });
   });
 
+  it('breaks equal scores by preferring the shorter name', () => {
+    const tied = [
+      { id: 'long', name: 'Rice, white, cooked' },
+      { id: 'short', name: 'Rice, white' },
+    ];
+    const result = rankCandidates('rice white', undefined, tied);
+    expect(result.candidates[0]!.score).toBe(result.candidates[1]!.score);
+    expect(result.candidates.map((c) => c.food.id)).toEqual(['short', 'long']);
+  });
+
   it('honours the limit and a custom threshold', () => {
     const result = rankCandidates('chicken breast', undefined, foods, { limit: 1, threshold: 2 });
     expect(result.candidates).toHaveLength(1);
