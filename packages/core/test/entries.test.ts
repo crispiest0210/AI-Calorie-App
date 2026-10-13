@@ -31,6 +31,17 @@ describe('entryNutrients', () => {
     expect(entryNutrients({ ...base, nutrientsPer100g: null })).toEqual({});
     expect(entryNutrients({ ...base, entryKind: 'quick_add', nutrientsAbsolute: null })).toEqual({});
   });
+
+  it('ignores the fields that belong to the other entry kind', () => {
+    const food: EngineEntry = { ...base, nutrientsAbsolute: { energy_kcal: '999' } };
+    expect(entryNutrients(food)).toEqual({ energy_kcal: '100' });
+    const quick: EngineEntry = {
+      ...base,
+      entryKind: 'quick_add',
+      nutrientsAbsolute: { energy_kcal: '320' },
+    };
+    expect(entryNutrients(quick)).toEqual({ energy_kcal: '320' });
+  });
 });
 
 describe('isEstimated', () => {
