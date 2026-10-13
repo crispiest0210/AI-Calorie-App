@@ -103,6 +103,12 @@ describe('totals', () => {
     expect(totalOf(totalsForEntries([oats]), 'protein_g')).toBe('8.45');
   });
 
+  it('keeps a genuinely reported zero, only hiding zeros from incomplete data', () => {
+    expect(totalOf(sumNutrients([{ protein_g: '0' }]), 'protein_g')).toBe('0');
+    expect(totalOf(sumNutrients([]), 'protein_g')).toBe('0');
+    expect(totalOf(sumNutrients([{ protein_g: '0' }, { energy_kcal: '5' }]), 'protein_g')).toBeNull();
+  });
+
   it('computes macro energy shares for the Today bars', () => {
     const shares = macroEnergyShares(totalsForEntries([oats]));
     expect(shares.protein_g).toBeCloseTo((8.45 * 4) / 194.5, 10);
