@@ -64,6 +64,10 @@ describe('a zero density', () => {
 describe('a zero-gram portion', () => {
   const broken: FoodMeasureInfo = { densityGPerMl: null, portions: [{ id: 'p0', label: 'empty', gramWeight: '0', source: 'user' }] };
 
+  it('is refused rather than resolved to 0 g', () => {
+    expect(resolveGrams({ value: '2', unit: 'portion', portionId: 'p0' }, broken)).toEqual({ ok: false, reason: 'portion_unknown' });
+  });
+
   it('is not divided by when converting grams back', () => {
     expect(gramsToUnit('100', 'portion', broken, 'p0')).toBeNull();
   });

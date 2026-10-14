@@ -59,7 +59,8 @@ export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsR
     }
     case 'portion': {
       const portion = food.portions.find((p) => p.id === amount.portionId);
-      if (!portion) return { ok: false, reason: 'portion_unknown' };
+      // A zero-gram portion would log a 0 g entry; refuse it like an unknown portion.
+      if (!portion || !dec(portion.gramWeight).greaterThan(0)) return { ok: false, reason: 'portion_unknown' };
       return { ok: true, grams: num(mul(value, portion.gramWeight)), provenance: 'portion' };
     }
     case 'kcal':
