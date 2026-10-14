@@ -91,4 +91,13 @@ describe('normalizePortion', () => {
   it('swaps an inverted range', () => {
     expect(normalizePortion({ estimate: 150, low: 200, high: 100 })).toMatchObject({ low: '100', high: '200', repaired: true });
   });
+
+  it('does not flag an estimate sitting exactly on either bound', () => {
+    expect(normalizePortion({ estimate: 100, low: 100, high: 200 })).toMatchObject({ low: '100', high: '200', repaired: false });
+    expect(normalizePortion({ estimate: 200, low: 100, high: 200 })).toMatchObject({ low: '100', high: '200', repaired: false });
+  });
+
+  it('swaps an inverted range and then widens it around an outside estimate', () => {
+    expect(normalizePortion({ estimate: 250, low: 200, high: 100 })).toMatchObject({ estimate: '250', low: '100', high: '250', repaired: true });
+  });
 });
