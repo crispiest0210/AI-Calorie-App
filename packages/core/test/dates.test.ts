@@ -30,8 +30,20 @@ describe('local dates', () => {
     expect(daysBetween('2026-09-20', '2026-09-13')).toBe(-7);
   });
 
+  it('counts days across leap days and year ends', () => {
+    expect(daysBetween('2027-12-31', '2028-03-01')).toBe(61);
+    expect(daysBetween('2026-12-31', '2027-01-01')).toBe(1);
+    expect(daysBetween('2026-09-20', '2026-09-20')).toBe(0);
+  });
+
   it('builds trend windows oldest first', () => {
     expect(lastNDays('2026-09-20', 3)).toEqual(['2026-09-18', '2026-09-19', '2026-09-20']);
+  });
+
+  it('builds degenerate trend windows: one day is just the end date, none is empty', () => {
+    expect(lastNDays('2026-09-20', 1)).toEqual(['2026-09-20']);
+    expect(lastNDays('2026-09-20', 0)).toEqual([]);
+    expect(lastNDays('2026-03-02', 3)).toEqual(['2026-02-28', '2026-03-01', '2026-03-02']);
   });
 
   it('labels days the way the header does', () => {
