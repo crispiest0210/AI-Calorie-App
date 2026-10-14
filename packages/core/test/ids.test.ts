@@ -27,6 +27,25 @@ describe('uuidv7', () => {
     expect(isUuid('00000000-0000-4000-8000-000000000000')).toBe(true);
   });
 
+  it('round-trips the largest 48-bit timestamp without touching the version or variant bits', () => {
+    const max = 2 ** 48 - 1;
+    setRandomSource((bytes) => bytes.fill(0xff));
+    try {
+      const id = uuidv7(max);
+      expect(timestampOfUuidv7(id)).toBe(max);
+      expect(id[14]).toBe('7');
+      expect(id[19]).toBe('b');
+    } finally {
+      setRandomSource(null);
+    }
+  });
+
+  it('accepts only lowercase hex, matching what uuidv7 emits', () => {
+    expect(isUuid('01890A5D-AC96-774B-BCCE-B302099A8057')).toBe(false);
+    expect(timestampOfUuidv7('01890A5D-AC96-774B-BCCE-B302099A8057')).toBeNull();
+    expect(isUuid('01890a5d-ac96-774b-bcce-b302099a8057')).toBe(true);
+  });
+
   it('is unique across many draws', () => {
     const ids = new Set(Array.from({ length: 2000 }, () => uuidv7()));
     expect(ids.size).toBe(2000);
