@@ -46,6 +46,11 @@ function hasDensity(food: FoodMeasureInfo): food is FoodMeasureInfo & { densityG
   return food.densityGPerMl !== null && dec(food.densityGPerMl).greaterThan(0);
 }
 
+/** A portion with no positive gram weight cannot be resolved, so it is never offered or defaulted to. */
+function usablePortions(food: FoodMeasureInfo): Portion[] {
+  return food.portions.filter((p) => dec(p.gramWeight).greaterThan(0));
+}
+
 export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsResult {
   const value = dec(amount.value);
   if (!value.greaterThan(0)) return { ok: false, reason: 'amount_not_positive' };
@@ -75,7 +80,7 @@ export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsR
  */
 export function availableUnits(food: FoodMeasureInfo): AmountUnit[] {
   const units: AmountUnit[] = [];
-  if (food.portions.length > 0) units.push('portion');
+  if (usablePortions(food).length > 0) units.push('portion');
   units.push('g');
   if (hasDensity(food)) units.push('ml');
   return units;
@@ -93,7 +98,7 @@ export interface DefaultAmount {
  * whose source lists no portion is logged in grams (spec 2.6.5).
  */
 export function defaultAmount(food: FoodMeasureInfo): DefaultAmount {
-  const portion = food.portions[0];
+  const portion = usablePortions(food)[0];
   if (portion !== undefined) return { unit: 'portion', portionId: portion.id, value: '1' };
   return { unit: 'g', portionId: null, value: '100' };
 }

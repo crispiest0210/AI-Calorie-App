@@ -71,4 +71,12 @@ describe('a zero-gram portion', () => {
   it('is not divided by when converting grams back', () => {
     expect(gramsToUnit('100', 'portion', broken, 'p0')).toBeNull();
   });
+
+  it('is neither offered nor opened on, falling through to a usable serving or grams', () => {
+    expect(availableUnits(broken)).toEqual(['g']);
+    expect(defaultAmount(broken)).toEqual({ unit: 'g', portionId: null, value: '100' });
+    const mixed: FoodMeasureInfo = { densityGPerMl: null, portions: [...broken.portions, cup] };
+    expect(availableUnits(mixed)).toEqual(['portion', 'g']);
+    expect(defaultAmount(mixed)).toEqual({ unit: 'portion', portionId: 'p1', value: '1' });
+  });
 });
