@@ -59,4 +59,16 @@ describe('customFoodFromLabel', () => {
     const { quarantineReasons } = customFoodFromLabel({ name: 'x', basis: 'per_100g', values: { energy_kcal: '-5' } });
     expect(quarantineReasons).toEqual(['energy_kcal is negative']);
   });
+
+  it('falls back to the generated serving label when the typed one is blank', () => {
+    const { food } = customFoodFromLabel({ name: 'Bar', basis: 'per_serving', servingGrams: 40, servingLabel: '   ', values: { energy_kcal: '150' } });
+    expect(food.portions[0]!.label).toBe('1 serving (40 g)');
+  });
+
+  it('rejects a negative serving weight and passes density and sourceRef through', () => {
+    expect(() => customFoodFromLabel({ name: 'x', basis: 'per_serving', servingGrams: -10, values: { energy_kcal: '1' } })).toThrow(CustomFoodError);
+    const { food } = customFoodFromLabel({ name: 'Oil', basis: 'per_100g', densityGPerMl: '0.92', sourceRef: 'label-1', values: { fat_g: '100' } });
+    expect(food.densityGPerMl).toBe('0.92');
+    expect(food.sourceRef).toBe('label-1');
+  });
 });
