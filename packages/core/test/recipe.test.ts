@@ -60,4 +60,10 @@ describe('computeRecipe', () => {
   it('treats a null cooked weight as the raw sum', () => {
     expect(computeRecipe({ ingredients: [rice], totalCookedGrams: null, servings: 1 }).cookedGrams).toBe('200');
   });
+
+  it('reports unparsable quantities as RecipeError, not a raw NumericError', () => {
+    expect(() => computeRecipe({ ingredients: [rice], servings: 'two' })).toThrow(RecipeError);
+    expect(() => computeRecipe({ ingredients: [{ ...rice, grams: '12abc' }], servings: 1 })).toThrow(RecipeError);
+    expect(() => computeRecipe({ ingredients: [rice], totalCookedGrams: 'lots', servings: 1 })).toThrow(RecipeError);
+  });
 });

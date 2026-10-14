@@ -3,7 +3,7 @@
  * ÷ cooked grams × 100. A code missing from any ingredient stays missing —
  * a recipe never silently treats an unreported nutrient as zero.
  */
-import { dec, num, type Num, type NumericInput } from './decimal';
+import { dec, num, NumericError, type Num, type NumericInput } from './decimal';
 import type { NutrientCode } from './nutrients';
 import { nutrientCodesOf, type NutrientMap } from './nutrient-map';
 import type { CanonicalNutrient, CanonicalPortion } from './normalize';
@@ -33,19 +33,29 @@ export interface RecipeResult {
 
 export class RecipeError extends Error {}
 
+/** Parses a recipe quantity; an unparsable value is a recipe problem, not a raw NumericError. */
+function quantity(value: NumericInput, what: string) {
+  try {
+    return dec(value);
+  } catch (error) {
+    if (error instanceof NumericError) throw new RecipeError(`${what} must be a number`);
+    throw error;
+  }
+}
+
 export function computeRecipe(input: RecipeInput): RecipeResult {
   if (input.ingredients.length === 0) throw new RecipeError('a recipe needs at least one ingredient');
-  const servings = dec(input.servings);
+  const servings = quantity(input.servings, 'servings');
   if (!servings.greaterThan(0)) throw new RecipeError('servings must be greater than zero');
 
   let rawGrams = dec(0);
   for (const ing of input.ingredients) {
-    const g = dec(ing.grams);
+    const g = quantity(ing.grams, 'ingredient grams');
     if (!g.greaterThan(0)) throw new RecipeError('ingredient grams must be greater than zero');
     rawGrams = rawGrams.plus(g);
   }
 
-  const cooked = input.totalCookedGrams === null || input.totalCookedGrams === undefined ? rawGrams : dec(input.totalCookedGrams);
+  const cooked = input.totalCookedGrams === null || input.totalCookedGrams === undefined ? rawGrams : quantity(input.totalCookedGrams, 'cooked grams');
   if (!cooked.greaterThan(0)) throw new RecipeError('cooked grams must be greater than zero');
 
   const codesEverywhere = new Set<NutrientCode>(nutrientCodesOf(input.ingredients[0]!.nutrientsPer100g));
