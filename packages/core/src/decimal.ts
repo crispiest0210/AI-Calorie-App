@@ -30,7 +30,13 @@ export class NumericError extends Error {
 
 /** Parses any accepted input into a Decimal, rejecting NaN/Infinity/garbage. */
 export function dec(value: NumericInput): Decimal {
-  const parsed = new D(value as Decimal.Value);
+  let parsed: Decimal;
+  try {
+    parsed = new D(value as Decimal.Value);
+  } catch {
+    // decimal.js throws its own DecimalError for unparsable strings.
+    throw new NumericError(value);
+  }
   if (!parsed.isFinite()) throw new NumericError(value);
   return parsed;
 }

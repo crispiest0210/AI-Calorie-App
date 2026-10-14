@@ -12,6 +12,10 @@ describe('decimal', () => {
   it('rejects non-finite input', () => {
     expect(() => dec(Number.NaN)).toThrow(NumericError);
     expect(() => dec(Number.POSITIVE_INFINITY)).toThrow(NumericError);
+    // Unparsable strings surface as NumericError too, not decimal.js's own error type.
+    expect(() => dec('banana')).toThrow(NumericError);
+    expect(() => dec('')).toThrow(NumericError);
+    expect(() => dec('  5 ')).toThrow(NumericError);
     expect(tryDec('banana')).toBeNull();
     expect(tryDec('4')?.toFixed()).toBe('4');
   });
