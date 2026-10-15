@@ -39,6 +39,12 @@ describe('display rounding', () => {
     expect(formatMl(null)).toBe('—');
   });
 
+  it('rounds up across the 10 g boundary without a stray decimal', () => {
+    expect(formatGrams('9.96')).toBe('10');
+    expect(formatNutrient('9.96', 'protein_g')).toBe('10');
+    expect(formatGrams('-0.04')).toBe('0');
+  });
+
   it('formats an amount in the unit it was entered in', () => {
     expect(formatAmount('150', 'g')).toBe('150 g');
     expect(formatAmount('200', 'ml')).toBe('200 mL');
@@ -59,6 +65,7 @@ describe('accessible and non-shaming copy', () => {
     expect(energyA11yLabel('2220', '2100', '-120')).toBe('Energy: 2,220 of 2,100 cal, 120 over');
     expect(energyA11yLabel('1420', null, null)).toBe('Energy: 1,420 cal, no target set');
     expect(energyA11yLabel('2100', '2100', '0')).toBe('Energy: 2,100 of 2,100 cal, 0 remaining');
+    expect(energyA11yLabel('2100.4', '2100', '-0.4')).toBe('Energy: 2,100 of 2,100 cal, 0 remaining');
   });
 
   it('states an overshoot plainly, or not at all', () => {
