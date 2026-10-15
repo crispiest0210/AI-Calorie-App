@@ -14,6 +14,7 @@ import {
   formatNutrient,
   lastNDays,
   localDateOf,
+  pluralize,
   profileForDate,
   progressForProfile,
   resolveProfile,
@@ -155,7 +156,7 @@ export default function HistoryScreen() {
               key={day.date}
               onPress={() => router.push({ pathname: '/day/[date]', params: { date: day.date } })}
               accessibilityRole="button"
-              accessibilityLabel={`${formatDayLabel(day.date, today)}, ${formatEnergy(day.totals.total.values.energy_kcal ?? '0')} calories, ${day.entries.length} entries`}
+              accessibilityLabel={`${formatDayLabel(day.date, today)}, ${formatEnergy(day.totals.total.values.energy_kcal ?? '0')} calories, ${pluralize(day.entries.length, 'entry', 'entries')}`}
               style={({ pressed }) => ({
                 marginHorizontal: spacing.lg,
                 marginTop: spacing.sm,
@@ -170,7 +171,7 @@ export default function HistoryScreen() {
                 <View style={{ gap: 2 }}>
                   <Text variant="label">{formatDayLabel(day.date, today)}</Text>
                   <Text variant="caption" tone="faint" numeric>
-                    {day.entries.length === 0 ? 'nothing logged' : `${day.entries.length} entries · ${day.waterMl} mL water`}
+                    {day.entries.length === 0 ? 'nothing logged' : `${pluralize(day.entries.length, 'entry', 'entries')} · ${day.waterMl} mL water`}
                   </Text>
                 </View>
                 <Text variant="heading" numeric tone={over ? 'over' : day.entries.length === 0 ? 'faint' : 'default'}>

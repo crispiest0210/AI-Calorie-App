@@ -87,3 +87,8 @@ export function overBySummary(remaining: Num, code: NutrientCode): string | null
   if (roundForDisplay(d, code) >= 0) return null;
   return `${formatWithUnit(d.abs(), code)} over`;
 }
+
+/** "1 entry", "2 entries": a count with its noun agreeing in number. */
+export function pluralize(count: number, singular: string, plural: string = `${singular}s`): string {
+  return `${count} ${count === 1 ? singular : plural}`;
+}

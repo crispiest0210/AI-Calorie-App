@@ -10,6 +10,7 @@ import {
   formatRange,
   formatWithUnit,
   overBySummary,
+  pluralize,
   roundForDisplay,
 } from '../src/format';
 
@@ -91,5 +92,18 @@ describe('negative zero', () => {
     expect(formatGrams('-0.04')).toBe('0');
     expect(formatMl('-0.2')).toBe('0');
     expect(formatNutrient('-0.4', 'protein_g')).toBe('-0.4');
+  });
+});
+
+describe('pluralize', () => {
+  it('agrees the noun with the count', () => {
+    expect(pluralize(1, 'entry', 'entries')).toBe('1 entry');
+    expect(pluralize(0, 'entry', 'entries')).toBe('0 entries');
+    expect(pluralize(2, 'entry', 'entries')).toBe('2 entries');
+  });
+
+  it('defaults the plural to adding an s', () => {
+    expect(pluralize(1, 'food')).toBe('1 food');
+    expect(pluralize(3, 'food')).toBe('3 foods');
   });
 });

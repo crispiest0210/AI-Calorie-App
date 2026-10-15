@@ -7,7 +7,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MEAL_SLOTS, MEAL_SLOT_LABELS, localDateOf, type MealSlot } from '@nt/core';
+import { MEAL_SLOTS, MEAL_SLOT_LABELS, localDateOf, pluralize, type MealSlot } from '@nt/core';
 import { foods as foodsRepo, entries as entriesRepo, recipes as recipesRepo, type FoodSummary } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { MIN_TOUCH_TARGET, radii, spacing, typography, useTheme } from '@/theme';
@@ -245,7 +245,7 @@ function MealCategories({
               onPress={() => onSelect(entry.category)}
               accessibilityRole="radio"
               accessibilityState={{ selected: isSelected }}
-              accessibilityLabel={`${entry.category}, ${entry.count} foods`}
+              accessibilityLabel={`${entry.category}, ${pluralize(entry.count, 'food')}`}
               style={{
                 minHeight: MIN_TOUCH_TARGET,
                 justifyContent: 'center',
