@@ -65,6 +65,16 @@ describe('NumberField', () => {
     expect(onChange).toHaveBeenLastCalledWith('90');
   });
 
+  it('steps from the input itself via screen-reader actions', () => {
+    const onChange = jest.fn();
+    render(<NumberField label="Amount" value="100" onChange={onChange} step={10} />);
+    const input = screen.getByLabelText('Amount');
+    fireEvent(input, 'accessibilityAction', { nativeEvent: { actionName: 'increment' } });
+    expect(onChange).toHaveBeenLastCalledWith('110');
+    fireEvent(input, 'accessibilityAction', { nativeEvent: { actionName: 'decrement' } });
+    expect(onChange).toHaveBeenLastCalledWith('90');
+  });
+
   it('never steps below zero', () => {
     const onChange = jest.fn();
     render(<NumberField label="Amount" value="5" onChange={onChange} step={10} />);

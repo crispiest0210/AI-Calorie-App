@@ -80,6 +80,14 @@ export function NumberField({ value, onChange, label, suffix, step = 10, autoFoc
             autoFocus={autoFocus}
             selectTextOnFocus
             accessibilityLabel={label}
+            accessibilityActions={[
+              { name: 'increment', label: `Increase by ${step}` },
+              { name: 'decrement', label: `Decrease by ${step}` },
+            ]}
+            onAccessibilityAction={(event) => {
+              if (event.nativeEvent.actionName === 'increment') nudge(step);
+              else if (event.nativeEvent.actionName === 'decrement') nudge(-step);
+            }}
             style={[typography.title, tabularNumbers, { flex: 1, color: colors.text, paddingVertical: spacing.sm }]}
             placeholderTextColor={colors.textFaint}
             placeholder="0"
