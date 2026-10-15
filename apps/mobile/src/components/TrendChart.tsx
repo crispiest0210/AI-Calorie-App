@@ -35,13 +35,13 @@ export function TrendChart({ days, today, onSelectDay }: { days: readonly TrendD
   // One target line, drawn at the most recent day's target: goals change
   // rarely, and a line per day would be noise rather than information.
   const target = [...days].reverse().find((d) => d.target !== null)?.target ?? null;
-  const average = logged.length === 0 ? null : Math.round(logged.reduce((sum, d) => sum + (d.energy ?? 0), 0) / logged.length);
+  const average = logged.length === 0 ? null : logged.reduce((sum, d) => sum + (d.energy ?? 0), 0) / logged.length;
 
   const summary =
     logged.length === 0
       ? 'No days logged in this range.'
-      : `Energy over ${days.length} days: ${logged.length} logged, averaging ${average} calories a day` +
-        (target === null ? ', no target set.' : ` against a target of ${Math.round(target)}.`);
+      : `Energy over ${days.length} days: ${logged.length} logged, averaging ${formatEnergy(average)} calories a day` +
+        (target === null ? ', no target set.' : ` against a target of ${formatEnergy(target)}.`);
 
   return (
     <View style={{ gap: spacing.sm }}>

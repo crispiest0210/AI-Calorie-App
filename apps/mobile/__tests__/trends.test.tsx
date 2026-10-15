@@ -19,7 +19,7 @@ describe('TrendChart', () => {
   it('summarises the whole range in one sentence', () => {
     render(<TrendChart days={days} today={TODAY} onSelectDay={jest.fn()} />);
     expect(
-      screen.getByLabelText('Energy over 3 days: 2 logged, averaging 2100 calories a day against a target of 2100.'),
+      screen.getByLabelText('Energy over 3 days: 2 logged, averaging 2,100 calories a day against a target of 2,100.'),
     ).toBeTruthy();
   });
 
