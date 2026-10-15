@@ -78,6 +78,13 @@ describe('NumberField', () => {
     fireEvent.changeText(screen.getByLabelText('Amount'), '12a.5x');
     expect(onChange).toHaveBeenLastCalledWith('12.5');
   });
+
+  it('keeps only the first decimal point', () => {
+    const onChange = jest.fn();
+    render(<NumberField label="Amount" value="100" onChange={onChange} />);
+    fireEvent.changeText(screen.getByLabelText('Amount'), '1.2.3');
+    expect(onChange).toHaveBeenLastCalledWith('1.23');
+  });
 });
 
 describe('SegmentedControl', () => {

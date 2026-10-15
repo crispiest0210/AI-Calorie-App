@@ -16,6 +16,13 @@ export interface NumberFieldProps {
   autoFocus?: boolean;
 }
 
+/** Digits and at most one decimal point, so "1.2.3" can never reach `dec`. */
+export function sanitizeDecimalInput(text: string): string {
+  const cleaned = text.replace(/[^\d.]/g, '');
+  const firstDot = cleaned.indexOf('.');
+  return firstDot === -1 ? cleaned : cleaned.slice(0, firstDot + 1) + cleaned.slice(firstDot + 1).replace(/\./g, '');
+}
+
 export function NumberField({ value, onChange, label, suffix, step = 10, autoFocus = false }: NumberFieldProps) {
   const { colors } = useTheme();
 
@@ -68,7 +75,7 @@ export function NumberField({ value, onChange, label, suffix, step = 10, autoFoc
         >
           <TextInput
             value={value}
-            onChangeText={(text) => onChange(text.replace(/[^\d.]/g, ''))}
+            onChangeText={(text) => onChange(sanitizeDecimalInput(text))}
             keyboardType="decimal-pad"
             autoFocus={autoFocus}
             selectTextOnFocus
