@@ -37,6 +37,18 @@ describe('findNutrientFields', () => {
   it('does not flag nutrient words that only appear in values', () => {
     expect(noNutrientFields({ items: [{ label: 'high protein bar' }] })).toBe(true);
   });
+
+  it('reports a nutrient-named subtree once instead of descending into it', () => {
+    const leaks = findNutrientFields({ nutrition: { kcal: 200, protein: 4 } });
+    expect(leaks).toEqual([{ path: 'nutrition', value: '[object Object]' }]);
+  });
+
+  it('indexes paths from a top-level array and ignores primitive and null roots', () => {
+    expect(findNutrientFields([{ ok: 1 }, { sodium_mg: 5 }])).toEqual([{ path: '[1].sodium_mg', value: '5' }]);
+    expect(noNutrientFields(null)).toBe(true);
+    expect(noNutrientFields('calories')).toBe(true);
+    expect(noNutrientFields(undefined)).toBe(true);
+  });
 });
 
 describe('modelResult', () => {
