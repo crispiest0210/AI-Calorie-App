@@ -68,6 +68,14 @@ describe('accessible and non-shaming copy', () => {
     expect(overBySummary('-4.25', 'protein_g')).toBe('4.2 g over');
     expect(overBySummary('-12.4', 'protein_g')).toBe('12 g over');
   });
+
+  it('does not call a sub-display-unit overshoot "over"', () => {
+    expect(overBySummary('-0.4', 'energy_kcal')).toBeNull();
+    expect(overBySummary('-0.04', 'protein_g')).toBeNull();
+    expect(overBySummary('-0.5', 'energy_kcal')).toBeNull();
+    expect(overBySummary('-0.6', 'energy_kcal')).toBe('1 cal over');
+    expect(energyA11yLabel('2100.3', '2100', '-0.3')).toBe('Energy: 2,100 of 2,100 cal, 0 remaining');
+  });
 });
 
 describe('negative zero', () => {

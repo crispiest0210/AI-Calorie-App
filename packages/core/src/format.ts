@@ -74,7 +74,7 @@ export function formatRange(low: NumericInput, high: NumericInput, code: Nutrien
 export function energyA11yLabel(consumed: NumericInput, target: NumericInput | null, remaining: NumericInput | null): string {
   if (target === null || remaining === null) return `Energy: ${formatEnergy(consumed)} cal, no target set`;
   const remainingD = dec(remaining);
-  const tail = remainingD.isNegative()
+  const tail = roundForDisplay(remainingD, 'energy_kcal') < 0
     ? `${formatEnergy(remainingD.abs())} over`
     : `${formatEnergy(remainingD)} remaining`;
   return `Energy: ${formatEnergy(consumed)} of ${formatEnergy(target)} cal, ${tail}`;
@@ -83,6 +83,7 @@ export function energyA11yLabel(consumed: NumericInput, target: NumericInput | n
 /** Neutral copy for a goal overshoot — no shaming (spec 5.7). */
 export function overBySummary(remaining: Num, code: NutrientCode): string | null {
   const d = dec(remaining);
-  if (!d.isNegative()) return null;
+  // An overshoot that rounds to zero on screen is not an overshoot ("0 cal over").
+  if (roundForDisplay(d, code) >= 0) return null;
   return `${formatWithUnit(d.abs(), code)} over`;
 }
