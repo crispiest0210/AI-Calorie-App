@@ -99,6 +99,27 @@ describe('the draft total', () => {
     ]);
     expect(energy.exact).toBe('164');
   });
+
+  it('keeps an edited amount fixed while an untouched one still widens the range', () => {
+    const energy = draftEnergy([
+      item({ gramsUntouched: false, grams: '100' }),
+      item({ itemId: 'i2', food: food('broccoli', '34'), portionGrams: { estimate: '100', low: '50', high: '150', basis: null } }),
+    ]);
+    // Rice is the user's 100 g (130 kcal); broccoli is the model's 50–150 g (17–51 kcal).
+    expect(energy.low).toBe('147');
+    expect(energy.high).toBe('181');
+    expect(energy.exact).toBeNull();
+  });
+
+  it('stays a range when a settled item sits beside one with no food yet', () => {
+    const energy = draftEnergy([
+      item({ gramsUntouched: false, grams: '100' }),
+      item({ itemId: 'i2', chosenFoodId: null, food: null }),
+    ]);
+    expect(energy.low).toBe('130');
+    expect(energy.high).toBe('130');
+    expect(energy.exact).toBeNull();
+  });
 });
 
 describe('what gets logged', () => {
