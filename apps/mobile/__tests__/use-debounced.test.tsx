@@ -11,7 +11,7 @@ describe('useDebounced', () => {
   });
 
   it('adopts a new value only after the delay', () => {
-    const { result, rerender } = renderHook(({ value }) => useDebounced(value, 150), {
+    const { result, rerender } = renderHook(({ value }: { value: string }) => useDebounced(value, 150), {
       initialProps: { value: 'a' },
     });
     rerender({ value: 'ap' });
@@ -22,7 +22,7 @@ describe('useDebounced', () => {
   });
 
   it('restarts the wait on every change and skips intermediate values', () => {
-    const { result, rerender } = renderHook(({ value }) => useDebounced(value, 150), {
+    const { result, rerender } = renderHook(({ value }: { value: string }) => useDebounced(value, 150), {
       initialProps: { value: 'a' },
     });
     rerender({ value: 'ap' });
@@ -35,8 +35,8 @@ describe('useDebounced', () => {
   });
 
   it('does not update after unmount', () => {
-    const clear = jest.spyOn(global, 'clearTimeout');
-    const { rerender, unmount } = renderHook(({ value }) => useDebounced(value, 150), {
+    const clear = jest.spyOn(globalThis, 'clearTimeout');
+    const { rerender, unmount } = renderHook(({ value }: { value: string }) => useDebounced(value, 150), {
       initialProps: { value: 'a' },
     });
     rerender({ value: 'ap' });
