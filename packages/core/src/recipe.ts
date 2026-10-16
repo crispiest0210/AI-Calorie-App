@@ -3,7 +3,7 @@
  * ÷ cooked grams × 100. A code missing from any ingredient stays missing —
  * a recipe never silently treats an unreported nutrient as zero.
  */
-import { dec, num, NumericError, type Num, type NumericInput } from './decimal';
+import { dec, num, tryDec, type Num, type NumericInput } from './decimal';
 import type { NutrientCode } from './nutrients';
 import { nutrientCodesOf, type NutrientMap } from './nutrient-map';
 import type { CanonicalNutrient, CanonicalPortion } from './normalize';
@@ -35,12 +35,9 @@ export class RecipeError extends Error {}
 
 /** Parses a recipe quantity; an unparsable value is a recipe problem, not a raw NumericError. */
 function quantity(value: NumericInput, what: string) {
-  try {
-    return dec(value);
-  } catch (error) {
-    if (error instanceof NumericError) throw new RecipeError(`${what} must be a number`);
-    throw error;
-  }
+  const parsed = tryDec(value);
+  if (!parsed) throw new RecipeError(`${what} must be a number`);
+  return parsed;
 }
 
 export function computeRecipe(input: RecipeInput): RecipeResult {
