@@ -1,5 +1,5 @@
 /** The undo toast behind swipe-to-delete (spec 5.2). Quiet, never modal. */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { radii, spacing, useTheme } from '../theme';
@@ -17,11 +17,16 @@ export function Toast({ message, actionLabel, onAction, onDismiss, durationMs = 
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
 
+  // Callers pass inline closures; keeping the latest in a ref stops every
+  // parent re-render from restarting the dismiss timer.
+  const onDismissRef = useRef(onDismiss);
+  onDismissRef.current = onDismiss;
+
   useEffect(() => {
     if (message === null) return undefined;
-    const timer = setTimeout(onDismiss, durationMs);
+    const timer = setTimeout(() => onDismissRef.current(), durationMs);
     return () => clearTimeout(timer);
-  }, [message, durationMs, onDismiss]);
+  }, [message, durationMs]);
 
   if (message === null) return null;
 
