@@ -3,6 +3,7 @@
  * opens the water entries from the summary, and quick-adds a preset amount.
  */
 import { fireEvent, render, screen } from '@testing-library/react-native';
+import type { WaterProgress } from '@nt/core';
 import { WaterRow } from '@/components/WaterRow';
 
 const presets = [
@@ -10,8 +11,13 @@ const presets = [
   { id: 'b', label: 'Bottle', amountMl: 500 },
 ];
 
-function progress(consumedMl: number, targetMl: number | null) {
-  return { consumedMl, targetMl, ratio: targetMl === null ? null : consumedMl / targetMl };
+function progress(consumedMl: number, targetMl: number | null): WaterProgress {
+  return {
+    consumedMl,
+    targetMl,
+    remainingMl: targetMl === null ? null : Math.max(targetMl - consumedMl, 0),
+    ratio: targetMl === null ? null : consumedMl / targetMl,
+  };
 }
 
 describe('WaterRow', () => {
