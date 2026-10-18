@@ -42,6 +42,29 @@ describe('TrendChart', () => {
     expect(onSelectDay).toHaveBeenCalledWith('2026-09-20');
   });
 
+  it('captions the range ends and the latest target', () => {
+    render(<TrendChart days={days} today={TODAY} onSelectDay={jest.fn()} />);
+    expect(screen.getByText('Sat, Sep 19')).toBeTruthy();
+    expect(screen.getByText('target 2,100')).toBeTruthy();
+    expect(screen.getByText('Today')).toBeTruthy();
+  });
+
+  it('omits the target caption when no day has a target', () => {
+    render(
+      <TrendChart days={[{ date: '2026-09-21', energy: 900, target: null }]} today={TODAY} onSelectDay={jest.fn()} />,
+    );
+    expect(screen.queryByText(/^target /)).toBeNull();
+    expect(screen.getByLabelText('Energy over 1 day: 1 logged, averaging 900 calories a day, no target set.')).toBeTruthy();
+  });
+
+  it('keeps every day tappable once the plot has been measured', () => {
+    const onSelectDay = jest.fn();
+    render(<TrendChart days={days} today={TODAY} onSelectDay={onSelectDay} />);
+    fireEvent(screen.getByRole('image'), 'layout', { nativeEvent: { layout: { width: 300, height: 128 } } });
+    fireEvent.press(screen.getByLabelText('Sat, Sep 19, 1,800 calories'));
+    expect(onSelectDay).toHaveBeenCalledWith('2026-09-19');
+  });
+
   it('copes with a range where nothing is logged and no target is set', () => {
     render(
       <TrendChart

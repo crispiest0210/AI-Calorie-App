@@ -40,7 +40,7 @@ export function TrendChart({ days, today, onSelectDay }: { days: readonly TrendD
   const summary =
     logged.length === 0
       ? 'No days logged in this range.'
-      : `Energy over ${days.length} days: ${logged.length} logged, averaging ${formatEnergy(average)} calories a day` +
+      : `Energy over ${days.length} ${days.length === 1 ? 'day' : 'days'}: ${logged.length} logged, averaging ${formatEnergy(average)} calories a day` +
         (target === null ? ', no target set.' : ` against a target of ${formatEnergy(target)}.`);
 
   return (
