@@ -7,7 +7,7 @@ import { useState } from 'react';
 import { Alert, Share, View } from 'react-native';
 import { useRouter } from 'expo-router';
 import { sql } from 'drizzle-orm';
-import { QUALITY_TIER_BADGES, type QualityTier } from '@nt/core';
+import { QUALITY_TIER_BADGES, pluralize, type QualityTier } from '@nt/core';
 import { outboxRepo, sync as syncClient } from '@nt/db';
 import { useDbQuery } from '@/db/provider';
 import { useSession } from '@/auth/provider';
@@ -146,7 +146,7 @@ export default function SettingsScreen() {
           Logs live on this device first. There are no third-party analytics and nothing is sold.
         </Text>
         <Text variant="caption" tone="faint" numeric>
-          {queued} {queued === 1 ? 'change' : 'changes'} waiting to sync.
+          {pluralize(queued, 'change')} waiting to sync.
         </Text>
         {accountsEnabled && session !== null && (
           <>

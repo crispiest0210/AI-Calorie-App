@@ -9,7 +9,7 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 import Svg, { Defs, Line, Path, Pattern, Rect } from 'react-native-svg';
-import { formatDayLabel, formatEnergy, type LocalDate } from '@nt/core';
+import { formatDayLabel, formatEnergy, pluralize, type LocalDate } from '@nt/core';
 import { radii, spacing, useTheme } from '@/theme';
 import { Text } from './Text';
 
@@ -40,7 +40,7 @@ export function TrendChart({ days, today, onSelectDay }: { days: readonly TrendD
   const summary =
     logged.length === 0
       ? 'No days logged in this range.'
-      : `Energy over ${days.length} ${days.length === 1 ? 'day' : 'days'}: ${logged.length} logged, averaging ${formatEnergy(average)} calories a day` +
+      : `Energy over ${pluralize(days.length, 'day')}: ${logged.length} logged, averaging ${formatEnergy(average)} calories a day` +
         (target === null ? ', no target set.' : ` against a target of ${formatEnergy(target)}.`);
 
   return (

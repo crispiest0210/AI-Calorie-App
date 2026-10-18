@@ -11,6 +11,7 @@ import {
   addDays,
   formatDayLabel,
   localDateOf,
+  pluralize,
   totalOf,
   type LocalDate,
   type MealSlot,
@@ -71,7 +72,7 @@ export function DayView({ date, showDateNav }: { date: LocalDate; showDateNav: b
         return;
       }
       successFeedback();
-      setUndo({ id: '', message: `Copied ${copied.length} ${copied.length === 1 ? 'entry' : 'entries'}` });
+      setUndo({ id: '', message: `Copied ${pluralize(copied.length, 'entry', 'entries')}` });
     },
     [db, date],
   );
@@ -141,7 +142,7 @@ export function DayView({ date, showDateNav }: { date: LocalDate; showDateNav: b
             </Text>
           </Row>
           <Text variant="caption" tone="faint" style={{ marginTop: spacing.sm }} numeric>
-            {day.entries.length} {day.entries.length === 1 ? 'entry' : 'entries'} ·{' '}
+            {pluralize(day.entries.length, 'entry', 'entries')} ·{' '}
             {totalOf(day.totals.total, 'fiber_g') ?? '—'} g fiber · {totalOf(day.totals.total, 'sodium_mg') ?? '—'} mg sodium
           </Text>
         </Card>
