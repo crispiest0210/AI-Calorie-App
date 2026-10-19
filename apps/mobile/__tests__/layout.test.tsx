@@ -5,7 +5,7 @@
 import { render, screen } from '@testing-library/react-native';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 import { SafeAreaProvider, type Metrics } from 'react-native-safe-area-context';
-import { Screen } from '@/components/Screen';
+import { Card, Screen } from '@/components/Screen';
 
 // An iPhone with a Dynamic Island: 59 pt of status bar, 34 pt home indicator.
 const metrics: Metrics = {
@@ -47,5 +47,56 @@ describe('Screen safe area', () => {
   it('always clears the home indicator at the bottom', () => {
     renderScreen(false);
     expect(contentPadding().paddingBottom).toBeGreaterThanOrEqual(34);
+  });
+});
+
+describe('Screen without scrolling', () => {
+  it('renders a plain View that still clears the insets', () => {
+    render(
+      <SafeAreaProvider initialMetrics={metrics}>
+        <Screen scroll={false} topInset>
+          <Text testID="content">content</Text>
+        </Screen>
+      </SafeAreaProvider>,
+    );
+    expect(screen.UNSAFE_queryByType(ScrollView)).toBeNull();
+    const view = screen.getByTestId('content').parent!.parent as unknown as { props: { style: unknown } };
+    const style = StyleSheet.flatten(view.props.style) as { flex: number; paddingTop: number; paddingBottom: number };
+    expect(style.flex).toBe(1);
+    expect(style.paddingTop).toBeGreaterThanOrEqual(59);
+    expect(style.paddingBottom).toBeGreaterThanOrEqual(34);
+  });
+
+  it('lets a caller style override the default padding', () => {
+    render(
+      <SafeAreaProvider initialMetrics={metrics}>
+        <Screen scroll={false} style={{ paddingBottom: 0 }}>
+          <Text testID="content">content</Text>
+        </Screen>
+      </SafeAreaProvider>,
+    );
+    const view = screen.getByTestId('content').parent!.parent as unknown as { props: { style: unknown } };
+    expect(StyleSheet.flatten(view.props.style)).toMatchObject({ paddingBottom: 0 });
+  });
+});
+
+describe('Card', () => {
+  it('renders its children inside a bordered surface', () => {
+    render(
+      <Card>
+        <Text>inside</Text>
+      </Card>,
+    );
+    expect(screen.getByText('inside')).toBeTruthy();
+  });
+
+  it('merges a caller style over the defaults', () => {
+    render(
+      <Card style={{ marginTop: 0 }}>
+        <Text>inside</Text>
+      </Card>,
+    );
+    const card = screen.getByText('inside').parent!.parent as unknown as { props: { style: unknown } };
+    expect(StyleSheet.flatten(card.props.style)).toMatchObject({ marginTop: 0, borderWidth: 1 });
   });
 });
