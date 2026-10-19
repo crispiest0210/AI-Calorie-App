@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MAX_PUSH_ROWS, problemDetails, pullResponse, pushRequest, syncFood, syncRow, SYNCED_TABLES } from '../src/sync-contracts';
+import { MAX_PUSH_ROWS, problemDetails, pullResponse, pushRequest, pushResponse, syncFood, syncRow, SYNCED_TABLES } from '../src/sync-contracts';
 
 const id = '3f2b8c1e-5a4d-4e6f-8a9b-0c1d2e3f4a5b';
 const id2 = '7a1c9d2e-6b5f-4c8d-9e0a-1b2c3d4e5f60';
@@ -87,5 +87,25 @@ describe('sync contracts', () => {
     const problem = { type: 'about:blank', title: 'Gone', status: 410, code: 'sync_cursor_expired' };
     expect(problemDetails.safeParse(problem).success).toBe(true);
     expect(problemDetails.safeParse({ ...problem, code: 'teapot' }).success).toBe(false);
+  });
+
+  it('accepts water and goal rows under their own table tags', () => {
+    const water = { ...base, localDate: '2026-09-20', loggedAt: 1_789_000_000_000, amountMl: 250 };
+    const preset = { ...base, label: null, amountMl: 500, position: 0 };
+    const goals = { ...base, effectiveFrom: '2026-09-01', waterTargetMl: 2000, targets: [] };
+    expect(syncRow.safeParse({ table: 'water_entry', row: water }).success).toBe(true);
+    expect(syncRow.safeParse({ table: 'water_entry', row: { ...water, amountMl: 5001 } }).success).toBe(false);
+    expect(syncRow.safeParse({ table: 'water_preset', row: preset }).success).toBe(true);
+    expect(syncRow.safeParse({ table: 'goal_profile', row: goals }).success).toBe(true);
+    expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 0 } }).success).toBe(false);
+  });
+
+  it('validates the revisions a push assigns', () => {
+    const assigned = { table: 'log_entry', id, serverRev: 3 };
+    expect(pushResponse.safeParse({ assigned: [assigned], cursor: 3 }).success).toBe(true);
+    expect(pushResponse.safeParse({ assigned: [], cursor: 0 }).success).toBe(true);
+    expect(pushResponse.safeParse({ assigned: [{ ...assigned, table: 'catalog_food' }], cursor: 3 }).success).toBe(false);
+    expect(pushResponse.safeParse({ assigned: [{ ...assigned, id: 'e1' }], cursor: 3 }).success).toBe(false);
+    expect(pushResponse.safeParse({ assigned: [{ ...assigned, serverRev: 1.5 }], cursor: 3 }).success).toBe(false);
   });
 });
