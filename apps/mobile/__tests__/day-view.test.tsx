@@ -1,7 +1,7 @@
 /**
- * DayView wires the Today layout to SQLite: deleting an entry offers undo,
- * copying an empty meal says so, and the Log button opens the sheet for the
- * remembered meal slot.
+ * DayView wires the Today layout to SQLite: opening an entry routes to it,
+ * deleting one offers undo, copying an empty meal says so, and the Log button
+ * opens the sheet for the remembered meal slot.
  */
 import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -154,6 +154,22 @@ describe('DayView', () => {
     expect(screen.getByText('Oats')).toBeTruthy();
     expect(screen.getByText(/^Incomplete: /)).toBeTruthy();
     expect(screen.getByText(/1 entry/)).toBeTruthy();
+  });
+
+  it('opens an entry for editing by its id', () => {
+    renderDay([oats]);
+    fireEvent.press(screen.getByText('Oats'));
+    expect(mockPush).toHaveBeenCalledWith({ pathname: '/entry/[id]', params: { id: 'e1' } });
+  });
+
+  it('deletes an entry, names it in the toast and restores it on Undo', () => {
+    renderDay([oats]);
+    fireEvent(screen.getByLabelText(/^Oats, /), 'accessibilityAction', { nativeEvent: { actionName: 'magicTap' } });
+    expect(mockDeleteEntry).toHaveBeenCalledWith({ marker: 'db' }, 'e1');
+    expect(screen.getByText('Removed Oats')).toBeTruthy();
+    fireEvent.press(screen.getByText('Undo'));
+    expect(mockRestoreEntry).toHaveBeenCalledWith({ marker: 'db' }, 'e1');
+    expect(screen.queryByText('Removed Oats')).toBeNull();
   });
 
   it('clears the toast after its timeout without restoring anything', () => {
