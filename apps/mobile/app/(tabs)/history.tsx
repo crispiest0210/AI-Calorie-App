@@ -130,7 +130,7 @@ export default function HistoryScreen() {
                 label={NUTRIENT_DEFS[code].displayName}
                 value={stat === null ? '—' : formatNutrient(String(stat.value), code)}
                 unit={stat === null ? undefined : NUTRIENT_DEFS[code].displayUnit}
-                detail={stat?.target == null ? 'no target' : `of ${formatNutrient(String(stat.target), code)} target`}
+                detail={stat?.target == null ? 'no target' : `of ${formatNutrient(String(stat.target), code)} ${NUTRIENT_DEFS[code].displayUnit} target`}
                 state={stat?.target != null && stat.value > stat.target ? 'over' : 'neutral'}
               />
             );
