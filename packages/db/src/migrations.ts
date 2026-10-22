@@ -39,7 +39,18 @@ export function runMigrations(db: RawSqlite, migrations: readonly Migration[] = 
   const ran: string[] = [];
   for (const migration of migrations) {
     if (applied.has(migration.name)) continue;
-    db.execute(`begin;\n${migration.sql}\ninsert into schema_migration (name, applied_at) values ('${migration.name}', ${appliedAt});\ncommit;`);
+    try {
+      db.execute(`begin;\n${migration.sql}\ninsert into schema_migration (name, applied_at) values ('${migration.name}', ${appliedAt});\ncommit;`);
+    } catch (err) {
+      // A statement that fails mid-script leaves the transaction open; without
+      // this the half-applied schema would be committed by the next write.
+      try {
+        db.execute('rollback;');
+      } catch {
+        // Nothing was open (the failure came before `begin` took effect).
+      }
+      throw err;
+    }
     ran.push(migration.name);
   }
   return ran;
