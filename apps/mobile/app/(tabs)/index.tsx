@@ -4,6 +4,8 @@ import { localDateOf } from '@nt/core';
 import { DayView } from '@/components/DayView';
 import { useUiStore, mealSlotForTime } from '@/state/ui';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function TodayScreen() {
   const selectedDate = useUiStore((s) => s.selectedDate);
   const setSelectedDate = useUiStore((s) => s.setSelectedDate);

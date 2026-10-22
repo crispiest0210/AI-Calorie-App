@@ -2,6 +2,8 @@ import { Tabs } from 'expo-router';
 import { Text } from '@/components/Text';
 import { useTheme } from '@/theme';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 /** Three tabs; the Log button lives on Today itself (spec 5.1). */
 function TabIcon({ label, focused }: { label: string; focused: boolean }) {
   return (

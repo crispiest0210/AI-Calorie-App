@@ -20,6 +20,8 @@ import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { SourceBadge } from '@/components/SourceBadge';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 const BAND_COPY = { likely: 'Likely', possible: 'Possible', unsure: 'Unsure' } as const;
 
 export default function PhotoReviewScreen() {

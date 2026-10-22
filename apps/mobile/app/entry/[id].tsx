@@ -28,6 +28,8 @@ import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { SourceBadge } from '@/components/SourceBadge';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function EntryDetailScreen() {
   const db = useDb();
   const router = useRouter();

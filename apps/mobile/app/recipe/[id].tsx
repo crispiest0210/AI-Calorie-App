@@ -26,6 +26,8 @@ import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { LabelledTextInput } from '@/components/LabelledTextInput';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function RecipeScreen() {
   const db = useDb();
   const router = useRouter();

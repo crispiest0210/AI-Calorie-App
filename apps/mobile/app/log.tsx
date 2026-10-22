@@ -18,6 +18,8 @@ import { Row } from '@/components/Button';
 import { FoodRow } from '@/components/FoodRow';
 import { SegmentedControl } from '@/components/SegmentedControl';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 type Tab = 'recent' | 'frequent' | 'meals' | 'mine';
 
 const TABS: { value: Tab; label: string }[] = [

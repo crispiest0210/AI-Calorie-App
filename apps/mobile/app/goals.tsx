@@ -32,6 +32,8 @@ import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 const MACROS = ['protein_g', 'carb_g', 'fat_g'] as const;
 
 /** Blank is no goal (null); text that is not a number yet is `invalid`. */

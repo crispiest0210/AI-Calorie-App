@@ -44,22 +44,40 @@ function openDatabase(): { db: Db; native: SQLite.SQLiteDatabase } {
   // hook, and `addDatabaseChangeListener` silently never fires — writes land
   // but no screen hears about them.
   const native = SQLite.openDatabaseSync(DATABASE_NAME, { enableChangeListener: true });
-  const raw: RawSqlite = {
-    execute: (sql) => native.execSync(sql),
-    select: <T,>(sql: string) => native.getAllSync<T>(sql),
-  };
-  applyPragmas(raw);
-  // The bundled catalog already carries the schema, so this is usually a no-op;
-  // it is what applies a new migration after an app update.
-  runMigrations(raw);
-  const db = drizzle(native, { schema }) as unknown as Db;
-  water.ensureDefaultPresets(db);
-  return { db, native };
+  try {
+    const raw: RawSqlite = {
+      execute: (sql) => native.execSync(sql),
+      select: <T,>(sql: string) => native.getAllSync<T>(sql),
+    };
+    applyPragmas(raw);
+    // The bundled catalog already carries the schema, so this is usually a no-op;
+    // it is what applies a new migration after an app update. A migration that
+    // fails rolls itself back, so a retry starts from the last good schema.
+    runMigrations(raw);
+    const db = drizzle(native, { schema }) as unknown as Db;
+    water.ensureDefaultPresets(db);
+    return { db, native };
+  } catch (err) {
+    native.closeSync?.();
+    throw err;
+  }
 }
 
-export function DatabaseProvider({ children, fallback }: { children: ReactNode; fallback: ReactNode }): React.JSX.Element {
+export interface DatabaseProviderProps {
+  children: ReactNode;
+  fallback: ReactNode;
+  /**
+   * Shown when the database cannot be opened (a failed copy or migration);
+   * `retry` tries again from the start. Without it the error is thrown to the
+   * nearest error boundary.
+   */
+  errorFallback?: (error: Error, retry: () => void) => ReactNode;
+}
+
+export function DatabaseProvider({ children, fallback, errorFallback }: DatabaseProviderProps): React.JSX.Element {
   const [value, setValue] = useState<{ db: Db; native: SQLite.SQLiteDatabase } | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [attempt, setAttempt] = useState(0);
   const [revision, setRevision] = useState(0);
 
   useEffect(() => {
@@ -69,11 +87,13 @@ export function DatabaseProvider({ children, fallback }: { children: ReactNode; 
         if (cancelled) return;
         setValue(openDatabase());
       })
-      .catch((err: unknown) => setError(err instanceof Error ? err : new Error(String(err))));
+      .catch((err: unknown) => {
+        if (!cancelled) setError(err instanceof Error ? err : new Error(String(err)));
+      });
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [attempt]);
 
   useEffect(() => {
     if (value === null) return undefined;
@@ -90,7 +110,17 @@ export function DatabaseProvider({ children, fallback }: { children: ReactNode; 
 
   const context = useMemo(() => (value === null ? null : { db: value.db, revision }), [value, revision]);
 
-  if (error !== null) throw error;
+  if (error !== null) {
+    if (errorFallback === undefined) throw error;
+    return (
+      <>
+        {errorFallback(error, () => {
+          setError(null);
+          setAttempt((n) => n + 1);
+        })}
+      </>
+    );
+  }
   if (context === null) return <>{fallback}</>;
   return <DbContext.Provider value={context}>{children}</DbContext.Provider>;
 }

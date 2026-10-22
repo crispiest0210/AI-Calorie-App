@@ -29,6 +29,8 @@ import { SegmentedControl } from '@/components/SegmentedControl';
 import { StatTile } from '@/components/StatTile';
 import { TrendChart, type TrendDay } from '@/components/TrendChart';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 type Range = '7' | '30';
 
 const MACROS: NutrientCode[] = ['protein_g', 'carb_g', 'fat_g'];

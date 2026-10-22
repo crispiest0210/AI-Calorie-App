@@ -18,6 +18,8 @@ import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { LabelledTextInput } from '@/components/LabelledTextInput';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 const FIELDS = ['energy_kcal', 'protein_g', 'carb_g', 'fat_g', 'fiber_g', 'sodium_mg'] as const;
 
 export default function CustomFoodScreen() {

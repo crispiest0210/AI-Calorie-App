@@ -11,6 +11,8 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function WaterScreen() {
   const db = useDb();
   const { colors } = useTheme();

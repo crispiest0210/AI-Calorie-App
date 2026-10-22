@@ -14,6 +14,8 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { LabelledTextInput } from '@/components/LabelledTextInput';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function SignInScreen() {
   const router = useRouter();
   const { signIn } = useSession();

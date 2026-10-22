@@ -27,6 +27,8 @@ import { Card, Screen } from '@/components/Screen';
 import { Text } from '@/components/Text';
 import { SourceBadge } from '@/components/SourceBadge';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 const DERIVATION_COPY: Record<string, string> = {
   reported: 'reported by the source',
   converted: 'converted from the source’s units',

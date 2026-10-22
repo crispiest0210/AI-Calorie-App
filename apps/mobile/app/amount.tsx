@@ -33,6 +33,8 @@ import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { SourceBadge } from '@/components/SourceBadge';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 const UNIT_LABELS: Record<AmountUnit, string> = { g: 'grams', ml: 'mL', portion: 'servings', kcal: 'cal' };
 
 const FAILURE_COPY: Record<string, string> = {

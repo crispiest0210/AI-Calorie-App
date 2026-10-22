@@ -19,6 +19,8 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { SyncBadge } from '@/components/SyncBadge';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function SettingsScreen() {
   const router = useRouter();
   const { colors } = useTheme();

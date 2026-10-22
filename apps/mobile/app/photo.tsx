@@ -15,6 +15,8 @@ import { Card, Screen } from '@/components/Screen';
 import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 /** Spec 2.7: the long edge the model is sent. */
 const MAX_EDGE = 1568;
 
