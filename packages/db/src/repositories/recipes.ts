@@ -16,6 +16,7 @@ import {
 } from '@nt/core';
 import { food, foodNutrient, foodPortion, recipeIngredient, recipeMeta } from '../schema';
 import type { Db, Writer } from '../db';
+import { isReadablePositiveNum, positiveNum, reportUnreadable } from '../validate';
 import { enqueue } from './outbox';
 import { foodDetail, insertFood, type FoodDetail } from './foods';
 
@@ -52,6 +53,10 @@ function ingredientsOf(db: Db, recipeId: string): RecipeIngredientView[] {
   return rows.flatMap((row) => {
     const detail = foodDetail(db, row.ingredientFoodId);
     if (detail === null) return [];
+    if (!isReadablePositiveNum(row.grams)) {
+      reportUnreadable('recipe_ingredient', row.id, 'grams');
+      return [];
+    }
     return [{
       id: row.id,
       ingredientFoodId: row.ingredientFoodId,
@@ -68,6 +73,16 @@ export function readRecipe(db: Db, recipeId: string): RecipeView | null {
   if (!row || row.kind !== 'recipe') return null;
   const meta = db.select().from(recipeMeta).where(eq(recipeMeta.foodId, recipeId)).get();
   const ingredients = ingredientsOf(db, recipeId);
+  let servings = meta?.servings ?? '1';
+  if (!isReadablePositiveNum(servings)) {
+    reportUnreadable('recipe_meta', recipeId, 'servings');
+    servings = '1';
+  }
+  let totalCookedGrams = meta?.totalCookedGrams ?? null;
+  if (totalCookedGrams !== null && !isReadablePositiveNum(totalCookedGrams)) {
+    reportUnreadable('recipe_meta', recipeId, 'total_cooked_grams');
+    totalCookedGrams = null;
+  }
 
   const computed =
     ingredients.length === 0
@@ -78,15 +93,15 @@ export function readRecipe(db: Db, recipeId: string): RecipeView | null {
             grams: i.grams,
             nutrientsPer100g: i.nutrientsPer100g,
           })),
-          totalCookedGrams: meta?.totalCookedGrams ?? null,
-          servings: meta?.servings ?? '1',
+          totalCookedGrams,
+          servings,
         });
 
   return {
     id: row.id,
     name: row.name,
-    servings: meta?.servings ?? '1',
-    totalCookedGrams: meta?.totalCookedGrams ?? null,
+    servings,
+    totalCookedGrams,
     ingredients,
     computed,
     incompleteCodes: computed?.incompleteCodes ?? [],
@@ -152,6 +167,8 @@ export interface CreateRecipeInput {
 }
 
 export function createRecipe(db: Db, input: CreateRecipeInput, now = Date.now()): string {
+  const servings = positiveNum('servings', input.servings);
+  const totalCookedGrams = input.totalCookedGrams == null ? null : positiveNum('totalCookedGrams', input.totalCookedGrams);
   const canonical: CanonicalFood = {
     kind: 'recipe',
     name: input.name.trim(),
@@ -167,7 +184,7 @@ export function createRecipe(db: Db, input: CreateRecipeInput, now = Date.now())
   return db.transaction((tx) => {
     const id = insertFood(tx, canonical, { sourceReleaseId: input.sourceReleaseId, synced: true, now });
     tx.insert(recipeMeta)
-      .values({ foodId: id, totalCookedGrams: input.totalCookedGrams ?? null, servings: input.servings })
+      .values({ foodId: id, totalCookedGrams, servings })
       .run();
     return id;
   });
@@ -179,11 +196,13 @@ export function updateRecipe(
   patch: { name?: string; servings?: Num; totalCookedGrams?: Num | null },
   now = Date.now(),
 ): void {
+  const values: Record<string, unknown> = {};
+  if (patch.servings !== undefined) values.servings = positiveNum('servings', patch.servings);
+  if (patch.totalCookedGrams !== undefined) {
+    values.totalCookedGrams = patch.totalCookedGrams === null ? null : positiveNum('totalCookedGrams', patch.totalCookedGrams);
+  }
   db.transaction((tx) => {
     if (patch.name !== undefined) tx.update(food).set({ name: patch.name.trim() }).where(eq(food.id, recipeId)).run();
-    const values: Record<string, unknown> = {};
-    if (patch.servings !== undefined) values.servings = patch.servings;
-    if (patch.totalCookedGrams !== undefined) values.totalCookedGrams = patch.totalCookedGrams;
     if (Object.keys(values).length > 0) {
       tx.update(recipeMeta).set(values).where(eq(recipeMeta.foodId, recipeId)).run();
     }
@@ -192,7 +211,8 @@ export function updateRecipe(
   });
 }
 
-export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string, grams: Num, now = Date.now()): string {
+export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string, rawGrams: Num, now = Date.now()): string {
+  const grams = positiveNum('grams', rawGrams);
   const position = db.select().from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, recipeId)).all().length;
   const id = uuidv7(now);
   db.transaction((tx) => {
@@ -203,7 +223,8 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
   return id;
 }
 
-export function updateIngredient(db: Db, recipeId: string, ingredientId: string, grams: Num, now = Date.now()): void {
+export function updateIngredient(db: Db, recipeId: string, ingredientId: string, rawGrams: Num, now = Date.now()): void {
+  const grams = positiveNum('grams', rawGrams);
   db.transaction((tx) => {
     tx.update(recipeIngredient).set({ grams, updatedAt: now }).where(eq(recipeIngredient.id, ingredientId)).run();
     recompute(tx, db, recipeId, now);

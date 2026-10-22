@@ -13,3 +13,4 @@ export type { EntryView } from './repositories/entries';
 export * as sync from './sync/index';
 export * as recipes from './repositories/recipes';
 export * as matcher from './repositories/matcher';
+export { ValidationError, WATER_ML_MAX, WATER_ML_MIN, WATER_TARGET_ML_MAX } from './validate';

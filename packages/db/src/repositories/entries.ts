@@ -19,6 +19,7 @@ import {
 } from '@nt/core';
 import { logEntry } from '../schema';
 import { parseJson, type Db } from '../db';
+import { isReadableNum, nonNegativeNum, nutrientMap, positiveNum, reportUnreadable } from '../validate';
 import { enqueue } from './outbox';
 
 export interface EntryView extends EngineEntry {
@@ -56,23 +57,46 @@ interface RawEntryRow {
   portion_label: string | null;
 }
 
+/**
+ * A value the engine cannot read is dropped and logged rather than thrown on,
+ * so the entry reads as incomplete for it instead of breaking its whole day.
+ */
+function readNutrients(row: RawEntryRow, field: 'nutrients_per_100g' | 'nutrients_absolute'): NutrientMap | null {
+  const json = row[field];
+  if (json === null) return null;
+  let reported = false;
+  return parseNutrientMap(parseJson(json, {}), () => {
+    if (!reported) reportUnreadable('log_entry', row.id, field);
+    reported = true;
+  });
+}
+
 function toView(row: RawEntryRow): EntryView {
+  const grams = row.grams === null || isReadableNum(row.grams) ? row.grams : null;
+  if (grams !== row.grams) reportUnreadable('log_entry', row.id, 'grams');
+  let amountValue = row.amount_value;
+  let amountUnit = row.amount_unit as AmountUnit;
+  if (!isReadableNum(amountValue)) {
+    reportUnreadable('log_entry', row.id, 'amount_value');
+    amountValue = grams ?? '0';
+    if (grams !== null) amountUnit = 'g';
+  }
   return {
     id: row.id,
     localDate: row.local_date,
     loggedAt: row.logged_at,
     mealSlot: row.meal_slot as MealSlot,
     entryKind: row.entry_kind as EntryView['entryKind'],
-    grams: row.grams,
-    nutrientsPer100g: row.nutrients_per_100g === null ? null : parseNutrientMap(parseJson(row.nutrients_per_100g, {})),
-    nutrientsAbsolute: row.nutrients_absolute === null ? null : parseNutrientMap(parseJson(row.nutrients_absolute, {})),
+    grams,
+    nutrientsPer100g: readNutrients(row, 'nutrients_per_100g'),
+    nutrientsAbsolute: readNutrients(row, 'nutrients_absolute'),
     gramsProvenance: row.grams_provenance as GramsProvenance,
     foodId: row.food_id,
     foodName: row.food_name_snapshot,
     foodBrand: row.food_brand,
     qualityTier: row.food_quality_tier,
-    amountValue: row.amount_value,
-    amountUnit: row.amount_unit as AmountUnit,
+    amountValue,
+    amountUnit,
     portionId: row.portion_id,
     portionLabel: row.portion_label,
     note: row.note,
@@ -116,6 +140,9 @@ export interface LogFoodInput {
 }
 
 export function logFood(db: Db, input: LogFoodInput): string {
+  const amountValue = positiveNum('amountValue', input.amountValue);
+  const grams = positiveNum('grams', input.grams);
+  const nutrientsPer100g = nutrientMap('nutrientsPer100g', input.nutrientsPer100g);
   const at = input.at ?? new Date();
   const now = at.getTime();
   const id = uuidv7(now);
@@ -129,14 +156,14 @@ export function logFood(db: Db, input: LogFoodInput): string {
         mealSlot: input.mealSlot,
         entryKind: 'food',
         foodId: input.foodId,
-        amountValue: input.amountValue,
+        amountValue,
         amountUnit: input.amountUnit,
         portionId: input.portionId ?? null,
-        grams: input.grams,
+        grams,
         gramsProvenance: input.gramsProvenance,
         foodNameSnapshot: input.foodName,
         sourceReleaseId: input.sourceReleaseId,
-        nutrientsPer100g: JSON.stringify(mapToJson(input.nutrientsPer100g)),
+        nutrientsPer100g: JSON.stringify(mapToJson(nutrientsPer100g)),
         nutrientsAbsolute: null,
         note: input.note ?? null,
         updatedAt: now,
@@ -157,6 +184,7 @@ export interface QuickAddInput {
 
 /** A quick add carries absolute numbers the user typed; there is no food behind it. */
 export function logQuickAdd(db: Db, input: QuickAddInput): string {
+  const nutrients = nutrientMap('nutrients', input.nutrients);
   const at = input.at ?? new Date();
   const now = at.getTime();
   const id = uuidv7(now);
@@ -170,7 +198,7 @@ export function logQuickAdd(db: Db, input: QuickAddInput): string {
         mealSlot: input.mealSlot,
         entryKind: 'quick_add',
         foodId: null,
-        amountValue: input.nutrients.energy_kcal ?? '0',
+        amountValue: nutrients.energy_kcal ?? '0',
         amountUnit: 'kcal',
         portionId: null,
         grams: null,
@@ -178,7 +206,7 @@ export function logQuickAdd(db: Db, input: QuickAddInput): string {
         foodNameSnapshot: input.label?.trim() || 'Quick add',
         sourceReleaseId: null,
         nutrientsPer100g: null,
-        nutrientsAbsolute: JSON.stringify(mapToJson(input.nutrients)),
+        nutrientsAbsolute: JSON.stringify(mapToJson(nutrients)),
         note: input.note ?? null,
         updatedAt: now,
       })
@@ -200,16 +228,19 @@ export interface UpdateEntryInput {
 }
 
 export function updateEntry(db: Db, id: string, patch: UpdateEntryInput, now = Date.now()): void {
+  const values: Record<string, unknown> = { updatedAt: now };
+  if (patch.mealSlot !== undefined) values.mealSlot = patch.mealSlot;
+  // A quick add's amount is its energy, which may legitimately be zero.
+  if (patch.amountValue !== undefined) values.amountValue = nonNegativeNum('amountValue', patch.amountValue);
+  if (patch.amountUnit !== undefined) values.amountUnit = patch.amountUnit;
+  if (patch.portionId !== undefined) values.portionId = patch.portionId;
+  if (patch.grams !== undefined) values.grams = patch.grams === null ? null : positiveNum('grams', patch.grams);
+  if (patch.gramsProvenance !== undefined) values.gramsProvenance = patch.gramsProvenance;
+  if (patch.nutrientsAbsolute !== undefined) {
+    values.nutrientsAbsolute = JSON.stringify(mapToJson(nutrientMap('nutrientsAbsolute', patch.nutrientsAbsolute)));
+  }
+  if (patch.note !== undefined) values.note = patch.note;
   db.transaction((tx) => {
-    const values: Record<string, unknown> = { updatedAt: now };
-    if (patch.mealSlot !== undefined) values.mealSlot = patch.mealSlot;
-    if (patch.amountValue !== undefined) values.amountValue = patch.amountValue;
-    if (patch.amountUnit !== undefined) values.amountUnit = patch.amountUnit;
-    if (patch.portionId !== undefined) values.portionId = patch.portionId;
-    if (patch.grams !== undefined) values.grams = patch.grams;
-    if (patch.gramsProvenance !== undefined) values.gramsProvenance = patch.gramsProvenance;
-    if (patch.nutrientsAbsolute !== undefined) values.nutrientsAbsolute = JSON.stringify(mapToJson(patch.nutrientsAbsolute));
-    if (patch.note !== undefined) values.note = patch.note;
     tx.update(logEntry).set(values).where(eq(logEntry.id, id)).run();
     enqueue(tx, 'log_entry', id, 'upsert', now);
   });
