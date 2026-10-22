@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { formatTimeOfDay, localDateOf } from '@nt/core';
-import { water as waterRepo } from '@nt/db';
+import { dec, formatTimeOfDay, localDateOf, parseUserNumber } from '@nt/core';
+import { WATER_ML_MAX, WATER_ML_MIN, water as waterRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { spacing, useTheme } from '@/theme';
 import { Card, Screen } from '@/components/Screen';
@@ -20,8 +20,9 @@ export default function WaterScreen() {
 
   const entries = useDbQuery((database) => waterRepo.waterForDate(database, date), [date]);
   const total = useDbQuery((database) => waterRepo.waterTotalMl(database, date), [date]);
-  const amount = Number.parseInt(custom, 10);
-  const valid = Number.isFinite(amount) && amount >= 1 && amount <= 5000;
+  const parsed = parseUserNumber(custom);
+  const amount = parsed === null ? 0 : dec(parsed).toNumber();
+  const valid = Number.isInteger(amount) && amount >= WATER_ML_MIN && amount <= WATER_ML_MAX;
 
   return (
     <Screen>

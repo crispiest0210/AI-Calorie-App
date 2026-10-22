@@ -60,23 +60,51 @@ describe('NumberField', () => {
     const onChange = jest.fn();
     render(<NumberField label="Amount" value="100" onChange={onChange} suffix="grams" step={10} />);
     fireEvent.press(screen.getByLabelText('Increase by 10'));
-    expect(onChange).toHaveBeenLastCalledWith('110');
+    expect(onChange).toHaveBeenLastCalledWith('110', '110');
     fireEvent.press(screen.getByLabelText('Decrease by 10'));
-    expect(onChange).toHaveBeenLastCalledWith('90');
+    expect(onChange).toHaveBeenLastCalledWith('90', '90');
   });
 
   it('never steps below zero', () => {
     const onChange = jest.fn();
     render(<NumberField label="Amount" value="5" onChange={onChange} step={10} />);
     fireEvent.press(screen.getByLabelText('Decrease by 10'));
-    expect(onChange).toHaveBeenLastCalledWith('0');
+    expect(onChange).toHaveBeenLastCalledWith('0', '0');
   });
 
-  it('keeps the field numeric as the user types', () => {
+  it('steps in exact decimals from a comma or half-typed value', () => {
     const onChange = jest.fn();
-    render(<NumberField label="Amount" value="100" onChange={onChange} />);
-    fireEvent.changeText(screen.getByLabelText('Amount'), '12a.5x');
-    expect(onChange).toHaveBeenLastCalledWith('12.5');
+    const { rerender } = render(<NumberField label="Amount" value="0.1" onChange={onChange} step={0.2} />);
+    fireEvent.press(screen.getByLabelText('Increase by 0.2'));
+    expect(onChange).toHaveBeenLastCalledWith('0.3', '0.3');
+    rerender(<NumberField label="Amount" value="." onChange={onChange} step={10} />);
+    fireEvent.press(screen.getByLabelText('Increase by 10'));
+    expect(onChange).toHaveBeenLastCalledWith('10', '10');
+  });
+
+  it('reads a comma as the decimal separator', () => {
+    const onChange = jest.fn();
+    render(<NumberField label="Amount" value="12" onChange={onChange} />);
+    fireEvent.changeText(screen.getByLabelText('Amount'), '12,5');
+    expect(onChange).toHaveBeenLastCalledWith('12.5', '12.5');
+  });
+
+  it('keeps half-typed text but reports no number for it', () => {
+    const onChange = jest.fn();
+    render(<NumberField label="Amount" value="" onChange={onChange} />);
+    fireEvent.changeText(screen.getByLabelText('Amount'), '.');
+    expect(onChange).toHaveBeenLastCalledWith('.', null);
+    fireEvent.changeText(screen.getByLabelText('Amount'), '1.');
+    expect(onChange).toHaveBeenLastCalledWith('1.', '1');
+    fireEvent.changeText(screen.getByLabelText('Amount'), '');
+    expect(onChange).toHaveBeenLastCalledWith('', null);
+  });
+
+  it('refuses a keystroke that cannot lead to a number', () => {
+    const onChange = jest.fn();
+    render(<NumberField label="Amount" value="1.2" onChange={onChange} />);
+    for (const text of ['1.2.', '1.2,', '-1.2', '1.2e', '12a.5x']) fireEvent.changeText(screen.getByLabelText('Amount'), text);
+    expect(onChange).not.toHaveBeenCalled();
   });
 });
 

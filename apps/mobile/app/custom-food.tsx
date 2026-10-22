@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { NUTRIENT_DEFS, customFoodFromLabel, num, type LabelBasis, type NutrientMap } from '@nt/core';
+import { NUTRIENT_DEFS, customFoodFromLabel, isPositive, parseUserNumber, type LabelBasis, type NutrientMap } from '@nt/core';
 import { foods as foodsRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { spacing } from '@/theme';
@@ -35,18 +35,22 @@ export default function CustomFoodScreen() {
   const [values, setValues] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
 
+  const parsed = Object.fromEntries(FIELDS.map((code) => [code, parseUserNumber(values[code] ?? '')])) as Record<(typeof FIELDS)[number], string | null>;
+  // Half-typed text (".") is neither a value nor blank, so it blocks saving rather than being dropped.
+  const halfTyped = FIELDS.some((code) => parsed[code] === null && (values[code] ?? '').trim() !== '');
+  const serving = parseUserNumber(servingGrams);
   const canSave =
     name.trim() !== '' &&
-    (values.energy_kcal ?? '').trim() !== '' &&
-    (basis === 'per_100g' || Number.parseFloat(servingGrams) > 0);
+    parsed.energy_kcal !== null &&
+    !halfTyped &&
+    (basis === 'per_100g' || (serving !== null && isPositive(serving)));
 
   const save = () => {
+    if (!canSave) return;
     const typed: NutrientMap = {};
     for (const code of FIELDS) {
-      const raw = values[code];
-      if (raw === undefined || raw.trim() === '') continue;
-      if (!Number.isFinite(Number.parseFloat(raw))) continue;
-      typed[code] = num(raw);
+      const value = parsed[code];
+      if (value !== null) typed[code] = value;
     }
 
     try {
@@ -54,7 +58,7 @@ export default function CustomFoodScreen() {
         name,
         brand,
         basis,
-        servingGrams: basis === 'per_serving' ? servingGrams : null,
+        servingGrams: basis === 'per_serving' ? serving : null,
         servingLabel,
         values: typed,
       });

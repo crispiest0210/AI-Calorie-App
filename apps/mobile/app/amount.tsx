@@ -16,6 +16,7 @@ import {
   formatWithUnit,
   gramsToUnit,
   localDateOf,
+  parseUserNumber,
   resolveGrams,
   scalePer100g,
   type AmountUnit,
@@ -87,10 +88,13 @@ export default function AmountScreen() {
   }, [seeded, food, seed]);
 
   const units = useMemo(() => (food === null ? ['g' as const] : availableUnits(food)), [food]);
+  // Blank or half-typed ("", ".") resolves as zero, which asks for an amount
+  // above zero instead of throwing during render.
+  const parsed = parseUserNumber(value);
   const resolved = useMemo(() => {
     if (food === null) return null;
-    return resolveGrams({ value: value === '' ? '0' : value, unit, portionId }, food);
-  }, [food, value, unit, portionId]);
+    return resolveGrams({ value: parsed ?? '0', unit, portionId }, food);
+  }, [food, parsed, unit, portionId]);
 
   const preview = useMemo(() => {
     if (food === null || resolved === null || !resolved.ok) return null;
@@ -107,16 +111,16 @@ export default function AmountScreen() {
     );
   }
 
-  const canSave = resolved !== null && resolved.ok;
+  const canSave = parsed !== null && resolved !== null && resolved.ok;
 
   const save = () => {
-    if (resolved === null || !resolved.ok) return;
+    if (parsed === null || resolved === null || !resolved.ok) return;
     entriesRepo.logFood(db, {
       foodId: food.id,
       foodName: food.name,
       sourceReleaseId: food.sourceReleaseId,
       mealSlot,
-      amountValue: value,
+      amountValue: parsed,
       amountUnit: unit,
       portionId: unit === 'portion' ? portionId : null,
       grams: resolved.grams,

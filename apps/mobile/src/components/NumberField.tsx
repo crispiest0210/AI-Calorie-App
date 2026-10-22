@@ -1,15 +1,21 @@
 /**
  * The amount field. Exposes screen-reader increment/decrement actions so the
  * gram stepper is adjustable without the keyboard (spec 5.6).
+ *
+ * The text only ever holds a number or a number being typed ("", "1.", ".5"):
+ * a "," becomes "." and a keystroke that cannot lead to a number is refused.
+ * `onChange` also hands over the parsed value, so no screen has to call
+ * dec()/num() on the raw text — "." or "" there would throw during render.
  */
 import { Pressable, TextInput, View } from 'react-native';
-import { dec, num } from '@nt/core';
+import { add, dec, normalizeNumberDraft, num, parseUserNumber, type Num } from '@nt/core';
 import { MIN_TOUCH_TARGET, radii, spacing, tabularNumbers, typography, useTheme } from '../theme';
 import { Text } from './Text';
 
 export interface NumberFieldProps {
   value: string;
-  onChange: (value: string) => void;
+  /** `parsed` is the canonical number, or null while the text is blank or half-typed. */
+  onChange: (value: string, parsed: Num | null) => void;
   label: string;
   suffix?: string;
   step?: number;
@@ -20,10 +26,15 @@ export function NumberField({ value, onChange, label, suffix, step = 10, autoFoc
   const { colors } = useTheme();
 
   const nudge = (delta: number) => {
-    const parsed = Number.parseFloat(value);
-    const base = Number.isFinite(parsed) ? parsed : 0;
-    const next = Math.max(0, base + delta);
-    onChange(num(dec(next.toFixed(2))));
+    const sum = add(parseUserNumber(value) ?? '0', delta);
+    const next = num(sum.isNegative() ? dec(0) : sum);
+    onChange(next, next);
+  };
+
+  const type = (text: string) => {
+    const draft = normalizeNumberDraft(text);
+    if (draft === null) return;
+    onChange(draft, parseUserNumber(draft));
   };
 
   const stepButton = (delta: number, symbol: string, a11y: string) => (
@@ -68,7 +79,7 @@ export function NumberField({ value, onChange, label, suffix, step = 10, autoFoc
         >
           <TextInput
             value={value}
-            onChangeText={(text) => onChange(text.replace(/[^\d.]/g, ''))}
+            onChangeText={type}
             keyboardType="decimal-pad"
             autoFocus={autoFocus}
             selectTextOnFocus

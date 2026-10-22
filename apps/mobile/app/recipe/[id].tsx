@@ -9,9 +9,12 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import {
   CORE_CODES,
   NUTRIENT_DEFS,
+  dec,
   formatGrams,
   formatWithUnit,
+  isPositive,
   num,
+  type Num,
 } from '@nt/core';
 import { foods as foodsRepo, recipes as recipesRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
@@ -31,6 +34,11 @@ export default function RecipeScreen() {
 
   const recipe = useDbQuery((database) => recipesRepo.readRecipe(database, id), [id]);
   const [nameDraft, setNameDraft] = useState<string | null>(null);
+  // Typed text per field. Each keystroke that is a number above zero is saved;
+  // anything else ("", "1.", ".") stays on screen until it becomes one.
+  const [drafts, setDrafts] = useState<Record<string, string>>({});
+  const typed = (key: string, text: string) => setDrafts((prev) => ({ ...prev, [key]: text }));
+  const positive = (parsed: Num | null): parsed is Num => parsed !== null && isPositive(parsed);
 
   if (recipe === null) {
     return (
@@ -59,16 +67,21 @@ export default function RecipeScreen() {
         />
         <NumberField
           label="Servings"
-          value={recipe.servings}
-          onChange={(value) => recipesRepo.updateRecipe(db, recipe.id, { servings: num(value || '1') })}
+          value={drafts.servings ?? recipe.servings}
+          onChange={(text, parsed) => {
+            typed('servings', text);
+            if (positive(parsed)) recipesRepo.updateRecipe(db, recipe.id, { servings: parsed });
+          }}
           step={1}
         />
         <NumberField
           label="Cooked weight (optional)"
-          value={recipe.totalCookedGrams ?? ''}
-          onChange={(value) =>
-            recipesRepo.updateRecipe(db, recipe.id, { totalCookedGrams: value.trim() === '' ? null : num(value) })
-          }
+          value={drafts.cooked ?? recipe.totalCookedGrams ?? ''}
+          onChange={(text, parsed) => {
+            typed('cooked', text);
+            if (text.trim() === '') recipesRepo.updateRecipe(db, recipe.id, { totalCookedGrams: null });
+            else if (positive(parsed)) recipesRepo.updateRecipe(db, recipe.id, { totalCookedGrams: parsed });
+          }}
           suffix="g"
           step={50}
         />
@@ -92,10 +105,10 @@ export default function RecipeScreen() {
               <View style={{ flex: 1 }}>
                 <NumberField
                   label="Grams"
-                  value={ingredient.grams}
-                  onChange={(value) => {
-                    if (value.trim() === '' || Number.parseFloat(value) <= 0) return;
-                    recipesRepo.updateIngredient(db, recipe.id, ingredient.id, num(value));
+                  value={drafts[ingredient.id] ?? ingredient.grams}
+                  onChange={(text, parsed) => {
+                    typed(ingredient.id, text);
+                    if (positive(parsed)) recipesRepo.updateIngredient(db, recipe.id, ingredient.id, parsed);
                   }}
                   step={10}
                 />
@@ -135,7 +148,7 @@ export default function RecipeScreen() {
               const perServing =
                 per100 === undefined || servingGrams === null
                   ? null
-                  : num((Number.parseFloat(per100) * Number.parseFloat(servingGrams)) / 100);
+                  : num(dec(per100).times(servingGrams).div(100));
               return (
                 <View key={code} style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                   <Text variant="label" tone="muted">
