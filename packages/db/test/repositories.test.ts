@@ -349,6 +349,26 @@ describe('water', () => {
     water.ensureDefaultPresets(db);
     expect(water.presets(db).map((p) => p.amountMl)).toEqual([250, 500, 750]);
   });
+
+  it('queues each seeded preset for sync exactly once', () => {
+    const { db } = freshDb();
+    water.ensureDefaultPresets(db);
+    water.ensureDefaultPresets(db);
+    const queued = outbox.pending(db);
+    expect(queued.map((r) => [r.tableName, r.op])).toEqual(water.DEFAULT_PRESETS.map(() => ['water_preset', 'upsert']));
+    expect(new Set(queued.map((r) => r.rowId))).toEqual(new Set(water.presets(db).map((p) => p.id)));
+  });
+
+  it("lists a day's water oldest first and leaves out deleted entries", () => {
+    const { db } = freshDb();
+    const at = (time: string) => new Date(`2024-03-02T${time}`);
+    water.addWater(db, 300, at('18:00:00'));
+    const gone = water.addWater(db, 999, at('12:00:00'));
+    water.addWater(db, 250, at('08:00:00'));
+    water.deleteWater(db, gone);
+
+    expect(water.waterForDate(db, '2024-03-02').map((w) => w.amountMl)).toEqual([250, 300]);
+  });
 });
 
 describe('goals', () => {
