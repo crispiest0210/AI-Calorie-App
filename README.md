@@ -73,7 +73,7 @@ catalog into place; everything after that is local reads and writes.
 
 ```bash
 pnpm -r run typecheck
-pnpm -r run test            # 253 tests: engine, database, importer, UI, API
+pnpm -r run test            # engine, database, importer, UI, API
 pnpm --filter @nt/core test:coverage   # 100% branches — the Phase 0 gate
 pnpm lint
 ```
