@@ -162,6 +162,24 @@ describe('food detail', () => {
   });
 });
 
+describe('source releases', () => {
+  it('finds the active release per provider and null when a provider has none', () => {
+    const { db, sqlite } = freshDb();
+    expect(foods.activeSourceRelease(db)).toBe(RELEASE_ID);
+    expect(foods.activeSourceRelease(db, 'user')).toBeNull();
+    sqlite.prepare("insert into source_release (id, provider, imported_at, is_active) values ('user-1', 'user', 0, 1), ('user-0', 'user', 0, 0)").run();
+    expect(foods.activeSourceRelease(db, 'user')).toBe('user-1');
+    sqlite.prepare("update source_release set is_active = 0 where id = ?").run(RELEASE_ID);
+    expect(foods.activeSourceRelease(db)).toBeNull();
+  });
+
+  it('reads a release for the provenance sheet and null for an unknown id', () => {
+    const { db } = freshDb();
+    expect(foods.sourceRelease(db, RELEASE_ID)).toEqual({ id: RELEASE_ID, provider: 'fdc', dataset: 'sr_legacy', version: 'test', releasedOn: '2026-01-01' });
+    expect(foods.sourceRelease(db, 'nope')).toBeNull();
+  });
+});
+
 describe('logging', () => {
   it('writes an entry and its outbox record in one transaction', () => {
     const { db, rice } = seeded();
