@@ -398,6 +398,32 @@ describe('goals', () => {
     expect(goalsRepo.allGoalProfiles(db)).toHaveLength(1);
   });
 
+  it('queues each save for sync and reuses the profile id for a same-day re-save', () => {
+    const { db } = freshDb();
+    const first = goalsRepo.saveGoals(db, { waterTargetMl: 2500, targets, effectiveFrom: '2026-01-01' });
+    const again = goalsRepo.saveGoals(db, { waterTargetMl: 2000, targets, effectiveFrom: '2026-01-01' });
+    const other = goalsRepo.saveGoals(db, { waterTargetMl: null, targets: [], effectiveFrom: '2026-02-01' });
+
+    expect(again).toBe(first);
+    expect(other).not.toBe(first);
+    expect(outbox.pending(db).map((row) => [row.tableName, row.rowId, row.op])).toEqual([
+      ['goal_profile', first, 'upsert'],
+      ['goal_profile', first, 'upsert'],
+      ['goal_profile', other, 'upsert'],
+    ]);
+  });
+
+  it('lists profiles oldest first and fills unused target bounds with null', () => {
+    const { db } = freshDb();
+    goalsRepo.saveGoals(db, { waterTargetMl: null, targets, effectiveFrom: '2026-06-01' });
+    goalsRepo.saveGoals(db, { waterTargetMl: null, targets: [], effectiveFrom: '2026-01-01' });
+
+    const profiles = goalsRepo.allGoalProfiles(db);
+    expect(profiles.map((p) => p.effectiveFrom)).toEqual(['2026-01-01', '2026-06-01']);
+    expect(profiles[0]!.targets).toEqual([]);
+    expect(profiles[1]!.targets).toContainEqual(targets[0]);
+  });
+
   it('resolves percent-of-energy targets when a day is read', () => {
     const { db, rice } = seeded();
     goalsRepo.saveGoals(db, { waterTargetMl: 2500, targets, effectiveFrom: '2000-01-01' });
