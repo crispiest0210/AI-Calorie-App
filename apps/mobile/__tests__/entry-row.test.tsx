@@ -79,4 +79,11 @@ describe('EntryRow', () => {
     expect(onPress).toHaveBeenCalledTimes(1);
     expect(onDelete).toHaveBeenCalledTimes(1);
   });
+
+  it('ignores accessibility actions other than the delete action', () => {
+    const onDelete = jest.fn();
+    render(<EntryRow entry={entry} onPress={jest.fn()} onDelete={onDelete} />);
+    fireEvent(screen.getByRole('button'), 'accessibilityAction', { nativeEvent: { actionName: 'activate' } });
+    expect(onDelete).not.toHaveBeenCalled();
+  });
 });

@@ -48,7 +48,10 @@ export function EntryRow({ entry, onPress, onDelete }: { entry: EntryView; onPre
             accessibilityLabel={`${entry.foodName}, ${amount}${energy === null ? '' : `, ${formatEnergy(energy)} calories`}`}
             accessibilityHint="Opens the entry to edit it"
             accessibilityActions={[{ name: 'magicTap', label: 'Delete entry' }]}
-            onAccessibilityAction={onDelete}
+            onAccessibilityAction={(event) => {
+              // Only the declared delete action deletes; any other action the platform sends must not.
+              if (event.nativeEvent.actionName === 'magicTap') onDelete();
+            }}
             style={({ pressed }) => ({
               flexDirection: 'row',
               alignItems: 'center',
