@@ -65,6 +65,28 @@ describe('TrendChart', () => {
     expect(onSelectDay).toHaveBeenCalledWith('2026-09-19');
   });
 
+  it('uses the most recent day that has a target, skipping later days without one', () => {
+    render(
+      <TrendChart
+        days={[
+          { date: '2026-09-19', energy: 1500, target: 1800 },
+          { date: '2026-09-20', energy: 1700, target: 2000 },
+          { date: '2026-09-21', energy: 1600, target: null },
+        ]}
+        today={TODAY}
+        onSelectDay={jest.fn()}
+      />,
+    );
+    expect(screen.getByText('target 2,000')).toBeTruthy();
+    expect(screen.getByLabelText(/against a target of 2,000\.$/)).toBeTruthy();
+  });
+
+  it('copes with an empty range', () => {
+    render(<TrendChart days={[]} today={TODAY} onSelectDay={jest.fn()} />);
+    expect(screen.getByLabelText('No days logged in this range.')).toBeTruthy();
+    expect(screen.queryByText(/^target /)).toBeNull();
+  });
+
   it('copes with a range where nothing is logged and no target is set', () => {
     render(
       <TrendChart
