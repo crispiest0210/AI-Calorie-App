@@ -31,7 +31,7 @@ network and no telemetry.
 | F14 Export and account deletion | Done |
 | F11 Recipes: ingredients, yield, per-serving nutrition | Done |
 | F12 7 and 30-day trends against the goals of each day | Done |
-| F13 Photo analysis | Not yet — Phase 4 |
+| F13 Photo analysis | Built — a model proposes foods and amounts, you review them (see below) |
 
 An account is optional. Everything works without one; signing in adds sync and
 barcode lookup and nothing else. Anything logged before signing in is already
@@ -49,6 +49,7 @@ apps/api             Hono API on Postgres: sync, catalog, barcode, export
 packages/tokens      design tokens (light/dark, spacing, type, motion)
 apps/mobile          Expo Router app (iOS + Android from one codebase)
 tools/fdc-import     builds the bundled offline catalog from USDA/OFF data
+tools/photo-eval     scores photo analysis against a labelled set (replay by default)
 fixtures/            committed USDA + Open Food Facts records: the golden test
                      set and the seed catalog's source
 ```
@@ -101,9 +102,10 @@ is the only place arithmetic happens. Two devices that see the same entries
 produce byte-identical totals (review item R13), and a stray `parseFloat` on a
 nutrient value is a lint error.
 
-**AI supplies no numbers.** There is no model call anywhere in this milestone.
-When photo analysis lands in Phase 4, the model proposes *what* and *how much*;
-nutrients still come from `food_nutrient`.
+**AI supplies no numbers.** The only model call is photo analysis, run by the
+API (`apps/api/src/vision`). The model proposes *what* and *how much*; its
+output schema has no nutrient field, and nutrients still come from
+`food_nutrient`. The app never calls a model itself.
 
 **Missing is not zero.** A nutrient a source does not report stays absent, and
 any day containing such an entry is shown as *incomplete* rather than quietly
