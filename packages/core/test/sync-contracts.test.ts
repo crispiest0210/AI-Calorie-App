@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MAX_PUSH_ROWS, problemDetails, pullResponse, pushRequest, pushResponse, syncFood, syncRow, SYNCED_TABLES } from '../src/sync-contracts';
+import { MAX_PUSH_ROWS, foodDetailResponse, foodSearchResult, problemDetails, pullResponse, pushRequest, pushResponse, syncFood, syncRow, SYNCED_TABLES } from '../src/sync-contracts';
 
 const id = '3f2b8c1e-5a4d-4e6f-8a9b-0c1d2e3f4a5b';
 const id2 = '7a1c9d2e-6b5f-4c8d-9e0a-1b2c3d4e5f60';
@@ -107,5 +107,39 @@ describe('sync contracts', () => {
     expect(pushResponse.safeParse({ assigned: [{ ...assigned, table: 'catalog_food' }], cursor: 3 }).success).toBe(false);
     expect(pushResponse.safeParse({ assigned: [{ ...assigned, id: 'e1' }], cursor: 3 }).success).toBe(false);
     expect(pushResponse.safeParse({ assigned: [{ ...assigned, serverRev: 1.5 }], cursor: 3 }).success).toBe(false);
+  });
+  describe('food read responses', () => {
+    const result = { id: 'usda:1', name: 'Rice', brand: null, kind: 'generic', qualityTier: 'lab', energyPer100g: '130' };
+    const detail = {
+      ...result,
+      gtin: null,
+      densityGPerMl: null,
+      nutrientsPer100g: { energy_kcal: '130' },
+      portions: [{ id: 'p1', label: '1 cup', gramWeight: '158', source: 'usda' }],
+      source: { provider: 'usda', dataset: null, version: null, sourceRef: null, citationUrl: null },
+    };
+
+    it('accepts a search result with a null energy and rejects a numeric one', () => {
+      expect(foodSearchResult.safeParse(result).success).toBe(true);
+      expect(foodSearchResult.safeParse({ ...result, energyPer100g: null }).success).toBe(true);
+      expect(foodSearchResult.safeParse({ ...result, energyPer100g: 130 }).success).toBe(false);
+    });
+
+    it('rejects an unknown kind or quality tier', () => {
+      expect(foodSearchResult.safeParse({ ...result, kind: 'mystery' }).success).toBe(false);
+      expect(foodSearchResult.safeParse({ ...result, qualityTier: 'gold' }).success).toBe(false);
+    });
+
+    it('accepts a detail response and keeps the source block required', () => {
+      expect(foodDetailResponse.safeParse(detail).success).toBe(true);
+      const { source: _omit, ...withoutSource } = detail;
+      expect(foodDetailResponse.safeParse(withoutSource).success).toBe(false);
+    });
+
+    it('rejects float gram weights and unknown nutrient codes in a detail response', () => {
+      const portion = detail.portions[0]!;
+      expect(foodDetailResponse.safeParse({ ...detail, portions: [{ ...portion, gramWeight: 158 }] }).success).toBe(false);
+      expect(foodDetailResponse.safeParse({ ...detail, nutrientsPer100g: { unobtainium: '1' } }).success).toBe(false);
+    });
   });
 });
