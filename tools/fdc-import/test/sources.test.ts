@@ -1,8 +1,8 @@
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
-import { fdcRecordsFrom, loadBulk } from '../src/sources';
+import { fdcRecordsFrom, loadBulk, loadFixtures } from '../src/sources';
 
 const dirs: string[] = [];
 function tempDir(): string {
@@ -52,5 +52,41 @@ describe('loadBulk', () => {
     const records = loadBulk(dir);
     expect(records.map((r) => r.sourceRef)).toEqual(['1', '2', '3']);
     expect(records.every((r) => r.provider === 'fdc')).toBe(true);
+  });
+});
+
+describe('loadFixtures', () => {
+  const product = (code: string, name = 'Plain yogurt') => ({ code, product_name: name, nutriments: { 'energy-kcal_100g': 60 } });
+
+  it('returns nothing when neither fixture directory exists', () => {
+    expect(loadFixtures(tempDir())).toEqual([]);
+  });
+
+  it('lists usda records before off products and de-duplicates within each provider', () => {
+    const root = tempDir();
+    mkdirSync(path.join(root, 'usda'));
+    mkdirSync(path.join(root, 'off'));
+    writeFileSync(path.join(root, 'usda', 'a.json'), JSON.stringify([detail(5, { dataType: 'Foundation' })]));
+    writeFileSync(path.join(root, 'usda', 'b.json'), JSON.stringify([detail(5, { dataType: 'Foundation' })]));
+    writeFileSync(path.join(root, 'off', 'a.json'), JSON.stringify({ products: [product('123'), product('123')] }));
+    const records = loadFixtures(root);
+    expect(records.map((r) => `${r.provider}:${r.sourceRef}`)).toEqual(['fdc:5', 'off:123']);
+  });
+
+  it('keeps an fdc id and an off code that share the same text as separate records', () => {
+    const root = tempDir();
+    mkdirSync(path.join(root, 'usda'));
+    mkdirSync(path.join(root, 'off'));
+    writeFileSync(path.join(root, 'usda', 'a.json'), JSON.stringify([detail(42, { dataType: 'Foundation' })]));
+    writeFileSync(path.join(root, 'off', 'a.json'), JSON.stringify({ products: [product('42')] }));
+    expect(loadFixtures(root).map((r) => r.provider)).toEqual(['fdc', 'off']);
+  });
+
+  it('keeps unnamed off products as rejected results rather than dropping them', () => {
+    const root = tempDir();
+    mkdirSync(path.join(root, 'off'));
+    writeFileSync(path.join(root, 'off', 'a.json'), JSON.stringify({ products: [product('9', '  ')] }));
+    const [record] = loadFixtures(root);
+    expect(record?.result.ok).toBe(false);
   });
 });
