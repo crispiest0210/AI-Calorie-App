@@ -73,6 +73,17 @@ describe('GET /v1/me/export', () => {
   });
 });
 
+describe('GET /v1/me/export CSV formula safety', () => {
+  it('prefixes user text that a spreadsheet would run as a formula', async () => {
+    await addEntry(USER_A, ENTRY_A, '=HYPERLINK("http://x")', '@SUM(A1)');
+
+    const doc = await json<ExportDoc>(await h.request(USER_A, '/v1/me/export'));
+
+    expect(doc.csv.logEntries).toContain(`"'=HYPERLINK(""http://x"")"`);
+    expect(doc.csv.logEntries).toContain(`'@SUM(A1)`);
+  });
+});
+
 describe('DELETE /v1/me', () => {
   it('removes the caller’s data and leaves other users’ untouched', async () => {
     await addEntry(USER_A, ENTRY_A, 'Rice', null);
