@@ -16,6 +16,7 @@ export interface ExportDocument {
   waterEntries: unknown[];
   waterPresets: unknown[];
   goalProfiles: unknown[];
+  userSettings: unknown[];
   customFoods: unknown[];
   /** The same log entries as CSV, for anything that reads spreadsheets. */
   csv: { logEntries: string };
@@ -37,6 +38,7 @@ export async function exportAll(sql: Sql, userId: string): Promise<ExportDocumen
   const waterEntries = (await sql.query(`select * from water_entry where user_id = $1 order by logged_at`, [userId])).rows;
   const waterPresets = (await sql.query(`select * from water_preset where user_id = $1 order by position`, [userId])).rows;
   const goalProfiles = (await sql.query(`select * from goal_profile where user_id = $1 order by effective_from`, [userId])).rows;
+  const userSettings = (await sql.query(`select * from user_settings where user_id = $1`, [userId])).rows;
   const customFoods = (
     await sql.query(
       `select f.*,
@@ -72,6 +74,7 @@ export async function exportAll(sql: Sql, userId: string): Promise<ExportDocumen
     waterEntries,
     waterPresets,
     goalProfiles,
+    userSettings,
     customFoods,
     csv: {
       logEntries: toCsv(logEntries, [

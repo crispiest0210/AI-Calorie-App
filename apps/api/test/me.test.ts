@@ -16,6 +16,7 @@ const ENTRY_B = 'bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbbbb1';
 interface ExportDoc {
   userId: string;
   logEntries: { id: string }[];
+  userSettings: { user_id: string; units: string }[];
   csv: { logEntries: string };
 }
 
@@ -53,6 +54,16 @@ describe('GET /v1/me/export', () => {
     expect(doc.userId).toBe(USER_A);
     expect(doc.logEntries.map((row) => row.id)).toEqual([ENTRY_A]);
     expect(doc.csv.logEntries).not.toContain('Pasta');
+  });
+
+  it('includes the caller’s settings but not another user’s', async () => {
+    for (const [user, units] of [[USER_A, 'imperial'], [USER_B, 'metric']] as const) {
+      await withUser(h.pool, user, (sql) => sql.query('insert into user_settings (user_id, units) values ($1, $2)', [user, units]));
+    }
+
+    const doc = await json<ExportDoc>(await h.request(USER_A, '/v1/me/export'));
+
+    expect(doc.userSettings.map((row) => [row.user_id, row.units])).toEqual([[USER_A, 'imperial']]);
   });
 
   it('quotes CSV fields that contain commas, quotes or newlines', async () => {
