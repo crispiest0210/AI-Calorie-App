@@ -162,6 +162,25 @@ describe('food detail', () => {
   });
 });
 
+describe('food deletion and last amounts', () => {
+  it('queues a delete in the outbox when a custom food is soft-deleted', () => {
+    const { db } = freshDb();
+    const id = customFood(db, 'My granola', { energy_kcal: '450' });
+    foods.softDeleteFood(db, id);
+    expect(outbox.pending(db).map((r) => [r.tableName, r.op])).toEqual([['food', 'upsert'], ['food', 'delete']]);
+  });
+
+  it('reports the amount of the latest live entry, ignoring deleted ones', () => {
+    const { db, rice } = seeded();
+    logRice(db, rice, '100', new Date(2026, 0, 1, 8));
+    logRice(db, rice, '150', new Date(2026, 0, 1, 12));
+    const latest = logRice(db, rice, '200', new Date(2026, 0, 1, 18));
+    expect(foods.lastAmountFor(db, rice)).toMatchObject({ amountValue: '200', grams: '200' });
+    entries.deleteEntry(db, latest);
+    expect(foods.lastAmountFor(db, rice)).toMatchObject({ amountValue: '150', grams: '150' });
+  });
+});
+
 describe('source releases', () => {
   it('finds the active release per provider and null when a provider has none', () => {
     const { db, sqlite } = freshDb();
