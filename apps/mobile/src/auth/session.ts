@@ -17,15 +17,30 @@ export interface Session {
   email: string | null;
 }
 
+function isSession(value: unknown): value is Session {
+  if (typeof value !== 'object' || value === null) return false;
+  const s = value as Record<string, unknown>;
+  return (
+    typeof s.accessToken === 'string' &&
+    typeof s.refreshToken === 'string' &&
+    typeof s.expiresAt === 'number' &&
+    Number.isFinite(s.expiresAt) &&
+    typeof s.userId === 'string' &&
+    (s.email === null || typeof s.email === 'string')
+  );
+}
+
 export async function loadSession(): Promise<Session | null> {
   const raw = await SecureStore.getItemAsync(KEY);
   if (raw === null) return null;
   try {
-    return JSON.parse(raw) as Session;
+    const parsed: unknown = JSON.parse(raw);
+    if (isSession(parsed)) return parsed;
   } catch {
-    await SecureStore.deleteItemAsync(KEY);
-    return null;
+    // Unparseable; discarded below.
   }
+  await SecureStore.deleteItemAsync(KEY);
+  return null;
 }
 
 export async function saveSession(session: Session): Promise<void> {

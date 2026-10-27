@@ -47,6 +47,15 @@ describe('loadSession', () => {
     expect(await loadSession()).toBeNull();
     expect(store.deleteItemAsync).toHaveBeenCalledWith('nt.session');
   });
+
+  it.each(['null', '{}', '"text"', JSON.stringify({ ...session, expiresAt: 'soon' })])(
+    'discards a parseable entry that is not a session: %s',
+    async (raw) => {
+      store.getItemAsync.mockResolvedValue(raw);
+      expect(await loadSession()).toBeNull();
+      expect(store.deleteItemAsync).toHaveBeenCalledWith('nt.session');
+    },
+  );
 });
 
 describe('saveSession / clearSession', () => {
