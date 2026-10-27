@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, normalizeGtin, search } from '../src/routes/foods';
+import { MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, escapeLike, normalizeGtin, search } from '../src/routes/foods';
 import type { Sql } from '../src/db';
 
 describe('normalizeGtin', () => {
@@ -46,6 +46,13 @@ describe('search limits', () => {
     const { sql, calls } = recorder();
     await search(sql, '  Rice ');
     expect(calls[0]).toEqual(['rice', 'rice%', MAX_SEARCH_LIMIT]);
+  });
+
+  it('escapes LIKE wildcards in the prefix pattern but not in the raw needle', async () => {
+    const { sql, calls } = recorder();
+    await search(sql, '50%_x\\y');
+    expect(calls[0]?.slice(0, 2)).toEqual(['50%_x\\y', '50\\%\\_x\\\\y%']);
+    expect(escapeLike('plain')).toBe('plain');
   });
 
   it('clamps the limit between 1 and the maximum', async () => {

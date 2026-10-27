@@ -17,6 +17,11 @@ const CITATIONS: Record<string, (ref: string) => string> = {
   off: (ref) => `https://world.openfoodfacts.org/product/${ref}`,
 };
 
+/** Escape LIKE metacharacters so "50%" or "a_b" match literally, not as wildcards. */
+export function escapeLike(text: string): string {
+  return text.replace(/[\\%_]/g, (c) => `\\${c}`);
+}
+
 export async function search(sql: Sql, query: string, limit = MAX_SEARCH_LIMIT): Promise<FoodSearchResult[]> {
   const needle = query.trim().toLowerCase();
   if (needle.length < MIN_SEARCH_LENGTH) return [];
@@ -64,7 +69,7 @@ export async function search(sql: Sql, query: string, limit = MAX_SEARCH_LIMIT):
        where n.food_id = ranked.id and n.nutrient_code = 'energy_kcal'
      ) as energy
      from ranked`,
-    [needle, `${needle}%`, capped],
+    [needle, `${escapeLike(needle)}%`, capped],
   );
 
   return rows.map((r) => ({
