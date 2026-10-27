@@ -53,6 +53,13 @@ describe('local dates', () => {
     expect(formatDayLabel('2026-09-14', '2026-09-20')).toBe('Mon, Sep 14');
   });
 
+  it('labels Yesterday and Tomorrow across month and year ends, and dates beyond them by weekday', () => {
+    expect(formatDayLabel('2026-02-28', '2026-03-01')).toBe('Yesterday');
+    expect(formatDayLabel('2027-01-01', '2026-12-31')).toBe('Tomorrow');
+    expect(formatDayLabel('2026-12-29', '2027-01-01')).toBe('Tue, Dec 29');
+    expect(formatDayLabel('2026-09-22', '2026-09-20')).toBe('Tue, Sep 22');
+  });
+
   it('formats clock times', () => {
     expect(formatTimeOfDay(new Date(2026, 8, 20, 0, 5).getTime())).toBe('12:05 AM');
     expect(formatTimeOfDay(new Date(2026, 8, 20, 12, 0).getTime())).toBe('12:00 PM');
