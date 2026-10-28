@@ -44,8 +44,10 @@ describe('conventions', () => {
   });
 
   it('rejects a malformed cursor', async () => {
-    const res = await h.request(USER_A, '/v1/sync/pull?cursor=-4');
-    expect(res.status).toBe(422);
+    for (const cursor of ['-4', '12abc', '1.5', '', '99999999999999999999']) {
+      const res = await h.request(USER_A, `/v1/sync/pull?cursor=${cursor}`);
+      expect(res.status, `cursor=${cursor}`).toBe(422);
+    }
   });
 });
 

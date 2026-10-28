@@ -109,8 +109,12 @@ export function createApp(deps: AppDeps) {
   app.get('/v1/sync/pull', async (c) => {
     const user = c.get('user');
     limiter.check(user.id, 'sync');
-    const cursor = Number.parseInt(c.req.query('cursor') ?? '0', 10);
-    if (!Number.isFinite(cursor) || cursor < 0) throw new ApiError('validation_failed', 'cursor must be a non-negative integer');
+    const rawCursor = c.req.query('cursor') ?? '0';
+    const cursor = Number(rawCursor);
+    // Digits only and a safe integer: "12abc" or 1e20 must not slip through to Postgres as a bigint.
+    if (!/^\d+$/.test(rawCursor) || !Number.isSafeInteger(cursor)) {
+      throw new ApiError('validation_failed', 'cursor must be a non-negative integer');
+    }
     const result = await withUser(deps.pool, user.id, (sql) => sync.pull(sql, user.id, cursor));
     return c.json(pullResponse.parse(result));
   });
