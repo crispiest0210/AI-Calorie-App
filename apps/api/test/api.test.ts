@@ -65,6 +65,15 @@ describe('food catalog', () => {
     expect(results.find((r) => r.name === 'Rice noodles, cooked')!.qualityTier).toBe('lab');
   });
 
+  it('honours ?limit, falls back to the default for garbage and keeps at least one result', async () => {
+    const names = async (query: string) =>
+      (await json<{ results: FoodRow[] }>(await h.request(USER_A, `/v1/foods/search?q=rice${query}`))).results;
+    expect(await names('&limit=1')).toHaveLength(1);
+    expect(await names('&limit=0')).toHaveLength(1);
+    expect(await names('&limit=-5')).toHaveLength(1);
+    expect((await names('&limit=abc')).length).toBeGreaterThan(1);
+  });
+
   it('returns nutrients as decimal strings, never floats', async () => {
     const res = await h.request(USER_A, '/v1/foods/33333333-3333-4333-8333-333333333331');
     const food = await json<FoodRow>(res);
