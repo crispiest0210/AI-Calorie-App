@@ -19,3 +19,14 @@ describe('malformed path ids', () => {
     expect(response.status).toBe(404);
   });
 });
+
+describe('malformed resolve body', () => {
+  it.each(['null', 'not json', '{}', '{"status":"nope"}'])('POST resolve with body %s is a 422', async (body) => {
+    const response = await h.request(USER_A, '/v1/photo-analyses/55555555-5555-4555-8555-555555555551/resolve', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body,
+    });
+    expect(response.status).toBe(422);
+  });
+});

@@ -169,7 +169,8 @@ export function createApp(deps: AppDeps) {
 
   app.post('/v1/photo-analyses/:id/resolve', async (c) => {
     const user = c.get('user');
-    const body = (await c.req.json().catch(() => ({}))) as { status?: string; keepImage?: boolean };
+    // A JSON `null` body parses fine, so fall back to an empty object for it too.
+    const body = ((await c.req.json().catch(() => null)) ?? {}) as { status?: string; keepImage?: boolean };
     if (body.status !== 'confirmed' && body.status !== 'abandoned') {
       throw new ApiError('validation_failed', 'status must be confirmed or abandoned');
     }
