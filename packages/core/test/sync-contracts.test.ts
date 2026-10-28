@@ -53,6 +53,14 @@ describe('sync contracts', () => {
     expect(syncRow.safeParse({ table: 'catalog_food', row: logEntry }).success).toBe(false);
   });
 
+  it('rejects timestamps that a date or a Postgres timestamp cannot hold', () => {
+    for (const updatedAt of [-1, 253_402_300_800_000, Number.MAX_SAFE_INTEGER]) {
+      expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, updatedAt } }).success).toBe(false);
+    }
+    expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, deletedAt: -1 } }).success).toBe(false);
+    expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, loggedAt: 253_402_300_800_000 } }).success).toBe(false);
+  });
+
   it('requires uuid ids and integer timestamps', () => {
     expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, id: 'e1' } }).success).toBe(false);
     expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, updatedAt: 1.5 } }).success).toBe(false);

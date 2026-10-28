@@ -18,17 +18,21 @@ export type SyncedTable = (typeof SYNCED_TABLES)[number];
 
 export const syncedTable = z.enum(SYNCED_TABLES);
 
+/** Epoch milliseconds from 1970 to the end of year 9999, a range both JS dates and Postgres timestamps round-trip. */
+const MAX_EPOCH_MS = 253_402_300_799_999;
+const epochMs = z.number().int().min(0).max(MAX_EPOCH_MS);
+
 /** Every synced row carries these; the server owns `serverRev`. */
 const syncColumns = {
   id: z.string().uuid(),
-  updatedAt: z.number().int(),
-  deletedAt: z.number().int().nullable(),
+  updatedAt: epochMs,
+  deletedAt: epochMs.nullable(),
 };
 
 export const syncLogEntry = z.object({
   ...syncColumns,
   localDate,
-  loggedAt: z.number().int(),
+  loggedAt: epochMs,
   tzOffsetMin: z.number().int(),
   mealSlot: z.enum(MEAL_SLOTS),
   entryKind: z.enum(ENTRY_KINDS),
