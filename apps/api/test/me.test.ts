@@ -5,6 +5,7 @@
  */
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { withUser } from '../src/db';
+import { REAUTH_WINDOW_SECONDS } from '../src/routes/me';
 import { insertCatalogFood, json, startHarness, USER_A, USER_B, type Harness } from './harness';
 
 let h: Harness;
@@ -105,5 +106,27 @@ describe('DELETE /v1/me', () => {
 
     const remaining = await h.pool.query('select id from log_entry');
     expect(remaining.rows.map((row) => row.id)).toEqual([ENTRY_B]);
+  });
+
+  it('also clears settings, so a deleted account leaves nothing in the export', async () => {
+    await withUser(h.pool, USER_A, (sql) => sql.query('insert into user_settings (user_id, units) values ($1, $2)', [USER_A, 'imperial']));
+    await withUser(h.pool, USER_B, (sql) => sql.query('insert into user_settings (user_id, units) values ($1, $2)', [USER_B, 'metric']));
+
+    await h.request(USER_A, '/v1/me', { method: 'DELETE' });
+
+    const remaining = await h.pool.query('select user_id from user_settings');
+    expect(remaining.rows.map((row) => row.user_id)).toEqual([USER_B]);
+  });
+
+  it('refuses a token older than the re-auth window and deletes nothing', async () => {
+    await addEntry(USER_A, ENTRY_A, 'Rice', null);
+    const staleIat = Math.floor(Date.now() / 1000) - REAUTH_WINDOW_SECONDS - 60;
+    const token = await h.tokenFor(USER_A, staleIat);
+
+    const res = await h.app.request('/v1/me', { method: 'DELETE', headers: { authorization: `Bearer ${token}` } });
+
+    expect(res.status).toBe(401);
+    const remaining = await h.pool.query('select id from log_entry');
+    expect(remaining.rows.map((row) => row.id)).toEqual([ENTRY_A]);
   });
 });
