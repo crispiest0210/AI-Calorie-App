@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, escapeLike, normalizeGtin, search } from '../src/routes/foods';
+import { normalizeGtin } from '@nt/core';
+import { MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, escapeLike, search } from '../src/routes/foods';
 import type { Sql } from '../src/db';
 
 describe('normalizeGtin', () => {

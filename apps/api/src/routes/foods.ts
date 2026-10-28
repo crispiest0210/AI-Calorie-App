@@ -3,7 +3,7 @@
  * the same way the device ranks its bundled catalog so results do not reorder
  * when the app switches between the two.
  */
-import type { FoodDetailResponse, FoodSearchResult } from '@nt/core';
+import { normalizeGtin, type FoodDetailResponse, type FoodSearchResult } from '@nt/core';
 import { ApiError } from '../errors';
 import type { Sql } from '../db';
 
@@ -120,13 +120,6 @@ export async function detail(sql: Sql, id: string): Promise<FoodDetailResponse> 
       citationUrl: food.source_ref === null ? null : (CITATIONS[food.provider]?.(food.source_ref) ?? null),
     },
   };
-}
-
-/** Barcodes are normalized to 14 digits so UPC-A and EAN-13 compare equal. */
-export function normalizeGtin(raw: string): string | null {
-  const digits = raw.replace(/\D/g, '');
-  if (digits.length === 0 || digits.length > 14) return null;
-  return digits.padStart(14, '0');
 }
 
 export interface BarcodeLookup {
