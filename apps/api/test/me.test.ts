@@ -85,6 +85,20 @@ describe('GET /v1/me/export', () => {
   });
 });
 
+describe('GET /v1/me/export deleted entries', () => {
+  it('keeps a soft-deleted entry in the JSON but not in the CSV', async () => {
+    await addEntry(USER_A, ENTRY_A, 'Rice', null);
+    await addEntry(USER_A, ENTRY_B, 'Pasta', null);
+    await withUser(h.pool, USER_A, (sql) => sql.query('update log_entry set deleted_at = now() where id = $1', [ENTRY_B]));
+
+    const doc = await json<ExportDoc>(await h.request(USER_A, '/v1/me/export'));
+
+    expect(doc.logEntries.map((row) => row.id).sort()).toEqual([ENTRY_A, ENTRY_B].sort());
+    expect(doc.csv.logEntries).toContain('Rice');
+    expect(doc.csv.logEntries).not.toContain('Pasta');
+  });
+});
+
 describe('GET /v1/me/export CSV formula safety', () => {
   it('prefixes user text that a spreadsheet would run as a formula', async () => {
     await addEntry(USER_A, ENTRY_A, '=HYPERLINK("http://x")', '@SUM(A1)');

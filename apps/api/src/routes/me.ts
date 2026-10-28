@@ -77,7 +77,8 @@ export async function exportAll(sql: Sql, userId: string): Promise<ExportDocumen
     userSettings,
     customFoods,
     csv: {
-      logEntries: toCsv(logEntries, [
+      // Deleted entries stay in the JSON as tombstones; a spreadsheet should only show what the user still has.
+      logEntries: toCsv(logEntries.filter((row) => row.deleted_at === null || row.deleted_at === undefined), [
         'local_date', 'meal_slot', 'food_name_snapshot', 'amount_value', 'amount_unit',
         'grams', 'grams_provenance', 'nutrients_per_100g', 'nutrients_absolute', 'note',
       ]),
