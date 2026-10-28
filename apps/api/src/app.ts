@@ -42,6 +42,8 @@ function idParam(value: string): string {
   return value;
 }
 
+const MAX_IDEMPOTENCY_KEY_LENGTH = 255;
+
 export function createApp(deps: AppDeps) {
   const app = new Hono<Env>();
   const limiter = deps.limiter ?? new RateLimiter();
@@ -96,6 +98,10 @@ export function createApp(deps: AppDeps) {
     if (!parsed.success) throw new ApiError('validation_failed', parsed.error.issues[0]?.message);
 
     const key = c.req.header('idempotency-key');
+    // The key is stored as primary-key text, so cap it rather than index arbitrary header sizes.
+    if (key !== undefined && key.length > MAX_IDEMPOTENCY_KEY_LENGTH) {
+      throw new ApiError('validation_failed', `Idempotency-Key must be at most ${MAX_IDEMPOTENCY_KEY_LENGTH} characters`);
+    }
     const response = await withUser(deps.pool, user.id, async (sql) => {
       const previous = await replay(sql, user.id, key);
       if (previous !== null) return previous;
