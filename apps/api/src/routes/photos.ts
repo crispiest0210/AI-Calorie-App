@@ -88,6 +88,10 @@ export async function runAnalysis(sql: Sql, userId: string, analysisId: string, 
     [analysisId, userId],
   );
   if (owned.rows[0] === undefined) throw new ApiError('not_found', 'no such analysis');
+  // A resolved analysis is finished; re-running it would flip it back to analyzed and spend a model call.
+  if (owned.rows[0].status === 'confirmed' || owned.rows[0].status === 'abandoned') {
+    throw new ApiError('validation_failed', 'this analysis has already been resolved');
+  }
 
   let outcome;
   try {

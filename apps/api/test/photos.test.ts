@@ -150,6 +150,19 @@ describe('the draft', () => {
   });
 });
 
+describe('running a resolved analysis', () => {
+  it('is refused without calling the model or reviving the draft', async () => {
+    await seedAnalysis();
+    await run(analyzerSaying(MODEL_SAID));
+    await withUser(h.pool, USER_A, (sql) => photos.resolveAnalysis(sql, USER_A, ANALYSIS, 'confirmed'));
+    const analyzer = analyzerSaying(MODEL_SAID);
+    await expect(run(analyzer)).rejects.toMatchObject({ code: 'validation_failed' });
+    expect(analyzer.analyzeMealImage).not.toHaveBeenCalled();
+    const { rows } = await h.pool.query('select status from photo_analysis where id = $1', [ANALYSIS]);
+    expect(rows[0].status).toBe('confirmed');
+  });
+});
+
 describe('quota', () => {
   it('stops after the daily limit, counting failures too', async () => {
     const today = new Date().toISOString().slice(0, 10);
