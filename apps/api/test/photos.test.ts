@@ -177,6 +177,15 @@ describe('retention', () => {
     expect(rows[0].image_expires_at.getTime() - now.getTime()).toBeCloseTo(photos.RETENTION_HOURS * HOUR, -3);
   });
 
+  it('does not restart the retention clock when a resolve is repeated', async () => {
+    const first = new Date(Date.now() - 2 * HOUR);
+    await withUser(h.pool, USER_A, (sql) => photos.resolveAnalysis(sql, USER_A, ANALYSIS, 'confirmed', { now: first }));
+    await withUser(h.pool, USER_A, (sql) => photos.resolveAnalysis(sql, USER_A, ANALYSIS, 'abandoned'));
+    const { rows } = await h.pool.query('select status, resolved_at from photo_analysis where id = $1', [ANALYSIS]);
+    expect(rows[0].status).toBe('confirmed');
+    expect(rows[0].resolved_at.getTime()).toBe(first.getTime());
+  });
+
   it('keeps the image when the user opted into a photo journal', async () => {
     await withUser(h.pool, USER_A, (sql) => photos.resolveAnalysis(sql, USER_A, ANALYSIS, 'confirmed', { keepImage: true }));
     const { rows } = await h.pool.query('select image_expires_at from photo_analysis where id = $1', [ANALYSIS]);

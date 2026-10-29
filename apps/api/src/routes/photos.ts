@@ -224,11 +224,13 @@ export async function resolveAnalysis(
   const now = options.now ?? new Date();
   const expiresAt = options.keepImage === true ? null : new Date(now.getTime() + RETENTION_HOURS * 3600_000);
 
-  const { rowCount } = await sql.query(
+  // First resolution wins: a retried resolve must not restart the retention clock.
+  await sql.query(
     `update photo_analysis set status = $3, resolved_at = $4, image_expires_at = $5
-     where id = $1 and user_id = $2`,
+     where id = $1 and user_id = $2 and resolved_at is null`,
     [analysisId, userId, status, now, expiresAt],
   );
+  const { rowCount } = await sql.query('select 1 from photo_analysis where id = $1 and user_id = $2', [analysisId, userId]);
   if (rowCount === 0) throw new ApiError('not_found', 'no such analysis');
 }
 
