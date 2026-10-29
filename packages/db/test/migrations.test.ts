@@ -1,6 +1,9 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
+import Database from 'better-sqlite3';
 import { describe, expect, it } from 'vitest';
+import { parseJson } from '../src/db';
+import { appliedMigrations, runMigrations, type RawSqlite } from '../src/migrations';
 import { MIGRATIONS } from '../src/migrations.generated';
 import { renderMigrations } from '../scripts/build-migrations.mjs';
 import { freshDb } from './helpers';
@@ -38,5 +41,40 @@ describe('migrations', () => {
         )
         .run(),
     ).toThrow(/CHECK constraint/i);
+  });
+
+  describe('runMigrations', () => {
+    const rawDb = (): RawSqlite => {
+      const sqlite = new Database(':memory:');
+      return { execute: (sql) => void sqlite.exec(sql), select: (sql) => sqlite.prepare(sql).all() as never[] };
+    };
+    const migrations = [
+      { name: '0001_a', sql: 'create table a (id integer);' },
+      { name: '0002_b', sql: 'create table b (id integer);' },
+    ];
+
+    it('reports what it ran and only runs what is still pending', () => {
+      const raw = rawDb();
+      expect(runMigrations(raw, migrations.slice(0, 1))).toEqual(['0001_a']);
+      expect(runMigrations(raw, migrations)).toEqual(['0002_b']);
+      expect(runMigrations(raw, migrations)).toEqual([]);
+      expect(appliedMigrations(raw)).toEqual(['0001_a', '0002_b']);
+    });
+
+    it('records the injected timestamp in the ledger', () => {
+      const raw = rawDb();
+      runMigrations(raw, migrations, 1234);
+      expect(raw.select('select applied_at from schema_migration')).toEqual([{ applied_at: 1234 }, { applied_at: 1234 }]);
+    });
+  });
+});
+
+describe('parseJson', () => {
+  it('parses valid JSON', () => {
+    expect(parseJson('{"a":1}', {})).toEqual({ a: 1 });
+  });
+
+  it('falls back for null, undefined, empty and corrupt text', () => {
+    for (const value of [null, undefined, '', '{not json']) expect(parseJson(value, { fallback: true })).toEqual({ fallback: true });
   });
 });
