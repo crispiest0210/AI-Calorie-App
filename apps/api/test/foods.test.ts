@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { normalizeGtin } from '@nt/core';
-import { MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, escapeLike, search } from '../src/routes/foods';
+import { MAX_SEARCH_LENGTH, MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, escapeLike, search } from '../src/routes/foods';
 import type { Sql } from '../src/db';
 
 describe('normalizeGtin', () => {
@@ -47,6 +47,14 @@ describe('search limits', () => {
     const { sql, calls } = recorder();
     await search(sql, '  Rice ');
     expect(calls[0]).toEqual(['rice', 'rice%', MAX_SEARCH_LIMIT]);
+  });
+
+  it('cuts an over-long query to the maximum length before it reaches the database', async () => {
+    const { sql, calls } = recorder();
+    await search(sql, 'a'.repeat(MAX_SEARCH_LENGTH + 500));
+    expect(calls[0]?.[0]).toBe('a'.repeat(MAX_SEARCH_LENGTH));
+    await search(sql, `${'a'.repeat(MAX_SEARCH_LENGTH - 1)} b`);
+    expect(calls[1]?.[0]).toBe('a'.repeat(MAX_SEARCH_LENGTH - 1));
   });
 
   it('escapes LIKE wildcards in the prefix pattern but not in the raw needle', async () => {

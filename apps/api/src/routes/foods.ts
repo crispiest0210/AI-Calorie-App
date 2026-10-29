@@ -12,6 +12,9 @@ export const MAX_SEARCH_LIMIT = 25;
 /** Matches the device: a single letter is not a query worth ranking. */
 export const MIN_SEARCH_LENGTH = 2;
 
+/** Longer input is cut off: no food name is this long, and similarity() scans the whole needle. */
+export const MAX_SEARCH_LENGTH = 100;
+
 const CITATIONS: Record<string, (ref: string) => string> = {
   fdc: (ref) => `https://fdc.nal.usda.gov/food-details/${ref}/nutrients`,
   off: (ref) => `https://world.openfoodfacts.org/product/${ref}`,
@@ -23,7 +26,7 @@ export function escapeLike(text: string): string {
 }
 
 export async function search(sql: Sql, query: string, limit = MAX_SEARCH_LIMIT): Promise<FoodSearchResult[]> {
-  const needle = query.trim().toLowerCase();
+  const needle = query.trim().toLowerCase().slice(0, MAX_SEARCH_LENGTH).trimEnd();
   if (needle.length < MIN_SEARCH_LENGTH) return [];
   const capped = Math.min(Math.max(limit, 1), MAX_SEARCH_LIMIT);
 
