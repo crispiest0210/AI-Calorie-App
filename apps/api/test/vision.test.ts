@@ -120,6 +120,14 @@ describe('the response', () => {
     await expect(invalid.analyzer.analyzeMealImage(IMAGE)).rejects.toMatchObject({ kind: 'schema' });
   });
 
+  it('says so when a response is cut off by the token limit', async () => {
+    const { analyzer } = analyzerReturning('{"is_food": true, "items": [{"label": "ri', { stop_reason: 'max_tokens' });
+    await expect(analyzer.analyzeMealImage(IMAGE)).rejects.toMatchObject({
+      kind: 'schema',
+      message: 'the model response was cut off',
+    });
+  });
+
   it('reports a refusal as a refusal', async () => {
     const { analyzer } = analyzerReturning(GOOD, { stop_reason: 'refusal' });
     await expect(analyzer.analyzeMealImage(IMAGE)).rejects.toMatchObject({ kind: 'refused' });

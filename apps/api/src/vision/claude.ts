@@ -105,7 +105,9 @@ export class ClaudeMealImageAnalyzer implements MealImageAnalyzer {
     try {
       raw = JSON.parse(text);
     } catch {
-      throw new AnalysisError('schema', 'the model did not return JSON', text);
+      const reason =
+        response.stop_reason === 'max_tokens' ? 'the model response was cut off' : 'the model did not return JSON';
+      throw new AnalysisError('schema', reason, text);
     }
 
     /*
