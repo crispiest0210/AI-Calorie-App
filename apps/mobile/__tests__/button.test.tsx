@@ -3,7 +3,8 @@
  * win, and never fires onPress while disabled.
  */
 import { fireEvent, render, screen } from '@testing-library/react-native';
-import { Button } from '@/components/Button';
+import { StyleSheet, Text } from 'react-native';
+import { Button, Row } from '@/components/Button';
 
 describe('Button', () => {
   it('is a button named by its label and fires onPress', () => {
@@ -32,5 +33,20 @@ describe('Button', () => {
   it('is enabled by default', () => {
     render(<Button label="Save" onPress={() => {}} />);
     expect(screen.getByRole('button', { name: 'Save' }).props.accessibilityState).toEqual({ disabled: false });
+  });
+});
+
+describe('Row', () => {
+  it('lays children out horizontally with the default gap', () => {
+    render(<Row><Text>One</Text></Row>);
+    const row = StyleSheet.flatten(screen.getByText('One').parent!.parent!.props.style);
+    expect(row).toMatchObject({ flexDirection: 'row', alignItems: 'center' });
+    expect(row.gap).toBeGreaterThan(0);
+  });
+
+  it('honours an explicit gap and extra style', () => {
+    render(<Row gap={3} style={{ marginTop: 2 }}><Text>One</Text></Row>);
+    const row = StyleSheet.flatten(screen.getByText('One').parent!.parent!.props.style);
+    expect(row).toMatchObject({ flexDirection: 'row', gap: 3, marginTop: 2 });
   });
 });
