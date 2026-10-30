@@ -118,6 +118,21 @@ describe('DELETE /v1/me', () => {
     expect(remaining.rows.map((row) => row.user_id)).toEqual([USER_B]);
   });
 
+  it('clears photo analyses and quota, keeping only rows whose image the sweeper still has to remove', async () => {
+    const [gone, stored] = ['dddddddd-dddd-4ddd-8ddd-ddddddddddd1', 'dddddddd-dddd-4ddd-8ddd-ddddddddddd2'];
+    await withUser(h.pool, USER_A, async (sql) => {
+      await sql.query(`insert into photo_analysis (id, user_id, status) values ($1,$2,'confirmed')`, [gone, USER_A]);
+      await sql.query(`insert into photo_analysis (id, user_id, status, storage_path) values ($1,$2,'analyzed',$3)`, [stored, USER_A, `${USER_A}/${stored}.jpg`]);
+      await sql.query(`insert into photo_analysis_quota (user_id, local_day, used) values ($1,'2026-09-20',2)`, [USER_A]);
+    });
+
+    await h.request(USER_A, '/v1/me', { method: 'DELETE' });
+
+    const rows = await h.pool.query('select id, image_expires_at is not null as due from photo_analysis where id = any($1::uuid[])', [[gone, stored]]);
+    expect(rows.rows).toEqual([{ id: stored, due: true }]);
+    expect((await h.pool.query('select 1 from photo_analysis_quota where user_id = $1', [USER_A])).rowCount).toBe(0);
+  });
+
   it('refuses a token older than the re-auth window and deletes nothing', async () => {
     await addEntry(USER_A, ENTRY_A, 'Rice', null);
     const staleIat = Math.floor(Date.now() / 1000) - REAUTH_WINDOW_SECONDS - 60;

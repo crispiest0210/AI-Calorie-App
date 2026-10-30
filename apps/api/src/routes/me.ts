@@ -92,7 +92,14 @@ export async function deleteAccount(sql: Sql, userId: string, tokenIssuedAt: num
   }
   // Custom foods cascade to their nutrients and portions.
   await sql.query('delete from food where owner_user_id = $1', [userId]);
-  for (const table of ['log_entry', 'water_entry', 'water_preset', 'goal_profile', 'user_settings', 'idempotency_key', 'sync_watermark']) {
+  // Photo analyses (items cascade). An analysis whose image is still in the object store stays until
+  // the sweeper has removed the file, so it is marked due now; deleting its row would orphan the image.
+  await sql.query(
+    `update photo_analysis set image_expires_at = now() where user_id = $1 and storage_path is not null and image_deleted_at is null`,
+    [userId],
+  );
+  await sql.query(`delete from photo_analysis where user_id = $1 and (storage_path is null or image_deleted_at is not null)`, [userId]);
+  for (const table of ['photo_analysis_quota', 'log_entry', 'water_entry', 'water_preset', 'goal_profile', 'user_settings', 'idempotency_key', 'sync_watermark']) {
     await sql.query(`delete from ${table} where user_id = $1`, [userId]);
   }
 }
