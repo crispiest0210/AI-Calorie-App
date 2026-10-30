@@ -10,7 +10,8 @@ import { withService, withUser } from '../src/db';
 import * as photos from '../src/routes/photos';
 import * as matching from '../src/routes/matching';
 import { AnalysisError, type MealImageAnalyzer } from '../src/vision/adapter';
-import { insertCatalogFood, json, startHarness, USER_A, USER_B, type Harness } from './harness';
+import { createApp } from '../src/app';
+import { AUTH, insertCatalogFood, json, startHarness, USER_A, USER_B, type Harness } from './harness';
 
 let h: Harness;
 
@@ -245,6 +246,34 @@ describe('retention', () => {
     await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS));
     const second = await h.pool.query('select image_deleted_at from photo_analysis where id = $1', [ANALYSIS]);
     expect(second.rows[0].image_deleted_at.getTime()).toBe(first.rows[0].image_deleted_at.getTime());
+  });
+});
+
+describe('running through the API surface', () => {
+  beforeEach(() => seedAnalysis());
+
+  it('reports photo analysis unavailable when no analyzer is configured', async () => {
+    const res = await h.request(USER_A, `/v1/photo-analyses/${ANALYSIS}/run`, { method: 'POST' });
+    expect(res.status).toBe(502);
+    expect(await json<{ code: string }>(res)).toMatchObject({ code: 'upstream_unavailable' });
+  });
+
+  it('refuses to run an analysis whose image has been deleted, without calling the model', async () => {
+    const analyzer = analyzerSaying(MODEL_SAID);
+    const readImage = vi.fn().mockResolvedValue(IMAGE);
+    const app = createApp({ pool: h.pool, auth: AUTH, analyzer, readImage });
+    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS));
+
+    const token = await h.tokenFor(USER_A);
+    const res = await app.request(`/v1/photo-analyses/${ANALYSIS}/run`, {
+      method: 'POST',
+      headers: { authorization: `Bearer ${token}` },
+    });
+
+    expect(res.status).toBe(404);
+    expect(await json<{ code: string }>(res)).toMatchObject({ code: 'not_found' });
+    expect(readImage).not.toHaveBeenCalled();
+    expect(analyzer.analyzeMealImage).not.toHaveBeenCalled();
   });
 });
 
