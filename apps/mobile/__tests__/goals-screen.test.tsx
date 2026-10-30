@@ -87,4 +87,14 @@ describe('GoalsScreen', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Save goals' }));
     expect(saved().waterTargetMl).toBeNull();
   });
+
+  it('treats a lone decimal point as 0 instead of crashing while typing or saving', () => {
+    render(<GoalsScreen />);
+    fireEvent.changeText(screen.getByLabelText('Protein'), '.');
+    fireEvent.changeText(screen.getByLabelText('Energy target'), '.');
+    fireEvent.press(screen.getByRole('button', { name: 'Save goals' }));
+    const targets = saved().targets;
+    expect(targets.find((t) => t.nutrientCode === 'protein_g')!.value).toBe('0');
+    expect(targets.find((t) => t.nutrientCode === 'energy_kcal')!.value).toBe('0');
+  });
 });

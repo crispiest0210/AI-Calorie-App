@@ -12,7 +12,7 @@ import {
   NUTRIENT_DEFS,
   formatDayLabel,
   localDateOf,
-  num,
+  tryDec,
   resolveTarget,
   type GoalBasis,
   type GoalTarget,
@@ -28,6 +28,9 @@ import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 
 const MACROS = ['protein_g', 'carb_g', 'fat_g'] as const;
+
+// A half-typed field such as "." is not a number yet; count it as 0 instead of throwing mid-render or on save.
+const numOrZero = (text: string) => tryDec(text)?.toFixed() ?? '0';
 
 export default function GoalsScreen() {
   const db = useDb();
@@ -60,17 +63,17 @@ export default function GoalsScreen() {
 
   const save = () => {
     const targets: GoalTarget[] = [
-      { nutrientCode: 'energy_kcal', kind: 'target', value: num(energy || '0'), valueLow: null, valueHigh: null, basis: 'absolute' },
+      { nutrientCode: 'energy_kcal', kind: 'target', value: numOrZero(energy), valueLow: null, valueHigh: null, basis: 'absolute' },
       ...MACROS.map<GoalTarget>((code) => ({
         nutrientCode: code,
         kind: 'target',
-        value: num(macros[code] || '0'),
+        value: numOrZero(macros[code]),
         valueLow: null,
         valueHigh: null,
         basis: macroBasis,
       })),
-      { nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: num(fiber || '0'), valueHigh: null, basis: 'absolute' },
-      { nutrientCode: 'sodium_mg', kind: 'max', value: null, valueLow: null, valueHigh: num(sodium || '0'), basis: 'absolute' },
+      { nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: numOrZero(fiber), valueHigh: null, basis: 'absolute' },
+      { nutrientCode: 'sodium_mg', kind: 'max', value: null, valueLow: null, valueHigh: numOrZero(sodium), basis: 'absolute' },
     ];
     const waterMl = Number.parseInt(water, 10);
     goalsRepo.saveGoals(db, { waterTargetMl: Number.isFinite(waterMl) && waterMl > 0 ? waterMl : null, targets });
@@ -100,8 +103,8 @@ export default function GoalsScreen() {
         />
         {MACROS.map((code) => {
           const resolved = resolveTarget(
-            { nutrientCode: code, kind: 'target', value: num(macros[code] || '0'), valueLow: null, valueHigh: null, basis: macroBasis },
-            num(energy || '0'),
+            { nutrientCode: code, kind: 'target', value: numOrZero(macros[code]), valueLow: null, valueHigh: null, basis: macroBasis },
+            numOrZero(energy),
           );
           return (
             <View key={code} style={{ gap: spacing.xs }}>
