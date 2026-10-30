@@ -12,6 +12,10 @@ export const DEFAULT_PRESETS = [
 ];
 
 export function addWater(db: Db, amountMl: number, at = new Date()): string {
+  // Same bounds as the sync contract, so a local row can never be one the server rejects.
+  if (!Number.isInteger(amountMl) || amountMl < 1 || amountMl > 5000) {
+    throw new RangeError(`water amount must be a whole number of mL between 1 and 5000, got ${amountMl}`);
+  }
   const now = at.getTime();
   const id = uuidv7(now);
   db.transaction((tx) => {

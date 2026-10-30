@@ -351,6 +351,15 @@ describe('water', () => {
     expect(water.waterTotalsForRange(db, '2000-01-01', '2999-01-01')[today]).toBe(250);
   });
 
+  it('rejects amounts the sync contract would refuse, without queueing anything', () => {
+    const { db } = freshDb();
+    for (const bad of [0, -250, 5001, 250.5, Number.NaN]) {
+      expect(() => water.addWater(db, bad)).toThrow(RangeError);
+    }
+    expect(water.addWater(db, 5000)).toBeTruthy();
+    expect(outbox.pending(db)).toHaveLength(1);
+  });
+
   it('reports zero for a day with no water', () => {
     const { db } = freshDb();
     expect(water.waterTotalMl(db, '2020-01-01')).toBe(0);
