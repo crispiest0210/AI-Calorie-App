@@ -423,6 +423,14 @@ describe('goals', () => {
     { nutrientCode: 'protein_g' as const, kind: 'target' as const, value: '25', valueLow: null, valueHigh: null, basis: 'pct_energy' as const },
   ];
 
+  it('rejects water targets the sync contract would refuse, without writing anything', () => {
+    const { db } = freshDb();
+    for (const bad of [0, -500, 2500.5, Number.NaN]) {
+      expect(() => goalsRepo.saveGoals(db, { waterTargetMl: bad, targets, effectiveFrom: '2026-01-01' })).toThrow(RangeError);
+    }
+    expect(goalsRepo.goalsForDate(db, '2026-01-01')).toBeNull();
+  });
+
   it('versions goals by date so past days keep their targets', () => {
     const { db } = freshDb();
     goalsRepo.saveGoals(db, { waterTargetMl: 2500, targets, effectiveFrom: '2026-01-01' });

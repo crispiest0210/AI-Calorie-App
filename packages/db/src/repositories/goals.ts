@@ -56,6 +56,11 @@ export interface SaveGoalsInput {
 }
 
 export function saveGoals(db: Db, input: SaveGoalsInput, at = new Date()): string {
+  // Same rule as the sync contract (positive whole mL), so a local profile is never one the server rejects.
+  const { waterTargetMl } = input;
+  if (waterTargetMl !== null && (!Number.isInteger(waterTargetMl) || waterTargetMl < 1)) {
+    throw new RangeError(`water target must be a positive whole number of mL or null, got ${waterTargetMl}`);
+  }
   const now = at.getTime();
   const effectiveFrom = input.effectiveFrom ?? localDateOf(at);
   return db.transaction((tx) => {
