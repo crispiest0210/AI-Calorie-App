@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { normalizeGtin } from '@nt/core';
-import { MAX_SEARCH_LENGTH, MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, escapeLike, search } from '../src/routes/foods';
+import { MAX_SEARCH_LENGTH, MAX_SEARCH_LIMIT, MIN_SEARCH_LENGTH, detail, escapeLike, lookupBarcode, search } from '../src/routes/foods';
 import type { Sql } from '../src/db';
 
 describe('normalizeGtin', () => {
@@ -70,5 +70,51 @@ describe('search limits', () => {
     await search(sql, 'rice', 0);
     await search(sql, 'rice', 7);
     expect(calls.map((c) => c[2])).toEqual([MAX_SEARCH_LIMIT, 1, 7]);
+  });
+});
+
+describe('detail citation URL', () => {
+  /** Answers the food lookup with one row and the nutrient and portion lookups with none. */
+  function foodWith(provider: string, sourceRef: string | null) {
+    const food = {
+      id: 'f1', name: 'Rice', brand: null, kind: 'food', quality_tier: 'lab', gtin: null,
+      density_g_per_ml: null, source_ref: sourceRef, provider, dataset: 'ds', version: '1',
+    };
+    return {
+      query: async (text: string) => ({ rows: text.includes('from food f join') ? [food] : [] }),
+    } as unknown as Sql;
+  }
+
+  it('links Open Food Facts products to their product page', async () => {
+    const { source } = await detail(foodWith('off', '3017620422003'), 'f1');
+    expect(source.citationUrl).toBe('https://world.openfoodfacts.org/product/3017620422003');
+  });
+
+  it('has no citation for a provider without a link template or a food without a source ref', async () => {
+    expect((await detail(foodWith('user', 'x'), 'f1')).source.citationUrl).toBeNull();
+    expect((await detail(foodWith('fdc', null), 'f1')).source.citationUrl).toBeNull();
+  });
+});
+
+describe('lookupBarcode', () => {
+  it('remembers an upstream miss and returns null', async () => {
+    const statements: string[] = [];
+    const sql = {
+      query: async (text: string) => {
+        statements.push(text);
+        return { rows: [] };
+      },
+    } as unknown as Sql;
+    const fetchUpstream = vi.fn(async () => null);
+    expect(await lookupBarcode(sql, '3017620422003', { fetchUpstream })).toBeNull();
+    expect(fetchUpstream).toHaveBeenCalledWith('03017620422003');
+    expect(statements.at(-1)).toContain('not_found');
+  });
+
+  it('answers a cached miss without asking upstream again', async () => {
+    const sql = { query: async () => ({ rows: [{ food_id: null, not_found: true }] }) } as unknown as Sql;
+    const fetchUpstream = vi.fn(async () => null);
+    expect(await lookupBarcode(sql, '3017620422003', { fetchUpstream })).toBeNull();
+    expect(fetchUpstream).not.toHaveBeenCalled();
   });
 });
