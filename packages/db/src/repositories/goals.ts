@@ -4,7 +4,7 @@
  * later still shows the goals that applied then.
  */
 import { asc, desc, eq, isNull, lte, and } from 'drizzle-orm';
-import { localDateOf, uuidv7, type GoalProfile, type GoalTarget, type LocalDate, type NutrientCode } from '@nt/core';
+import { localDateOf, tryDec, uuidv7, type GoalProfile, type GoalTarget, type LocalDate, type NutrientCode } from '@nt/core';
 import { goalProfile, goalTarget } from '../schema';
 import type { Db } from '../db';
 import { enqueue } from './outbox';
@@ -55,12 +55,28 @@ export interface SaveGoalsInput {
   effectiveFrom?: LocalDate;
 }
 
+/** A goal is only usable if its numbers parse, are not negative, and a range is not inverted. */
+function assertValidTarget(target: GoalTarget): void {
+  const parsed: Record<string, ReturnType<typeof tryDec>> = {};
+  for (const field of ['value', 'valueLow', 'valueHigh'] as const) {
+    const raw = target[field];
+    if (raw === null || raw === undefined) continue;
+    const d = tryDec(raw);
+    if (!d || d.isNegative()) throw new RangeError(`${target.nutrientCode} ${field} must be a non-negative number, got ${raw}`);
+    parsed[field] = d;
+  }
+  if (parsed.valueLow && parsed.valueHigh && parsed.valueLow.greaterThan(parsed.valueHigh)) {
+    throw new RangeError(`${target.nutrientCode} range low must not exceed high`);
+  }
+}
+
 export function saveGoals(db: Db, input: SaveGoalsInput, at = new Date()): string {
   // Same rule as the sync contract (positive whole mL), so a local profile is never one the server rejects.
   const { waterTargetMl } = input;
   if (waterTargetMl !== null && (!Number.isInteger(waterTargetMl) || waterTargetMl < 1)) {
     throw new RangeError(`water target must be a positive whole number of mL or null, got ${waterTargetMl}`);
   }
+  input.targets.forEach(assertValidTarget);
   const now = at.getTime();
   const effectiveFrom = input.effectiveFrom ?? localDateOf(at);
   return db.transaction((tx) => {

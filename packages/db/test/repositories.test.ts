@@ -468,6 +468,19 @@ describe('goals', () => {
     expect(goalsRepo.goalsForDate(db, '2026-01-01')).toBeNull();
   });
 
+  it('rejects unparseable, negative or inverted-range targets without writing anything', () => {
+    const { db } = freshDb();
+    const base = { nutrientCode: 'energy_kcal' as const, kind: 'range' as const, value: null, valueLow: null, valueHigh: null, basis: 'absolute' as const };
+    for (const bad of [
+      { ...base, kind: 'target' as const, value: 'abc' },
+      { ...base, kind: 'target' as const, value: '-5' },
+      { ...base, valueLow: '2000', valueHigh: '1500' },
+    ]) {
+      expect(() => goalsRepo.saveGoals(db, { waterTargetMl: null, targets: [bad], effectiveFrom: '2026-01-01' })).toThrow(RangeError);
+    }
+    expect(goalsRepo.goalsForDate(db, '2026-01-01')).toBeNull();
+  });
+
   it('versions goals by date so past days keep their targets', () => {
     const { db } = freshDb();
     goalsRepo.saveGoals(db, { waterTargetMl: 2500, targets, effectiveFrom: '2026-01-01' });
