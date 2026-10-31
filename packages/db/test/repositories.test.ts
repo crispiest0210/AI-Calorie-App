@@ -256,6 +256,15 @@ describe('logging', () => {
     expect(outbox.pending(db)).toHaveLength(2);
   });
 
+  it('rejects edited quick-add nutrients the sync contract would refuse, without queueing anything', () => {
+    const { db } = freshDb();
+    const id = entries.logQuickAdd(db, { mealSlot: 'snack', nutrients: { energy_kcal: '100' } });
+    const queued = outbox.pending(db).length;
+    expect(() => entries.updateEntry(db, id, { nutrientsAbsolute: { energy_kcal: '1e3' } })).toThrow();
+    expect(entries.entryById(db, id)!.nutrientsAbsolute).toEqual({ energy_kcal: '100' });
+    expect(outbox.pending(db)).toHaveLength(queued);
+  });
+
   it('leaves untouched fields alone on a partial edit', () => {
     const { db, rice } = seeded();
     const id = logRice(db, rice, '150');

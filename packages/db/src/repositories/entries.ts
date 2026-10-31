@@ -203,6 +203,7 @@ export interface UpdateEntryInput {
 }
 
 export function updateEntry(db: Db, id: string, patch: UpdateEntryInput, now = Date.now()): void {
+  if (patch.nutrientsAbsolute !== undefined) schemas.nutrientMap.parse(patch.nutrientsAbsolute);
   db.transaction((tx) => {
     const values: Record<string, unknown> = { updatedAt: now };
     if (patch.mealSlot !== undefined) values.mealSlot = patch.mealSlot;
