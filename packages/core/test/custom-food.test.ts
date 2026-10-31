@@ -65,6 +65,14 @@ describe('customFoodFromLabel', () => {
     expect(food.portions[0]!.label).toBe('1 serving (40 g)');
   });
 
+  it('rejects a non-positive or unparseable density', () => {
+    const make = (densityGPerMl: string) => () =>
+      customFoodFromLabel({ name: 'Oil', basis: 'per_100g', densityGPerMl, values: { fat_g: '100' } });
+    expect(make('0')).toThrow(/density must be greater than 0/);
+    expect(make('-1')).toThrow(CustomFoodError);
+    expect(make('thick')).toThrow(/the density is not a number/);
+  });
+
   it('rejects a negative serving weight and passes density and sourceRef through', () => {
     expect(() => customFoodFromLabel({ name: 'x', basis: 'per_serving', servingGrams: -10, values: { energy_kcal: '1' } })).toThrow(CustomFoodError);
     const { food } = customFoodFromLabel({ name: 'Oil', basis: 'per_100g', densityGPerMl: '0.92', sourceRef: 'label-1', values: { fat_g: '100' } });

@@ -38,6 +38,13 @@ export function customFoodFromLabel(input: CustomFoodInput): { food: CanonicalFo
   const codes: NutrientCode[] = nutrientCodesOf(input.values);
   if (codes.length === 0) throw new CustomFoodError('a custom food needs at least one nutrient value');
 
+  let densityGPerMl: Num | null = null;
+  if (input.densityGPerMl !== null && input.densityGPerMl !== undefined) {
+    const density = parseLabelNumber(input.densityGPerMl, 'the density');
+    if (!density.greaterThan(0)) throw new CustomFoodError('the density must be greater than 0 g/ml');
+    densityGPerMl = num(density);
+  }
+
   const portions: CanonicalPortion[] = [];
   let factor = dec(1);
   if (input.basis === 'per_serving') {
@@ -69,7 +76,7 @@ export function customFoodFromLabel(input: CustomFoodInput): { food: CanonicalFo
       gtin: normalizeGtin(input.gtin),
       qualityTier: 'user',
       sourceRef: input.sourceRef ?? 'user',
-      densityGPerMl: input.densityGPerMl ?? null,
+      densityGPerMl,
       category: null,
       nutrients,
       portions,
