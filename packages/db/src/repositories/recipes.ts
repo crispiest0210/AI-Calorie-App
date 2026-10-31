@@ -152,7 +152,18 @@ export interface CreateRecipeInput {
   sourceReleaseId: string;
 }
 
+/** Servings (and a cooked weight, when given) divide the recipe totals, so they must be positive numbers. */
+function assertRecipeYield(servings: Num | undefined, totalCookedGrams: Num | null | undefined): void {
+  if (servings !== undefined && !tryDec(servings)?.greaterThan(0)) {
+    throw new RangeError(`recipe servings must be a positive number, got ${servings}`);
+  }
+  if (totalCookedGrams != null && !tryDec(totalCookedGrams)?.greaterThan(0)) {
+    throw new RangeError(`recipe cooked weight must be a positive number, got ${totalCookedGrams}`);
+  }
+}
+
 export function createRecipe(db: Db, input: CreateRecipeInput, now = Date.now()): string {
+  assertRecipeYield(input.servings, input.totalCookedGrams);
   const canonical: CanonicalFood = {
     kind: 'recipe',
     name: input.name.trim(),
@@ -180,6 +191,7 @@ export function updateRecipe(
   patch: { name?: string; servings?: Num; totalCookedGrams?: Num | null },
   now = Date.now(),
 ): void {
+  assertRecipeYield(patch.servings, patch.totalCookedGrams);
   db.transaction((tx) => {
     if (patch.name !== undefined) tx.update(food).set({ name: patch.name.trim() }).where(eq(food.id, recipeId)).run();
     const values: Record<string, unknown> = {};

@@ -136,6 +136,16 @@ describe('recipes', () => {
     expect(foods.foodDetail(db, id)!.portions[0]!.id).toBe(serving.id);
   });
 
+  it('rejects servings and cooked weights that are not positive numbers', () => {
+    const { db, id } = kitchen();
+    for (const servings of ['0', '-2', '', 'abc']) {
+      expect(() => recipes.updateRecipe(db, id, { servings })).toThrow(RangeError);
+    }
+    expect(() => recipes.updateRecipe(db, id, { totalCookedGrams: '0' })).toThrow(RangeError);
+    expect(() => recipes.createRecipe(db, { name: 'Soup', servings: '0', sourceReleaseId: RELEASE_ID })).toThrow(RangeError);
+    recipes.updateRecipe(db, id, { totalCookedGrams: null });
+  });
+
   it('queues the recipe for sync on every change', () => {
     const { db, rice, id } = kitchen();
     recipes.addIngredient(db, id, rice, '200');
