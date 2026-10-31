@@ -7,6 +7,7 @@
 import { asc, eq } from 'drizzle-orm';
 import {
   computeRecipe,
+  tryDec,
   uuidv7,
   type CanonicalFood,
   type Num,
@@ -192,7 +193,13 @@ export function updateRecipe(
   });
 }
 
+/** An ingredient weight that is not a positive number would corrupt every total the recipe feeds. */
+function assertIngredientGrams(grams: Num): void {
+  if (!tryDec(grams)?.greaterThan(0)) throw new RangeError(`ingredient grams must be a positive number, got ${grams}`);
+}
+
 export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string, grams: Num, now = Date.now()): string {
+  assertIngredientGrams(grams);
   const position = db.select().from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, recipeId)).all().length;
   const id = uuidv7(now);
   db.transaction((tx) => {
@@ -204,6 +211,7 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
 }
 
 export function updateIngredient(db: Db, recipeId: string, ingredientId: string, grams: Num, now = Date.now()): void {
+  assertIngredientGrams(grams);
   db.transaction((tx) => {
     tx.update(recipeIngredient).set({ grams, updatedAt: now }).where(eq(recipeIngredient.id, ingredientId)).run();
     recompute(tx, db, recipeId, now);

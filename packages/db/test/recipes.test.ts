@@ -48,6 +48,17 @@ describe('recipes', () => {
     ]);
   });
 
+  it('rejects ingredient weights that are not positive numbers', () => {
+    const { db, rice, id } = kitchen();
+    for (const bad of ['0', '-5', 'abc', '']) {
+      expect(() => recipes.addIngredient(db, id, rice, bad)).toThrow(RangeError);
+    }
+    const ingredient = recipes.addIngredient(db, id, rice, '200');
+    expect(() => recipes.updateIngredient(db, id, ingredient, '0')).toThrow(RangeError);
+    expect(recipes.readRecipe(db, id)!.ingredients).toHaveLength(1);
+    expect(recipes.readRecipe(db, id)!.ingredients[0]!.grams).toBe('200');
+  });
+
   it('recomputes when an ingredient changes, is added or removed', () => {
     const { db, rice, chicken, id } = kitchen();
     const riceIngredient = recipes.addIngredient(db, id, rice, '200');
