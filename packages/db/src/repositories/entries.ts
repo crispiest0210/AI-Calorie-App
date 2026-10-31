@@ -8,6 +8,7 @@ import {
   mapToJson,
   parseNutrientMap,
   schemas,
+  tryDec,
   tzOffsetMinutesOf,
   uuidv7,
   type AmountUnit,
@@ -116,7 +117,15 @@ export interface LogFoodInput {
   at?: Date;
 }
 
+/** A non-positive or non-numeric amount would corrupt every total the entry feeds. */
+function assertPositive(label: string, value: Num): void {
+  if (!tryDec(value)?.greaterThan(0)) throw new RangeError(`${label} must be a positive number, got ${value}`);
+}
+
 export function logFood(db: Db, input: LogFoodInput): string {
+  assertPositive('amountValue', input.amountValue);
+  assertPositive('grams', input.grams);
+  schemas.nutrientMap.parse(input.nutrientsPer100g);
   const at = input.at ?? new Date();
   const now = at.getTime();
   const id = uuidv7(now);
@@ -203,6 +212,8 @@ export interface UpdateEntryInput {
 }
 
 export function updateEntry(db: Db, id: string, patch: UpdateEntryInput, now = Date.now()): void {
+  if (patch.amountValue !== undefined) assertPositive('amountValue', patch.amountValue);
+  if (patch.grams != null) assertPositive('grams', patch.grams);
   if (patch.nutrientsAbsolute !== undefined) schemas.nutrientMap.parse(patch.nutrientsAbsolute);
   db.transaction((tx) => {
     const values: Record<string, unknown> = { updatedAt: now };

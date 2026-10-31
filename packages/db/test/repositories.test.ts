@@ -241,6 +241,25 @@ describe('logging', () => {
     expect(outbox.pending(db)).toHaveLength(0);
   });
 
+  it('rejects food entries with a non-positive amount or malformed nutrients, without queueing anything', () => {
+    const { db, rice } = seeded();
+    for (const bad of ['0', '-5', 'abc', '']) {
+      expect(() => logRice(db, rice, bad)).toThrow(RangeError);
+    }
+    expect(() =>
+      entries.logFood(db, {
+        foodId: rice, foodName: 'Rice', sourceReleaseId: RELEASE_ID, mealSlot: 'lunch', amountValue: '100',
+        amountUnit: 'g', grams: '100', gramsProvenance: 'user', nutrientsPer100g: { energy_kcal: '1e3' },
+      }),
+    ).toThrow();
+    const id = logRice(db, rice, '100');
+    const queued = outbox.pending(db).length;
+    expect(() => entries.updateEntry(db, id, { grams: '-1' })).toThrow(RangeError);
+    expect(() => entries.updateEntry(db, id, { amountValue: '0' })).toThrow(RangeError);
+    expect(outbox.pending(db)).toHaveLength(queued);
+    expect(entries.entriesForDate(db, localDateOf())).toHaveLength(1);
+  });
+
   it('names an unlabelled quick add', () => {
     const { db } = freshDb();
     entries.logQuickAdd(db, { mealSlot: 'snack', nutrients: { energy_kcal: '100' }, label: '  ' });
