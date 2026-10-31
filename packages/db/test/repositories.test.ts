@@ -232,6 +232,15 @@ describe('logging', () => {
     expect(totalOf(day.totals.total, 'protein_g')).toBeNull();
   });
 
+  it('rejects quick-add nutrients the sync contract would refuse, without queueing anything', () => {
+    const { db } = freshDb();
+    for (const bad of ['', '1e3', '12.', 'abc']) {
+      expect(() => entries.logQuickAdd(db, { mealSlot: 'snack', nutrients: { energy_kcal: bad } })).toThrow();
+    }
+    expect(entries.entriesForDate(db, localDateOf())).toHaveLength(0);
+    expect(outbox.pending(db)).toHaveLength(0);
+  });
+
   it('names an unlabelled quick add', () => {
     const { db } = freshDb();
     entries.logQuickAdd(db, { mealSlot: 'snack', nutrients: { energy_kcal: '100' }, label: '  ' });

@@ -7,6 +7,7 @@ import {
   localDateOf,
   mapToJson,
   parseNutrientMap,
+  schemas,
   tzOffsetMinutesOf,
   uuidv7,
   type AmountUnit,
@@ -157,6 +158,8 @@ export interface QuickAddInput {
 
 /** A quick add carries absolute numbers the user typed; there is no food behind it. */
 export function logQuickAdd(db: Db, input: QuickAddInput): string {
+  // Same shape the sync contract demands, so a local row can never be one the server rejects.
+  schemas.nutrientMap.parse(input.nutrients);
   const at = input.at ?? new Date();
   const now = at.getTime();
   const id = uuidv7(now);
