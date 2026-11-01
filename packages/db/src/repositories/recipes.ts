@@ -4,7 +4,7 @@
  * 3.3). Logging one is logging a food, so everything downstream — snapshots,
  * totals, sync — works without knowing recipes exist.
  */
-import { asc, eq } from 'drizzle-orm';
+import { and, asc, eq, isNull } from 'drizzle-orm';
 import {
   computeRecipe,
   tryDec,
@@ -193,6 +193,14 @@ export function updateRecipe(
 ): void {
   assertRecipeYield(patch.servings, patch.totalCookedGrams);
   db.transaction((tx) => {
+    // An unknown, non-recipe or deleted id must not queue an upsert for a row that is not a live recipe.
+    const live = tx
+      .select({ id: recipeMeta.foodId })
+      .from(recipeMeta)
+      .innerJoin(food, eq(food.id, recipeMeta.foodId))
+      .where(and(eq(recipeMeta.foodId, recipeId), isNull(food.deletedAt)))
+      .get();
+    if (!live) return;
     if (patch.name !== undefined) tx.update(food).set({ name: patch.name.trim() }).where(eq(food.id, recipeId)).run();
     const values: Record<string, unknown> = {};
     if (patch.servings !== undefined) values.servings = patch.servings;
@@ -210,6 +218,15 @@ function assertIngredientGrams(grams: Num): void {
   if (!tryDec(grams)?.greaterThan(0)) throw new RangeError(`ingredient grams must be a positive number, got ${grams}`);
 }
 
+/** Whether `ingredientId` is an ingredient of `recipeId`; edits to anything else must not queue a sync op. */
+function hasIngredient(tx: Writer, recipeId: string, ingredientId: string): boolean {
+  return !!tx
+    .select({ id: recipeIngredient.id })
+    .from(recipeIngredient)
+    .where(and(eq(recipeIngredient.id, ingredientId), eq(recipeIngredient.recipeFoodId, recipeId)))
+    .get();
+}
+
 export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string, grams: Num, now = Date.now()): string {
   assertIngredientGrams(grams);
   const position = db.select().from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, recipeId)).all().length;
@@ -225,6 +242,7 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
 export function updateIngredient(db: Db, recipeId: string, ingredientId: string, grams: Num, now = Date.now()): void {
   assertIngredientGrams(grams);
   db.transaction((tx) => {
+    if (!hasIngredient(tx, recipeId, ingredientId)) return;
     tx.update(recipeIngredient).set({ grams, updatedAt: now }).where(eq(recipeIngredient.id, ingredientId)).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);
@@ -233,6 +251,7 @@ export function updateIngredient(db: Db, recipeId: string, ingredientId: string,
 
 export function removeIngredient(db: Db, recipeId: string, ingredientId: string, now = Date.now()): void {
   db.transaction((tx) => {
+    if (!hasIngredient(tx, recipeId, ingredientId)) return;
     tx.delete(recipeIngredient).where(eq(recipeIngredient.id, ingredientId)).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);

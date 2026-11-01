@@ -155,6 +155,20 @@ describe('recipes', () => {
     expect(queued.every((row) => row.tableName === 'food')).toBe(true);
   });
 
+  it('ignores edits to an unknown recipe or ingredient instead of queueing an upsert', () => {
+    const { db, rice, id } = kitchen();
+    const ingredient = recipes.addIngredient(db, id, rice, '200');
+    const queued = outbox.pendingCount(db);
+    recipes.updateRecipe(db, 'no-such-recipe', { servings: '4' });
+    recipes.updateRecipe(db, rice, { name: 'Not a recipe' });
+    recipes.updateIngredient(db, id, 'no-such-ingredient', '100');
+    recipes.removeIngredient(db, id, 'no-such-ingredient');
+    recipes.updateIngredient(db, 'other-recipe', ingredient, '999');
+    recipes.removeIngredient(db, 'other-recipe', ingredient);
+    expect(outbox.pendingCount(db)).toBe(queued);
+    expect(recipes.readRecipe(db, id)!.ingredients[0]!.grams).toBe('200');
+  });
+
   it('lists recipes and ignores a deleted one', () => {
     const { db, rice, id } = kitchen();
     recipes.addIngredient(db, id, rice, '200');
