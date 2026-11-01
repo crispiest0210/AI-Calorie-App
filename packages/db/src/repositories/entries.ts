@@ -2,7 +2,7 @@
  * Log entries. A write never depends on the network (spec 2.11): the row and
  * its outbox record land in one local transaction and the UI re-reads SQLite.
  */
-import { and, asc, eq, gte, isNull, lte, sql } from 'drizzle-orm';
+import { and, asc, eq, gte, isNotNull, isNull, lte, sql } from 'drizzle-orm';
 import {
   localDateOf,
   mapToJson,
@@ -244,6 +244,9 @@ export function deleteEntry(db: Db, id: string, now = Date.now()): void {
 /** Undo for the swipe-to-delete toast; the row never left the database. */
 export function restoreEntry(db: Db, id: string, now = Date.now()): void {
   db.transaction((tx) => {
+    // Only a deleted entry can be restored; a live or unknown id must not queue a bogus upsert.
+    const deleted = tx.select({ id: logEntry.id }).from(logEntry).where(and(eq(logEntry.id, id), isNotNull(logEntry.deletedAt))).get();
+    if (!deleted) return;
     tx.update(logEntry).set({ deletedAt: null, updatedAt: now }).where(eq(logEntry.id, id)).run();
     enqueue(tx, 'log_entry', id, 'upsert', now);
   });

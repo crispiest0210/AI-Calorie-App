@@ -301,6 +301,24 @@ describe('logging', () => {
     expect(outbox.pendingCount(db)).toBe(queued);
   });
 
+  it('ignores restoring a live or unknown entry instead of queueing an upsert', () => {
+    const { db, rice } = seeded();
+    const id = logRice(db, rice, '150');
+    const queued = outbox.pendingCount(db);
+    entries.restoreEntry(db, id);
+    entries.restoreEntry(db, 'no-such-entry');
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
+  it('ignores deleting an unknown or already-deleted food instead of queueing a tombstone', () => {
+    const { db, rice } = seeded();
+    foods.softDeleteFood(db, rice);
+    const queued = outbox.pendingCount(db);
+    foods.softDeleteFood(db, rice);
+    foods.softDeleteFood(db, 'no-such-food');
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('soft-deletes with undo, leaving a tombstone for sync', () => {
     const { db, sqlite, rice } = seeded();
     const id = logRice(db, rice, '150');

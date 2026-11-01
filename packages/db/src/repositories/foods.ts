@@ -337,6 +337,9 @@ export function createCustomFood(db: Db, canonical: CanonicalFood, options: Inse
 
 export function softDeleteFood(db: Db, id: string, now = Date.now()): void {
   db.transaction((tx) => {
+    // An unknown or already-deleted id must not queue a tombstone for a row that never existed.
+    const live = tx.select({ id: food.id }).from(food).where(and(eq(food.id, id), isNull(food.deletedAt))).get();
+    if (!live) return;
     tx.update(food).set({ deletedAt: now, updatedAt: now }).where(eq(food.id, id)).run();
     enqueue(tx, 'food', id, 'delete', now);
   });
