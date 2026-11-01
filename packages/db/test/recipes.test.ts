@@ -177,6 +177,16 @@ describe('recipes', () => {
     expect(outbox.pendingCount(db)).toBe(queued);
   });
 
+  it('ignores ingredient edits on a deleted recipe instead of queueing an upsert for its tombstone', () => {
+    const { db, rice, id } = kitchen();
+    const ingredient = recipes.addIngredient(db, id, rice, '200');
+    foods.softDeleteFood(db, id);
+    const queued = outbox.pendingCount(db);
+    recipes.updateIngredient(db, id, ingredient, '999');
+    recipes.removeIngredient(db, id, ingredient);
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('lists recipes and ignores a deleted one', () => {
     const { db, rice, id } = kitchen();
     recipes.addIngredient(db, id, rice, '200');
