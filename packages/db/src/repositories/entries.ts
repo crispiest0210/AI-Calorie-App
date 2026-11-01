@@ -216,6 +216,9 @@ export function updateEntry(db: Db, id: string, patch: UpdateEntryInput, now = D
   if (patch.grams != null) assertPositive('grams', patch.grams);
   if (patch.nutrientsAbsolute !== undefined) schemas.nutrientMap.parse(patch.nutrientsAbsolute);
   db.transaction((tx) => {
+    // An unknown or deleted entry must not queue an upsert that would resurrect or invent a row.
+    const live = tx.select({ id: logEntry.id }).from(logEntry).where(and(eq(logEntry.id, id), isNull(logEntry.deletedAt))).get();
+    if (!live) return;
     const values: Record<string, unknown> = { updatedAt: now };
     if (patch.mealSlot !== undefined) values.mealSlot = patch.mealSlot;
     if (patch.amountValue !== undefined) values.amountValue = patch.amountValue;

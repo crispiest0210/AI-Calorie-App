@@ -310,6 +310,16 @@ describe('logging', () => {
     expect(outbox.pendingCount(db)).toBe(queued);
   });
 
+  it('ignores editing an unknown or deleted entry instead of queueing an upsert', () => {
+    const { db, rice } = seeded();
+    const id = logRice(db, rice, '150');
+    entries.deleteEntry(db, id);
+    const queued = outbox.pendingCount(db);
+    entries.updateEntry(db, id, { note: 'x' });
+    entries.updateEntry(db, 'no-such-entry', { note: 'x' });
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('ignores deleting an unknown or already-deleted food instead of queueing a tombstone', () => {
     const { db, rice } = seeded();
     foods.softDeleteFood(db, rice);
