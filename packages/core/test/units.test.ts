@@ -24,6 +24,8 @@ describe('resolveGrams', () => {
   it('refuses non-positive amounts and energy units', () => {
     expect(resolveGrams({ value: '0', unit: 'g' }, rice)).toEqual({ ok: false, reason: 'amount_not_positive' });
     expect(resolveGrams({ value: '-1', unit: 'g' }, rice)).toEqual({ ok: false, reason: 'amount_not_positive' });
+    expect(resolveGrams({ value: '.', unit: 'g' }, rice)).toEqual({ ok: false, reason: 'amount_not_positive' });
+    expect(resolveGrams({ value: '', unit: 'g' }, rice)).toEqual({ ok: false, reason: 'amount_not_positive' });
     expect(resolveGrams({ value: '250', unit: 'kcal' }, rice)).toEqual({ ok: false, reason: 'energy_unit_needs_quick_add' });
   });
 });
