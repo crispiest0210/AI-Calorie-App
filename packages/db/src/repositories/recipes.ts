@@ -185,6 +185,15 @@ export function createRecipe(db: Db, input: CreateRecipeInput, now = Date.now())
   });
 }
 
+function isLiveRecipe(tx: Writer, recipeId: string): boolean {
+  return !!tx
+    .select({ id: recipeMeta.foodId })
+    .from(recipeMeta)
+    .innerJoin(food, eq(food.id, recipeMeta.foodId))
+    .where(and(eq(recipeMeta.foodId, recipeId), isNull(food.deletedAt)))
+    .get();
+}
+
 export function updateRecipe(
   db: Db,
   recipeId: string,
@@ -194,13 +203,7 @@ export function updateRecipe(
   assertRecipeYield(patch.servings, patch.totalCookedGrams);
   db.transaction((tx) => {
     // An unknown, non-recipe or deleted id must not queue an upsert for a row that is not a live recipe.
-    const live = tx
-      .select({ id: recipeMeta.foodId })
-      .from(recipeMeta)
-      .innerJoin(food, eq(food.id, recipeMeta.foodId))
-      .where(and(eq(recipeMeta.foodId, recipeId), isNull(food.deletedAt)))
-      .get();
-    if (!live) return;
+    if (!isLiveRecipe(tx, recipeId)) return;
     if (patch.name !== undefined) tx.update(food).set({ name: patch.name.trim() }).where(eq(food.id, recipeId)).run();
     const values: Record<string, unknown> = {};
     if (patch.servings !== undefined) values.servings = patch.servings;
@@ -232,6 +235,8 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
   const position = db.select().from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, recipeId)).all().length;
   const id = uuidv7(now);
   db.transaction((tx) => {
+    // A deleted recipe is a tombstone; adding to it would queue an upsert that resurrects it on other devices.
+    if (!isLiveRecipe(tx, recipeId)) throw new Error(`recipe ${recipeId} not found`);
     tx.insert(recipeIngredient).values({ id, recipeFoodId: recipeId, ingredientFoodId, grams, position, updatedAt: now }).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);

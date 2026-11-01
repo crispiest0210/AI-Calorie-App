@@ -169,6 +169,14 @@ describe('recipes', () => {
     expect(recipes.readRecipe(db, id)!.ingredients[0]!.grams).toBe('200');
   });
 
+  it('refuses to add an ingredient to a deleted recipe', () => {
+    const { db, rice, id } = kitchen();
+    foods.softDeleteFood(db, id);
+    const queued = outbox.pendingCount(db);
+    expect(() => recipes.addIngredient(db, id, rice, '200')).toThrow(/not found/);
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('lists recipes and ignores a deleted one', () => {
     const { db, rice, id } = kitchen();
     recipes.addIngredient(db, id, rice, '200');
