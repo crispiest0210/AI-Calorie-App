@@ -233,6 +233,9 @@ export function updateEntry(db: Db, id: string, patch: UpdateEntryInput, now = D
 /** Soft delete: the row becomes a tombstone so other devices learn about it. */
 export function deleteEntry(db: Db, id: string, now = Date.now()): void {
   db.transaction((tx) => {
+    // An unknown or already-deleted id must not queue a tombstone for a row that never existed.
+    const live = tx.select({ id: logEntry.id }).from(logEntry).where(and(eq(logEntry.id, id), isNull(logEntry.deletedAt))).get();
+    if (!live) return;
     tx.update(logEntry).set({ deletedAt: now, updatedAt: now }).where(eq(logEntry.id, id)).run();
     enqueue(tx, 'log_entry', id, 'delete', now);
   });

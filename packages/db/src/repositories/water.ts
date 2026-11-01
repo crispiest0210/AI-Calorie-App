@@ -27,6 +27,9 @@ export function addWater(db: Db, amountMl: number, at = new Date()): string {
 
 export function deleteWater(db: Db, id: string, now = Date.now()): void {
   db.transaction((tx) => {
+    // An unknown or already-deleted id must not queue a tombstone for a row that never existed.
+    const live = tx.select({ id: waterEntry.id }).from(waterEntry).where(and(eq(waterEntry.id, id), isNull(waterEntry.deletedAt))).get();
+    if (!live) return;
     tx.update(waterEntry).set({ deletedAt: now, updatedAt: now }).where(eq(waterEntry.id, id)).run();
     enqueue(tx, 'water_entry', id, 'delete', now);
   });

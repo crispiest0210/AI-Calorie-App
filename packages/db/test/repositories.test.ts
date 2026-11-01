@@ -291,6 +291,16 @@ describe('logging', () => {
     expect(entries.entryById(db, id)).toMatchObject({ grams: '150', mealSlot: 'lunch', amountUnit: 'g' });
   });
 
+  it('ignores deleting an unknown or already-deleted entry instead of queueing a tombstone', () => {
+    const { db, rice } = seeded();
+    const id = logRice(db, rice, '150');
+    entries.deleteEntry(db, id);
+    const queued = outbox.pendingCount(db);
+    entries.deleteEntry(db, id);
+    entries.deleteEntry(db, 'no-such-entry');
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('soft-deletes with undo, leaving a tombstone for sync', () => {
     const { db, sqlite, rice } = seeded();
     const id = logRice(db, rice, '150');
@@ -386,6 +396,16 @@ describe('water', () => {
     water.deleteWater(db, second);
     expect(water.waterTotalMl(db, today)).toBe(250);
     expect(water.waterTotalsForRange(db, '2000-01-01', '2999-01-01')[today]).toBe(250);
+  });
+
+  it('ignores deleting an unknown or already-deleted water entry instead of queueing a tombstone', () => {
+    const { db } = freshDb();
+    const id = water.addWater(db, 250);
+    water.deleteWater(db, id);
+    const queued = outbox.pendingCount(db);
+    water.deleteWater(db, id);
+    water.deleteWater(db, 'no-such-entry');
+    expect(outbox.pendingCount(db)).toBe(queued);
   });
 
   it('rejects amounts the sync contract would refuse, without queueing anything', () => {
