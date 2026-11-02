@@ -523,6 +523,17 @@ describe('goals', () => {
     { nutrientCode: 'protein_g' as const, kind: 'target' as const, value: '25', valueLow: null, valueHigh: null, basis: 'pct_energy' as const },
   ];
 
+  it('rejects two targets for the same nutrient without touching an existing profile', () => {
+    const { db } = freshDb();
+    goalsRepo.saveGoals(db, { waterTargetMl: 2500, targets, effectiveFrom: '2026-01-01' });
+    expect(() =>
+      goalsRepo.saveGoals(db, { waterTargetMl: 2000, targets: [targets[0]!, { ...targets[0]!, value: '1800' }], effectiveFrom: '2026-01-01' }),
+    ).toThrow(RangeError);
+    const stored = goalsRepo.goalsForDate(db, '2026-01-01')!;
+    expect(stored.waterTargetMl).toBe(2500);
+    expect(stored.targets).toHaveLength(2);
+  });
+
   it('rejects water targets the sync contract would refuse, without writing anything', () => {
     const { db } = freshDb();
     for (const bad of [0, -500, 2500.5, Number.NaN]) {

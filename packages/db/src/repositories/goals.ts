@@ -77,6 +77,12 @@ export function saveGoals(db: Db, input: SaveGoalsInput, at = new Date()): strin
     throw new RangeError(`water target must be a positive whole number of mL or null, got ${waterTargetMl}`);
   }
   input.targets.forEach(assertValidTarget);
+  // One row per nutrient per profile (primary key); fail clearly before writing instead of on a constraint error.
+  const seen = new Set<string>();
+  for (const target of input.targets) {
+    if (seen.has(target.nutrientCode)) throw new RangeError(`duplicate goal target for ${target.nutrientCode}`);
+    seen.add(target.nutrientCode);
+  }
   const now = at.getTime();
   const effectiveFrom = input.effectiveFrom ?? localDateOf(at);
   return db.transaction((tx) => {
