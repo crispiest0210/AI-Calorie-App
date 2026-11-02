@@ -146,6 +146,15 @@ describe('recipes', () => {
     recipes.updateRecipe(db, id, { totalCookedGrams: null });
   });
 
+  it('rejects a blank recipe name, which the sync contract would refuse', () => {
+    const { db, id } = kitchen();
+    for (const name of ['', '   ']) {
+      expect(() => recipes.createRecipe(db, { name, servings: '2', sourceReleaseId: RELEASE_ID })).toThrow(RangeError);
+      expect(() => recipes.updateRecipe(db, id, { name })).toThrow(RangeError);
+    }
+    expect(foods.foodDetail(db, id)!.name).toBe('Chicken and rice');
+  });
+
   it('queues the recipe for sync on every change', () => {
     const { db, rice, id } = kitchen();
     recipes.addIngredient(db, id, rice, '200');

@@ -162,7 +162,13 @@ function assertRecipeYield(servings: Num | undefined, totalCookedGrams: Num | nu
   }
 }
 
+/** The sync contract requires a non-empty name, so a blank one would sit in the outbox and be rejected forever. */
+function assertRecipeName(name: string): void {
+  if (name.trim() === '') throw new RangeError('recipe name must not be blank');
+}
+
 export function createRecipe(db: Db, input: CreateRecipeInput, now = Date.now()): string {
+  assertRecipeName(input.name);
   assertRecipeYield(input.servings, input.totalCookedGrams);
   const canonical: CanonicalFood = {
     kind: 'recipe',
@@ -200,6 +206,7 @@ export function updateRecipe(
   patch: { name?: string; servings?: Num; totalCookedGrams?: Num | null },
   now = Date.now(),
 ): void {
+  if (patch.name !== undefined) assertRecipeName(patch.name);
   assertRecipeYield(patch.servings, patch.totalCookedGrams);
   db.transaction((tx) => {
     // An unknown, non-recipe or deleted id must not queue an upsert for a row that is not a live recipe.
