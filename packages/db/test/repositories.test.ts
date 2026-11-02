@@ -542,6 +542,15 @@ describe('goals', () => {
     expect(goalsRepo.goalsForDate(db, '2026-01-01')).toBeNull();
   });
 
+  it('rejects an effective date that is not a real calendar day, without writing anything', () => {
+    const { db } = freshDb();
+    for (const bad of ['', 'yesterday', '2026-1-1', '2026-02-30', '2026-13-01']) {
+      expect(() => goalsRepo.saveGoals(db, { waterTargetMl: 2000, targets, effectiveFrom: bad as never })).toThrow(RangeError);
+    }
+    expect(goalsRepo.allGoalProfiles(db)).toHaveLength(0);
+    expect(outbox.pendingCount(db)).toBe(0);
+  });
+
   it('rejects unparseable, negative or inverted-range targets without writing anything', () => {
     const { db } = freshDb();
     const base = { nutrientCode: 'energy_kcal' as const, kind: 'range' as const, value: null, valueLow: null, valueHigh: null, basis: 'absolute' as const };

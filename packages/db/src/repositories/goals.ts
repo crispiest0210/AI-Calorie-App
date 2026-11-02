@@ -4,7 +4,7 @@
  * later still shows the goals that applied then.
  */
 import { asc, desc, eq, isNull, lte, and } from 'drizzle-orm';
-import { localDateOf, tryDec, uuidv7, type GoalProfile, type GoalTarget, type LocalDate, type NutrientCode } from '@nt/core';
+import { isLocalDate, localDateOf, tryDec, uuidv7, type GoalProfile, type GoalTarget, type LocalDate, type NutrientCode } from '@nt/core';
 import { goalProfile, goalTarget } from '../schema';
 import type { Db } from '../db';
 import { enqueue } from './outbox';
@@ -75,6 +75,9 @@ export function saveGoals(db: Db, input: SaveGoalsInput, at = new Date()): strin
   const { waterTargetMl } = input;
   if (waterTargetMl !== null && (!Number.isInteger(waterTargetMl) || waterTargetMl < 1)) {
     throw new RangeError(`water target must be a positive whole number of mL or null, got ${waterTargetMl}`);
+  }
+  if (input.effectiveFrom !== undefined && !isLocalDate(input.effectiveFrom)) {
+    throw new RangeError(`goal effective date must be a real YYYY-MM-DD date, got ${input.effectiveFrom}`);
   }
   input.targets.forEach(assertValidTarget);
   // One row per nutrient per profile (primary key); fail clearly before writing instead of on a constraint error.
