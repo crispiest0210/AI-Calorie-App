@@ -221,8 +221,12 @@ function assertIngredientGrams(grams: Num): void {
   if (!tryDec(grams)?.greaterThan(0)) throw new RangeError(`ingredient grams must be a positive number, got ${grams}`);
 }
 
-/** Whether `ingredientId` is an ingredient of `recipeId`; edits to anything else must not queue a sync op. */
+/**
+ * Whether `ingredientId` is an ingredient of the live recipe `recipeId`; edits to anything else (including a
+ * deleted recipe's tombstone) must not queue a sync op.
+ */
 function hasIngredient(tx: Writer, recipeId: string, ingredientId: string): boolean {
+  if (!isLiveRecipe(tx, recipeId)) return false;
   return !!tx
     .select({ id: recipeIngredient.id })
     .from(recipeIngredient)

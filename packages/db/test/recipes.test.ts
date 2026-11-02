@@ -177,6 +177,16 @@ describe('recipes', () => {
     expect(outbox.pendingCount(db)).toBe(queued);
   });
 
+  it('does not queue a sync op when updating or removing an ingredient of a deleted recipe', () => {
+    const { db, rice, id } = kitchen();
+    const ingredientId = recipes.addIngredient(db, id, rice, '100');
+    foods.softDeleteFood(db, id);
+    const queued = outbox.pendingCount(db);
+    recipes.updateIngredient(db, id, ingredientId, '200');
+    recipes.removeIngredient(db, id, ingredientId);
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('lists recipes and ignores a deleted one', () => {
     const { db, rice, id } = kitchen();
     recipes.addIngredient(db, id, rice, '200');
