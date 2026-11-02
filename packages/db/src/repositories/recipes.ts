@@ -248,6 +248,10 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
   db.transaction((tx) => {
     // A deleted recipe is a tombstone; adding to it would queue an upsert that resurrects it on other devices.
     if (!isLiveRecipe(tx, recipeId)) throw new Error(`recipe ${recipeId} not found`);
+    // A recipe cannot contain itself, and an unknown or deleted food would leave a dangling ingredient.
+    if (ingredientFoodId === recipeId) throw new RangeError('a recipe cannot be an ingredient of itself');
+    const ingredient = tx.select({ id: food.id }).from(food).where(and(eq(food.id, ingredientFoodId), isNull(food.deletedAt))).get();
+    if (!ingredient) throw new Error(`ingredient food ${ingredientFoodId} not found`);
     tx.insert(recipeIngredient).values({ id, recipeFoodId: recipeId, ingredientFoodId, grams, position, updatedAt: now }).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);

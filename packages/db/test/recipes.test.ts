@@ -186,6 +186,17 @@ describe('recipes', () => {
     expect(outbox.pendingCount(db)).toBe(queued);
   });
 
+  it('refuses a recipe as its own ingredient and unknown or deleted ingredient foods', () => {
+    const { db, rice, id } = kitchen();
+    foods.softDeleteFood(db, rice);
+    const queued = outbox.pendingCount(db);
+    expect(() => recipes.addIngredient(db, id, id, '100')).toThrow(/itself/);
+    expect(() => recipes.addIngredient(db, id, 'no-such-food', '100')).toThrow(/not found/);
+    expect(() => recipes.addIngredient(db, id, rice, '100')).toThrow(/not found/);
+    expect(recipes.readRecipe(db, id)!.ingredients).toHaveLength(0);
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('does not queue a sync op when updating or removing an ingredient of a deleted recipe', () => {
     const { db, rice, id } = kitchen();
     const ingredientId = recipes.addIngredient(db, id, rice, '100');
