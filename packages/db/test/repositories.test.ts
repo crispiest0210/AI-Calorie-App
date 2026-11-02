@@ -367,6 +367,21 @@ describe('logging', () => {
     expect(totalOf(day.totals.byMeal.breakfast, 'energy_kcal')).toBe('349.5');
   });
 
+  it('skips deleted entries when copying a meal and queues one upsert per copy', () => {
+    const { db, rice } = seeded();
+    const yesterday = new Date(Date.now() - 86_400_000);
+    logRice(db, rice, '150', yesterday, 'breakfast');
+    const removed = logRice(db, rice, '90', new Date(yesterday.getTime() + 1000), 'breakfast');
+    entries.deleteEntry(db, removed);
+    const before = outbox.pendingCount(db);
+
+    const copied = entries.copyMeal(db, { date: localDateOf(yesterday), mealSlot: 'breakfast' }, { date: localDateOf(), mealSlot: 'breakfast' });
+
+    expect(copied).toHaveLength(1);
+    expect(entries.entriesForDate(db, localDateOf()).map((e) => e.amountValue)).toEqual(['150']);
+    expect(outbox.pending(db).slice(before).map((r) => [r.rowId, r.op])).toEqual([[copied[0], 'upsert']]);
+  });
+
   it('copies nothing when the source meal is empty', () => {
     const { db } = freshDb();
     expect(entries.copyMeal(db, { date: '2026-01-01', mealSlot: 'lunch' }, { date: '2026-01-02', mealSlot: 'lunch' })).toEqual([]);
