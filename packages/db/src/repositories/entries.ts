@@ -5,6 +5,7 @@
 import { and, asc, eq, gte, isNotNull, isNull, lte, sql } from 'drizzle-orm';
 import {
   localDateOf,
+  isLocalDate,
   mapToJson,
   parseNutrientMap,
   schemas,
@@ -257,6 +258,7 @@ export function restoreEntry(db: Db, id: string, now = Date.now()): void {
 
 /** Copy a meal from another day (F4), re-snapshotting nothing — the old snapshot is the point. */
 export function copyMeal(db: Db, from: { date: LocalDate; mealSlot: MealSlot }, to: { date: LocalDate; mealSlot: MealSlot }, at = new Date()): string[] {
+  if (!isLocalDate(to.date)) throw new RangeError(`copy target date must be a real YYYY-MM-DD date, got ${to.date}`);
   const source = db
     .select()
     .from(logEntry)

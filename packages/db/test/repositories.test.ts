@@ -387,6 +387,17 @@ describe('logging', () => {
     expect(entries.copyMeal(db, { date: '2026-01-01', mealSlot: 'lunch' }, { date: '2026-01-02', mealSlot: 'lunch' })).toEqual([]);
   });
 
+  it('rejects a copy target date that is not a real calendar day, without writing anything', () => {
+    const { db, rice } = seeded();
+    const from = localDateOf(new Date(Date.now() - 86_400_000));
+    logRice(db, rice, '150', new Date(Date.now() - 86_400_000));
+    const before = outbox.pendingCount(db);
+    for (const bad of ['', 'tomorrow', '2026-02-30']) {
+      expect(() => entries.copyMeal(db, { date: from, mealSlot: 'breakfast' }, { date: bad as never, mealSlot: 'breakfast' })).toThrow(RangeError);
+    }
+    expect(outbox.pendingCount(db)).toBe(before);
+  });
+
   it('lists recents and frequents for the Log sheet', () => {
     const { db, rice, chicken } = seeded();
     logRice(db, rice, '150', new Date(Date.now() - 3000));
