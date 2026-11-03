@@ -1,3 +1,4 @@
+import { sql } from 'drizzle-orm';
 import { describe, expect, it } from 'vitest';
 import { customFoodFromLabel, dayTotals, localDateOf, totalOf } from '@nt/core';
 import { readDay } from '../src/day';
@@ -155,6 +156,24 @@ describe('meal browsing', () => {
     expect(names[0]).toBe('Hamburger, NFS');
     expect(names).toHaveLength(5);
     expect(foods.foodsInCategory(db, 'Nothing here')).toEqual([]);
+  });
+
+  it('counts and lists only live foods, ranks the rest by size and honours the limits', () => {
+    const db = withCategories();
+    for (let i = 0; i < 4; i += 1) catalogFood(db, `Sauce variant ${i}`, { energy_kcal: '50' }, { category: 'Sauces' });
+    for (let i = 0; i < 3; i += 1) catalogFood(db, `Salad variant ${i}`, { energy_kcal: '40' }, { category: 'Salads' });
+    const gone = catalogFood(db, 'Sauce variant gone', { energy_kcal: '50' }, { category: 'Sauces' });
+    const thin = catalogFood(db, 'Salad variant gone', { energy_kcal: '40' }, { category: 'Salads' });
+    db.run(sql`update food set deleted_at = 1 where id in (${gone}, ${thin})`);
+
+    const rest = foods.mealCategories(db).filter((c) => !c.featured);
+    expect(rest).toEqual([
+      { category: 'Sauces', count: 4, featured: false },
+      { category: 'Salads', count: 3, featured: false },
+    ]);
+    expect(foods.mealCategories(db, 3).map((c) => c.category)).toEqual(['Burgers', 'Coffee', 'Sauces']);
+    expect(foods.foodsInCategory(db, 'Sauces').map((f) => f.name)).not.toContain('Sauce variant gone');
+    expect(foods.foodsInCategory(db, 'Burgers', 2)).toHaveLength(2);
   });
 });
 
