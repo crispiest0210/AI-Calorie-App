@@ -102,6 +102,22 @@ describe('food search', () => {
     expect(foods.searchFoods(db, 'rice')).toEqual([]);
     expect(foods.foodDetail(db, rice)).toBeNull();
   });
+
+  it('creates a custom food with its portion and queues exactly one upsert', () => {
+    const { db } = freshDb();
+    const { food } = customFoodFromLabel({
+      name: 'Protein bar',
+      basis: 'per_serving',
+      servingGrams: 50,
+      servingLabel: '1 bar',
+      values: { energy_kcal: '200' },
+    });
+    const id = foods.createCustomFood(db, food, { sourceReleaseId: RELEASE_ID, ownerUserId: 'user-1' });
+    const detail = foods.foodDetail(db, id)!;
+    expect(detail.name).toBe('Protein bar');
+    expect(detail.portions.map((p) => p.label)).toEqual(['1 bar']);
+    expect(outbox.pending(db).map((o) => [o.tableName, o.rowId, o.op])).toEqual([['food', id, 'upsert']]);
+  });
 });
 
 describe('meal browsing', () => {
