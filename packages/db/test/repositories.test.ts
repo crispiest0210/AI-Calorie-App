@@ -276,6 +276,13 @@ describe('logging', () => {
     expect(entries.entriesForDate(db, localDateOf())).toHaveLength(1);
   });
 
+  it('refuses to log a food that is not in the catalog, without writing or queueing anything', () => {
+    const { db } = seeded();
+    expect(() => logRice(db, 'no-such-food', '100')).toThrow();
+    expect(entries.entriesForDate(db, localDateOf())).toHaveLength(0);
+    expect(outbox.pending(db)).toHaveLength(0);
+  });
+
   it('names an unlabelled quick add', () => {
     const { db } = freshDb();
     entries.logQuickAdd(db, { mealSlot: 'snack', nutrients: { energy_kcal: '100' }, label: '  ' });
