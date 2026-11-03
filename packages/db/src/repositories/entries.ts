@@ -125,6 +125,9 @@ function assertPositive(label: string, value: Num): void {
 export function logFood(db: Db, input: LogFoodInput): string {
   assertPositive('amountValue', input.amountValue);
   assertPositive('grams', input.grams);
+  // The snapshot name must be non-empty or the sync contract rejects the entry.
+  const foodName = input.foodName.trim();
+  if (!foodName) throw new RangeError('foodName must not be blank');
   schemas.nutrientMap.parse(input.nutrientsPer100g);
   const at = input.at ?? new Date();
   const now = at.getTime();
@@ -144,7 +147,7 @@ export function logFood(db: Db, input: LogFoodInput): string {
         portionId: input.portionId ?? null,
         grams: input.grams,
         gramsProvenance: input.gramsProvenance,
-        foodNameSnapshot: input.foodName,
+        foodNameSnapshot: foodName,
         sourceReleaseId: input.sourceReleaseId,
         nutrientsPer100g: JSON.stringify(mapToJson(input.nutrientsPer100g)),
         nutrientsAbsolute: null,

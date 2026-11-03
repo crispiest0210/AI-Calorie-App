@@ -276,6 +276,18 @@ describe('logging', () => {
     expect(entries.entriesForDate(db, localDateOf())).toHaveLength(1);
   });
 
+  it('rejects a blank food name and trims the stored snapshot, without queueing anything on rejection', () => {
+    const { db, rice } = seeded();
+    const base = {
+      foodId: rice, sourceReleaseId: RELEASE_ID, mealSlot: 'lunch' as const, amountValue: '100',
+      amountUnit: 'g' as const, grams: '100', gramsProvenance: 'user' as const, nutrientsPer100g: { energy_kcal: '130' },
+    };
+    expect(() => entries.logFood(db, { ...base, foodName: '   ' })).toThrow(RangeError);
+    expect(outbox.pending(db)).toHaveLength(0);
+    entries.logFood(db, { ...base, foodName: '  Rice  ' });
+    expect(entries.entriesForDate(db, localDateOf())[0]!.foodName).toBe('Rice');
+  });
+
   it('names an unlabelled quick add', () => {
     const { db } = freshDb();
     entries.logQuickAdd(db, { mealSlot: 'snack', nutrients: { energy_kcal: '100' }, label: '  ' });
