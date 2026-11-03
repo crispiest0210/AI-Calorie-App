@@ -433,6 +433,29 @@ describe('logging', () => {
     expect(entries.loggedDates(db, '2000-01-01', '2999-01-01')).toHaveLength(2);
   });
 
+  it('lists logged days newest first, inside the window only, skipping days whose entries are all deleted', () => {
+    const { db, rice } = seeded();
+    const noon = (date: string) => new Date(`${date}T12:00:00`);
+    logRice(db, rice, '100', noon('2024-03-01'));
+    logRice(db, rice, '100', noon('2024-03-02'));
+    logRice(db, rice, '100', noon('2024-03-02'), 'dinner');
+    const gone = logRice(db, rice, '100', noon('2024-03-03'));
+    logRice(db, rice, '100', noon('2024-03-05'));
+    entries.deleteEntry(db, gone);
+    expect(entries.loggedDates(db, '2024-03-01', '2024-03-04')).toEqual(['2024-03-02', '2024-03-01']);
+    expect(entries.loggedDates(db, '2024-04-01', '2024-04-30')).toEqual([]);
+  });
+
+  it('keeps myFoods to the user’s own live foods, sorted by name and capped by the limit', () => {
+    const { db } = seeded();
+    customFood(db, 'Zucchini bake', { energy_kcal: '90' });
+    customFood(db, 'Apple crumble', { energy_kcal: '250' });
+    const gone = customFood(db, 'Old shake', { energy_kcal: '120' });
+    foods.softDeleteFood(db, gone);
+    expect(foods.myFoods(db).map((f) => f.name)).toEqual(['Apple crumble', 'Zucchini bake']);
+    expect(foods.myFoods(db, 1).map((f) => f.name)).toEqual(['Apple crumble']);
+  });
+
   it('reads a range for the history charts', () => {
     const { db, rice } = seeded();
     logRice(db, rice, '150', new Date(Date.now() - 86_400_000));
