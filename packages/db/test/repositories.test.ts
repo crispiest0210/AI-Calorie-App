@@ -217,6 +217,49 @@ describe('food deletion and last amounts', () => {
   });
 });
 
+describe('recent and frequent foods', () => {
+  const logChicken = (db: ReturnType<typeof seeded>['db'], chicken: string, at: Date) =>
+    entries.logFood(db, {
+      foodId: chicken,
+      foodName: 'Chicken, breast, roasted',
+      sourceReleaseId: RELEASE_ID,
+      mealSlot: 'dinner',
+      amountValue: '100',
+      amountUnit: 'g',
+      grams: '100',
+      gramsProvenance: 'user',
+      nutrientsPer100g: CHICKEN,
+      at,
+    });
+
+  it('lists each food once, most recently logged first, ignoring deleted entries and foods', () => {
+    const { db, rice, chicken } = seeded();
+    logRice(db, rice, '100', new Date(2026, 0, 1, 8));
+    logChicken(db, chicken, new Date(2026, 0, 1, 12));
+    const latestRice = logRice(db, rice, '100', new Date(2026, 0, 1, 18));
+    expect(foods.recentFoods(db).map((f) => f.id)).toEqual([rice, chicken]);
+    entries.deleteEntry(db, latestRice);
+    expect(foods.recentFoods(db).map((f) => f.id)).toEqual([chicken, rice]);
+    foods.softDeleteFood(db, chicken);
+    expect(foods.recentFoods(db).map((f) => f.id)).toEqual([rice]);
+    expect(foods.recentFoods(db, 0)).toEqual([]);
+  });
+
+  it('ranks by uses inside the window, breaking ties by name, and honours the limit', () => {
+    const { db, rice, chicken } = seeded();
+    logRice(db, rice, '100', new Date(2026, 0, 1, 8));
+    logRice(db, rice, '100', new Date(2026, 0, 2, 8));
+    logChicken(db, chicken, new Date(2026, 0, 2, 12));
+    logChicken(db, chicken, new Date(2026, 0, 3, 12));
+    expect(foods.frequentFoods(db, 0).map((f) => f.id)).toEqual([chicken, rice]);
+    // Later window: the early rice is out, the two chicken entries stay.
+    expect(foods.frequentFoods(db, new Date(2026, 0, 2, 9).getTime()).map((f) => f.id)).toEqual([chicken]);
+    expect(foods.frequentFoods(db, new Date(2026, 0, 2, 0).getTime()).map((f) => f.id)).toEqual([chicken, rice]);
+    expect(foods.frequentFoods(db, 0, 1).map((f) => f.id)).toEqual([chicken]);
+    expect(foods.frequentFoods(db, new Date(2027, 0, 1).getTime())).toEqual([]);
+  });
+});
+
 describe('source releases', () => {
   it('finds the active release per provider and null when a provider has none', () => {
     const { db, sqlite } = freshDb();
