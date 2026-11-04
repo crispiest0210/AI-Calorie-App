@@ -1,7 +1,8 @@
-import { sql } from 'drizzle-orm';
+import { eq, sql } from 'drizzle-orm';
 import { describe, expect, it } from 'vitest';
 import { customFoodFromLabel, dayTotals, localDateOf, totalOf } from '@nt/core';
 import { readDay } from '../src/day';
+import { waterPreset } from '../src/schema';
 import * as entries from '../src/repositories/entries';
 import * as foods from '../src/repositories/foods';
 import * as goalsRepo from '../src/repositories/goals';
@@ -579,6 +580,17 @@ describe('water', () => {
     water.deleteWater(db, gone);
 
     expect(water.waterForDate(db, '2024-03-02').map((w) => w.amountMl)).toEqual([250, 300]);
+  });
+
+  it('lists presets by position, leaves out deleted ones and does not reseed over them', () => {
+    const { db } = freshDb();
+    water.ensureDefaultPresets(db);
+    const [glass] = water.presets(db);
+    db.update(waterPreset).set({ deletedAt: 1 }).where(eq(waterPreset.id, glass!.id)).run();
+
+    expect(water.presets(db).map((p) => p.label)).toEqual(['Bottle', 'Large bottle']);
+    water.ensureDefaultPresets(db);
+    expect(water.presets(db).map((p) => p.label)).toEqual(['Bottle', 'Large bottle']);
   });
 });
 
