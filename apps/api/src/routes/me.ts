@@ -4,6 +4,7 @@
  */
 import { ApiError } from '../errors';
 import type { Sql } from '../db';
+import type { ImageStore } from '../storage';
 
 /** Deleting an account is irreversible, so the token must be freshly issued. */
 export const REAUTH_WINDOW_SECONDS = 300;
@@ -85,21 +86,35 @@ export async function exportAll(sql: Sql, userId: string): Promise<ExportDocumen
   };
 }
 
-export async function deleteAccount(sql: Sql, userId: string, tokenIssuedAt: number, now = Date.now()): Promise<void> {
-  const ageSeconds = now / 1000 - tokenIssuedAt;
+export async function deleteAccount(
+  sql: Sql,
+  userId: string,
+  tokenIssuedAt: number,
+  options: { now?: number; images?: ImageStore } = {},
+): Promise<void> {
+  const ageSeconds = (options.now ?? Date.now()) / 1000 - tokenIssuedAt;
   if (ageSeconds > REAUTH_WINDOW_SECONDS) {
     throw new ApiError('unauthorized', 'sign in again before deleting your account');
   }
-  // Custom foods cascade to their nutrients and portions.
-  await sql.query('delete from food where owner_user_id = $1', [userId]);
-  // Photo analyses (items cascade). An analysis whose image is still in the object store stays until
-  // the sweeper has removed the file, so it is marked due now; deleting its row would orphan the image.
-  await sql.query(
-    `update photo_analysis set image_expires_at = now() where user_id = $1 and storage_path is not null and image_deleted_at is null`,
+
+  // Images first (spec 2.8): once the rows are gone nothing points at them, so
+  // a failure here must abort the whole deletion — the transaction rolls back
+  // and the user can simply try again, rather than leaving photos orphaned.
+  const { rows } = await sql.query<{ storage_path: string }>(
+    'select storage_path from photo_analysis where user_id = $1 and storage_path is not null',
     [userId],
   );
-  await sql.query(`delete from photo_analysis where user_id = $1 and (storage_path is null or image_deleted_at is not null)`, [userId]);
-  for (const table of ['photo_analysis_quota', 'log_entry', 'water_entry', 'water_preset', 'goal_profile', 'user_settings', 'idempotency_key', 'sync_watermark']) {
+  if (rows.length > 0) {
+    if (options.images === undefined) throw new ApiError('upstream_unavailable', 'photo storage is not configured');
+    await options.images.remove(rows.map((row) => row.storage_path));
+  }
+
+  // Custom foods cascade to their nutrients and portions; analyses to their items.
+  await sql.query('delete from food where owner_user_id = $1', [userId]);
+  for (const table of [
+    'log_entry', 'water_entry', 'water_preset', 'goal_profile', 'user_settings', 'idempotency_key', 'sync_watermark',
+    'photo_analysis', 'photo_analysis_quota',
+  ]) {
     await sql.query(`delete from ${table} where user_id = $1`, [userId]);
   }
 }

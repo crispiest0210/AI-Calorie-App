@@ -85,7 +85,8 @@ export async function startHarness(overrides: Partial<AppDeps> = {}): Promise<Ha
     async reset() {
       await withService(pool, async (sql) => {
         await sql.query(`truncate log_entry, water_entry, water_preset, goal_profile,
-                          user_settings, idempotency_key, sync_watermark, barcode_cache restart identity cascade`);
+                          user_settings, idempotency_key, sync_watermark, barcode_cache,
+                          photo_analysis, photo_analysis_item, photo_analysis_quota restart identity cascade`);
         // Catalog rows are fixtures too: each test seeds the foods it needs.
         await sql.query(`delete from food`);
       });
