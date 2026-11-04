@@ -262,7 +262,7 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
 export function updateIngredient(db: Db, recipeId: string, ingredientId: string, grams: Num, now = Date.now()): void {
   assertIngredientGrams(grams);
   db.transaction((tx) => {
-    if (!hasIngredient(tx, recipeId, ingredientId)) return;
+    if (!isLiveRecipe(tx, recipeId) || !hasIngredient(tx, recipeId, ingredientId)) return;
     tx.update(recipeIngredient).set({ grams, updatedAt: now }).where(eq(recipeIngredient.id, ingredientId)).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);
@@ -271,7 +271,7 @@ export function updateIngredient(db: Db, recipeId: string, ingredientId: string,
 
 export function removeIngredient(db: Db, recipeId: string, ingredientId: string, now = Date.now()): void {
   db.transaction((tx) => {
-    if (!hasIngredient(tx, recipeId, ingredientId)) return;
+    if (!isLiveRecipe(tx, recipeId) || !hasIngredient(tx, recipeId, ingredientId)) return;
     tx.delete(recipeIngredient).where(eq(recipeIngredient.id, ingredientId)).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);
