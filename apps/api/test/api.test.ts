@@ -157,4 +157,17 @@ describe('sync push idempotency', () => {
     expect((await push(USER_B)).status).toBe(200);
     expect((await push(USER_A)).status).toBe(200);
   });
+
+  it('rejects an Idempotency-Key longer than 255 characters', async () => {
+    const push = (key: string) =>
+      h.request(USER_A, '/v1/sync/push', {
+        method: 'POST',
+        headers: { 'idempotency-key': key },
+        body: JSON.stringify({ changes: [] }),
+      });
+    expect((await push('k'.repeat(255))).status).toBe(200);
+    const res = await push('k'.repeat(256));
+    expect(res.status).toBe(422);
+    expect(await res.json()).toMatchObject({ code: 'validation_failed' });
+  });
 });
