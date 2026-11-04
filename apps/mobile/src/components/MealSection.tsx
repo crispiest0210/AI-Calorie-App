@@ -48,7 +48,11 @@ export function MealSection({ slot, entries, totals, onAdd, onCopyYesterday, onO
               Nothing logged yet.
             </Text>
             <View style={{ flexDirection: 'row', gap: spacing.lg }}>
-              <Pressable onPress={onAdd} accessibilityRole="button" style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}>
+              <Pressable
+                onPress={onAdd}
+                accessibilityRole="button"
+                accessibilityLabel={`Add food to ${MEAL_SLOT_LABELS[slot]}`}
+                style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}>
                 <Text variant="label" tone="accent">
                   Add food
                 </Text>
@@ -56,6 +60,7 @@ export function MealSection({ slot, entries, totals, onAdd, onCopyYesterday, onO
               <Pressable
                 onPress={onCopyYesterday}
                 accessibilityRole="button"
+                accessibilityLabel={`Copy ${MEAL_SLOT_LABELS[slot]} from yesterday`}
                 accessibilityHint="Copies this meal from yesterday"
                 style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}
               >
