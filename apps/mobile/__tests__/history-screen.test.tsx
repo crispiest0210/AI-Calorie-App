@@ -95,6 +95,13 @@ describe('HistoryScreen', () => {
     expect(screen.getAllByText('nothing logged')).toHaveLength(30);
   });
 
+  it('announces a day over its energy target in the row label, not only by colour', () => {
+    mockEntries = [oats];
+    mockProfiles = [{ ...profile, targets: [{ nutrientCode: 'energy_kcal', kind: 'target', value: '500', basis: 'absolute' }] }];
+    render(<HistoryScreen />);
+    expect(screen.getByLabelText('Today, 800 calories, 1 entry, over target')).toBeTruthy();
+  });
+
   it('opens the tapped day', () => {
     mockEntries = [oats];
     render(<HistoryScreen />);

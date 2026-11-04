@@ -156,7 +156,7 @@ export default function HistoryScreen() {
               key={day.date}
               onPress={() => router.push({ pathname: '/day/[date]', params: { date: day.date } })}
               accessibilityRole="button"
-              accessibilityLabel={`${formatDayLabel(day.date, today)}, ${formatEnergy(day.totals.total.values.energy_kcal ?? '0')} calories, ${pluralize(day.entries.length, 'entry', 'entries')}`}
+              accessibilityLabel={`${formatDayLabel(day.date, today)}, ${formatEnergy(day.totals.total.values.energy_kcal ?? '0')} calories, ${pluralize(day.entries.length, 'entry', 'entries')}${over ? ', over target' : ''}`}
               style={({ pressed }) => ({
                 marginHorizontal: spacing.lg,
                 marginTop: spacing.sm,
