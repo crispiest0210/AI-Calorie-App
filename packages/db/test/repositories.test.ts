@@ -534,6 +534,25 @@ describe('logging', () => {
     expect(rows).toHaveLength(2);
     expect(dayTotals(rows).total.values.energy_kcal).toBe('307.5');
   });
+
+  it('reads a range inclusively in date then time order, skipping deleted entries and other days', () => {
+    const { db, rice } = seeded();
+    const at = (day: string, hour: number) => new Date(`${day}T${String(hour).padStart(2, '0')}:00:00`);
+    logRice(db, rice, '300', at('2024-03-03', 9));
+    logRice(db, rice, '200', at('2024-03-02', 18));
+    logRice(db, rice, '100', at('2024-03-02', 8));
+    const gone = logRice(db, rice, '400', at('2024-03-02', 12));
+    logRice(db, rice, '500', at('2024-03-01', 12));
+    logRice(db, rice, '600', at('2024-03-04', 12));
+    entries.deleteEntry(db, gone);
+
+    const rows = entries.entriesForRange(db, '2024-03-02', '2024-03-03');
+    expect(rows.map((r) => [r.localDate, r.grams])).toEqual([
+      ['2024-03-02', '100'],
+      ['2024-03-02', '200'],
+      ['2024-03-03', '300'],
+    ]);
+  });
 });
 
 describe('water', () => {
