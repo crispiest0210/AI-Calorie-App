@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { candidateEnergy, matchLabel } from '../src/repositories/matcher';
-import { catalogFood, freshDb } from './helpers';
+import { softDeleteFood } from '../src/repositories/foods';
+import { catalogFood, customFood, freshDb } from './helpers';
 
 describe('matcher', () => {
   it('matches a label to the catalog food and reports it as matched', () => {
@@ -28,6 +29,17 @@ describe('matcher', () => {
     catalogFood(db, 'Rice, wild, cooked', { energy_kcal: '101' });
 
     expect(matchLabel(db, 'rice', undefined, { limit: 2 }).candidates).toHaveLength(2);
+  });
+
+  it('never offers a soft-deleted custom food as a candidate', () => {
+    const { db } = freshDb();
+    const gone = customFood(db, 'Banana bread', { energy_kcal: '326' });
+    const kept = customFood(db, 'Banana smoothie', { energy_kcal: '60' });
+    softDeleteFood(db, gone);
+
+    const ids = matchLabel(db, 'banana').candidates.map((c) => c.food.id);
+    expect(ids).toContain(kept);
+    expect(ids).not.toContain(gone);
   });
 
   it('reads energy per 100 g from the catalog, and null for an unknown food', () => {
