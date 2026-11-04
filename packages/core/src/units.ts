@@ -3,7 +3,7 @@
  * a unit that cannot be resolved from source data is refused, never guessed
  * (spec 2.6.1 and 2.6.5).
  */
-import { dec, mul, num, type Num, type NumericInput } from './decimal';
+import { dec, mul, num, tryDec, type Num, type NumericInput } from './decimal';
 
 export const AMOUNT_UNITS = ['g', 'ml', 'portion', 'kcal'] as const;
 export type AmountUnit = (typeof AMOUNT_UNITS)[number];
@@ -52,8 +52,9 @@ function usablePortions(food: FoodMeasureInfo): Portion[] {
 }
 
 export function resolveGrams(amount: AmountInput, food: FoodMeasureInfo): GramsResult {
-  const value = dec(amount.value);
-  if (!value.greaterThan(0)) return { ok: false, reason: 'amount_not_positive' };
+  // A half-typed "." in the amount field is unparseable; it is as unusable as zero, not a crash.
+  const value = tryDec(amount.value);
+  if (value === null || !value.greaterThan(0)) return { ok: false, reason: 'amount_not_positive' };
 
   switch (amount.unit) {
     case 'g':
