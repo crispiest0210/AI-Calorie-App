@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MEAL_SLOTS, MEAL_SLOT_LABELS, NUTRIENT_DEFS, localDateOf, num, type MealSlot, type NutrientMap } from '@nt/core';
+import { MEAL_SLOTS, MEAL_SLOT_LABELS, NUTRIENT_DEFS, isPositive, localDateOf, parseUserNumber, type MealSlot, type NutrientMap } from '@nt/core';
 import { entries as entriesRepo } from '@nt/db';
 import { useDb } from '@/db/provider';
 import { spacing } from '@/theme';
@@ -17,6 +17,8 @@ import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { LabelledTextInput } from '@/components/LabelledTextInput';
+
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
 
 const FIELDS = ['energy_kcal', 'protein_g', 'carb_g', 'fat_g'] as const;
 
@@ -32,17 +34,17 @@ export default function QuickAddScreen() {
   const [label, setLabel] = useState('');
   const [values, setValues] = useState<Record<string, string>>({ energy_kcal: '' });
 
-  const energy = values.energy_kcal ?? '';
-  const canSave = energy.trim() !== '' && Number.parseFloat(energy) > 0;
+  const parsed = Object.fromEntries(FIELDS.map((code) => [code, parseUserNumber(values[code] ?? '')])) as Record<(typeof FIELDS)[number], string | null>;
+  // Half-typed text (".") is neither a value nor blank, so it blocks saving rather than being dropped.
+  const halfTyped = FIELDS.some((code) => parsed[code] === null && (values[code] ?? '').trim() !== '');
+  const canSave = parsed.energy_kcal !== null && isPositive(parsed.energy_kcal) && !halfTyped;
 
   const save = () => {
+    if (!canSave) return;
     const nutrients: NutrientMap = {};
     for (const code of FIELDS) {
-      const raw = values[code];
-      if (raw === undefined || raw.trim() === '') continue;
-      const parsed = Number.parseFloat(raw);
-      if (!Number.isFinite(parsed)) continue;
-      nutrients[code] = num(raw);
+      const value = parsed[code];
+      if (value !== null) nutrients[code] = value;
     }
     entriesRepo.logQuickAdd(db, {
       mealSlot,

@@ -14,6 +14,7 @@ import {
 } from '@nt/core';
 import { food, foodNutrient, foodPortion } from '../schema';
 import type { Db, Writer } from '../db';
+import { isReadableNum, isReadablePositiveNum, reportUnreadable } from '../validate';
 import { enqueue } from './outbox';
 
 export interface FoodSummary {
@@ -248,6 +249,11 @@ export function foodDetail(db: Db, id: string): FoodDetail | null {
   const map: NutrientMap = {};
   const derivations: Partial<Record<keyof NutrientMap, string>> = {};
   for (const n of nutrients) {
+    // An unreadable value reads as not reported, never as a crash or a zero.
+    if (!isReadableNum(n.amountPer100g)) {
+      reportUnreadable('food_nutrient', id, n.nutrientCode);
+      continue;
+    }
     map[n.nutrientCode as keyof NutrientMap] = n.amountPer100g;
     derivations[n.nutrientCode as keyof NutrientMap] = n.derivation;
   }
@@ -265,7 +271,11 @@ export function foodDetail(db: Db, id: string): FoodDetail | null {
     energyPer100g: map.energy_kcal ?? null,
     nutrientsPer100g: map,
     derivations,
-    portions: portions.map((p) => ({ id: p.id, label: p.label, gramWeight: p.gramWeight, source: p.source as Portion['source'] })),
+    portions: portions.flatMap((p) => {
+      if (isReadablePositiveNum(p.gramWeight)) return [{ id: p.id, label: p.label, gramWeight: p.gramWeight, source: p.source as Portion['source'] }];
+      reportUnreadable('food_portion', p.id, 'gram_weight');
+      return [];
+    }),
   };
 }
 

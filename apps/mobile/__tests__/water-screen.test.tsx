@@ -17,6 +17,7 @@ jest.mock('@/db/provider', () => ({
 }));
 jest.mock('expo-router', () => ({ useLocalSearchParams: () => mockParams }));
 jest.mock('@nt/db', () => ({
+  ...jest.requireActual('@nt/db'),
   water: {
     addWater: (...args: unknown[]) => mockAddWater(...args),
     deleteWater: (...args: unknown[]) => mockDeleteWater(...args),

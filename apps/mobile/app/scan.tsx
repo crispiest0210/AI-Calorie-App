@@ -18,6 +18,8 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { LabelledTextInput } from '@/components/LabelledTextInput';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 const BARCODE_TYPES = ['ean13', 'ean8', 'upc_a', 'upc_e'] as const;
 
 export default function ScanScreen() {

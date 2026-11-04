@@ -1,4 +1,5 @@
 export * from './decimal';
+export * from './user-number';
 export * from './nutrients';
 export * from './nutrient-map';
 export * from './energy';

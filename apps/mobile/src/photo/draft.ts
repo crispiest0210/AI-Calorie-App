@@ -6,7 +6,7 @@
  * — and every calorie in those totals comes from the local catalog, keyed by
  * the food the user has accepted.
  */
-import { dec, num, type ConfidenceBand, type Num, type NutrientMap } from '@nt/core';
+import { dec, num, tryDec, type ConfidenceBand, type Num, type NutrientMap } from '@nt/core';
 import { foods as foodsRepo, type Db, type FoodDetail } from '@nt/db';
 
 export interface DraftCandidate {
@@ -72,8 +72,13 @@ export function needsResolving(item: ReviewItem): boolean {
   return item.chosenFoodId === null || item.food === null;
 }
 
+/** True when the item's amount is a number above zero; a cleared field is not. */
+export function hasAmount(item: ReviewItem): boolean {
+  return tryDec(item.grams)?.greaterThan(0) === true;
+}
+
 export function canConfirm(items: readonly ReviewItem[]): boolean {
-  return items.length > 0 && items.every((item) => !needsResolving(item));
+  return items.length > 0 && items.every((item) => !needsResolving(item) && hasAmount(item));
 }
 
 export interface EnergyRange {

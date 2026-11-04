@@ -8,11 +8,25 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { DatabaseProvider } from '@/db/provider';
+import { ErrorPanel } from '@/components/RouteErrorBoundary';
 import { SessionProvider } from '@/auth/provider';
 import { SyncProvider } from '@/sync/provider';
 import { useTheme } from '@/theme';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 void SplashScreen.preventAutoHideAsync();
+
+function DatabaseError({ error, retry }: { error: Error; retry: () => void }) {
+  return (
+    <ErrorPanel
+      title="Your log could not be opened"
+      body="The app could not open its database on this device. Nothing has been deleted. Try again, and if it keeps happening, restart the app."
+      error={error}
+      onRetry={retry}
+    />
+  );
+}
 
 function Loading() {
   const { colors } = useTheme();
@@ -40,7 +54,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <DatabaseProvider fallback={<Loading />}>
+        <DatabaseProvider fallback={<Loading />} errorFallback={(error, retry) => <DatabaseError error={error} retry={retry} />}>
           <SessionProvider>
             <SyncProvider>
               <StatusBar style={isDark ? 'light' : 'dark'} />

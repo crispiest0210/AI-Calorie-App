@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { NUTRIENT_DEFS, customFoodFromLabel, type LabelBasis, type NutrientMap } from '@nt/core';
+import { NUTRIENT_DEFS, customFoodFromLabel, isPositive, parseUserNumber, type LabelBasis, type NutrientMap } from '@nt/core';
 import { foods as foodsRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { spacing } from '@/theme';
@@ -17,6 +17,8 @@ import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { LabelledTextInput } from '@/components/LabelledTextInput';
+
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
 
 const FIELDS = ['energy_kcal', 'protein_g', 'carb_g', 'fat_g', 'fiber_g', 'sodium_mg'] as const;
 
@@ -35,25 +37,30 @@ export default function CustomFoodScreen() {
   const [values, setValues] = useState<Record<string, string>>({});
   const [error, setError] = useState<string | null>(null);
 
+  const parsed = Object.fromEntries(FIELDS.map((code) => [code, parseUserNumber(values[code] ?? '')])) as Record<(typeof FIELDS)[number], string | null>;
+  // Half-typed text (".") is neither a value nor blank, so it blocks saving rather than being dropped.
+  const halfTyped = FIELDS.some((code) => parsed[code] === null && (values[code] ?? '').trim() !== '');
+  const serving = parseUserNumber(servingGrams);
   const canSave =
     name.trim() !== '' &&
-    (values.energy_kcal ?? '').trim() !== '' &&
-    (basis === 'per_100g' || Number.parseFloat(servingGrams) > 0);
+    parsed.energy_kcal !== null &&
+    !halfTyped &&
+    (basis === 'per_100g' || (serving !== null && isPositive(serving)));
 
   const save = () => {
+    if (!canSave) return;
+    const typed: NutrientMap = {};
+    for (const code of FIELDS) {
+      const value = parsed[code];
+      if (value !== null) typed[code] = value;
+    }
+
     try {
-      // Blank fields are skipped; anything else goes to core as typed so a
-      // value like "12abc" is reported by name instead of throwing here.
-      const typed: NutrientMap = {};
-      for (const code of FIELDS) {
-        const raw = values[code]?.trim();
-        if (raw) typed[code] = raw;
-      }
       const { food, quarantineReasons } = customFoodFromLabel({
         name,
         brand,
         basis,
-        servingGrams: basis === 'per_serving' ? servingGrams : null,
+        servingGrams: basis === 'per_serving' ? serving : null,
         servingLabel,
         values: typed,
       });

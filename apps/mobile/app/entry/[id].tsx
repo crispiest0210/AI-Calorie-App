@@ -13,6 +13,8 @@ import {
   entryNutrients,
   formatTimeOfDay,
   formatWithUnit,
+  isPositive,
+  parseUserNumber,
   resolveGrams,
   type MealSlot,
 } from '@nt/core';
@@ -25,6 +27,8 @@ import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { SourceBadge } from '@/components/SourceBadge';
+
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
 
 export default function EntryDetailScreen() {
   const db = useDb();
@@ -47,20 +51,23 @@ export default function EntryDetailScreen() {
 
   const contributed = entryNutrients(entry);
   const value = amount ?? entry.amountValue;
-  const dirty = amount !== null && amount !== entry.amountValue;
+  // Blank or half-typed text is never saved: a quick add once stored "" here
+  // and its day could no longer be read.
+  const parsed = parseUserNumber(value);
+  const dirty = amount !== null && parsed !== null && isPositive(parsed) && parsed !== entry.amountValue;
 
   const saveAmount = () => {
-    if (!dirty) return;
+    if (!dirty || parsed === null) return;
     if (entry.entryKind === 'quick_add') {
-      entriesRepo.updateEntry(db, entry.id, { amountValue: value, nutrientsAbsolute: { ...contributed, energy_kcal: value } });
+      entriesRepo.updateEntry(db, entry.id, { amountValue: parsed, nutrientsAbsolute: { ...contributed, energy_kcal: parsed } });
       setAmount(null);
       return;
     }
     if (food === null) return;
-    const resolved = resolveGrams({ value, unit: entry.amountUnit, portionId: entry.portionId }, food);
+    const resolved = resolveGrams({ value: parsed, unit: entry.amountUnit, portionId: entry.portionId }, food);
     if (!resolved.ok) return;
     entriesRepo.updateEntry(db, entry.id, {
-      amountValue: value,
+      amountValue: parsed,
       grams: resolved.grams,
       // An AI estimate the user edits becomes an adjusted amount (spec 5.3).
       gramsProvenance: entry.gramsProvenance === 'ai_estimate' ? 'ai_adjusted' : resolved.provenance,

@@ -13,6 +13,8 @@ import { Card, Screen } from '@/components/Screen';
 import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
+
 export default function RecipesScreen() {
   const db = useDb();
   const router = useRouter();

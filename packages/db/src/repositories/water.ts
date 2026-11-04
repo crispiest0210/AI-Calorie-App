@@ -3,6 +3,7 @@ import { and, asc, eq, isNull, sql } from 'drizzle-orm';
 import { localDateOf, uuidv7, type LocalDate } from '@nt/core';
 import { waterEntry, waterPreset } from '../schema';
 import type { Db } from '../db';
+import { WATER_ML_MAX, WATER_ML_MIN, integerInRange } from '../validate';
 import { enqueue } from './outbox';
 
 export const DEFAULT_PRESETS = [
@@ -12,10 +13,7 @@ export const DEFAULT_PRESETS = [
 ];
 
 export function addWater(db: Db, amountMl: number, at = new Date()): string {
-  // Same bounds as the sync contract, so a local row can never be one the server rejects.
-  if (!Number.isInteger(amountMl) || amountMl < 1 || amountMl > 5000) {
-    throw new RangeError(`water amount must be a whole number of mL between 1 and 5000, got ${amountMl}`);
-  }
+  integerInRange('amountMl', amountMl, WATER_ML_MIN, WATER_ML_MAX);
   const now = at.getTime();
   const id = uuidv7(now);
   db.transaction((tx) => {

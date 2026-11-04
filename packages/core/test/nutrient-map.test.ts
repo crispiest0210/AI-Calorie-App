@@ -30,6 +30,17 @@ describe('nutrient maps', () => {
     expect(parseNutrientMap({ fiber_g: undefined })).toEqual({});
   });
 
+  it('drops values that are not non-negative decimals instead of throwing', () => {
+    const invalid: [string, unknown][] = [];
+    const parsed = parseNutrientMap(
+      { energy_kcal: '', protein_g: 'abc', fat_g: '-1', carb_g: {}, fiber_g: Number.NaN, sodium_mg: '12.50' },
+      (code, value) => invalid.push([code, value]),
+    );
+    expect(parsed).toEqual({ sodium_mg: '12.5' });
+    expect(invalid.map(([code]) => code)).toEqual(['energy_kcal', 'protein_g', 'fat_g', 'carb_g', 'fiber_g']);
+    expect(parseNutrientMap({ energy_kcal: '1.2.3' })).toEqual({});
+  });
+
   it('round-trips to JSON', () => {
     expect(mapToJson({ energy_kcal: '100' })).toEqual({ energy_kcal: '100' });
   });

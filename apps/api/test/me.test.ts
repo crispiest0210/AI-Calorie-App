@@ -8,7 +8,10 @@ import { withUser } from '../src/db';
 import { REAUTH_WINDOW_SECONDS } from '../src/routes/me';
 import { insertCatalogFood, json, startHarness, USER_A, USER_B, type Harness } from './harness';
 
+import { MemoryImageStore } from '../src/storage';
+
 let h: Harness;
+const images = new MemoryImageStore();
 
 const CATALOG = 'cccccccc-cccc-4ccc-8ccc-ccccccccccc1';
 const ENTRY_A = 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1';
@@ -34,7 +37,7 @@ async function addEntry(userId: string, id: string, foodName: string, note: stri
 }
 
 beforeAll(async () => {
-  h = await startHarness();
+  h = await startHarness({ images });
 });
 afterAll(async () => {
   await h.stop();
@@ -132,7 +135,7 @@ describe('DELETE /v1/me', () => {
     expect(remaining.rows.map((row) => row.user_id)).toEqual([USER_B]);
   });
 
-  it('clears photo analyses and quota, keeping only rows whose image the sweeper still has to remove', async () => {
+  it('removes stored images, analyses and quota when deleting the account', async () => {
     const [gone, stored] = ['dddddddd-dddd-4ddd-8ddd-ddddddddddd1', 'dddddddd-dddd-4ddd-8ddd-ddddddddddd2'];
     await withUser(h.pool, USER_A, async (sql) => {
       await sql.query(`insert into photo_analysis (id, user_id, status) values ($1,$2,'confirmed')`, [gone, USER_A]);
@@ -140,10 +143,14 @@ describe('DELETE /v1/me', () => {
       await sql.query(`insert into photo_analysis_quota (user_id, local_day, used) values ($1,'2026-09-20',2)`, [USER_A]);
     });
 
-    await h.request(USER_A, '/v1/me', { method: 'DELETE' });
+    const path = `${USER_A}/${stored}.jpg`;
+    images.put(path, new Uint8Array([1]));
+    const response = await h.request(USER_A, '/v1/me', { method: 'DELETE' });
+    expect(response.status).toBe(204);
+    expect(images.objects.has(path)).toBe(false);
 
     const rows = await h.pool.query('select id, image_expires_at is not null as due from photo_analysis where id = any($1::uuid[])', [[gone, stored]]);
-    expect(rows.rows).toEqual([{ id: stored, due: true }]);
+    expect(rows.rows).toEqual([]);
     expect((await h.pool.query('select 1 from photo_analysis_quota where user_id = $1', [USER_A])).rowCount).toBe(0);
   });
 

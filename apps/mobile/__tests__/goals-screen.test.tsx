@@ -15,6 +15,7 @@ jest.mock('@/db/provider', () => ({
 }));
 jest.mock('expo-router', () => ({ useRouter: () => ({ back: mockBack }) }));
 jest.mock('@nt/db', () => ({
+  ...jest.requireActual('@nt/db'),
   goals: {
     goalsForDate: () => mockCurrent,
     saveGoals: (...args: unknown[]) => mockSaveGoals(...args),
@@ -56,8 +57,8 @@ describe('GoalsScreen', () => {
 
   it('shows the gram equivalent of a percentage macro', () => {
     render(<GoalsScreen />);
-    expect(screen.getByText('≈ 131.25 g at 4 cal per gram')).toBeTruthy();
-    expect(screen.getByText('≈ 236.25 g at 4 cal per gram')).toBeTruthy();
+    expect(screen.getByText('≈ 131 g at 4 cal per gram')).toBeTruthy();
+    expect(screen.getByText('≈ 236 g at 4 cal per gram')).toBeTruthy();
     expect(screen.getByText('≈ 70 g at 9 cal per gram')).toBeTruthy();
   });
 
@@ -81,20 +82,19 @@ describe('GoalsScreen', () => {
     expect(protein).toMatchObject({ value: '60', basis: 'absolute' });
   });
 
-  it('saves a null water target when the amount is blank or zero', () => {
+  it('saves a null water target when the amount is blank', () => {
     render(<GoalsScreen />);
-    fireEvent.changeText(screen.getByLabelText('Water target'), '0');
+    fireEvent.changeText(screen.getByLabelText('Water target'), '');
     fireEvent.press(screen.getByRole('button', { name: 'Save goals' }));
     expect(saved().waterTargetMl).toBeNull();
   });
 
-  it('treats a lone decimal point as 0 instead of crashing while typing or saving', () => {
+  it('blocks saving a half-typed decimal without crashing', () => {
     render(<GoalsScreen />);
     fireEvent.changeText(screen.getByLabelText('Protein'), '.');
     fireEvent.changeText(screen.getByLabelText('Energy target'), '.');
     fireEvent.press(screen.getByRole('button', { name: 'Save goals' }));
-    const targets = saved().targets;
-    expect(targets.find((t) => t.nutrientCode === 'protein_g')!.value).toBe('0');
-    expect(targets.find((t) => t.nutrientCode === 'energy_kcal')!.value).toBe('0');
+    expect(mockSaveGoals).not.toHaveBeenCalled();
+    expect(mockBack).not.toHaveBeenCalled();
   });
 });

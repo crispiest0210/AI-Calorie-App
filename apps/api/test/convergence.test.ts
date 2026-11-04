@@ -45,7 +45,10 @@ interface ExportDoc {
   csv: { logEntries: string };
 }
 
+import { MemoryImageStore } from '../src/storage';
+
 let h: Harness;
+const images = new MemoryImageStore();
 
 const RICE = { energy_kcal: '129', protein_g: '2.7', carb_g: '28', fat_g: '0.3', fiber_g: '0.4', sodium_mg: '1' };
 const CHICKEN = { energy_kcal: '165', protein_g: '31', carb_g: '0', fat_g: '3.6', fiber_g: '0', sodium_mg: '74' };
@@ -136,7 +139,7 @@ const logFood = (db: Db, foodId: string, name: string, grams: string, nutrients:
   });
 
 beforeAll(async () => {
-  h = await startHarness();
+  h = await startHarness({ images });
 });
 afterAll(async () => {
   await h.stop();
@@ -428,12 +431,13 @@ describe('export', () => {
     );
     await h.pool.query(`insert into photo_analysis_quota (user_id, local_day, used) values ($1, '2026-01-01', 2)`, [USER_A]);
 
+    images.put('a/b.jpg', new Uint8Array([1]));
     const accepted = await h.request(USER_A, '/v1/me', { method: 'DELETE' });
     expect(accepted.status).toBe(204);
     expect((await h.pool.query('select count(*)::int as n from photo_analysis_quota')).rows[0].n).toBe(0);
     const photos = (await h.pool.query('select id, image_expires_at from photo_analysis')).rows;
-    expect(photos.map((r) => r.id)).toEqual([keptId]);
-    expect(photos[0].image_expires_at).not.toBeNull();
+    expect(photos).toEqual([]);
+    expect(images.objects.has('a/b.jpg')).toBe(false);
     expect((await h.pool.query('select count(*)::int as n from log_entry')).rows[0].n).toBe(0);
   });
 });

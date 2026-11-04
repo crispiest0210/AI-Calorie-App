@@ -88,10 +88,10 @@ describe('RecipeScreen', () => {
     expect(mockUpdateRecipe).not.toHaveBeenCalled();
   });
 
-  it('falls back to one serving when the field is cleared', () => {
+  it('preserves the saved servings while the field is cleared', () => {
     render(<RecipeScreen />);
     fireEvent.changeText(screen.getByLabelText('Servings'), '');
-    expect(mockUpdateRecipe).toHaveBeenCalledWith({ marker: 'db' }, 'r1', { servings: '1' });
+    expect(mockUpdateRecipe).not.toHaveBeenCalled();
   });
 
   it('sets and clears the cooked weight', () => {

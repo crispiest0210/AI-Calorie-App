@@ -6,7 +6,7 @@
 import { useCallback, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { formatEnergy, formatGrams, formatRange, localDateOf, num, type MealSlot } from '@nt/core';
+import { formatEnergy, formatGrams, formatRange, localDateOf, type MealSlot } from '@nt/core';
 import { entries as entriesRepo, foods as foodsRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { useSession } from '@/auth/provider';
@@ -19,6 +19,8 @@ import { Text } from '@/components/Text';
 import { Button } from '@/components/Button';
 import { NumberField } from '@/components/NumberField';
 import { SourceBadge } from '@/components/SourceBadge';
+
+export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
 
 const BAND_COPY = { likely: 'Likely', possible: 'Possible', unsure: 'Unsure' } as const;
 
@@ -39,6 +41,9 @@ export default function PhotoReviewScreen() {
     [serverDraft],
   );
   const [items, setItems] = useState<ReviewItem[] | null>(null);
+  // What is typed in each amount field; the item itself only ever holds a
+  // number, because the draft total is computed from it on every render.
+  const [gramsText, setGramsText] = useState<Record<string, string>>({});
   const review = items ?? initial;
   const energy = draftEnergy(review);
   const ready = canConfirm(review);
@@ -186,8 +191,11 @@ export default function PhotoReviewScreen() {
 
             <NumberField
               label={`Amount${item.gramsUntouched ? ' (estimated)' : ''}`}
-              value={item.grams}
-              onChange={(value) => update(item.itemId, { grams: num(value || '0'), gramsUntouched: false })}
+              value={gramsText[item.itemId] ?? item.grams}
+              onChange={(text, parsed) => {
+                setGramsText((prev) => ({ ...prev, [item.itemId]: text }));
+                update(item.itemId, { grams: parsed ?? '0', gramsUntouched: false });
+              }}
               suffix="g"
               step={10}
             />

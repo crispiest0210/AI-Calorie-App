@@ -113,7 +113,7 @@ describe('EntryDetailScreen', () => {
   it('does not save a zero amount', () => {
     render(<EntryDetailScreen />);
     fireEvent.changeText(screen.getByLabelText('Amount (g)'), '0');
-    fireEvent.press(screen.getByRole('button', { name: 'Save amount' }));
+    expect(screen.queryByRole('button', { name: 'Save amount' })).toBeNull();
     expect(mockUpdateEntry).not.toHaveBeenCalled();
   });
 

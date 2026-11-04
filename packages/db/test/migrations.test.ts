@@ -78,3 +78,39 @@ describe('parseJson', () => {
     for (const value of [null, undefined, '', '{not json']) expect(parseJson(value, { fallback: true })).toEqual({ fallback: true });
   });
 });
+
+describe('a migration that fails', () => {
+  it('rolls back so nothing half-applied is left behind', () => {
+    const { sqlite } = freshDb();
+    const raw: RawSqlite = {
+      execute: (sql) => {
+        sqlite.exec(sql);
+      },
+      select: (sql) => sqlite.prepare(sql).all() as never[],
+    };
+    const broken = { name: '9999_broken', sql: 'create table half_done (id text);\ninsert into no_such_table values (1);' };
+
+    expect(() => runMigrations(raw, [broken])).toThrow(/no_such_table/);
+    expect(sqlite.inTransaction).toBe(false);
+    expect(sqlite.prepare(`select name from sqlite_master where name = 'half_done'`).all()).toEqual([]);
+    expect(sqlite.prepare(`select name from schema_migration where name = '9999_broken'`).all()).toEqual([]);
+
+    // A later write is not swept into the abandoned transaction.
+    sqlite.exec(`create table after_failure (id text)`);
+    expect(sqlite.prepare(`select name from sqlite_master where name = 'after_failure'`).all()).toHaveLength(1);
+  });
+
+  it('still reports the original error when there is nothing to roll back', () => {
+    const calls: string[] = [];
+    const raw: RawSqlite = {
+      execute: (sql) => {
+        calls.push(sql);
+        if (sql.startsWith('begin')) throw new Error('disk I/O error');
+        if (sql === 'rollback;') throw new Error('no transaction is active');
+      },
+      select: () => [],
+    };
+    expect(() => runMigrations(raw, [{ name: '0001_x', sql: 'select 1;' }])).toThrow('disk I/O error');
+    expect(calls).toContain('rollback;');
+  });
+});

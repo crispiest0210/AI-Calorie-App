@@ -283,9 +283,11 @@ describe('running through the API surface', () => {
 
   it('refuses to run an analysis whose image has been deleted, without calling the model', async () => {
     const analyzer = analyzerSaying(MODEL_SAID);
-    const readImage = vi.fn().mockResolvedValue(IMAGE);
-    const app = createApp({ pool: h.pool, auth: AUTH, analyzer, readImage });
-    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS));
+    const images = new MemoryImageStore();
+    images.put(PATH_A, IMAGE.bytes);
+    const readImage = vi.spyOn(images, 'read');
+    const app = createApp({ pool: h.pool, auth: AUTH, analyzer, images });
+    await withUser(h.pool, USER_A, (sql) => photos.deleteImageNow(sql, USER_A, ANALYSIS, images));
 
     const token = await h.tokenFor(USER_A);
     const res = await app.request(`/v1/photo-analyses/${ANALYSIS}/run`, {

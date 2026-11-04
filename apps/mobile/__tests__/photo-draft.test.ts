@@ -60,6 +60,11 @@ describe('resolving', () => {
   it('refuses to confirm an empty draft', () => {
     expect(canConfirm([])).toBe(false);
   });
+
+  it('holds Confirm while an amount is cleared or zero', () => {
+    expect(canConfirm([item({ grams: '0', gramsUntouched: false })])).toBe(false);
+    expect(canConfirm([item(), item({ itemId: 'i2', grams: '0.5', gramsUntouched: false })])).toBe(true);
+  });
 });
 
 describe('the draft total', () => {
