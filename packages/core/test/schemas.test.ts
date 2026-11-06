@@ -54,6 +54,12 @@ describe('shared schemas', () => {
     expect(logEntrySchema.safeParse({ ...quick, amountValue: '-1' }).success).toBe(false);
   });
 
+  it('rejects zero or negative resolved grams on food entries', () => {
+    expect(logEntrySchema.safeParse({ ...entry, grams: '0' }).success).toBe(false);
+    expect(logEntrySchema.safeParse({ ...entry, grams: '-150' }).success).toBe(false);
+    expect(logEntrySchema.safeParse({ ...entry, grams: '0.5' }).success).toBe(true);
+  });
+
   it('requires quick adds to carry absolute nutrients', () => {
     const quick = { ...entry, entryKind: 'quick_add', foodId: null, grams: null, nutrientsPer100g: null, amountUnit: 'kcal', amountValue: '250' };
     expect(logEntrySchema.safeParse({ ...quick, nutrientsAbsolute: { energy_kcal: '250' } }).success).toBe(true);

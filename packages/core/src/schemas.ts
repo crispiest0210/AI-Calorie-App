@@ -86,6 +86,8 @@ export const logEntrySchema = z
     } else if (entry.nutrientsAbsolute === null) {
       ctx.addIssue({ code: 'custom', message: 'quick adds need absolute nutrients' });
     }
+    if (entry.grams !== null && compare(entry.grams, 0) < 0) ctx.addIssue({ code: 'custom', path: ['grams'], message: 'must not be negative' });
+    if (entry.entryKind === 'food' && entry.grams !== null && !isPositive(entry.grams)) ctx.addIssue({ code: 'custom', path: ['grams'], message: 'must be greater than zero for a food entry' });
     if (compare(entry.amountValue, 0) < 0) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must not be negative' });
   });
 
