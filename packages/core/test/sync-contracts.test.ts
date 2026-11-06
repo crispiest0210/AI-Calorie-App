@@ -48,6 +48,12 @@ describe('sync contracts', () => {
     expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, amountValue: 150 } }).success).toBe(false);
   });
 
+  it('rejects a timezone offset outside the real UTC-12 to UTC+14 range', () => {
+    expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, tzOffsetMin: 840 } }).success).toBe(true);
+    expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, tzOffsetMin: -721 } }).success).toBe(false);
+    expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, tzOffsetMin: 841 } }).success).toBe(false);
+  });
+
   it('rejects a row whose payload does not match its table tag', () => {
     expect(syncRow.safeParse({ table: 'water_entry', row: logEntry }).success).toBe(false);
     expect(syncRow.safeParse({ table: 'catalog_food', row: logEntry }).success).toBe(false);

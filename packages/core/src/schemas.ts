@@ -18,6 +18,9 @@ export const numericString = z
 
 export const localDate = z.string().refine(isLocalDate, 'expected YYYY-MM-DD');
 
+/** Minutes east of UTC; real zones span UTC-12:00 to UTC+14:00, so anything outside is corrupt. */
+export const tzOffsetMin = z.number().int().min(-720).max(840);
+
 export const nutrientCode = z.enum(NUTRIENT_CODES);
 export const nutrientMap = z.record(nutrientCode, numericString);
 
@@ -53,7 +56,7 @@ export const logEntrySchema = z
     id: z.string(),
     localDate,
     loggedAt: z.number().int(),
-    tzOffsetMin: z.number().int(),
+    tzOffsetMin,
     mealSlot,
     entryKind,
     foodId: z.string().nullable(),
