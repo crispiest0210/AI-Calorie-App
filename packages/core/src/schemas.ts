@@ -9,6 +9,7 @@ import { ENTRY_KINDS, MEAL_SLOTS } from './entries';
 import { GOAL_BASES, GOAL_KINDS } from './goals';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
 import { isLocalDate } from './dates';
+import { compare } from './decimal';
 
 /** A decimal string as stored and synced — never a float (review item R13). */
 export const numericString = z
@@ -84,6 +85,21 @@ export const goalTargetSchema = z.object({
   valueLow: numericString.nullable(),
   valueHigh: numericString.nullable(),
   basis: z.enum(GOAL_BASES),
+}).superRefine((target, ctx) => {
+  // Mirrors the db repository: each kind uses exactly its own value fields.
+  const used = {
+    target: { value: true, valueLow: false, valueHigh: false },
+    min: { value: false, valueLow: true, valueHigh: false },
+    max: { value: false, valueLow: false, valueHigh: true },
+    range: { value: false, valueLow: true, valueHigh: true },
+  }[target.kind];
+  for (const key of ['value', 'valueLow', 'valueHigh'] as const) {
+    if (used[key] && target[key] === null) ctx.addIssue({ code: 'custom', path: [key], message: `is required for a ${target.kind} goal` });
+    if (!used[key] && target[key] !== null) ctx.addIssue({ code: 'custom', path: [key], message: `must be empty for a ${target.kind} goal` });
+  }
+  if (target.valueLow !== null && target.valueHigh !== null && compare(target.valueLow, target.valueHigh) > 0) {
+    ctx.addIssue({ code: 'custom', path: ['valueLow'], message: 'must not exceed valueHigh' });
+  }
 });
 
 export const goalProfileSchema = z.object({

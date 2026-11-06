@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { goalProfileSchema, logEntrySchema, numericString, waterEntrySchema, waterPresetSchema, foodSchema, foodPortionSchema, localDate, nutrientMap } from '../src/schemas';
+import { goalProfileSchema, goalTargetSchema, logEntrySchema, numericString, waterEntrySchema, waterPresetSchema, foodSchema, foodPortionSchema, localDate, nutrientMap } from '../src/schemas';
 
 const entry = {
   id: 'e1',
@@ -70,3 +70,21 @@ describe('shared schemas', () => {
     expect(foodPortionSchema.safeParse({ id: 'p1', foodId: 'f1', label: '1 cup', gramWeight: '202', source: 'fdc' }).success).toBe(true);
   });
 });
+
+describe('goalTargetSchema', () => {
+  const base = { nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: '30', valueHigh: null, basis: 'absolute' } as const;
+
+  it('accepts each kind with exactly its value fields', () => {
+    expect(goalTargetSchema.safeParse(base).success).toBe(true);
+    expect(goalTargetSchema.safeParse({ ...base, kind: 'max', valueLow: null, valueHigh: '2300' }).success).toBe(true);
+    expect(goalTargetSchema.safeParse({ ...base, kind: 'target', value: '2100', valueLow: null }).success).toBe(true);
+    expect(goalTargetSchema.safeParse({ ...base, kind: 'range', valueHigh: '40' }).success).toBe(true);
+  });
+
+  it('rejects a missing, stray or inverted value', () => {
+    expect(goalTargetSchema.safeParse({ ...base, valueLow: null }).success).toBe(false);
+    expect(goalTargetSchema.safeParse({ ...base, value: '10' }).success).toBe(false);
+    expect(goalTargetSchema.safeParse({ ...base, kind: 'range', valueHigh: '20' }).success).toBe(false);
+  });
+});
+
