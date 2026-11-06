@@ -68,6 +68,10 @@ describe('shared schemas', () => {
       foodSchema.safeParse({ id: 'f1', kind: 'generic', name: 'Rice', brand: null, gtin: null, qualityTier: 'lab', sourceRef: '169704', sourceReleaseId: 'r1', densityGPerMl: null }).success,
     ).toBe(true);
     expect(foodPortionSchema.safeParse({ id: 'p1', foodId: 'f1', label: '1 cup', gramWeight: '202', source: 'fdc' }).success).toBe(true);
+    expect(foodPortionSchema.safeParse({ id: 'p1', foodId: 'f1', label: '1 cup', gramWeight: '0', source: 'fdc' }).success).toBe(false);
+    expect(
+      foodSchema.safeParse({ id: 'f1', kind: 'generic', name: 'Rice', brand: null, gtin: null, qualityTier: 'lab', sourceRef: null, sourceReleaseId: null, densityGPerMl: '0' }).success,
+    ).toBe(false);
   });
 });
 

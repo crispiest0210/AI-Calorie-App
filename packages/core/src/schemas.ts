@@ -9,12 +9,15 @@ import { ENTRY_KINDS, MEAL_SLOTS } from './entries';
 import { GOAL_BASES, GOAL_KINDS } from './goals';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
 import { isLocalDate } from './dates';
-import { compare } from './decimal';
+import { compare, isPositive } from './decimal';
 
 /** A decimal string as stored and synced — never a float (review item R13). */
 export const numericString = z
   .string()
   .regex(/^-?\d+(\.\d+)?$/, 'expected a decimal string');
+
+/** A decimal string greater than zero: a zero serving count or portion weight would divide by zero downstream. */
+export const positiveNumericString = numericString.refine(isPositive, 'must be greater than zero');
 
 export const localDate = z.string().refine(isLocalDate, 'expected YYYY-MM-DD');
 
@@ -35,7 +38,7 @@ export const foodPortionSchema = z.object({
   id: z.string(),
   foodId: z.string(),
   label: z.string().min(1),
-  gramWeight: numericString,
+  gramWeight: positiveNumericString,
   source: z.enum(['fdc', 'off_serving', 'user']),
 });
 
@@ -48,7 +51,7 @@ export const foodSchema = z.object({
   qualityTier,
   sourceRef: z.string().nullable(),
   sourceReleaseId: z.string().nullable(),
-  densityGPerMl: numericString.nullable(),
+  densityGPerMl: positiveNumericString.nullable(),
 });
 
 export const logEntrySchema = z

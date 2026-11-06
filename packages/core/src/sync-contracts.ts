@@ -7,14 +7,10 @@
  * nutrients and portions — so a food never arrives half-written (review R3).
  */
 import { z } from 'zod';
-import { goalProfileSchema, localDate, tzOffsetMin, numericString, nutrientMap, waterEntrySchema, waterPresetSchema } from './schemas';
+import { goalProfileSchema, localDate, positiveNumericString, tzOffsetMin, numericString, nutrientMap, waterEntrySchema, waterPresetSchema } from './schemas';
 import { MEAL_SLOTS, ENTRY_KINDS } from './entries';
 import { AMOUNT_UNITS, GRAMS_PROVENANCES } from './units';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
-import { isPositive } from './decimal';
-
-/** A decimal string greater than zero: a zero serving count or portion weight would divide by zero downstream. */
-const positiveNumericString = numericString.refine(isPositive, 'must be greater than zero');
 
 /** Tables that sync. Catalog tables are server-owned and never pushed. */
 export const SYNCED_TABLES = ['log_entry', 'water_entry', 'water_preset', 'goal_profile', 'food'] as const;
@@ -174,9 +170,9 @@ export const foodSearchResult = z.object({
 
 export const foodDetailResponse = foodSearchResult.extend({
   gtin: z.string().nullable(),
-  densityGPerMl: numericString.nullable(),
+  densityGPerMl: positiveNumericString.nullable(),
   nutrientsPer100g: nutrientMap,
-  portions: z.array(z.object({ id: z.string(), label: z.string(), gramWeight: numericString, source: z.string() })),
+  portions: z.array(z.object({ id: z.string(), label: z.string(), gramWeight: positiveNumericString, source: z.string() })),
   source: z.object({
     provider: z.string(),
     dataset: z.string().nullable(),
