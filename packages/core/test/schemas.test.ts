@@ -46,6 +46,14 @@ describe('shared schemas', () => {
     expect(logEntrySchema.safeParse({ ...entry, nutrientsPer100g: null }).success).toBe(false);
   });
 
+  it('rejects a zero or negative amount on food entries, and a negative one on quick adds', () => {
+    expect(logEntrySchema.safeParse({ ...entry, amountValue: '0' }).success).toBe(false);
+    expect(logEntrySchema.safeParse({ ...entry, amountValue: '-5' }).success).toBe(false);
+    const quick = { ...entry, entryKind: 'quick_add', foodId: null, grams: null, nutrientsPer100g: null, amountUnit: 'kcal', nutrientsAbsolute: { energy_kcal: '0' } };
+    expect(logEntrySchema.safeParse({ ...quick, amountValue: '0' }).success).toBe(true);
+    expect(logEntrySchema.safeParse({ ...quick, amountValue: '-1' }).success).toBe(false);
+  });
+
   it('requires quick adds to carry absolute nutrients', () => {
     const quick = { ...entry, entryKind: 'quick_add', foodId: null, grams: null, nutrientsPer100g: null, amountUnit: 'kcal', amountValue: '250' };
     expect(logEntrySchema.safeParse({ ...quick, nutrientsAbsolute: { energy_kcal: '250' } }).success).toBe(true);

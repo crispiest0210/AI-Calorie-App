@@ -21,10 +21,10 @@ export const positiveNumericString = numericString.refine(isPositive, 'must be g
 
 export const localDate = z.string().refine(isLocalDate, 'expected YYYY-MM-DD');
 
-/** Minutes east of UTC; real zones span UTC-12:00 to UTC+14:00, so anything outside is corrupt. */
 /** Epoch milliseconds from 1970 to the end of year 9999, a range both JS dates and Postgres timestamps round-trip. */
 export const epochMs = z.number().int().min(0).max(253_402_300_799_999);
 
+/** Minutes east of UTC; real zones span UTC-12:00 to UTC+14:00, so anything outside is corrupt. */
 export const tzOffsetMin = z.number().int().min(-720).max(840);
 
 export const nutrientCode = z.enum(NUTRIENT_CODES);
@@ -82,9 +82,11 @@ export const logEntrySchema = z
       if (entry.foodId === null) ctx.addIssue({ code: 'custom', message: 'food entries need a food_id' });
       if (entry.grams === null) ctx.addIssue({ code: 'custom', message: 'food entries need resolved grams' });
       if (entry.nutrientsPer100g === null) ctx.addIssue({ code: 'custom', message: 'food entries need a per-100 g snapshot' });
+      if (!isPositive(entry.amountValue)) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must be greater than zero for a food entry' });
     } else if (entry.nutrientsAbsolute === null) {
       ctx.addIssue({ code: 'custom', message: 'quick adds need absolute nutrients' });
     }
+    if (compare(entry.amountValue, 0) < 0) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must not be negative' });
   });
 
 export const goalTargetSchema = z.object({
