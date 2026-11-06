@@ -151,3 +151,16 @@ describe('sync contracts', () => {
     });
   });
 });
+
+describe('syncFood positive quantities', () => {
+  it('rejects a zero or negative density, portion weight, serving count or ingredient weight', () => {
+    expect(syncFood.safeParse({ ...food, densityGPerMl: '1.04' }).success).toBe(true);
+    expect(syncFood.safeParse({ ...food, densityGPerMl: '0' }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, portions: [{ ...food.portions[0], gramWeight: '0' }] }).success).toBe(false);
+    const recipe = { servings: '4', totalCookedGrams: null, ingredients: [{ id, ingredientFoodId: id2, grams: '200', position: 0 }] };
+    expect(syncFood.safeParse({ ...food, recipe }).success).toBe(true);
+    expect(syncFood.safeParse({ ...food, recipe: { ...recipe, servings: '0' } }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, recipe: { ...recipe, totalCookedGrams: '-5' } }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, recipe: { ...recipe, ingredients: [{ ...recipe.ingredients[0], grams: '0' }] } }).success).toBe(false);
+  });
+});

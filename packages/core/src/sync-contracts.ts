@@ -11,6 +11,10 @@ import { goalProfileSchema, localDate, numericString, nutrientMap, waterEntrySch
 import { MEAL_SLOTS, ENTRY_KINDS } from './entries';
 import { AMOUNT_UNITS, GRAMS_PROVENANCES } from './units';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
+import { isPositive } from './decimal';
+
+/** A decimal string greater than zero: a zero serving count or portion weight would divide by zero downstream. */
+const positiveNumericString = numericString.refine(isPositive, 'must be greater than zero');
 
 /** Tables that sync. Catalog tables are server-owned and never pushed. */
 export const SYNCED_TABLES = ['log_entry', 'water_entry', 'water_preset', 'goal_profile', 'food'] as const;
@@ -62,7 +66,7 @@ export const syncFood = z.object({
   gtin: z.string().nullable(),
   qualityTier: z.enum(QUALITY_TIERS),
   sourceRef: z.string().nullable(),
-  densityGPerMl: numericString.nullable(),
+  densityGPerMl: positiveNumericString.nullable(),
   nutrients: z.array(
     z.object({
       nutrientCode: z.string(),
@@ -74,7 +78,7 @@ export const syncFood = z.object({
     z.object({
       id: z.string().uuid(),
       label: z.string().min(1),
-      gramWeight: numericString,
+      gramWeight: positiveNumericString,
       source: z.string(),
       position: z.number().int(),
     }),
@@ -86,13 +90,13 @@ export const syncFood = z.object({
    */
   recipe: z
     .object({
-      servings: numericString,
-      totalCookedGrams: numericString.nullable(),
+      servings: positiveNumericString,
+      totalCookedGrams: positiveNumericString.nullable(),
       ingredients: z.array(
         z.object({
           id: z.string().uuid(),
           ingredientFoodId: z.string().uuid(),
-          grams: numericString,
+          grams: positiveNumericString,
           position: z.number().int(),
         }),
       ),
