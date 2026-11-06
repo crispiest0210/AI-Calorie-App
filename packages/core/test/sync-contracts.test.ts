@@ -170,3 +170,9 @@ describe('syncFood positive quantities', () => {
     expect(syncFood.safeParse({ ...food, recipe: { ...recipe, ingredients: [{ ...recipe.ingredients[0], grams: '0' }] } }).success).toBe(false);
   });
 });
+
+describe('syncFood nutrient codes', () => {
+  it('rejects a nutrient code the catalog does not define instead of failing the insert', () => {
+    expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], nutrientCode: 'unobtainium' }] }).success).toBe(false);
+  });
+});

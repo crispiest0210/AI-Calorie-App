@@ -110,7 +110,7 @@ export function serializeRow(db: Db, table: SyncedTable, id: string): SyncRow | 
           qualityTier: row.qualityTier as never,
           sourceRef: row.sourceRef,
           densityGPerMl: row.densityGPerMl,
-          nutrients: nutrients.map((n) => ({ nutrientCode: n.nutrientCode, amountPer100g: n.amountPer100g, derivation: n.derivation })),
+          nutrients: nutrients.map((n) => ({ nutrientCode: n.nutrientCode as never, amountPer100g: n.amountPer100g, derivation: n.derivation })),
           portions: portions.map((p) => ({ id: p.id, label: p.label, gramWeight: p.gramWeight, source: p.source, position: p.position })),
           recipe:
             meta === undefined
