@@ -7,7 +7,7 @@
  * nutrients and portions — so a food never arrives half-written (review R3).
  */
 import { z } from 'zod';
-import { goalProfileSchema, localDate, positiveNumericString, tzOffsetMin, numericString, nutrientMap, waterEntrySchema, waterPresetSchema } from './schemas';
+import { epochMs, goalProfileSchema, localDate, positiveNumericString, tzOffsetMin, numericString, nutrientMap, waterEntrySchema, waterPresetSchema } from './schemas';
 import { MEAL_SLOTS, ENTRY_KINDS } from './entries';
 import { AMOUNT_UNITS, GRAMS_PROVENANCES } from './units';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
@@ -17,10 +17,6 @@ export const SYNCED_TABLES = ['log_entry', 'water_entry', 'water_preset', 'goal_
 export type SyncedTable = (typeof SYNCED_TABLES)[number];
 
 export const syncedTable = z.enum(SYNCED_TABLES);
-
-/** Epoch milliseconds from 1970 to the end of year 9999, a range both JS dates and Postgres timestamps round-trip. */
-const MAX_EPOCH_MS = 253_402_300_799_999;
-const epochMs = z.number().int().min(0).max(MAX_EPOCH_MS);
 
 /** Every synced row carries these; the server owns `serverRev`. */
 const syncColumns = {

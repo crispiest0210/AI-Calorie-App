@@ -22,6 +22,9 @@ export const positiveNumericString = numericString.refine(isPositive, 'must be g
 export const localDate = z.string().refine(isLocalDate, 'expected YYYY-MM-DD');
 
 /** Minutes east of UTC; real zones span UTC-12:00 to UTC+14:00, so anything outside is corrupt. */
+/** Epoch milliseconds from 1970 to the end of year 9999, a range both JS dates and Postgres timestamps round-trip. */
+export const epochMs = z.number().int().min(0).max(253_402_300_799_999);
+
 export const tzOffsetMin = z.number().int().min(-720).max(840);
 
 export const nutrientCode = z.enum(NUTRIENT_CODES);
@@ -58,7 +61,7 @@ export const logEntrySchema = z
   .object({
     id: z.string(),
     localDate,
-    loggedAt: z.number().int(),
+    loggedAt: epochMs,
     tzOffsetMin,
     mealSlot,
     entryKind,
@@ -118,7 +121,7 @@ export const goalProfileSchema = z.object({
 export const waterEntrySchema = z.object({
   id: z.string(),
   localDate,
-  loggedAt: z.number().int(),
+  loggedAt: epochMs,
   amountMl: z.number().int().min(1).max(5000),
 });
 

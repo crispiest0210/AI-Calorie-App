@@ -63,6 +63,7 @@ describe('shared schemas', () => {
     ).toBe(true);
     expect(waterEntrySchema.safeParse({ id: 'w1', localDate: '2026-09-20', loggedAt: 1, amountMl: 250 }).success).toBe(true);
     expect(waterEntrySchema.safeParse({ id: 'w1', localDate: '2026-09-20', loggedAt: 1, amountMl: 9000 }).success).toBe(false);
+    expect(waterEntrySchema.safeParse({ id: 'w1', localDate: '2026-09-20', loggedAt: -1, amountMl: 250 }).success).toBe(false);
     expect(waterPresetSchema.safeParse({ id: 'p1', label: 'Glass', amountMl: 250, position: 0 }).success).toBe(true);
     expect(
       foodSchema.safeParse({ id: 'f1', kind: 'generic', name: 'Rice', brand: null, gtin: null, qualityTier: 'lab', sourceRef: '169704', sourceReleaseId: 'r1', densityGPerMl: null }).success,
