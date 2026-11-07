@@ -97,9 +97,9 @@ export const logEntrySchema = z
 export const goalTargetSchema = z.object({
   nutrientCode,
   kind: z.enum(GOAL_KINDS),
-  value: numericString.nullable(),
-  valueLow: numericString.nullable(),
-  valueHigh: numericString.nullable(),
+  value: nonNegativeNumericString.nullable(),
+  valueLow: nonNegativeNumericString.nullable(),
+  valueHigh: nonNegativeNumericString.nullable(),
   basis: z.enum(GOAL_BASES),
 }).superRefine((target, ctx) => {
   // Mirrors the db repository: each kind uses exactly its own value fields.

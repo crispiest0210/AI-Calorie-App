@@ -105,5 +105,12 @@ describe('goalTargetSchema', () => {
     expect(goalTargetSchema.safeParse({ ...base, value: '10' }).success).toBe(false);
     expect(goalTargetSchema.safeParse({ ...base, kind: 'range', valueHigh: '20' }).success).toBe(false);
   });
+
+  it('rejects negative target values', () => {
+    expect(goalTargetSchema.safeParse({ ...base, valueLow: '-5' }).success).toBe(false);
+    expect(goalTargetSchema.safeParse({ ...base, kind: 'target', value: '-2100', valueLow: null }).success).toBe(false);
+    expect(goalTargetSchema.safeParse({ ...base, kind: 'max', valueLow: null, valueHigh: '-1' }).success).toBe(false);
+    expect(goalTargetSchema.safeParse({ ...base, valueLow: '0' }).success).toBe(true);
+  });
 });
 
