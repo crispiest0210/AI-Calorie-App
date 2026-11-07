@@ -84,6 +84,14 @@ describe('sync contracts', () => {
     expect(syncFood.safeParse({ ...food, recipe: { ...recipe, servings: 4 } }).success).toBe(false);
   });
 
+  it('rejects negative positions on portions and recipe ingredients', () => {
+    const portion = food.portions[0];
+    expect(syncFood.safeParse({ ...food, portions: [{ ...portion, position: -1 }] }).success).toBe(false);
+    const ingredient = { id, ingredientFoodId: id2, grams: '200', position: -1 };
+    const recipe = { servings: '4', totalCookedGrams: null, ingredients: [ingredient] };
+    expect(syncFood.safeParse({ ...food, recipe }).success).toBe(false);
+  });
+
   it('caps a push batch at MAX_PUSH_ROWS', () => {
     const change = { table: 'log_entry', row: logEntry };
     expect(pushRequest.safeParse({ changes: Array(MAX_PUSH_ROWS).fill(change) }).success).toBe(true);

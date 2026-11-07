@@ -72,7 +72,7 @@ export const syncFood = z.object({
       label: z.string().min(1),
       gramWeight: positiveNumericString,
       source: z.string(),
-      position: z.number().int(),
+      position: z.number().int().nonnegative(),
     }),
   ),
   /**
@@ -89,7 +89,7 @@ export const syncFood = z.object({
           id: z.string().uuid(),
           ingredientFoodId: z.string().uuid(),
           grams: positiveNumericString,
-          position: z.number().int(),
+          position: z.number().int().nonnegative(),
         }),
       ),
     })
