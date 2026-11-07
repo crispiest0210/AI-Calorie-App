@@ -136,7 +136,7 @@ export const waterPresetSchema = z.object({
   id: z.string(),
   label: z.string().nullable(),
   amountMl: z.number().int().min(1).max(5000),
-  position: z.number().int(),
+  position: z.number().int().min(0),
 });
 
 export type FoodRow = z.infer<typeof foodSchema>;
