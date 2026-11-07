@@ -31,7 +31,7 @@ export const epochMs = z.number().int().min(0).max(253_402_300_799_999);
 export const tzOffsetMin = z.number().int().min(-720).max(840);
 
 export const nutrientCode = z.enum(NUTRIENT_CODES);
-export const nutrientMap = z.record(nutrientCode, numericString);
+export const nutrientMap = z.record(nutrientCode, nonNegativeNumericString);
 
 export const mealSlot = z.enum(MEAL_SLOTS);
 export const entryKind = z.enum(ENTRY_KINDS);

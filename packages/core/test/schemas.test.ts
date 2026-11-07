@@ -34,6 +34,7 @@ describe('shared schemas', () => {
     expect(localDate.safeParse('2026-13-01').success).toBe(false);
     expect(nutrientMap.safeParse({ energy_kcal: '1' }).success).toBe(true);
     expect(nutrientMap.safeParse({ bogus: '1' }).success).toBe(false);
+    expect(nutrientMap.safeParse({ energy_kcal: '-1' }).success).toBe(false);
   });
 
   it('accepts a well-formed food entry', () => {
