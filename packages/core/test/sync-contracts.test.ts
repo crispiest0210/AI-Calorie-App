@@ -171,6 +171,13 @@ describe('syncFood positive quantities', () => {
   });
 });
 
+describe('syncFood nutrient amounts', () => {
+  it('accepts zero but rejects a negative amount per 100 g', () => {
+    expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], amountPer100g: '0' }] }).success).toBe(true);
+    expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], amountPer100g: '-1' }] }).success).toBe(false);
+  });
+});
+
 describe('syncFood nutrient codes', () => {
   it('rejects a nutrient code the catalog does not define instead of failing the insert', () => {
     expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], nutrientCode: 'unobtainium' }] }).success).toBe(false);

@@ -19,6 +19,9 @@ export const numericString = z
 /** A decimal string greater than zero: a zero serving count or portion weight would divide by zero downstream. */
 export const positiveNumericString = numericString.refine(isPositive, 'must be greater than zero');
 
+/** A decimal string that is zero or more: a nutrient amount below zero is corrupt data, not a real food. */
+export const nonNegativeNumericString = numericString.refine((v) => compare(v, 0) >= 0, 'must not be negative');
+
 export const localDate = z.string().refine(isLocalDate, 'expected YYYY-MM-DD');
 
 /** Epoch milliseconds from 1970 to the end of year 9999, a range both JS dates and Postgres timestamps round-trip. */

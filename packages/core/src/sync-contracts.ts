@@ -7,7 +7,7 @@
  * nutrients and portions — so a food never arrives half-written (review R3).
  */
 import { z } from 'zod';
-import { epochMs, goalProfileSchema, localDate, positiveNumericString, tzOffsetMin, numericString, nutrientCode, nutrientMap, waterEntrySchema, waterPresetSchema } from './schemas';
+import { epochMs, goalProfileSchema, localDate, positiveNumericString, tzOffsetMin, numericString, nonNegativeNumericString, nutrientCode, nutrientMap, waterEntrySchema, waterPresetSchema } from './schemas';
 import { MEAL_SLOTS, ENTRY_KINDS } from './entries';
 import { AMOUNT_UNITS, GRAMS_PROVENANCES } from './units';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
@@ -62,7 +62,7 @@ export const syncFood = z.object({
   nutrients: z.array(
     z.object({
       nutrientCode,
-      amountPer100g: numericString,
+      amountPer100g: nonNegativeNumericString,
       derivation: z.string(),
     }),
   ),
