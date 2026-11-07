@@ -191,3 +191,19 @@ describe('syncFood nutrient codes', () => {
     expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], nutrientCode: 'unobtainium' }] }).success).toBe(false);
   });
 });
+
+describe('sync response counters', () => {
+  it('rejects negative cursors and revisions', () => {
+    const id = '00000000-0000-4000-8000-000000000001';
+    expect(pushResponse.safeParse({ assigned: [{ table: SYNCED_TABLES[0], id, serverRev: 0 }], cursor: 0 }).success).toBe(true);
+    expect(pushResponse.safeParse({ assigned: [{ table: SYNCED_TABLES[0], id, serverRev: -1 }], cursor: 0 }).success).toBe(false);
+    expect(pushResponse.safeParse({ assigned: [], cursor: -1 }).success).toBe(false);
+    expect(pullResponse.safeParse({ changes: [], nextCursor: -1, hasMore: false }).success).toBe(false);
+  });
+
+  it('bounds the problem status to a real HTTP status', () => {
+    const problem = { type: 'about:blank', title: 'Gone', status: 410, code: 'sync_cursor_expired' };
+    expect(problemDetails.safeParse({ ...problem, status: 99 }).success).toBe(false);
+    expect(problemDetails.safeParse({ ...problem, status: 600 }).success).toBe(false);
+  });
+});

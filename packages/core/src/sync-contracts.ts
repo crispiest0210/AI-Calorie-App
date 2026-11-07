@@ -116,13 +116,13 @@ export const pushRequest = z.object({
 
 export const pushResponse = z.object({
   /** The revision the server assigned each row, keyed by row id. */
-  assigned: z.array(z.object({ table: syncedTable, id: z.string().uuid(), serverRev: z.number().int() })),
-  cursor: z.number().int(),
+  assigned: z.array(z.object({ table: syncedTable, id: z.string().uuid(), serverRev: z.number().int().nonnegative() })),
+  cursor: z.number().int().nonnegative(),
 });
 
 export const pullResponse = z.object({
-  changes: z.array(syncRow.and(z.object({ serverRev: z.number().int() }))),
-  nextCursor: z.number().int(),
+  changes: z.array(syncRow.and(z.object({ serverRev: z.number().int().nonnegative() }))),
+  nextCursor: z.number().int().nonnegative(),
   hasMore: z.boolean(),
 });
 
@@ -148,7 +148,7 @@ export type ProblemCode = (typeof PROBLEM_CODES)[number];
 export const problemDetails = z.object({
   type: z.string(),
   title: z.string(),
-  status: z.number().int(),
+  status: z.number().int().min(100).max(599),
   code: z.enum(PROBLEM_CODES),
   detail: z.string().optional(),
 });
