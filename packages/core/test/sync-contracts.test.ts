@@ -120,6 +120,8 @@ describe('sync contracts', () => {
     expect(syncRow.safeParse({ table: 'water_preset', row: preset }).success).toBe(true);
     expect(syncRow.safeParse({ table: 'goal_profile', row: goals }).success).toBe(true);
     expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 0 } }).success).toBe(false);
+    expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 20000 } }).success).toBe(true);
+    expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 20001 } }).success).toBe(false);
   });
 
   it('validates the revisions a push assigns', () => {

@@ -30,6 +30,9 @@ export const epochMs = z.number().int().min(0).max(253_402_300_799_999);
 /** Minutes east of UTC; real zones span UTC-12:00 to UTC+14:00, so anything outside is corrupt. */
 export const tzOffsetMin = z.number().int().min(-720).max(840);
 
+/** Largest daily water goal in mL; mirrors the device repository's limit so synced rows can't exceed it. */
+export const WATER_TARGET_ML_MAX = 20000;
+
 export const nutrientCode = z.enum(NUTRIENT_CODES);
 export const nutrientMap = z.record(nutrientCode, nonNegativeNumericString);
 
@@ -121,7 +124,7 @@ export const goalTargetSchema = z.object({
 export const goalProfileSchema = z.object({
   id: z.string(),
   effectiveFrom: localDate,
-  waterTargetMl: z.number().int().positive().nullable(),
+  waterTargetMl: z.number().int().min(1).max(WATER_TARGET_ML_MAX).nullable(),
   targets: z.array(goalTargetSchema),
 });
 
