@@ -38,7 +38,7 @@ export const syncLogEntry = z.object({
   portionId: z.string().uuid().nullable(),
   grams: numericString.nullable(),
   gramsProvenance: z.enum(GRAMS_PROVENANCES),
-  foodNameSnapshot: z.string().min(1),
+  foodNameSnapshot: z.string().trim().min(1),
   sourceReleaseId: z.string().nullable(),
   nutrientsPer100g: nutrientMap.nullable(),
   nutrientsAbsolute: nutrientMap.nullable(),

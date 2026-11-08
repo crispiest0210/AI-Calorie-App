@@ -84,6 +84,10 @@ describe('sync contracts', () => {
     expect(syncFood.safeParse({ ...food, recipe: { ...recipe, servings: 4 } }).success).toBe(false);
   });
 
+  it('rejects blank food name snapshots on log entries', () => {
+    expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, foodNameSnapshot: '   ' } }).success).toBe(false);
+  });
+
   it('rejects blank food names and portion labels', () => {
     expect(syncFood.safeParse({ ...food, name: '   ' }).success).toBe(false);
     const portion = food.portions[0];

@@ -77,7 +77,7 @@ export const logEntrySchema = z
     portionId: z.string().nullable(),
     grams: numericString.nullable(),
     gramsProvenance,
-    foodNameSnapshot: z.string().min(1),
+    foodNameSnapshot: z.string().trim().min(1),
     sourceReleaseId: z.string().nullable(),
     nutrientsPer100g: nutrientMap.nullable(),
     nutrientsAbsolute: nutrientMap.nullable(),
