@@ -53,7 +53,7 @@ export const syncGoalProfile = goalProfileSchema.extend(syncColumns);
 const hasUniqueKeys = <T>(items: T[], key: (item: T) => string) => new Set(items.map(key)).size === items.length;
 
 /** A custom food and everything that belongs to it, in one payload. */
-export const syncFood = z.object({
+const syncFoodShape = z.object({
   ...syncColumns,
   kind: z.enum(FOOD_KINDS),
   name: z.string().trim().min(1),
@@ -104,6 +104,11 @@ export const syncFood = z.object({
     })
     .nullable()
     .optional(),
+});
+
+export const syncFood = syncFoodShape.refine((f) => !f.recipe?.ingredients.some((i) => i.ingredientFoodId === f.id), {
+  message: 'a recipe cannot be an ingredient of itself',
+  path: ['recipe', 'ingredients'],
 });
 
 export const syncRow = z.discriminatedUnion('table', [

@@ -221,6 +221,15 @@ describe('syncFood duplicate keys', () => {
   });
 });
 
+describe('syncFood recipe self-reference', () => {
+  it('rejects a recipe that lists itself as an ingredient', () => {
+    const own = { id: id2, ingredientFoodId: food.id, grams: '200', position: 0 };
+    const recipe = { servings: '4', totalCookedGrams: null, ingredients: [own] };
+    expect(syncFood.safeParse({ ...food, recipe }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, recipe: { ...recipe, ingredients: [{ ...own, ingredientFoodId: id2 }] } }).success).toBe(true);
+  });
+});
+
 describe('problemDetails status', () => {
   const problem = { type: 'about:blank', title: 'Bad', code: 'server_error' };
 
