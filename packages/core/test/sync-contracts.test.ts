@@ -84,6 +84,12 @@ describe('sync contracts', () => {
     expect(syncFood.safeParse({ ...food, recipe: { ...recipe, servings: 4 } }).success).toBe(false);
   });
 
+  it('rejects blank food names and portion labels', () => {
+    expect(syncFood.safeParse({ ...food, name: '   ' }).success).toBe(false);
+    const portion = food.portions[0];
+    expect(syncFood.safeParse({ ...food, portions: [{ ...portion, label: '  ' }] }).success).toBe(false);
+  });
+
   it('rejects negative positions on portions and recipe ingredients', () => {
     const portion = food.portions[0];
     expect(syncFood.safeParse({ ...food, portions: [{ ...portion, position: -1 }] }).success).toBe(false);

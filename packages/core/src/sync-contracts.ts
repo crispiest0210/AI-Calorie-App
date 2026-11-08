@@ -56,7 +56,7 @@ const hasUniqueKeys = <T>(items: T[], key: (item: T) => string) => new Set(items
 export const syncFood = z.object({
   ...syncColumns,
   kind: z.enum(FOOD_KINDS),
-  name: z.string().min(1),
+  name: z.string().trim().min(1),
   brand: z.string().nullable(),
   gtin: z.string().nullable(),
   qualityTier: z.enum(QUALITY_TIERS),
@@ -75,7 +75,7 @@ export const syncFood = z.object({
     .array(
       z.object({
         id: z.string().uuid(),
-        label: z.string().min(1),
+        label: z.string().trim().min(1),
         gramWeight: positiveNumericString,
         source: z.string(),
         position: z.number().int().nonnegative(),
