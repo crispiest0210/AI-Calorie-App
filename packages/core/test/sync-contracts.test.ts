@@ -196,3 +196,10 @@ describe('syncFood nutrient codes', () => {
     expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], nutrientCode: 'unobtainium' }] }).success).toBe(false);
   });
 });
+
+describe('syncFood duplicate keys', () => {
+  it('rejects repeated nutrient codes and portion ids, which would collide on primary keys', () => {
+    expect(syncFood.safeParse({ ...food, nutrients: [food.nutrients[0], food.nutrients[0]] }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, portions: [food.portions[0], food.portions[0]] }).success).toBe(false);
+  });
+});

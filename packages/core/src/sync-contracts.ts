@@ -49,6 +49,9 @@ export const syncWaterEntry = waterEntrySchema.extend(syncColumns);
 export const syncWaterPreset = waterPresetSchema.extend(syncColumns);
 export const syncGoalProfile = goalProfileSchema.extend(syncColumns);
 
+/** Rejects an array whose items repeat a key that the database stores as a primary key. */
+const hasUniqueKeys = <T>(items: T[], key: (item: T) => string) => new Set(items.map(key)).size === items.length;
+
 /** A custom food and everything that belongs to it, in one payload. */
 export const syncFood = z.object({
   ...syncColumns,
@@ -59,22 +62,26 @@ export const syncFood = z.object({
   qualityTier: z.enum(QUALITY_TIERS),
   sourceRef: z.string().nullable(),
   densityGPerMl: positiveNumericString.nullable(),
-  nutrients: z.array(
-    z.object({
-      nutrientCode,
-      amountPer100g: nonNegativeNumericString,
-      derivation: z.string(),
-    }),
-  ),
-  portions: z.array(
-    z.object({
-      id: z.string().uuid(),
-      label: z.string().min(1),
-      gramWeight: positiveNumericString,
-      source: z.string(),
-      position: z.number().int().nonnegative(),
-    }),
-  ),
+  nutrients: z
+    .array(
+      z.object({
+        nutrientCode,
+        amountPer100g: nonNegativeNumericString,
+        derivation: z.string(),
+      }),
+    )
+    .refine((items) => hasUniqueKeys(items, (n) => n.nutrientCode), 'duplicate nutrient code'),
+  portions: z
+    .array(
+      z.object({
+        id: z.string().uuid(),
+        label: z.string().min(1),
+        gramWeight: positiveNumericString,
+        source: z.string(),
+        position: z.number().int().nonnegative(),
+      }),
+    )
+    .refine((items) => hasUniqueKeys(items, (p) => p.id), 'duplicate portion id'),
   /**
    * Present only for a recipe. It rides with the food for the same reason its
    * nutrients do: a recipe that arrives without its ingredients cannot be
