@@ -116,3 +116,12 @@ describe('goalTargetSchema', () => {
   });
 });
 
+
+describe('empty ids', () => {
+  it('rejects an empty id on rows that need a real key', () => {
+    expect(waterEntrySchema.safeParse({ id: '', localDate: '2026-09-20', loggedAt: 1, amountMl: 250 }).success).toBe(false);
+    expect(waterPresetSchema.safeParse({ id: '', label: null, amountMl: 250, position: 0 }).success).toBe(false);
+    expect(foodPortionSchema.safeParse({ id: 'p1', foodId: '', label: '1 cup', gramWeight: '202', source: 'fdc' }).success).toBe(false);
+    expect(goalProfileSchema.safeParse({ id: '', effectiveFrom: '2026-09-20', waterTargetMl: null, targets: [] }).success).toBe(false);
+  });
+});

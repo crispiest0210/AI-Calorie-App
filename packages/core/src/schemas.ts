@@ -44,15 +44,15 @@ export const qualityTier = z.enum(QUALITY_TIERS);
 export const foodKind = z.enum(FOOD_KINDS);
 
 export const foodPortionSchema = z.object({
-  id: z.string(),
-  foodId: z.string(),
+  id: z.string().min(1),
+  foodId: z.string().min(1),
   label: z.string().min(1),
   gramWeight: positiveNumericString,
   source: z.enum(['fdc', 'off_serving', 'user']),
 });
 
 export const foodSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   kind: foodKind,
   name: z.string().min(1),
   brand: z.string().nullable(),
@@ -65,7 +65,7 @@ export const foodSchema = z.object({
 
 export const logEntrySchema = z
   .object({
-    id: z.string(),
+    id: z.string().min(1),
     localDate,
     loggedAt: epochMs,
     tzOffsetMin,
@@ -122,21 +122,21 @@ export const goalTargetSchema = z.object({
 });
 
 export const goalProfileSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   effectiveFrom: localDate,
   waterTargetMl: z.number().int().min(1).max(WATER_TARGET_ML_MAX).nullable(),
   targets: z.array(goalTargetSchema),
 });
 
 export const waterEntrySchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   localDate,
   loggedAt: epochMs,
   amountMl: z.number().int().min(1).max(5000),
 });
 
 export const waterPresetSchema = z.object({
-  id: z.string(),
+  id: z.string().min(1),
   label: z.string().nullable(),
   amountMl: z.number().int().min(1).max(5000),
   position: z.number().int().min(0),
