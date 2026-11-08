@@ -131,6 +131,9 @@ describe('sync contracts', () => {
     expect(pushResponse.safeParse({ assigned: [{ ...assigned, table: 'catalog_food' }], cursor: 3 }).success).toBe(false);
     expect(pushResponse.safeParse({ assigned: [{ ...assigned, id: 'e1' }], cursor: 3 }).success).toBe(false);
     expect(pushResponse.safeParse({ assigned: [{ ...assigned, serverRev: 1.5 }], cursor: 3 }).success).toBe(false);
+    expect(pushResponse.safeParse({ assigned: [{ ...assigned, serverRev: -1 }], cursor: 3 }).success).toBe(false);
+    expect(pushResponse.safeParse({ assigned: [], cursor: -1 }).success).toBe(false);
+    expect(pullResponse.safeParse({ changes: [], nextCursor: -1, hasMore: false }).success).toBe(false);
   });
   describe('food read responses', () => {
     const result = { id: 'usda:1', name: 'Rice', brand: null, kind: 'generic', qualityTier: 'lab', energyPer100g: '130' };
