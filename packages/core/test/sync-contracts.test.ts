@@ -212,6 +212,13 @@ describe('syncFood duplicate keys', () => {
     expect(syncFood.safeParse({ ...food, nutrients: [food.nutrients[0], food.nutrients[0]] }).success).toBe(false);
     expect(syncFood.safeParse({ ...food, portions: [food.portions[0], food.portions[0]] }).success).toBe(false);
   });
+
+  it('rejects repeated recipe ingredient ids', () => {
+    const ingredient = { id, ingredientFoodId: id2, grams: '200', position: 0 };
+    const recipe = { servings: '4', totalCookedGrams: null, ingredients: [ingredient, { ...ingredient, position: 1 }] };
+    expect(syncFood.safeParse({ ...food, recipe }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, recipe: { ...recipe, ingredients: [ingredient] } }).success).toBe(true);
+  });
 });
 
 describe('problemDetails status', () => {

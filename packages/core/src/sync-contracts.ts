@@ -91,14 +91,16 @@ export const syncFood = z.object({
     .object({
       servings: positiveNumericString,
       totalCookedGrams: positiveNumericString.nullable(),
-      ingredients: z.array(
-        z.object({
-          id: z.string().uuid(),
-          ingredientFoodId: z.string().uuid(),
-          grams: positiveNumericString,
-          position: z.number().int().nonnegative(),
-        }),
-      ),
+      ingredients: z
+        .array(
+          z.object({
+            id: z.string().uuid(),
+            ingredientFoodId: z.string().uuid(),
+            grams: positiveNumericString,
+            position: z.number().int().nonnegative(),
+          }),
+        )
+        .refine((items) => hasUniqueKeys(items, (i) => i.id), 'duplicate ingredient id'),
     })
     .nullable()
     .optional(),
