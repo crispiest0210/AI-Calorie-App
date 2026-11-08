@@ -155,7 +155,7 @@ export type ProblemCode = (typeof PROBLEM_CODES)[number];
 export const problemDetails = z.object({
   type: z.string(),
   title: z.string(),
-  status: z.number().int(),
+  status: z.number().int().min(100).max(599),
   code: z.enum(PROBLEM_CODES),
   detail: z.string().optional(),
 });

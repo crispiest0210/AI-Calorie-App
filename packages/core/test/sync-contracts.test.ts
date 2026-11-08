@@ -203,3 +203,17 @@ describe('syncFood duplicate keys', () => {
     expect(syncFood.safeParse({ ...food, portions: [food.portions[0], food.portions[0]] }).success).toBe(false);
   });
 });
+
+describe('problemDetails status', () => {
+  const problem = { type: 'about:blank', title: 'Bad', code: 'server_error' };
+
+  it('accepts real HTTP status codes', () => {
+    expect(problemDetails.safeParse({ ...problem, status: 500 }).success).toBe(true);
+  });
+
+  it('rejects values outside 100-599', () => {
+    expect(problemDetails.safeParse({ ...problem, status: 0 }).success).toBe(false);
+    expect(problemDetails.safeParse({ ...problem, status: 99 }).success).toBe(false);
+    expect(problemDetails.safeParse({ ...problem, status: 600 }).success).toBe(false);
+  });
+});
