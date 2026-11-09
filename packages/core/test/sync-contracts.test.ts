@@ -132,6 +132,10 @@ describe('sync contracts', () => {
     expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 0 } }).success).toBe(false);
     expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 20000 } }).success).toBe(true);
     expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, waterTargetMl: 20001 } }).success).toBe(false);
+    const kcal = { nutrientCode: 'energy_kcal', kind: 'target', value: '2100', valueLow: null, valueHigh: null, basis: 'absolute' };
+    expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, targets: [kcal] } }).success).toBe(true);
+    // goal_target is keyed by (profile, nutrient): a repeated nutrient would violate it.
+    expect(syncRow.safeParse({ table: 'goal_profile', row: { ...goals, targets: [kcal, { ...kcal, value: '1900' }] } }).success).toBe(false);
   });
 
   it('validates the revisions a push assigns', () => {

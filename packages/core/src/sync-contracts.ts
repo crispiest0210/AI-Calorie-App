@@ -47,10 +47,13 @@ export const syncLogEntry = z.object({
 
 export const syncWaterEntry = waterEntrySchema.extend(syncColumns);
 export const syncWaterPreset = waterPresetSchema.extend(syncColumns);
-export const syncGoalProfile = goalProfileSchema.extend(syncColumns);
-
 /** Rejects an array whose items repeat a key that the database stores as a primary key. */
 const hasUniqueKeys = <T>(items: T[], key: (item: T) => string) => new Set(items.map(key)).size === items.length;
+
+/** goal_target is keyed by (goal_profile_id, nutrient_code): one target per nutrient. */
+export const syncGoalProfile = goalProfileSchema
+  .extend(syncColumns)
+  .refine((p) => hasUniqueKeys(p.targets, (t) => t.nutrientCode), { message: 'duplicate nutrient code in goal targets', path: ['targets'] });
 
 /** A custom food and everything that belongs to it, in one payload. */
 const syncFoodShape = z.object({
