@@ -101,6 +101,16 @@ describe('blank food text', () => {
   });
 });
 
+describe('food gtin', () => {
+  const base = { id: 'f1', kind: 'branded', name: 'Bar', brand: null, qualityTier: 'crowd', sourceRef: null, sourceReleaseId: null, densityGPerMl: null } as const;
+  it('accepts only normalized 14-digit barcodes or null', () => {
+    expect(foodSchema.safeParse({ ...base, gtin: '00049000028911' }).success).toBe(true);
+    expect(foodSchema.safeParse({ ...base, gtin: null }).success).toBe(true);
+    expect(foodSchema.safeParse({ ...base, gtin: '049000028911' }).success).toBe(false);
+    expect(foodSchema.safeParse({ ...base, gtin: '' }).success).toBe(false);
+  });
+});
+
 describe('goalTargetSchema', () => {
   const base = { nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: '30', valueHigh: null, basis: 'absolute' } as const;
 

@@ -56,7 +56,7 @@ export const foodSchema = z.object({
   kind: foodKind,
   name: z.string().trim().min(1),
   brand: z.string().nullable(),
-  gtin: z.string().nullable(),
+  gtin: z.string().regex(/^\d{14}$/, 'expected 14 digits').nullable(),
   qualityTier,
   sourceRef: z.string().nullable(),
   sourceReleaseId: z.string().nullable(),
