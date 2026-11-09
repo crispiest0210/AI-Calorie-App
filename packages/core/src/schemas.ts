@@ -137,7 +137,8 @@ export const waterEntrySchema = z.object({
 
 export const waterPresetSchema = z.object({
   id: z.string().min(1),
-  label: z.string().nullable(),
+  // A blank label would render an empty chip; "no label" is null.
+  label: z.string().trim().min(1).nullable(),
   amountMl: z.number().int().min(1).max(5000),
   position: z.number().int().min(0),
 });
