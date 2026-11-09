@@ -181,6 +181,15 @@ describe('sync contracts', () => {
   });
 });
 
+describe('syncFood gtin', () => {
+  it('accepts null or a normalized 14-digit barcode and rejects anything else', () => {
+    expect(syncFood.safeParse({ ...food, gtin: '00049000028911' }).success).toBe(true);
+    expect(syncFood.safeParse({ ...food, gtin: '049000028911' }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, gtin: 'not-a-barcode' }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, gtin: '' }).success).toBe(false);
+  });
+});
+
 describe('syncFood positive quantities', () => {
   it('rejects a zero or negative density, portion weight, serving count or ingredient weight', () => {
     expect(syncFood.safeParse({ ...food, densityGPerMl: '1.04' }).success).toBe(true);

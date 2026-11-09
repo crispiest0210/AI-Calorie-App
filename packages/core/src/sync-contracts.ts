@@ -58,7 +58,8 @@ const syncFoodShape = z.object({
   kind: z.enum(FOOD_KINDS),
   name: z.string().trim().min(1),
   brand: z.string().nullable(),
-  gtin: z.string().nullable(),
+  /** Stored normalized: 14 digits (see normalizeGtin). */
+  gtin: z.string().regex(/^\d{14}$/, 'expected 14 digits').nullable(),
   qualityTier: z.enum(QUALITY_TIERS),
   sourceRef: z.string().nullable(),
   densityGPerMl: positiveNumericString.nullable(),
