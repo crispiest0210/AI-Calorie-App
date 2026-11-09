@@ -92,6 +92,15 @@ describe('shared schemas', () => {
   });
 });
 
+describe('blank food text', () => {
+  it('rejects whitespace-only food names and portion labels', () => {
+    expect(
+      foodSchema.safeParse({ id: 'f1', kind: 'generic', name: '   ', brand: null, gtin: null, qualityTier: 'lab', sourceRef: null, sourceReleaseId: null, densityGPerMl: null }).success,
+    ).toBe(false);
+    expect(foodPortionSchema.safeParse({ id: 'p1', foodId: 'f1', label: '  ', gramWeight: '202', source: 'fdc' }).success).toBe(false);
+  });
+});
+
 describe('goalTargetSchema', () => {
   const base = { nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: '30', valueHigh: null, basis: 'absolute' } as const;
 

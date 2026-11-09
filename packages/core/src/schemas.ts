@@ -46,7 +46,7 @@ export const foodKind = z.enum(FOOD_KINDS);
 export const foodPortionSchema = z.object({
   id: z.string().min(1),
   foodId: z.string().min(1),
-  label: z.string().min(1),
+  label: z.string().trim().min(1),
   gramWeight: positiveNumericString,
   source: z.enum(['fdc', 'off_serving', 'user']),
 });
@@ -54,7 +54,7 @@ export const foodPortionSchema = z.object({
 export const foodSchema = z.object({
   id: z.string().min(1),
   kind: foodKind,
-  name: z.string().min(1),
+  name: z.string().trim().min(1),
   brand: z.string().nullable(),
   gtin: z.string().nullable(),
   qualityTier,
