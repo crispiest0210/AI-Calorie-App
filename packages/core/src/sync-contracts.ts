@@ -11,6 +11,7 @@ import { epochMs, goalProfileSchema, localDate, positiveNumericString, tzOffsetM
 import { MEAL_SLOTS, ENTRY_KINDS } from './entries';
 import { AMOUNT_UNITS, GRAMS_PROVENANCES } from './units';
 import { FOOD_KINDS, QUALITY_TIERS } from './normalize';
+import { DERIVATIONS } from './nutrients';
 
 /** Tables that sync. Catalog tables are server-owned and never pushed. */
 export const SYNCED_TABLES = ['log_entry', 'water_entry', 'water_preset', 'goal_profile', 'food'] as const;
@@ -71,7 +72,7 @@ const syncFoodShape = z.object({
       z.object({
         nutrientCode,
         amountPer100g: nonNegativeNumericString,
-        derivation: z.string(),
+        derivation: z.enum(DERIVATIONS),
       }),
     )
     .refine((items) => hasUniqueKeys(items, (n) => n.nutrientCode), 'duplicate nutrient code'),
@@ -81,7 +82,7 @@ const syncFoodShape = z.object({
         id: z.string().uuid(),
         label: z.string().trim().min(1),
         gramWeight: positiveNumericString,
-        source: z.string(),
+        source: z.enum(['fdc', 'off_serving', 'user']),
         position: z.number().int().nonnegative(),
       }),
     )

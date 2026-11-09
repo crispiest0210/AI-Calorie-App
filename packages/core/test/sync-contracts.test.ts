@@ -34,7 +34,7 @@ const food = {
   qualityTier: 'user',
   sourceRef: null,
   densityGPerMl: null,
-  nutrients: [{ nutrientCode: 'energy_kcal', amountPer100g: '450', derivation: 'label' }],
+  nutrients: [{ nutrientCode: 'energy_kcal', amountPer100g: '450', derivation: 'reported' }],
   portions: [{ id: id2, label: '1 bowl', gramWeight: '60', source: 'user', position: 0 }],
 };
 
@@ -90,6 +90,8 @@ describe('sync contracts', () => {
 
   it('rejects blank food names and portion labels', () => {
     expect(syncFood.safeParse({ ...food, name: '   ' }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, nutrients: [{ ...food.nutrients[0], derivation: 'label' }] }).success).toBe(false);
+    expect(syncFood.safeParse({ ...food, portions: [{ ...food.portions[0], source: 'usda' }] }).success).toBe(false);
     const portion = food.portions[0];
     expect(syncFood.safeParse({ ...food, portions: [{ ...portion, label: '  ' }] }).success).toBe(false);
   });
