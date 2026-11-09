@@ -84,6 +84,15 @@ describe('sync contracts', () => {
     expect(syncFood.safeParse({ ...food, recipe: { ...recipe, servings: 4 } }).success).toBe(false);
   });
 
+  it('applies the log entry cross-field rules to synced rows', () => {
+    const push = (row: object) => syncRow.safeParse({ table: 'log_entry', row }).success;
+    expect(push({ ...logEntry, foodId: null })).toBe(false);
+    expect(push({ ...logEntry, grams: null })).toBe(false);
+    expect(push({ ...logEntry, nutrientsPer100g: null })).toBe(false);
+    expect(push({ ...logEntry, amountValue: '0' })).toBe(false);
+    expect(push({ ...logEntry, entryKind: 'quick_add', foodId: null, grams: null, nutrientsPer100g: null, nutrientsAbsolute: null })).toBe(false);
+  });
+
   it('rejects blank food name snapshots on log entries', () => {
     expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, foodNameSnapshot: '   ' } }).success).toBe(false);
   });

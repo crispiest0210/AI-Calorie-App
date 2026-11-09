@@ -63,6 +63,31 @@ export const foodSchema = z.object({
   densityGPerMl: positiveNumericString.nullable(),
 });
 
+/** Cross-field rules every log entry must satisfy, whether it comes from the device or the sync API. */
+export const refineLogEntry = (
+  entry: {
+    entryKind: string;
+    foodId: string | null;
+    grams: string | null;
+    amountValue: string;
+    nutrientsPer100g: unknown;
+    nutrientsAbsolute: unknown;
+  },
+  ctx: z.RefinementCtx,
+): void => {
+  if (entry.entryKind === 'food') {
+    if (entry.foodId === null) ctx.addIssue({ code: 'custom', message: 'food entries need a food_id' });
+    if (entry.grams === null) ctx.addIssue({ code: 'custom', message: 'food entries need resolved grams' });
+    if (entry.nutrientsPer100g === null) ctx.addIssue({ code: 'custom', message: 'food entries need a per-100 g snapshot' });
+    if (!isPositive(entry.amountValue)) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must be greater than zero for a food entry' });
+  } else if (entry.nutrientsAbsolute === null) {
+    ctx.addIssue({ code: 'custom', message: 'quick adds need absolute nutrients' });
+  }
+  if (entry.grams !== null && compare(entry.grams, 0) < 0) ctx.addIssue({ code: 'custom', path: ['grams'], message: 'must not be negative' });
+  if (entry.entryKind === 'food' && entry.grams !== null && !isPositive(entry.grams)) ctx.addIssue({ code: 'custom', path: ['grams'], message: 'must be greater than zero for a food entry' });
+  if (compare(entry.amountValue, 0) < 0) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must not be negative' });
+};
+
 export const logEntrySchema = z
   .object({
     id: z.string().min(1),
@@ -83,19 +108,7 @@ export const logEntrySchema = z
     nutrientsAbsolute: nutrientMap.nullable(),
     note: z.string().nullable(),
   })
-  .superRefine((entry, ctx) => {
-    if (entry.entryKind === 'food') {
-      if (entry.foodId === null) ctx.addIssue({ code: 'custom', message: 'food entries need a food_id' });
-      if (entry.grams === null) ctx.addIssue({ code: 'custom', message: 'food entries need resolved grams' });
-      if (entry.nutrientsPer100g === null) ctx.addIssue({ code: 'custom', message: 'food entries need a per-100 g snapshot' });
-      if (!isPositive(entry.amountValue)) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must be greater than zero for a food entry' });
-    } else if (entry.nutrientsAbsolute === null) {
-      ctx.addIssue({ code: 'custom', message: 'quick adds need absolute nutrients' });
-    }
-    if (entry.grams !== null && compare(entry.grams, 0) < 0) ctx.addIssue({ code: 'custom', path: ['grams'], message: 'must not be negative' });
-    if (entry.entryKind === 'food' && entry.grams !== null && !isPositive(entry.grams)) ctx.addIssue({ code: 'custom', path: ['grams'], message: 'must be greater than zero for a food entry' });
-    if (compare(entry.amountValue, 0) < 0) ctx.addIssue({ code: 'custom', path: ['amountValue'], message: 'must not be negative' });
-  });
+  .superRefine(refineLogEntry);
 
 export const goalTargetSchema = z.object({
   nutrientCode,
