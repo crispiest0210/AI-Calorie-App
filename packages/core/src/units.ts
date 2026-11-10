@@ -47,7 +47,7 @@ function hasDensity(food: FoodMeasureInfo): food is FoodMeasureInfo & { densityG
 }
 
 /** A portion with no positive gram weight cannot be resolved, so it is never offered or defaulted to. */
-function usablePortions(food: FoodMeasureInfo): Portion[] {
+export function usablePortions(food: FoodMeasureInfo): Portion[] {
   return food.portions.filter((p) => dec(p.gramWeight).greaterThan(0));
 }
 

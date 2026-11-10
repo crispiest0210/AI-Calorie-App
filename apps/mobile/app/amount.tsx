@@ -19,6 +19,7 @@ import {
   parseUserNumber,
   resolveGrams,
   scalePer100g,
+  usablePortions,
   type AmountUnit,
   type MealSlot,
 } from '@nt/core';
@@ -89,6 +90,7 @@ export default function AmountScreen() {
     setSeeded(true);
   }, [seeded, food, seed]);
 
+  const portions = useMemo(() => (food === null ? [] : usablePortions(food)), [food]);
   const units = useMemo(() => (food === null ? ['g' as const] : availableUnits(food)), [food]);
   // Blank or half-typed ("", ".") resolves as zero, which asks for an amount
   // above zero instead of throwing during render.
@@ -166,19 +168,19 @@ export default function AmountScreen() {
           onChange={(next) => {
             const grams = resolved?.ok === true ? resolved.grams : null;
             setUnit(next);
-            if (next === 'portion' && portionId === null && food.portions[0]) setPortionId(food.portions[0].id);
+            if (next === 'portion' && portionId === null && portions[0]) setPortionId(portions[0].id);
             if (grams !== null) {
-              const converted = gramsToUnit(grams, next, food, next === 'portion' ? portionId ?? food.portions[0]?.id ?? null : null);
+              const converted = gramsToUnit(grams, next, food, next === 'portion' ? portionId ?? portions[0]?.id ?? null : null);
               if (converted !== null) setValue(converted);
             }
           }}
         />
 
-        {unit === 'portion' && food.portions.length > 0 && (
+        {unit === 'portion' && portions.length > 0 && (
           <SegmentedControl
             label="Serving"
-            options={food.portions.map((p) => ({ value: p.id, label: `${p.label} · ${p.gramWeight} g` }))}
-            value={portionId ?? food.portions[0]!.id}
+            options={portions.map((p) => ({ value: p.id, label: `${p.label} · ${p.gramWeight} g` }))}
+            value={portionId ?? portions[0]!.id}
             onChange={setPortionId}
           />
         )}

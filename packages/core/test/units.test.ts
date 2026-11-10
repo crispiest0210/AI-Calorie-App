@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { availableUnits, defaultAmount, gramsToUnit, resolveGrams, type FoodMeasureInfo } from '../src/units';
+import { availableUnits, defaultAmount, gramsToUnit, resolveGrams, usablePortions, type FoodMeasureInfo } from '../src/units';
 
 const cup = { id: 'p1', label: '1 cup, cooked', gramWeight: '158', source: 'fdc' as const };
 const rice: FoodMeasureInfo = { densityGPerMl: null, portions: [cup] };
@@ -72,6 +72,12 @@ describe('a zero-gram portion', () => {
 
   it('is not divided by when converting grams back', () => {
     expect(gramsToUnit('100', 'portion', broken, 'p0')).toBeNull();
+  });
+
+  it('is left out of the portions the Serving picker lists', () => {
+    const mixed: FoodMeasureInfo = { densityGPerMl: null, portions: [...broken.portions, cup] };
+    expect(usablePortions(broken)).toEqual([]);
+    expect(usablePortions(mixed)).toEqual([cup]);
   });
 
   it('is neither offered nor opened on, falling through to a usable serving or grams', () => {
