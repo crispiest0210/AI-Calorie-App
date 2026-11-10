@@ -30,6 +30,10 @@ export const epochMs = z.number().int().min(0).max(253_402_300_799_999);
 /** Minutes east of UTC; real zones span UTC-12:00 to UTC+14:00, so anything outside is corrupt. */
 export const tzOffsetMin = z.number().int().min(-720).max(840);
 
+/** Smallest and largest single water entry or preset in mL; mirrors the device repository and the database check. */
+export const WATER_ML_MIN = 1;
+export const WATER_ML_MAX = 5000;
+
 /** Largest daily water goal in mL; mirrors the device repository's limit so synced rows can't exceed it. */
 export const WATER_TARGET_ML_MAX = 20000;
 
@@ -145,14 +149,14 @@ export const waterEntrySchema = z.object({
   id: z.string().min(1),
   localDate,
   loggedAt: epochMs,
-  amountMl: z.number().int().min(1).max(5000),
+  amountMl: z.number().int().min(WATER_ML_MIN).max(WATER_ML_MAX),
 });
 
 export const waterPresetSchema = z.object({
   id: z.string().min(1),
   // A blank label would render an empty chip; "no label" is null.
   label: z.string().trim().min(1).nullable(),
-  amountMl: z.number().int().min(1).max(5000),
+  amountMl: z.number().int().min(WATER_ML_MIN).max(WATER_ML_MAX),
   position: z.number().int().min(0),
 });
 
