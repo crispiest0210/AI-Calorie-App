@@ -145,3 +145,11 @@ describe('empty ids', () => {
     expect(goalProfileSchema.safeParse({ id: '', effectiveFrom: '2026-09-20', waterTargetMl: null, targets: [] }).success).toBe(false);
   });
 });
+
+describe('log entry references', () => {
+  it('rejects empty food and portion ids but still accepts null', () => {
+    expect(logEntrySchema.safeParse({ ...entry, foodId: '' }).success).toBe(false);
+    expect(logEntrySchema.safeParse({ ...entry, portionId: '' }).success).toBe(false);
+    expect(logEntrySchema.safeParse({ ...entry, portionId: null }).success).toBe(true);
+  });
+});
