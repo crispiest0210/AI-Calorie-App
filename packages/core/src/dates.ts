@@ -39,7 +39,7 @@ export function tzOffsetMinutesOf(instant: Date = new Date()): number {
 export function addDays(date: LocalDate, days: number): LocalDate {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
   const shifted = new Date(utcMs(y, m, d + days));
-  return `${shifted.getUTCFullYear()}-${pad(shifted.getUTCMonth() + 1)}-${pad(shifted.getUTCDate())}`;
+  return `${String(shifted.getUTCFullYear()).padStart(4, '0')}-${pad(shifted.getUTCMonth() + 1)}-${pad(shifted.getUTCDate())}`;
 }
 
 export function daysBetween(from: LocalDate, to: LocalDate): number {

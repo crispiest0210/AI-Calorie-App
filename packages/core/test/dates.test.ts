@@ -25,6 +25,11 @@ describe('local dates', () => {
     expect(addDays('2028-02-28', 1)).toBe('2028-02-29');
   });
 
+  it('keeps a four-digit year when shifting dates before year 100', () => {
+    expect(addDays('0050-01-01', 1)).toBe('0050-01-02');
+    expect(isLocalDate(addDays('0099-12-31', 1))).toBe(true);
+  });
+
   it('counts days between dates', () => {
     expect(daysBetween('2026-09-13', '2026-09-20')).toBe(7);
     expect(daysBetween('2026-09-20', '2026-09-13')).toBe(-7);
