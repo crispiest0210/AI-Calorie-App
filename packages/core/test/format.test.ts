@@ -58,6 +58,11 @@ describe('display rounding', () => {
     expect(formatRange('520', '780', 'energy_kcal')).toBe('520–780 cal');
     expect(formatRange('4.25', '12.5', 'protein_g')).toBe('4.2–12 g');
   });
+
+  it('collapses a range whose ends round to the same value', () => {
+    expect(formatRange('499.6', '500.4', 'energy_kcal')).toBe('500 cal');
+    expect(formatRange('500', '500', 'energy_kcal')).toBe('500 cal');
+  });
 });
 
 describe('accessible and non-shaming copy', () => {

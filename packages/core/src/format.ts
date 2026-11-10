@@ -64,10 +64,15 @@ export function formatAmount(value: NumericInput, unit: AmountUnit, portionLabel
   }
 }
 
-/** An en dash range, e.g. "520–780 cal" for an unconfirmed photo draft. */
+/**
+ * An en dash range, e.g. "520–780 cal" for an unconfirmed photo draft. A range
+ * whose ends round to the same text collapses to one value ("500 cal", not "500–500 cal").
+ */
 export function formatRange(low: NumericInput, high: NumericInput, code: NutrientCode): string {
   const unit = NUTRIENT_DEFS[code].displayUnit;
-  return `${formatNutrient(low, code)}–${formatNutrient(high, code)} ${unit}`;
+  const lowText = formatNutrient(low, code);
+  const highText = formatNutrient(high, code);
+  return lowText === highText ? `${lowText} ${unit}` : `${lowText}–${highText} ${unit}`;
 }
 
 /** Text alternative for the energy ring (spec 5.6). */
