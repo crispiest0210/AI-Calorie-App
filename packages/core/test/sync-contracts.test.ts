@@ -188,6 +188,12 @@ describe('sync contracts', () => {
       expect(foodDetailResponse.safeParse(withoutSource).success).toBe(false);
     });
 
+    it('rejects a malformed gtin or a blank portion label in a detail response', () => {
+      expect(foodDetailResponse.safeParse({ ...detail, gtin: '00049000028911' }).success).toBe(true);
+      expect(foodDetailResponse.safeParse({ ...detail, gtin: '049000028911' }).success).toBe(false);
+      expect(foodDetailResponse.safeParse({ ...detail, portions: [{ ...detail.portions[0], label: '  ' }] }).success).toBe(false);
+    });
+
     it('rejects float gram weights and unknown nutrient codes in a detail response', () => {
       const portion = detail.portions[0]!;
       expect(foodDetailResponse.safeParse({ ...detail, portions: [{ ...portion, gramWeight: 158 }] }).success).toBe(false);

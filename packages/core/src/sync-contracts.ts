@@ -184,10 +184,10 @@ export const foodSearchResult = z.object({
 });
 
 export const foodDetailResponse = foodSearchResult.extend({
-  gtin: z.string().nullable(),
+  gtin: z.string().regex(/^\d{14}$/, 'expected 14 digits').nullable(),
   densityGPerMl: positiveNumericString.nullable(),
   nutrientsPer100g: nutrientMap,
-  portions: z.array(z.object({ id: z.string(), label: z.string(), gramWeight: positiveNumericString, source: z.string() })),
+  portions: z.array(z.object({ id: z.string(), label: z.string().trim().min(1), gramWeight: positiveNumericString, source: z.string() })),
   source: z.object({
     provider: z.string(),
     dataset: z.string().nullable(),
