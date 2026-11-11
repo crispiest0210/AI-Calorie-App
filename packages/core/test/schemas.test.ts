@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { goalProfileSchema, goalTargetSchema, logEntrySchema, numericString, waterEntrySchema, waterPresetSchema, foodSchema, foodPortionSchema, localDate, nutrientMap } from '../src/schemas';
+import { WATER_ML_MAX, WATER_ML_MIN, WATER_TARGET_ML_MAX, goalProfileSchema, goalTargetSchema, logEntrySchema, numericString, waterEntrySchema, waterPresetSchema, foodSchema, foodPortionSchema, localDate, nutrientMap } from '../src/schemas';
 
 const entry = {
   id: 'e1',
@@ -143,6 +143,28 @@ describe('empty ids', () => {
     expect(waterPresetSchema.safeParse({ id: 'p1', label: '  ', amountMl: 250, position: 0 }).success).toBe(false);
     expect(foodPortionSchema.safeParse({ id: 'p1', foodId: '', label: '1 cup', gramWeight: '202', source: 'fdc' }).success).toBe(false);
     expect(goalProfileSchema.safeParse({ id: '', effectiveFrom: '2026-09-20', waterTargetMl: null, targets: [] }).success).toBe(false);
+  });
+});
+
+describe('water amount limits', () => {
+  const water = (amountMl: number) => waterEntrySchema.safeParse({ id: 'w1', localDate: '2026-09-20', loggedAt: 1, amountMl }).success;
+  const preset = (amountMl: number) => waterPresetSchema.safeParse({ id: 'p1', label: 'Glass', amountMl, position: 0 }).success;
+  const target = (waterTargetMl: number) => goalProfileSchema.safeParse({ id: 'g1', effectiveFrom: '2026-09-20', waterTargetMl, targets: [] }).success;
+
+  it('accepts a drink at exactly the limits and rejects one past them', () => {
+    for (const check of [water, preset]) {
+      expect(check(WATER_ML_MIN)).toBe(true);
+      expect(check(WATER_ML_MAX)).toBe(true);
+      expect(check(WATER_ML_MIN - 1)).toBe(false);
+      expect(check(WATER_ML_MAX + 1)).toBe(false);
+      expect(check(250.5)).toBe(false);
+    }
+  });
+
+  it('bounds the daily water target', () => {
+    expect(target(WATER_TARGET_ML_MAX)).toBe(true);
+    expect(target(WATER_TARGET_ML_MAX + 1)).toBe(false);
+    expect(target(0)).toBe(false);
   });
 });
 
