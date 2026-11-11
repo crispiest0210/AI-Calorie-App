@@ -121,3 +121,12 @@ export function gramsToUnit(grams: NumericInput, unit: AmountUnit, food: FoodMea
       return null;
   }
 }
+
+/**
+ * Converted amounts for the Amount field: two decimals at most, so 100 g of a
+ * 30 g serving reads "3.33" rather than 34 digits of "3.3333…". The exact
+ * grams stay with the entry; only the typed text is shortened.
+ */
+export function amountFieldText(value: NumericInput): Num {
+  return num(dec(value).toDecimalPlaces(2, 6)); // 6 = ROUND_HALF_EVEN, as everywhere else
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { availableUnits, defaultAmount, gramsToUnit, resolveGrams, usablePortions, type FoodMeasureInfo } from '../src/units';
+import { amountFieldText, availableUnits, defaultAmount, gramsToUnit, resolveGrams, usablePortions, type FoodMeasureInfo } from '../src/units';
 
 const cup = { id: 'p1', label: '1 cup, cooked', gramWeight: '158', source: 'fdc' as const };
 const rice: FoodMeasureInfo = { densityGPerMl: null, portions: [cup] };
@@ -86,5 +86,16 @@ describe('a zero-gram portion', () => {
     const mixed: FoodMeasureInfo = { densityGPerMl: null, portions: [...broken.portions, cup] };
     expect(availableUnits(mixed)).toEqual(['portion', 'g']);
     expect(defaultAmount(mixed)).toEqual({ unit: 'portion', portionId: 'p1', value: '1' });
+  });
+});
+
+describe('amountFieldText', () => {
+  it('shortens repeating conversions to two decimals', () => {
+    expect(amountFieldText(gramsToUnit('100', 'portion', { densityGPerMl: null, portions: [{ id: 'p', label: 'x', gramWeight: '30', source: 'user' }] }, 'p')!)).toBe('3.33');
+  });
+  it('leaves short values exact and drops trailing zeros', () => {
+    expect(amountFieldText('2')).toBe('2');
+    expect(amountFieldText('0.25')).toBe('0.25');
+    expect(amountFieldText('1.500')).toBe('1.5');
   });
 });

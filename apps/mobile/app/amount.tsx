@@ -11,6 +11,7 @@ import {
   MEAL_SLOTS,
   MEAL_SLOT_LABELS,
   NUTRIENT_DEFS,
+  amountFieldText,
   availableUnits,
   defaultAmount,
   formatWithUnit,
@@ -171,7 +172,7 @@ export default function AmountScreen() {
             if (next === 'portion' && portionId === null && portions[0]) setPortionId(portions[0].id);
             if (grams !== null) {
               const converted = gramsToUnit(grams, next, food, next === 'portion' ? portionId ?? portions[0]?.id ?? null : null);
-              if (converted !== null) setValue(converted);
+              if (converted !== null) setValue(amountFieldText(converted));
             }
           }}
         />
