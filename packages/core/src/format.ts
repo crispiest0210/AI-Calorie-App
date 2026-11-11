@@ -51,6 +51,13 @@ export function formatMl(ml: NumericInput | null | undefined): string {
   return ml === null || ml === undefined ? '—' : formatRounded(dec(ml).toDecimalPlaces(0, Decimal.ROUND_HALF_EVEN).toNumber());
 }
 
+/** A portion count: up to two decimals so quarter servings read "0.25" and "1.75", not "0.2" and "1.8". */
+function formatPortionCount(count: NumericInput): string {
+  return new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(
+    dec(count).toDecimalPlaces(2, Decimal.ROUND_HALF_EVEN).toNumber() || 0,
+  );
+}
+
 export function formatAmount(value: NumericInput, unit: AmountUnit, portionLabel?: string): string {
   switch (unit) {
     case 'g':
@@ -60,7 +67,7 @@ export function formatAmount(value: NumericInput, unit: AmountUnit, portionLabel
     case 'kcal':
       return `${formatEnergy(value)} cal`;
     case 'portion':
-      return `${formatGrams(value)} × ${portionLabel ?? 'portion'}`;
+      return `${formatPortionCount(value)} × ${portionLabel ?? 'portion'}`;
   }
 }
 

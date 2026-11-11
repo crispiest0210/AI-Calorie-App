@@ -54,6 +54,13 @@ describe('display rounding', () => {
     expect(formatAmount('2', 'portion')).toBe('2 × portion');
   });
 
+  it('keeps quarter-portion counts exact', () => {
+    expect(formatAmount('0.25', 'portion', 'slice')).toBe('0.25 × slice');
+    expect(formatAmount('1.75', 'portion', 'slice')).toBe('1.75 × slice');
+    expect(formatAmount('1.5', 'portion', 'slice')).toBe('1.5 × slice');
+    expect(formatAmount('1000', 'portion', 'slice')).toBe('1,000 × slice');
+  });
+
   it('formats a draft range', () => {
     expect(formatRange('520', '780', 'energy_kcal')).toBe('520–780 cal');
     expect(formatRange('4.25', '12.5', 'protein_g')).toBe('4.2–12 g');
