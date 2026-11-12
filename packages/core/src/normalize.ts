@@ -3,7 +3,7 @@
  * portions only from the source's own portion table (spec 2.6). Anything that
  * fails a sanity check is quarantined rather than served.
  */
-import { dec, num, type Num } from './decimal';
+import { dec, num, tryDec, type Num } from './decimal';
 import { codeForFdcNutrientId, type Derivation, type NutrientCode } from './nutrients';
 import { NUTRIENT_DEFS } from './nutrients';
 import { resolveEnergy } from './energy';
@@ -331,8 +331,13 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
   for (const [field, mapping] of Object.entries(OFF_FIELD_MAP)) {
     const value = nutriments[field];
     if (value === null || value === undefined || value === '') continue;
+    const parsed = toNumOrNull(value);
+    if (parsed === null) {
+      warnings.push(`dropped ${mapping.code}: "${String(value)}" is not a number`);
+      continue;
+    }
     // Non-null by construction: every unit in OFF_FIELD_MAP is convertible.
-    const converted = convertToCodeUnit(num(value), mapping.unit, mapping.code)!;
+    const converted = convertToCodeUnit(parsed, mapping.unit, mapping.code)!;
     if (mapping.code === 'energy_kcal') {
       energyKcal = converted.value;
       continue;
@@ -342,8 +347,8 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
   }
 
   if (raw.sodium_mg === undefined) {
-    const salt = nutriments['salt_100g'];
-    if (salt !== null && salt !== undefined && salt !== '') {
+    const salt = toNumOrNull(nutriments['salt_100g']);
+    if (salt !== null) {
       const sodium = num(dec(salt).times(SALT_TO_SODIUM_MG_PER_G));
       raw.sodium_mg = sodium;
       nutrients.push({ code: 'sodium_mg', amountPer100g: sodium, derivation: 'derived' });
@@ -391,5 +396,6 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
 
 function toNumOrNull(value: number | string | null | undefined): Num | null {
   if (value === null || value === undefined || value === '') return null;
-  return num(value);
+  const parsed = tryDec(value);
+  return parsed === null ? null : num(parsed);
 }

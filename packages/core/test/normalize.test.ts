@@ -336,6 +336,20 @@ describe('normalizeOffProduct', () => {
     expect(result.warnings).toContain('sodium derived from salt');
   });
 
+  it('drops a non-numeric nutriment with a warning instead of throwing', () => {
+    const result = normalizeOffProduct({
+      code: '1',
+      product_name: 'x',
+      serving_quantity: 'n/a',
+      nutriments: { 'energy-kcal_100g': 100, proteins_100g: 'n/a', salt_100g: 'unknown', 'energy-kj_100g': 'NaN' },
+    });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.food.nutrients).toEqual([{ code: 'energy_kcal', amountPer100g: '100', derivation: 'reported' }]);
+    expect(result.food.portions).toEqual([]);
+    expect(result.warnings).toContain('dropped protein_g: "n/a" is not a number');
+  });
+
   it('falls back to kJ, then to nothing', () => {
     const kj = normalizeOffProduct({ code: '1', product_name: 'x', nutriments: { 'energy-kj_100g': 418.4 } });
     expect(kj.ok && kj.food.nutrients[0]).toEqual({ code: 'energy_kcal', amountPer100g: '100', derivation: 'converted' });
