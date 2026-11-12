@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MATCH_THRESHOLD, matchQueries, rankCandidates, scoreCandidate, tokenizeLabel } from '../src/matching';
+import { MATCH_THRESHOLD, MAX_CANDIDATES, matchQueries, rankCandidates, scoreCandidate, tokenizeLabel } from '../src/matching';
 
 describe('tokenizeLabel', () => {
   it('lowercases, splits on punctuation and drops single characters', () => {
@@ -89,5 +89,14 @@ describe('rankCandidates', () => {
     expect(result.candidates).toHaveLength(1);
     expect(result.status).toBe('unmatched');
     expect(MATCH_THRESHOLD).toBeLessThan(1);
+  });
+
+  it('returns at most MAX_CANDIDATES by default, keeping the best ones', () => {
+    const many = ['apple', 'apple pie', 'apple sauce', 'apple juice concentrate', 'apple butter spread'].map(
+      (name, index) => ({ id: String(index), name }),
+    );
+    const result = rankCandidates('apple', undefined, many);
+    expect(result.candidates).toHaveLength(MAX_CANDIDATES);
+    expect(result.candidates[0]!.food.id).toBe('0');
   });
 });
