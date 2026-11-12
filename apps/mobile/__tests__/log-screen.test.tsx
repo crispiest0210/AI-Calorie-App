@@ -15,6 +15,8 @@ let mockLast: unknown = null;
 let mockDetail: unknown = null;
 let mockRecents: unknown[] = [];
 let mockMine: unknown[] = [];
+let mockCategories: unknown[] = [];
+let mockCategoryFoods: unknown[] = [];
 
 jest.mock('@/db/provider', () => ({
   useDb: () => ({ marker: 'db' }),
@@ -56,8 +58,8 @@ jest.mock('@nt/db', () => ({
     recentFoods: () => mockRecents,
     frequentFoods: () => [],
     myFoods: () => mockMine,
-    mealCategories: () => [],
-    foodsInCategory: () => [],
+    mealCategories: () => mockCategories,
+    foodsInCategory: () => mockCategoryFoods,
     lastAmountFor: () => mockLast,
     foodDetail: () => mockDetail,
   },
@@ -89,6 +91,8 @@ describe('LogSheet', () => {
     mockDetail = null;
     mockRecents = [oats];
     mockMine = [];
+    mockCategories = [];
+    mockCategoryFoods = [];
   });
 
   it('shows the empty state when the selected tab has nothing', () => {
@@ -142,5 +146,52 @@ describe('LogSheet', () => {
     expect(mockAddIngredient).toHaveBeenCalledWith({ marker: 'db' }, 'recipe-9', 'food-1', '100');
     expect(mockBack).toHaveBeenCalled();
     expect(mockLogFood).not.toHaveBeenCalled();
+  });
+
+  describe('Meals tab', () => {
+    beforeEach(() => {
+      mockCategories = [{ category: 'Burgers', count: 2, featured: true }];
+      mockCategoryFoods = [{ id: 'food-2', name: 'Cheeseburger', brand: null, qualityTier: 'reference', energyPer100g: 260 }];
+    });
+
+    it('asks for a kind of meal before listing anything', () => {
+      render(<LogSheet />);
+      fireEvent.press(screen.getByRole('radio', { name: 'Meals' }));
+      expect(screen.getByText('Pick a kind of meal above.')).toBeTruthy();
+      expect(screen.getByRole('radio', { name: 'Burgers, 2 foods' })).toBeTruthy();
+      expect(screen.queryByRole('button', { name: /^Cheeseburger/ })).toBeNull();
+    });
+
+    it('lists the foods of the chosen kind and clears the choice when tapped again', () => {
+      render(<LogSheet />);
+      fireEvent.press(screen.getByRole('radio', { name: 'Meals' }));
+      fireEvent.press(screen.getByRole('radio', { name: 'Burgers, 2 foods' }));
+      expect(screen.getByRole('button', { name: /^Cheeseburger/ })).toBeTruthy();
+      fireEvent.press(screen.getByRole('radio', { name: 'Burgers, 2 foods' }));
+      expect(screen.queryByRole('button', { name: /^Cheeseburger/ })).toBeNull();
+      expect(screen.getByText('Pick a kind of meal above.')).toBeTruthy();
+    });
+
+    it('drops the chosen kind when switching tabs', () => {
+      render(<LogSheet />);
+      fireEvent.press(screen.getByRole('radio', { name: 'Meals' }));
+      fireEvent.press(screen.getByRole('radio', { name: 'Burgers, 2 foods' }));
+      fireEvent.press(screen.getByRole('radio', { name: 'Recent' }));
+      fireEvent.press(screen.getByRole('radio', { name: 'Meals' }));
+      expect(screen.getByText('Pick a kind of meal above.')).toBeTruthy();
+    });
+
+    it('opens the amount screen for a meal food instead of re-logging it', () => {
+      mockLast = { amountValue: '50', amountUnit: 'g', portionId: null, grams: '50' };
+      render(<LogSheet />);
+      fireEvent.press(screen.getByRole('radio', { name: 'Meals' }));
+      fireEvent.press(screen.getByRole('radio', { name: 'Burgers, 2 foods' }));
+      fireEvent.press(screen.getByRole('button', { name: /^Cheeseburger/ }));
+      expect(mockLogFood).not.toHaveBeenCalled();
+      expect(mockPush).toHaveBeenCalledWith({
+        pathname: '/amount',
+        params: { foodId: 'food-2', mealSlot: 'dinner', date: '2026-03-02' },
+      });
+    });
   });
 });
