@@ -61,6 +61,10 @@ describe('display rounding', () => {
     expect(formatAmount('1000', 'portion', 'slice')).toBe('1,000 × slice');
   });
 
+  it('never renders a portion count that rounds to zero as "-0"', () => {
+    expect(formatAmount('-0.001', 'portion', 'slice')).toBe('0 × slice');
+  });
+
   it('formats a draft range', () => {
     expect(formatRange('520', '780', 'energy_kcal')).toBe('520–780 cal');
     expect(formatRange('4.25', '12.5', 'protein_g')).toBe('4.2–12 g');
