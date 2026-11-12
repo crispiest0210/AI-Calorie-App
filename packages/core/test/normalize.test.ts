@@ -100,6 +100,19 @@ describe('normalizeFdcFood', () => {
     expect(QUALITY_TIER_BADGES.crowd).toBe('Open Food Facts');
   });
 
+  it('drops non-numeric nutrient amounts and portion weights instead of throwing', () => {
+    const result = normalizeFdcFood({
+      ...baseFdc,
+      foodNutrients: [...baseFdc.foodNutrients, { nutrientId: 1079, amount: 'n/a', unitName: 'G' }],
+      foodPortions: [{ amount: 1, measureUnitName: 'cup', modifier: 'cooked', gramWeight: 'n/a' }],
+    });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.food.portions).toEqual([]);
+    expect(result.warnings).toContain('dropped nutrient 1079: "n/a" is not a number');
+    expect(result.food.nutrients.map((n) => n.code)).toContain('energy_kcal');
+  });
+
   it('keeps the branded label serving as a portion', () => {
     const result = normalizeFdcFood({
       ...baseFdc,

@@ -211,7 +211,12 @@ export function normalizeFdcFood(record: FdcFoodRecord): NormalizeResult {
 
   for (const row of record.foodNutrients) {
     if (row.amount === null || row.amount === undefined) continue;
-    const scaled = num(dec(row.amount).times(basisFactor));
+    const amount = tryDec(row.amount);
+    if (amount === null) {
+      warnings.push(`dropped nutrient ${row.nutrientId}: "${String(row.amount)}" is not a number`);
+      continue;
+    }
+    const scaled = num(amount.times(basisFactor));
 
     if (row.nutrientId === FDC_ENERGY_KJ_ID) {
       energyKj = scaled;
@@ -252,8 +257,8 @@ export function normalizeFdcFood(record: FdcFoodRecord): NormalizeResult {
 
   const portions: CanonicalPortion[] = [];
   for (const row of record.foodPortions ?? []) {
-    const gramWeight = dec(row.gramWeight);
-    if (!gramWeight.greaterThan(0)) continue;
+    const gramWeight = tryDec(row.gramWeight);
+    if (gramWeight === null || !gramWeight.greaterThan(0)) continue;
     const label = fdcPortionLabel(row);
     if (label === '') continue;
     portions.push({ label, gramWeight: num(gramWeight), source: 'fdc' });
