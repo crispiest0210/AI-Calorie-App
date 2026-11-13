@@ -43,16 +43,6 @@ export function scalePer100g(per100g: NutrientMap, grams: NumericInput): Nutrien
   return out;
 }
 
-/** Multiplies every value by a scalar (used by recipe math). */
-export function scaleMap(map: NutrientMap, factor: NumericInput): NutrientMap {
-  const f = dec(factor);
-  const out: NutrientMap = {};
-  for (const code of nutrientCodesOf(map)) {
-    out[code] = num(dec(map[code] as Num).times(f));
-  }
-  return out;
-}
-
 export function mapToJson(map: NutrientMap): Record<string, string> {
   const out: Record<string, string> = {};
   for (const code of nutrientCodesOf(map)) out[code] = map[code] as Num;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mapToJson, nutrientCodesOf, parseNutrientMap, scaleMap, scalePer100g } from '../src/nutrient-map';
+import { mapToJson, nutrientCodesOf, parseNutrientMap, scalePer100g } from '../src/nutrient-map';
 
 describe('nutrient maps', () => {
   it('lists reported codes in catalog order', () => {
@@ -14,10 +14,6 @@ describe('nutrient maps', () => {
   it('keeps missing nutrients missing rather than zero', () => {
     const scaled = scalePer100g({ energy_kcal: '100' }, '50');
     expect('fiber_g' in scaled).toBe(false);
-  });
-
-  it('scales by a bare factor', () => {
-    expect(scaleMap({ fat_g: '3' }, '2')).toEqual({ fat_g: '6' });
   });
 
   it('parses untrusted JSON columns defensively', () => {
