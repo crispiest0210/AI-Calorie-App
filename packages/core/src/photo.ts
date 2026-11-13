@@ -66,7 +66,7 @@ export const MODEL_OUTPUT_SCHEMA = {
         additionalProperties: false,
         required: ['label', 'identification_confidence', 'portion_grams'],
         properties: {
-          label: { type: 'string', maxLength: MAX_TEXT, description: 'What the food is, in the plainest words: "white rice", "grilled chicken breast".' },
+          label: { type: 'string', minLength: 1, maxLength: MAX_TEXT, description: 'What the food is, in the plainest words: "white rice", "grilled chicken breast".' },
           description: { type: 'string', maxLength: MAX_TEXT, description: 'What you can see that supports the label.' },
           preparation: { type: 'string', maxLength: MAX_TEXT, description: 'How it appears to be cooked: fried, grilled, raw, with skin.' },
           identification_confidence: { type: 'number', minimum: 0, maximum: 1, description: 'How sure you are of the label alone.' },

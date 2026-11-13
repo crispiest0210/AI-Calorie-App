@@ -4,9 +4,11 @@ import {
   MODEL_OUTPUT_SCHEMA,
   confidenceBand,
   findNutrientFields,
+  modelItem,
   modelResult,
   noNutrientFields,
   normalizePortion,
+  portionGrams,
 } from '../src/photo';
 
 describe('confidenceBand', () => {
@@ -82,6 +84,21 @@ describe('modelResult', () => {
 describe('model-facing definitions', () => {
   it('contain no nutrient field in the output schema', () => {
     expect(noNutrientFields(MODEL_OUTPUT_SCHEMA)).toBe(true);
+  });
+
+  it('describe the same fields and required keys as modelResult', () => {
+    const item = MODEL_OUTPUT_SCHEMA.properties.items.items;
+    expect(Object.keys(MODEL_OUTPUT_SCHEMA.properties).sort()).toEqual(Object.keys(modelResult.shape).sort());
+    expect(Object.keys(item.properties).sort()).toEqual(Object.keys(modelItem.shape).sort());
+    expect(Object.keys(item.properties.portion_grams.properties).sort()).toEqual(Object.keys(portionGrams.shape).sort());
+    const requiredByZod = (shape: Record<string, { isOptional(): boolean }>) =>
+      Object.keys(shape).filter((key) => !shape[key]!.isOptional()).sort();
+    expect([...MODEL_OUTPUT_SCHEMA.required].sort()).toEqual(requiredByZod(modelResult.shape));
+    expect([...item.required].sort()).toEqual(requiredByZod(modelItem.shape));
+  });
+
+  it('keep the label non-empty in the output schema as modelResult does', () => {
+    expect(MODEL_OUTPUT_SCHEMA.properties.items.items.properties.label.minLength).toBe(1);
   });
 
   it('tell the model not to state nutrients', () => {
