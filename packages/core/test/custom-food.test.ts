@@ -79,4 +79,11 @@ describe('customFoodFromLabel', () => {
     expect(food.densityGPerMl).toBe('0.92');
     expect(food.sourceRef).toBe('label-1');
   });
+
+  it('stores a blank brand and an unusable barcode as null', () => {
+    const base = { name: 'Bar', basis: 'per_100g', values: { energy_kcal: '100' } } as const;
+    expect(customFoodFromLabel({ ...base, brand: '   ' }).food.brand).toBeNull();
+    expect(customFoodFromLabel({ ...base, gtin: 'n/a' }).food.gtin).toBeNull();
+    expect(customFoodFromLabel({ ...base, gtin: '123456789012345' }).food.gtin).toBeNull();
+  });
 });
