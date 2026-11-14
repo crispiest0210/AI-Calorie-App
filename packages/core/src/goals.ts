@@ -159,7 +159,8 @@ export function goalProgress(totals: NutrientTotals, target: ResolvedTarget): Go
   if (target.kind === 'range' && target.low !== null && consumedD.lessThan(dec(target.low))) {
     state = 'under_target';
   } else if (consumedD.greaterThan(referenceD)) {
-    state = 'over_target';
+    // Going past a minimum is meeting it, not exceeding a limit.
+    state = target.kind === 'min' ? 'at_target' : 'over_target';
   } else if (consumedD.equals(referenceD)) {
     state = 'at_target';
   } else {

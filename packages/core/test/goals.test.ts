@@ -93,6 +93,12 @@ describe('goalProgress', () => {
     expect(progress.find((p) => p.nutrientCode === 'sodium_mg')).toMatchObject({ state: 'over_target', remaining: '-200' });
   });
 
+  it('keeps a minimum at_target when it is exceeded, and under_target while short', () => {
+    const min = resolveTarget({ nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: '30', valueHigh: null, basis: 'absolute' }, null);
+    expect(goalProgress(sumNutrients([{ fiber_g: '45' }]), min)).toMatchObject({ remaining: '-15', state: 'at_target' });
+    expect(goalProgress(sumNutrients([{ fiber_g: '20' }]), min)).toMatchObject({ remaining: '10', state: 'under_target' });
+  });
+
   it('treats a range below its low edge as under target', () => {
     const carb = progressForProfile(totals, profile).find((p) => p.nutrientCode === 'carb_g')!;
     expect(carb.state).toBe('under_target');
