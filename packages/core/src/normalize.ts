@@ -365,7 +365,12 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
     }
   }
 
-  const energy = resolveEnergy({ kcal: energyKcal, kj: toNumOrNull(nutriments['energy-kj_100g']), macros: raw });
+  const kjRaw = nutriments['energy-kj_100g'];
+  const kj = toNumOrNull(kjRaw);
+  if (energyKcal === null && kj === null && kjRaw !== null && kjRaw !== undefined && kjRaw !== '') {
+    warnings.push(`dropped energy_kj: "${String(kjRaw)}" is not a number`);
+  }
+  const energy = resolveEnergy({ kcal: energyKcal, kj, macros: raw });
   if (energy.kcal !== null) {
     nutrients.unshift({ code: 'energy_kcal', amountPer100g: energy.kcal, derivation: energy.derivation as Derivation });
   } else {

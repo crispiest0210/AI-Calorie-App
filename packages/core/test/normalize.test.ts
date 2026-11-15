@@ -364,6 +364,14 @@ describe('normalizeOffProduct', () => {
     expect(result.warnings).toContain('dropped salt: "unknown" is not a number');
   });
 
+  it('warns when the only energy value, kJ, is non-numeric', () => {
+    const result = normalizeOffProduct({ code: '1', product_name: 'x', nutriments: { 'energy-kj_100g': 'n/a' } });
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.warnings).toContain('dropped energy_kj: "n/a" is not a number');
+    expect(result.warnings).toContain('no energy value available');
+  });
+
   it('stays quiet about an empty salt value', () => {
     const result = normalizeOffProduct({ code: '1', product_name: 'x', nutriments: { 'energy-kcal_100g': 100, salt_100g: '' } });
     expect(result.ok && result.warnings.some((w) => w.includes('salt'))).toBe(false);
