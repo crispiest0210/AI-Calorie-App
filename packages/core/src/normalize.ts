@@ -379,6 +379,9 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
 
   const portions: CanonicalPortion[] = [];
   const servingGrams = toNumOrNull(record.serving_quantity);
+  if (servingGrams === null && record.serving_quantity !== null && record.serving_quantity !== undefined && record.serving_quantity !== '') {
+    warnings.push(`dropped serving portion: "${String(record.serving_quantity)}" is not a number`);
+  }
   if (servingGrams !== null && dec(servingGrams).greaterThan(0)) {
     portions.push({
       label: record.serving_size?.trim() || `1 serving (${servingGrams} g)`,

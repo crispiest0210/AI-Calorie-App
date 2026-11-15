@@ -372,6 +372,16 @@ describe('normalizeOffProduct', () => {
     expect(result.warnings).toContain('no energy value available');
   });
 
+  it('warns when the serving quantity is non-numeric and stays quiet when it is absent', () => {
+    const bad = normalizeOffProduct({ code: '1', product_name: 'x', serving_quantity: 'n/a', nutriments: { 'energy-kcal_100g': 100 } });
+    expect(bad.ok).toBe(true);
+    if (!bad.ok) return;
+    expect(bad.food.portions).toEqual([]);
+    expect(bad.warnings).toContain('dropped serving portion: "n/a" is not a number');
+    const none = normalizeOffProduct({ code: '1', product_name: 'x', nutriments: { 'energy-kcal_100g': 100 } });
+    expect(none.ok && none.warnings.some((w) => w.includes('serving'))).toBe(false);
+  });
+
   it('stays quiet about an empty salt value', () => {
     const result = normalizeOffProduct({ code: '1', product_name: 'x', nutriments: { 'energy-kcal_100g': 100, salt_100g: '' } });
     expect(result.ok && result.warnings.some((w) => w.includes('salt'))).toBe(false);
