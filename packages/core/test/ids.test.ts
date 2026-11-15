@@ -21,6 +21,13 @@ describe('uuidv7', () => {
     expect(timestampOfUuidv7(uuidv7(10.9))).toBe(10);
   });
 
+  it('clamps a non-finite or out-of-range clock instead of throwing or wrapping', () => {
+    expect(timestampOfUuidv7(uuidv7(Number.NaN))).toBe(0);
+    expect(timestampOfUuidv7(uuidv7(Number.NEGATIVE_INFINITY))).toBe(0);
+    expect(timestampOfUuidv7(uuidv7(Number.POSITIVE_INFINITY))).toBe(2 ** 48 - 1);
+    expect(timestampOfUuidv7(uuidv7(2 ** 48 + 5))).toBe(2 ** 48 - 1);
+  });
+
   it('rejects non-v7 and malformed ids', () => {
     expect(timestampOfUuidv7('not-a-uuid')).toBeNull();
     expect(timestampOfUuidv7('00000000-0000-4000-8000-000000000000')).toBeNull();

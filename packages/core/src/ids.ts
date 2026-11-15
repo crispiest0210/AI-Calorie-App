@@ -4,6 +4,7 @@
  */
 
 const HEX = '0123456789abcdef';
+const MAX_TIMESTAMP = 2 ** 48 - 1;
 
 export type RandomSource = (bytes: Uint8Array) => void;
 
@@ -36,7 +37,9 @@ function randomBytes(count: number): Uint8Array {
 
 export function uuidv7(now: number = Date.now()): string {
   const bytes = randomBytes(16);
-  const ms = BigInt(Math.max(0, Math.floor(now)));
+  // A v7 timestamp is 48 bits. Clamp instead of letting NaN/Infinity throw out
+  // of BigInt() or a far-future clock wrap around and sort before older ids.
+  const ms = BigInt(Number.isNaN(now) ? 0 : Math.min(MAX_TIMESTAMP, Math.max(0, Math.floor(now))));
   for (let i = 0; i < 6; i += 1) {
     bytes[i] = Number((ms >> BigInt(8 * (5 - i))) & 0xffn);
   }
