@@ -352,7 +352,11 @@ export function normalizeOffProduct(record: OffProductRecord): NormalizeResult {
   }
 
   if (raw.sodium_mg === undefined) {
-    const salt = toNumOrNull(nutriments['salt_100g']);
+    const saltRaw = nutriments['salt_100g'];
+    const salt = toNumOrNull(saltRaw);
+    if (salt === null && saltRaw !== null && saltRaw !== undefined && saltRaw !== '') {
+      warnings.push(`dropped salt: "${String(saltRaw)}" is not a number`);
+    }
     if (salt !== null) {
       const sodium = num(dec(salt).times(SALT_TO_SODIUM_MG_PER_G));
       raw.sodium_mg = sodium;

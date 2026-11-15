@@ -361,6 +361,12 @@ describe('normalizeOffProduct', () => {
     expect(result.food.nutrients).toEqual([{ code: 'energy_kcal', amountPer100g: '100', derivation: 'reported' }]);
     expect(result.food.portions).toEqual([]);
     expect(result.warnings).toContain('dropped protein_g: "n/a" is not a number');
+    expect(result.warnings).toContain('dropped salt: "unknown" is not a number');
+  });
+
+  it('stays quiet about an empty salt value', () => {
+    const result = normalizeOffProduct({ code: '1', product_name: 'x', nutriments: { 'energy-kcal_100g': 100, salt_100g: '' } });
+    expect(result.ok && result.warnings.some((w) => w.includes('salt'))).toBe(false);
   });
 
   it('falls back to kJ, then to nothing', () => {
