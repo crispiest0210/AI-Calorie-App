@@ -12,15 +12,15 @@ import { isLocalDate } from './dates';
 import { compare, isPositive } from './decimal';
 
 /** A decimal string as stored and synced — never a float (review item R13). */
-export const numericString = z
-  .string()
-  .regex(/^-?\d+(\.\d+)?$/, 'expected a decimal string');
+const DECIMAL_RE = /^-?\d+(\.\d+)?$/;
+
+export const numericString = z.string().regex(DECIMAL_RE, 'expected a decimal string');
 
 /** A decimal string greater than zero: a zero serving count or portion weight would divide by zero downstream. */
-export const positiveNumericString = numericString.refine(isPositive, 'must be greater than zero');
+export const positiveNumericString = numericString.refine((v) => !DECIMAL_RE.test(v) || isPositive(v), 'must be greater than zero');
 
 /** A decimal string that is zero or more: a nutrient amount below zero is corrupt data, not a real food. */
-export const nonNegativeNumericString = numericString.refine((v) => compare(v, 0) >= 0, 'must not be negative');
+export const nonNegativeNumericString = numericString.refine((v) => !DECIMAL_RE.test(v) || compare(v, 0) >= 0, 'must not be negative');
 
 export const localDate = z.string().refine(isLocalDate, 'expected YYYY-MM-DD');
 

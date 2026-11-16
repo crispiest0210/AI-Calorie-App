@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { WATER_ML_MAX, WATER_ML_MIN, WATER_TARGET_ML_MAX, goalProfileSchema, goalTargetSchema, logEntrySchema, numericString, waterEntrySchema, waterPresetSchema, foodSchema, foodPortionSchema, localDate, nutrientMap } from '../src/schemas';
+import { WATER_ML_MAX, WATER_ML_MIN, WATER_TARGET_ML_MAX, goalProfileSchema, goalTargetSchema, logEntrySchema, numericString, positiveNumericString, nonNegativeNumericString, epochMs, waterEntrySchema, waterPresetSchema, foodSchema, foodPortionSchema, localDate, nutrientMap } from '../src/schemas';
 
 const entry = {
   id: 'e1',
@@ -27,6 +27,31 @@ describe('shared schemas', () => {
     expect(numericString.safeParse('-3').success).toBe(true);
     expect(numericString.safeParse('1e3').success).toBe(false);
     expect(numericString.safeParse('abc').success).toBe(false);
+  });
+
+  it('requires positive decimal strings to be greater than zero', () => {
+    expect(positiveNumericString.safeParse('0.001').success).toBe(true);
+    expect(positiveNumericString.safeParse('0').success).toBe(false);
+    expect(positiveNumericString.safeParse('0.00').success).toBe(false);
+    expect(positiveNumericString.safeParse('-1').success).toBe(false);
+    expect(positiveNumericString.safeParse('1e3').success).toBe(false);
+    expect(positiveNumericString.safeParse('abc').success).toBe(false);
+  });
+
+  it('allows zero but not negatives in non-negative decimal strings', () => {
+    expect(nonNegativeNumericString.safeParse('0').success).toBe(true);
+    expect(nonNegativeNumericString.safeParse('12.5').success).toBe(true);
+    expect(nonNegativeNumericString.safeParse('-0.1').success).toBe(false);
+    expect(nonNegativeNumericString.safeParse('abc').success).toBe(false);
+  });
+
+  it('bounds epoch milliseconds to whole numbers from 1970 through year 9999', () => {
+    expect(epochMs.safeParse(0).success).toBe(true);
+    expect(epochMs.safeParse(253_402_300_799_999).success).toBe(true);
+    expect(epochMs.safeParse(253_402_300_800_000).success).toBe(false);
+    expect(epochMs.safeParse(-1).success).toBe(false);
+    expect(epochMs.safeParse(1.5).success).toBe(false);
+    expect(epochMs.safeParse('0').success).toBe(false);
   });
 
   it('validates local dates and nutrient maps', () => {
