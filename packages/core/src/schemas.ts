@@ -14,6 +14,8 @@ import { compare, isPositive } from './decimal';
 /** A decimal string as stored and synced — never a float (review item R13). */
 const DECIMAL_RE = /^-?\d+(\.\d+)?$/;
 
+const isDecimal = (v: string): boolean => DECIMAL_RE.test(v);
+
 export const numericString = z.string().regex(DECIMAL_RE, 'expected a decimal string');
 
 /** A decimal string greater than zero: a zero serving count or portion weight would divide by zero downstream. */
@@ -79,6 +81,8 @@ export const refineLogEntry = (
   },
   ctx: z.RefinementCtx,
 ): void => {
+  // These refinements still run when a field's own decimal check failed; bail out so the schema reports that issue rather than throwing.
+  if (!isDecimal(entry.amountValue) || (entry.grams !== null && !isDecimal(entry.grams))) return;
   if (entry.entryKind === 'food') {
     if (entry.foodId === null) ctx.addIssue({ code: 'custom', message: 'food entries need a food_id' });
     if (entry.grams === null) ctx.addIssue({ code: 'custom', message: 'food entries need resolved grams' });
@@ -133,7 +137,7 @@ export const goalTargetSchema = z.object({
     if (used[key] && target[key] === null) ctx.addIssue({ code: 'custom', path: [key], message: `is required for a ${target.kind} goal` });
     if (!used[key] && target[key] !== null) ctx.addIssue({ code: 'custom', path: [key], message: `must be empty for a ${target.kind} goal` });
   }
-  if (target.valueLow !== null && target.valueHigh !== null && compare(target.valueLow, target.valueHigh) > 0) {
+  if (target.valueLow !== null && target.valueHigh !== null && isDecimal(target.valueLow) && isDecimal(target.valueHigh) && compare(target.valueLow, target.valueHigh) > 0) {
     ctx.addIssue({ code: 'custom', path: ['valueLow'], message: 'must not exceed valueHigh' });
   }
 });

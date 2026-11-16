@@ -66,6 +66,11 @@ describe('shared schemas', () => {
     expect(logEntrySchema.safeParse(entry).success).toBe(true);
   });
 
+  it('fails validation instead of throwing on a non-decimal amount or grams', () => {
+    expect(logEntrySchema.safeParse({ ...entry, amountValue: 'abc' }).success).toBe(false);
+    expect(logEntrySchema.safeParse({ ...entry, grams: 'abc' }).success).toBe(false);
+  });
+
   it('requires food entries to carry a food, grams and a snapshot', () => {
     expect(logEntrySchema.safeParse({ ...entry, foodId: null }).success).toBe(false);
     expect(logEntrySchema.safeParse({ ...entry, grams: null }).success).toBe(false);
@@ -137,6 +142,12 @@ describe('food gtin', () => {
 });
 
 describe('goalTargetSchema', () => {
+  it('fails validation instead of throwing on a non-decimal range bound', () => {
+    const range = { nutrientCode: 'fiber_g', kind: 'range', value: null, valueLow: 'abc', valueHigh: '5', basis: 'absolute' };
+    expect(goalTargetSchema.safeParse(range).success).toBe(false);
+    expect(goalTargetSchema.safeParse({ ...range, valueLow: '1', valueHigh: 'abc' }).success).toBe(false);
+  });
+
   const base = { nutrientCode: 'fiber_g', kind: 'min', value: null, valueLow: '30', valueHigh: null, basis: 'absolute' } as const;
 
   it('accepts each kind with exactly its value fields', () => {
