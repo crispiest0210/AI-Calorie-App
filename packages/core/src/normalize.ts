@@ -198,7 +198,10 @@ export function normalizeFdcFood(record: FdcFoodRecord): NormalizeResult {
   const warnings: string[] = [];
   const perServing = record.nutrientBasis === 'per_serving';
   const servingGrams = record.servingSize ?? null;
-  if (perServing && (servingGrams === null || (record.servingSizeUnit ?? 'g').toLowerCase() !== 'g')) {
+  if (
+    perServing &&
+    (servingGrams === null || !(Number.isFinite(servingGrams) && servingGrams > 0) || (record.servingSizeUnit ?? 'g').toLowerCase() !== 'g')
+  ) {
     return { ok: false, reasons: ['per-serving record without a gram serving size'], sourceRef };
   }
   const basisFactor = perServing ? dec(100).div(dec(servingGrams as number)) : dec(1);

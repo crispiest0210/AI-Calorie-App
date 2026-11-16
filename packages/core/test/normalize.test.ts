@@ -172,6 +172,12 @@ describe('normalizeFdcFood', () => {
     expect(normalizeFdcFood({ ...baseFdc, nutrientBasis: 'per_serving', servingSize: 50, servingSizeUnit: 'ml' })).toMatchObject({ ok: false });
   });
 
+  it('refuses a per-serving record whose gram serving size is zero, negative or not finite', () => {
+    for (const servingSize of [0, -5, Number.NaN, Number.POSITIVE_INFINITY]) {
+      expect(normalizeFdcFood({ ...baseFdc, nutrientBasis: 'per_serving', servingSize, servingSizeUnit: 'g' })).toMatchObject({ ok: false });
+    }
+  });
+
   it('derives energy from Atwater factors only when none is reported', () => {
     const result = normalizeFdcFood({
       ...baseFdc,
