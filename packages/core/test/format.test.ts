@@ -46,6 +46,13 @@ describe('display rounding', () => {
     expect(formatGrams('-0.04')).toBe('0');
   });
 
+  it('groups thousands and never shows a negative zero for mL and large gram amounts', () => {
+    expect(formatMl('1250.4')).toBe('1,250');
+    expect(formatMl('-0.4')).toBe('0');
+    expect(formatGrams('1250.4')).toBe('1,250');
+    expect(formatAmount('2500', 'ml')).toBe('2,500 mL');
+  });
+
   it('formats an amount in the unit it was entered in', () => {
     expect(formatAmount('150', 'g')).toBe('150 g');
     expect(formatAmount('200', 'ml')).toBe('200 mL');
