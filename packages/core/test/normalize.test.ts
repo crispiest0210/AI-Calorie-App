@@ -110,6 +110,7 @@ describe('normalizeFdcFood', () => {
     if (!result.ok) return;
     expect(result.food.portions).toEqual([]);
     expect(result.warnings).toContain('dropped nutrient 1079: "n/a" is not a number');
+    expect(result.warnings).toContain('dropped portion: gram weight "n/a" is not a number');
     expect(result.food.nutrients.map((n) => n.code)).toContain('energy_kcal');
   });
 

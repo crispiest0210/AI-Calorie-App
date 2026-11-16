@@ -258,7 +258,13 @@ export function normalizeFdcFood(record: FdcFoodRecord): NormalizeResult {
   const portions: CanonicalPortion[] = [];
   for (const row of record.foodPortions ?? []) {
     const gramWeight = tryDec(row.gramWeight);
-    if (gramWeight === null || !gramWeight.greaterThan(0)) continue;
+    if (gramWeight === null) {
+      if (row.gramWeight !== null && row.gramWeight !== undefined) {
+        warnings.push(`dropped portion: gram weight "${String(row.gramWeight)}" is not a number`);
+      }
+      continue;
+    }
+    if (!gramWeight.greaterThan(0)) continue;
     const label = fdcPortionLabel(row);
     if (label === '') continue;
     portions.push({ label, gramWeight: num(gramWeight), source: 'fdc' });
