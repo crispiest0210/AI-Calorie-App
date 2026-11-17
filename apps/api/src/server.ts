@@ -35,7 +35,7 @@ if (Boolean(supabaseUrl) !== Boolean(serviceKey)) {
 }
 const images: ImageStore | undefined =
   supabaseUrl && serviceKey
-    ? new SupabaseImageStore({ url: supabaseUrl, serviceKey, bucket: process.env.PHOTO_BUCKET ?? 'meal-photos' })
+    ? new SupabaseImageStore({ url: supabaseUrl, serviceKey, bucket: process.env.PHOTO_BUCKET || 'meal-photos' })
     : undefined;
 
 const analyzer = process.env.ANTHROPIC_API_KEY
