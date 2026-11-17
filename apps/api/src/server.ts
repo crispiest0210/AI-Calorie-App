@@ -41,6 +41,9 @@ const images: ImageStore | undefined =
 const analyzer = process.env.ANTHROPIC_API_KEY
   ? new ClaudeMealImageAnalyzer({ ...(process.env.PHOTO_MODEL ? { model: process.env.PHOTO_MODEL } : {}) })
   : undefined;
+if (analyzer && !images) {
+  console.warn('photo analysis disabled: ANTHROPIC_API_KEY is set but photo storage is not configured');
+}
 
 const app = createApp({
   pool,
