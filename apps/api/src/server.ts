@@ -55,8 +55,9 @@ const stopSweeper = images
     })
   : () => undefined;
 
-const port = Number.parseInt(process.env.PORT ?? '8787', 10);
-if (!Number.isInteger(port) || port < 0 || port > 65535) {
+const rawPort = process.env.PORT ?? '8787';
+const port = /^\d+$/.test(rawPort) ? Number(rawPort) : Number.NaN;
+if (!Number.isInteger(port) || port > 65535) {
   console.error(`invalid PORT: ${JSON.stringify(process.env.PORT)}`);
   process.exit(1);
 }
