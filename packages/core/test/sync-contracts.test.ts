@@ -43,6 +43,13 @@ describe('sync contracts', () => {
     expect([...SYNCED_TABLES]).toEqual(['log_entry', 'water_entry', 'water_preset', 'goal_profile', 'food']);
   });
 
+  it('rejects non-decimal log entry amounts and grams without throwing', () => {
+    for (const row of [{ ...logEntry, amountValue: 'abc' }, { ...logEntry, grams: '1e3' }, { ...logEntry, amountValue: '' }]) {
+      expect(() => syncRow.safeParse({ table: 'log_entry', row })).not.toThrow();
+      expect(syncRow.safeParse({ table: 'log_entry', row }).success).toBe(false);
+    }
+  });
+
   it('accepts a log entry row and rejects float amounts', () => {
     expect(syncRow.safeParse({ table: 'log_entry', row: logEntry }).success).toBe(true);
     expect(syncRow.safeParse({ table: 'log_entry', row: { ...logEntry, amountValue: 150 } }).success).toBe(false);
