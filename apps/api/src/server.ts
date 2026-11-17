@@ -56,6 +56,10 @@ const stopSweeper = images
   : () => undefined;
 
 const port = Number.parseInt(process.env.PORT ?? '8787', 10);
+if (!Number.isInteger(port) || port < 0 || port > 65535) {
+  console.error(`invalid PORT: ${JSON.stringify(process.env.PORT)}`);
+  process.exit(1);
+}
 const server = serve({ fetch: app.fetch, port }, (info) => {
   console.info(`api listening on :${info.port}`, { photos: images !== undefined, analysis: analyzer !== undefined });
 });
