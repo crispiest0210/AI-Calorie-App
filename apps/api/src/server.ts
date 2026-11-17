@@ -29,6 +29,10 @@ const pool = createPool({ connectionString: required('DATABASE_URL') });
 
 const supabaseUrl = process.env.SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+if (Boolean(supabaseUrl) !== Boolean(serviceKey)) {
+  // Names only, never values. Without both, photo storage and analysis stay off.
+  console.warn('photo storage disabled: set both SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY, or neither');
+}
 const images: ImageStore | undefined =
   supabaseUrl && serviceKey
     ? new SupabaseImageStore({ url: supabaseUrl, serviceKey, bucket: process.env.PHOTO_BUCKET ?? 'meal-photos' })
