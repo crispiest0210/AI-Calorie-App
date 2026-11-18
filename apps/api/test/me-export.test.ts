@@ -64,6 +64,27 @@ describe('GET /v1/me/export', () => {
     expect(doc.csv.logEntries).toContain('"Rice, ""sticky"""');
     expect(doc.csv.logEntries).toContain('"line one\nline two"');
   });
+
+  it('neutralises spreadsheet formulas in CSV text and keeps deleted entries out of the CSV but in the JSON', async () => {
+    await withUser(h.pool, USER_A, async (sql) => {
+      await sql.query(`update log_entry set note = $1 where user_id = $2`, ['=HYPERLINK("http://x")', USER_A]);
+      await sql.query(
+        `insert into log_entry (id, user_id, local_date, logged_at, tz_offset_min, meal_slot, entry_kind,
+                                food_id, amount_value, amount_unit, grams, grams_provenance,
+                                food_name_snapshot, nutrients_per_100g, note, updated_at, deleted_at)
+         values ($1,$2,'2026-09-20',now(),0,'dinner','food',$3,'50','g','50','user',
+                 'Tombstoned food','{"energy_kcal":"129"}','gone',now(),now())`,
+        ['aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2', USER_A, CATALOG],
+      );
+    });
+    const doc = await json<{ logEntries: unknown[]; csv: { logEntries: string } }>(
+      await h.request(USER_A, '/v1/me/export'),
+    );
+
+    expect(doc.logEntries).toHaveLength(2);
+    expect(doc.csv.logEntries).toContain(`"'=HYPERLINK(""http://x"")"`);
+    expect(doc.csv.logEntries).not.toContain('Tombstoned food');
+  });
 });
 
 describe('DELETE /v1/me', () => {
