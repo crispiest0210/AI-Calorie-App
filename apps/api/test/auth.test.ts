@@ -59,6 +59,13 @@ describe('verifyToken', () => {
   it('rejects garbage', async () => {
     expect((await rejection(verifyToken('not-a-jwt', CONFIG))).code).toBe('unauthorized');
   });
+
+  it('rejects an unsigned alg:none token carrying a valid-looking payload', async () => {
+    const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64url');
+    const exp = Math.floor(Date.now() / 1000) + 3600;
+    const token = `${encode({ alg: 'none', typ: 'JWT' })}.${encode({ sub: 'user-1', exp })}.`;
+    expect((await rejection(verifyToken(token, CONFIG))).code).toBe('unauthorized');
+  });
 });
 
 describe('bearerToken', () => {
