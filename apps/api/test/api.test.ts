@@ -76,6 +76,8 @@ describe('food catalog', () => {
     expect((await names('&limit=abc')).length).toBeGreaterThan(1);
     expect((await names('&limit=1abc')).length).toBeGreaterThan(1);
     expect((await names('&limit=1.5')).length).toBeGreaterThan(1);
+    // An enormous integer is capped to the maximum rather than rejected or passed on to Postgres.
+    expect((await names('&limit=99999999999999999999')).length).toBeGreaterThan(1);
   });
 
   it('returns nutrients as decimal strings, never floats', async () => {
