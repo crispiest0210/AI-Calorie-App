@@ -57,7 +57,8 @@ export function startRetentionSweeper(
     if (running) return;
     running = true;
     try {
-      options.onReport?.(await runRetentionSweep(pool, store));
+      const report = await runRetentionSweep(pool, store);
+      options.onReport?.(report);
     } catch (error) {
       options.onError?.(error);
     } finally {

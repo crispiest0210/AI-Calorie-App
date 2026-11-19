@@ -6,6 +6,7 @@
  */
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import type { ModelResult } from '@nt/core';
+import type { Pool } from 'pg';
 import { withService } from '../src/db';
 import { runRetentionSweep, startRetentionSweeper, SWEEP_BATCH_SIZE } from '../src/retention';
 import { RETENTION_HOURS, ABANDON_AFTER_HOURS } from '../src/routes/photos';
@@ -141,6 +142,34 @@ describe('the scheduled sweep', () => {
     await expect.poll(() => reports.length).toBeGreaterThan(0);
     stop();
     expect(store.objects.has(path)).toBe(false);
+  });
+
+  it('sweeps on its own when no onReport callback is given', async () => {
+    const { analysisId, path } = await analyzedPhoto();
+    await withService(h.pool, (sql) =>
+      sql.query(`update photo_analysis set image_expires_at = now() - interval '1 minute' where id = $1`, [analysisId]),
+    );
+
+    const stop = startRetentionSweeper(h.pool, store, { intervalMs: 60_000 });
+    await expect.poll(() => store.objects.has(path)).toBe(false);
+    stop();
+  });
+
+  it('reports a failed run and keeps its schedule going', async () => {
+    let attempts = 0;
+    const brokenPool = {
+      connect: async () => {
+        attempts += 1;
+        throw new Error('database unreachable');
+      },
+    } as unknown as Pool;
+
+    const errors: unknown[] = [];
+    const stop = startRetentionSweeper(brokenPool, store, { intervalMs: 20, onError: (error) => errors.push(error) });
+    await expect.poll(() => errors.length).toBeGreaterThan(1);
+    stop();
+    expect(attempts).toBeGreaterThan(1);
+    expect(errors[0]).toMatchObject({ message: 'database unreachable' });
   });
 });
 
