@@ -31,6 +31,14 @@ describe('pullCursor', () => {
     settings.setSetting(db, CURSOR_KEY, '42');
     expect(pullCursor(db)).toBe(42);
   });
+
+  it('treats a partly numeric stored value as corrupt instead of truncating it', () => {
+    const { db } = freshDb();
+    for (const raw of ['12abc', '1.5', '1e3', '99999999999999999999']) {
+      settings.setSetting(db, CURSOR_KEY, raw);
+      expect(pullCursor(db), raw).toBe(0);
+    }
+  });
 });
 
 describe('push', () => {

@@ -26,8 +26,10 @@ export interface SyncResult {
 
 export function pullCursor(db: Db): number {
   const raw = getSetting(db, CURSOR_KEY);
-  const value = raw === null ? 0 : Number.parseInt(raw, 10);
-  return Number.isFinite(value) && value >= 0 ? value : 0;
+  // Digits only: "12abc" or "1.5" is a corrupt value, not a cursor of 12 or 1 (a wrong cursor would skip rows).
+  if (raw === null || !/^\d+$/.test(raw)) return 0;
+  const value = Number(raw);
+  return Number.isSafeInteger(value) ? value : 0;
 }
 
 function setPullCursor(db: Db, cursor: number): void {
