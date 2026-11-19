@@ -69,10 +69,10 @@ export function createApp(deps: AppDeps) {
     const user = c.get('user');
     limiter.check(user.id, 'search');
     const query = c.req.query('q') ?? '';
-    const limit = Number.parseInt(c.req.query('limit') ?? '25', 10);
-    const results = await withUser(deps.pool, user.id, (sql) =>
-      foods.search(sql, query, Number.isFinite(limit) ? limit : 25),
-    );
+    const rawLimit = c.req.query('limit') ?? '25';
+    // "1abc" or "2.5" is garbage like "abc", not a limit of 1 or 2: both fall back to the default.
+    const limit = /^-?\d+$/.test(rawLimit) ? Number.parseInt(rawLimit, 10) : 25;
+    const results = await withUser(deps.pool, user.id, (sql) => foods.search(sql, query, limit));
     return c.json({ results });
   });
 

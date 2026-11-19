@@ -74,6 +74,8 @@ describe('food catalog', () => {
     expect(await names('&limit=0')).toHaveLength(1);
     expect(await names('&limit=-5')).toHaveLength(1);
     expect((await names('&limit=abc')).length).toBeGreaterThan(1);
+    expect((await names('&limit=1abc')).length).toBeGreaterThan(1);
+    expect((await names('&limit=1.5')).length).toBeGreaterThan(1);
   });
 
   it('returns nutrients as decimal strings, never floats', async () => {
