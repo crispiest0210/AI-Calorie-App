@@ -50,6 +50,27 @@ describe('SupabaseImageStore', () => {
     expect([...image.bytes]).toEqual([1, 2, 3]);
   });
 
+  it('reports webp as webp and anything else, or no content type, as jpeg', async () => {
+    const read = async (headers: Record<string, string>) => {
+      const { fetch } = fakeFetch(() => new Response(new Uint8Array([1]), { headers }));
+      return (await new SupabaseImageStore({ ...OPTIONS, fetch }).read(PATH)).mediaType;
+    };
+    expect(await read({ 'content-type': 'image/webp' })).toBe('image/webp');
+    expect(await read({ 'content-type': 'application/octet-stream' })).toBe('image/jpeg');
+    expect(await read({})).toBe('image/jpeg');
+  });
+
+  it('joins a signed URL without a leading slash, and rejects a response with no URL', async () => {
+    const bare = fakeFetch(() => Response.json({ url: 'object/upload/sign/meal-photos/x.jpg?token=t' }));
+    const signed = await new SupabaseImageStore({ ...OPTIONS, fetch: bare.fetch }).createUploadUrl(PATH);
+    expect(signed.uploadUrl).toBe('https://proj.supabase.co/storage/v1/object/upload/sign/meal-photos/x.jpg?token=t');
+
+    const empty = fakeFetch(() => Response.json({}));
+    await expect(new SupabaseImageStore({ ...OPTIONS, fetch: empty.fetch }).createUploadUrl(PATH)).rejects.toMatchObject({
+      code: 'upstream_unavailable',
+    });
+  });
+
   it('treats a missing object as not found rather than an outage', async () => {
     const { fetch } = fakeFetch(() => new Response('{}', { status: 404 }));
     await expect(new SupabaseImageStore({ ...OPTIONS, fetch }).read(PATH)).rejects.toMatchObject({ code: 'not_found' });
