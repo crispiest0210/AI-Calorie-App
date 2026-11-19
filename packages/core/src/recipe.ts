@@ -46,10 +46,12 @@ export function computeRecipe(input: RecipeInput): RecipeResult {
   if (!servings.greaterThan(0)) throw new RecipeError('servings must be greater than zero');
 
   let rawGrams = dec(0);
+  const grams: ReturnType<typeof dec>[] = [];
   for (const ing of input.ingredients) {
     const g = quantity(ing.grams, 'ingredient grams');
     if (!g.greaterThan(0)) throw new RecipeError('ingredient grams must be greater than zero');
     rawGrams = rawGrams.plus(g);
+    grams.push(g);
   }
 
   const cooked = input.totalCookedGrams === null || input.totalCookedGrams === undefined ? rawGrams : quantity(input.totalCookedGrams, 'cooked grams');
@@ -67,9 +69,10 @@ export function computeRecipe(input: RecipeInput): RecipeResult {
   const nutrients: CanonicalNutrient[] = [];
   for (const code of codesEverywhere) {
     let absolute = dec(0);
-    for (const ing of input.ingredients) {
-      absolute = absolute.plus(dec(ing.nutrientsPer100g[code] as Num).times(dec(ing.grams)).div(100));
-    }
+    input.ingredients.forEach((ing, i) => {
+      const per100 = quantity(ing.nutrientsPer100g[code] as Num, `${code} per 100 g`);
+      absolute = absolute.plus(per100.times(grams[i]!).div(100));
+    });
     const value = num(absolute.div(cooked).times(100));
     per100g[code] = value;
     nutrients.push({ code, amountPer100g: value, derivation: 'computed' });

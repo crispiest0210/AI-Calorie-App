@@ -66,4 +66,9 @@ describe('computeRecipe', () => {
     expect(() => computeRecipe({ ingredients: [{ ...rice, grams: '12abc' }], servings: 1 })).toThrow(RecipeError);
     expect(() => computeRecipe({ ingredients: [rice], totalCookedGrams: 'lots', servings: 1 })).toThrow(RecipeError);
   });
+
+  it('reports an unparsable per-100 g nutrient value as RecipeError', () => {
+    const bad = { ...rice, nutrientsPer100g: { ...rice.nutrientsPer100g, energy_kcal: 'n/a' } };
+    expect(() => computeRecipe({ ingredients: [bad], servings: 1 })).toThrow(RecipeError);
+  });
 });
