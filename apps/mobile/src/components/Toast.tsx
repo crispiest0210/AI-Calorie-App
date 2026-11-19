@@ -2,7 +2,7 @@
 import { useEffect, useRef } from 'react';
 import { Pressable, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { radii, spacing, useTheme } from '../theme';
+import { MIN_TOUCH_TARGET, radii, spacing, useTheme } from '../theme';
 import { Text } from './Text';
 
 export interface ToastProps {
@@ -53,7 +53,12 @@ export function Toast({ message, actionLabel, onAction, onDismiss, durationMs = 
         {message}
       </Text>
       {actionLabel !== undefined && onAction !== undefined && (
-        <Pressable onPress={onAction} accessibilityRole="button" hitSlop={12}>
+        <Pressable
+          onPress={onAction}
+          accessibilityRole="button"
+          hitSlop={12}
+          style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center', paddingHorizontal: spacing.sm }}
+        >
           <Text variant="label" tone="accent">
             {actionLabel}
           </Text>
