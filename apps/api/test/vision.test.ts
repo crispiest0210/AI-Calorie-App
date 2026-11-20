@@ -76,7 +76,52 @@ describe('the request', () => {
   });
 });
 
+describe('the request options', () => {
+  it('sends the configured model and effort, and the image as base64 with its media type', async () => {
+    const { create } = analyzerReturning(GOOD);
+    const analyzer = new ClaudeMealImageAnalyzer({
+      client: { messages: { create } } as unknown as Anthropic,
+      model: 'test-model',
+      effort: 'high',
+    });
+    const outcome = await analyzer.analyzeMealImage({ bytes: new Uint8Array([1, 2, 3]), mediaType: 'image/png' });
+    const request = create.mock.calls[0]![0] as {
+      model: string;
+      output_config: { effort: string };
+      messages: { content: { type: string; source?: { media_type: string; data: string } }[] }[];
+    };
+    expect(request.model).toBe('test-model');
+    expect(request.output_config.effort).toBe('high');
+    expect(request.messages[0]!.content[0]!.source).toEqual({
+      type: 'base64',
+      media_type: 'image/png',
+      data: Buffer.from([1, 2, 3]).toString('base64'),
+    });
+    expect(outcome.model).toBe('test-model');
+  });
+
+  it('defaults to medium effort', async () => {
+    const { analyzer, create } = analyzerReturning(GOOD);
+    await analyzer.analyzeMealImage(IMAGE);
+    const request = create.mock.calls[0]![0] as { output_config: { effort: string } };
+    expect(request.output_config.effort).toBe('medium');
+  });
+});
+
 describe('the response', () => {
+  it('ignores non-text blocks and joins text blocks before parsing', async () => {
+    const json = JSON.stringify(GOOD);
+    const { analyzer } = analyzerReturning(GOOD, {
+      content: [
+        { type: 'thinking', thinking: 'hmm' },
+        { type: 'text', text: json.slice(0, 20) },
+        { type: 'text', text: json.slice(20) },
+      ],
+    });
+    const outcome = await analyzer.analyzeMealImage(IMAGE);
+    expect(outcome.result.items[0]!.label).toBe('white rice');
+  });
+
   it('returns a validated result with usage and latency', async () => {
     const { analyzer } = analyzerReturning(GOOD);
     const outcome = await analyzer.analyzeMealImage(IMAGE);
