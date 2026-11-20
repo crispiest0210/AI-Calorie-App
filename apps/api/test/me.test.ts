@@ -5,7 +5,7 @@
  */
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { withUser } from '../src/db';
-import { REAUTH_WINDOW_SECONDS } from '../src/routes/me';
+import { deleteAccount, REAUTH_WINDOW_SECONDS } from '../src/routes/me';
 import { insertCatalogFood, json, startHarness, USER_A, USER_B, type Harness } from './harness';
 
 import { MemoryImageStore } from '../src/storage';
@@ -164,5 +164,33 @@ describe('DELETE /v1/me', () => {
     expect(res.status).toBe(401);
     const remaining = await h.pool.query('select id from log_entry');
     expect(remaining.rows.map((row) => row.id)).toEqual([ENTRY_A]);
+  });
+
+  describe('when stored photos cannot be removed', () => {
+    const ANALYSIS = 'dddddddd-dddd-4ddd-8ddd-ddddddddddd3';
+
+    async function seed(): Promise<void> {
+      await addEntry(USER_A, ENTRY_A, 'Rice', null);
+      await withUser(h.pool, USER_A, async (sql) => {
+        await sql.query(`insert into photo_analysis (id, user_id, status, storage_path) values ($1,$2,'analyzed',$3)`, [ANALYSIS, USER_A, `${USER_A}/${ANALYSIS}.jpg`]);
+      });
+    }
+
+    async function remaining(): Promise<number> {
+      return ((await h.pool.query('select 1 from log_entry')).rowCount ?? 0) + ((await h.pool.query('select 1 from photo_analysis')).rowCount ?? 0);
+    }
+
+    it('aborts and keeps every row when photo storage is not configured', async () => {
+      await seed();
+      await expect(withUser(h.pool, USER_A, (sql) => deleteAccount(sql, USER_A, Math.floor(Date.now() / 1000)))).rejects.toMatchObject({ code: 'upstream_unavailable' });
+      expect(await remaining()).toBe(2);
+    });
+
+    it('rolls the deletion back when the image store fails', async () => {
+      await seed();
+      const failing = { remove: async () => { throw new Error('storage down'); } } as unknown as MemoryImageStore;
+      await expect(withUser(h.pool, USER_A, (sql) => deleteAccount(sql, USER_A, Math.floor(Date.now() / 1000), { images: failing }))).rejects.toThrow('storage down');
+      expect(await remaining()).toBe(2);
+    });
   });
 });
