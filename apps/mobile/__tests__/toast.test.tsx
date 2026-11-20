@@ -2,8 +2,9 @@
  * The undo toast dismisses itself on a fixed clock, even when the parent
  * re-renders with a fresh onDismiss closure (spec 5.2).
  */
-import { act, render } from '@testing-library/react-native';
+import { act, fireEvent, render, screen } from '@testing-library/react-native';
 import { SafeAreaProvider, type Metrics } from 'react-native-safe-area-context';
+import { MIN_TOUCH_TARGET } from '@/theme';
 import { Toast, type ToastProps } from '@/components/Toast';
 
 const metrics: Metrics = {
@@ -37,5 +38,20 @@ describe('Toast', () => {
     render(toast({ message: null, onDismiss }));
     act(() => jest.advanceTimersByTime(10000));
     expect(onDismiss).not.toHaveBeenCalled();
+  });
+
+  it('renders an action button at least the minimum touch target tall and fires onAction', () => {
+    const onAction = jest.fn();
+    render(toast({ message: 'Deleted', actionLabel: 'Undo', onAction, onDismiss: jest.fn() }));
+    const button = screen.getByRole('button', { name: 'Undo' });
+    const flat = Object.assign({}, ...[button.props.style].flat(Infinity));
+    expect(flat.minHeight).toBeGreaterThanOrEqual(MIN_TOUCH_TARGET);
+    fireEvent.press(button);
+    expect(onAction).toHaveBeenCalledTimes(1);
+  });
+
+  it('omits the action button when no action handler is given', () => {
+    render(toast({ message: 'Saved', actionLabel: 'Undo', onDismiss: jest.fn() }));
+    expect(screen.queryByRole('button')).toBeNull();
   });
 });
