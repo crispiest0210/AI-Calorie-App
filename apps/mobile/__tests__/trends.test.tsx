@@ -30,6 +30,22 @@ describe('TrendChart', () => {
     expect(screen.getByText(/Hatched bars went over/)).toBeTruthy();
   });
 
+  it('does not call a day over when it lands exactly on target or has no target', () => {
+    render(
+      <TrendChart
+        days={[
+          { date: '2026-09-20', energy: 2100, target: 2100 },
+          { date: '2026-09-21', energy: 3000, target: null },
+        ]}
+        today={TODAY}
+        onSelectDay={jest.fn()}
+      />,
+    );
+    expect(screen.getByLabelText('Yesterday, 2,100 calories')).toBeTruthy();
+    expect(screen.getByLabelText('Today, 3,000 calories')).toBeTruthy();
+    expect(screen.queryByLabelText(/over target/)).toBeNull();
+  });
+
   it('labels a day with nothing logged as such, not as zero', () => {
     render(<TrendChart days={days} today={TODAY} onSelectDay={jest.fn()} />);
     expect(screen.getByLabelText('Today, nothing logged')).toBeTruthy();
