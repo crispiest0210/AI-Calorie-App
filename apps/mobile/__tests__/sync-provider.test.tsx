@@ -2,8 +2,8 @@
  * Sync failures must never block logging (spec 2.11): each failure kind maps
  * to a quiet state, and only an auth failure signs the user out.
  */
-import { render, screen, waitFor } from '@testing-library/react-native';
-import { Text } from 'react-native';
+import { act, render, screen, waitFor } from '@testing-library/react-native';
+import { AppState, Text } from 'react-native';
 
 const mockSync = jest.fn();
 const mockSignOut = jest.fn().mockResolvedValue(undefined);
@@ -99,5 +99,29 @@ describe('SyncProvider', () => {
     renderProvider();
     await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('error|catalog is still loading|3'));
     expect(mockSync).not.toHaveBeenCalled();
+  });
+
+  it('falls back to a generic message when something other than an Error is thrown', async () => {
+    mockSync.mockRejectedValue('nope');
+    renderProvider();
+    await waitFor(() => expect(screen.getByTestId('status')).toHaveTextContent('error|Sync failed|3'));
+  });
+
+  it('syncs again when the app returns to the foreground', async () => {
+    let onChange: (next: string) => void = () => {};
+    const remove = jest.fn();
+    const spy = jest.spyOn(AppState, 'addEventListener').mockImplementation(((_: string, handler: (next: string) => void) => {
+      onChange = handler;
+      return { remove };
+    }) as never);
+    mockSync.mockResolvedValue({ pushed: 0, pulled: 0, cursor: 1, reset: false });
+    renderProvider();
+    await waitFor(() => expect(mockSync).toHaveBeenCalledTimes(1));
+
+    act(() => onChange('background'));
+    expect(mockSync).toHaveBeenCalledTimes(1);
+    act(() => onChange('active'));
+    await waitFor(() => expect(mockSync).toHaveBeenCalledTimes(2));
+    spy.mockRestore();
   });
 });
