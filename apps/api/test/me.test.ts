@@ -154,6 +154,32 @@ describe('DELETE /v1/me', () => {
     expect((await h.pool.query('select 1 from photo_analysis_quota where user_id = $1', [USER_A])).rowCount).toBe(0);
   });
 
+  it('keeps the account intact when the stored photos cannot be removed', async () => {
+    const stored = 'dddddddd-dddd-4ddd-8ddd-ddddddddddd3';
+    const path = `${USER_A}/${stored}.jpg`;
+    await addEntry(USER_A, ENTRY_A, 'Rice', null);
+    await withUser(h.pool, USER_A, async (sql) => {
+      await sql.query(`insert into photo_analysis (id, user_id, status, storage_path) values ($1,$2,'analyzed',$3)`, [stored, USER_A, path]);
+    });
+    images.put(path, new Uint8Array([1]));
+
+    images.failing = true;
+    try {
+      const response = await h.request(USER_A, '/v1/me', { method: 'DELETE' });
+      expect(response.status).toBeGreaterThanOrEqual(500);
+    } finally {
+      images.failing = false;
+    }
+
+    // The transaction rolled back, so the user can simply try again.
+    expect(images.objects.has(path)).toBe(true);
+    expect((await h.pool.query('select 1 from log_entry where user_id = $1', [USER_A])).rowCount).toBe(1);
+    expect((await h.pool.query('select 1 from photo_analysis where id = $1', [stored])).rowCount).toBe(1);
+
+    expect((await h.request(USER_A, '/v1/me', { method: 'DELETE' })).status).toBe(204);
+    expect(images.objects.has(path)).toBe(false);
+  });
+
   it('refuses a token older than the re-auth window and deletes nothing', async () => {
     await addEntry(USER_A, ENTRY_A, 'Rice', null);
     const staleIat = Math.floor(Date.now() / 1000) - REAUTH_WINDOW_SECONDS - 60;
