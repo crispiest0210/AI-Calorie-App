@@ -26,6 +26,7 @@ export function SyncBadge({ onPress }: { onPress?: () => void }) {
       onPress={onPress}
       accessibilityRole={onPress === undefined ? 'text' : 'button'}
       accessibilityLabel={message ?? label}
+      hitSlop={onPress === undefined ? undefined : 12}
       style={{
         alignSelf: 'flex-start',
         paddingHorizontal: spacing.md,

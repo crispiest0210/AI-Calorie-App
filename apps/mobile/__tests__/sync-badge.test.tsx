@@ -54,4 +54,9 @@ describe('SyncBadge', () => {
     fireEvent.press(screen.getByRole('button', { name: 'Synced' }));
     expect(onPress).toHaveBeenCalledTimes(1);
   });
+
+  it('extends the tappable area of the pressable badge past its small pill', () => {
+    show({}, jest.fn());
+    expect(screen.getByRole('button', { name: 'Synced' }).props.hitSlop).toBe(12);
+  });
 });

@@ -39,4 +39,9 @@ describe('SourceBadge', () => {
     fireEvent.press(button);
     expect(onPress).toHaveBeenCalledTimes(1);
   });
+
+  it('extends the tappable area of the pressable badge past its small pill', () => {
+    render(<SourceBadge tier="crowd" onPress={jest.fn()} />);
+    expect(screen.getByRole('button', { name: 'Data source: Open Food Facts' }).props.hitSlop).toBe(12);
+  });
 });

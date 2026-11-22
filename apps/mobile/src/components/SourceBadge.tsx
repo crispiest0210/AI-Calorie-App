@@ -30,6 +30,7 @@ export function SourceBadge({ tier, onPress }: { tier: QualityTier | string | nu
     <Pressable
       onLongPress={onPress}
       onPress={onPress}
+      hitSlop={12}
       accessibilityRole="button"
       accessibilityLabel={`Data source: ${label}`}
       accessibilityHint="Shows where this number comes from"
