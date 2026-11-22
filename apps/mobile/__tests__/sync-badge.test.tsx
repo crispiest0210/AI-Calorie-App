@@ -3,6 +3,7 @@
  * message wins as the screen-reader label when there is one.
  */
 import { fireEvent, render, screen } from '@testing-library/react-native';
+import { BADGE_HIT_SLOP } from '@/theme';
 import { SyncBadge } from '@/components/SyncBadge';
 import { useSync, type SyncStatus } from '@/sync/provider';
 
@@ -53,5 +54,15 @@ describe('SyncBadge', () => {
     show({}, onPress);
     fireEvent.press(screen.getByRole('button', { name: 'Synced' }));
     expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('extends the tap area only when the badge is pressable', () => {
+    show({}, () => {});
+    expect(screen.getByRole('button').props.hitSlop).toEqual(BADGE_HIT_SLOP);
+  });
+
+  it('adds no hit slop when it is a plain text label', () => {
+    show({});
+    expect(screen.getByLabelText('Synced').props.hitSlop).toBeUndefined();
   });
 });

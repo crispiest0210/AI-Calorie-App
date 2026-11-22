@@ -5,6 +5,7 @@
  */
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import { QUALITY_TIER_BADGES, type QualityTier } from '@nt/core';
+import { BADGE_HIT_SLOP } from '@/theme';
 import { SourceBadge } from '@/components/SourceBadge';
 
 describe('SourceBadge', () => {
@@ -38,5 +39,10 @@ describe('SourceBadge', () => {
     const button = screen.getByRole('button', { name: 'Data source: Open Food Facts' });
     fireEvent.press(button);
     expect(onPress).toHaveBeenCalledTimes(1);
+  });
+
+  it('extends its tap area when pressable', () => {
+    render(<SourceBadge tier="lab" onPress={() => {}} />);
+    expect(screen.getByRole('button').props.hitSlop).toEqual(BADGE_HIT_SLOP);
   });
 });

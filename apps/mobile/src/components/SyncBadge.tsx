@@ -3,7 +3,7 @@
  * to SQLite before this had an opinion.
  */
 import { Pressable, View } from 'react-native';
-import { radii, spacing, useTheme } from '@/theme';
+import { BADGE_HIT_SLOP, radii, spacing, useTheme } from '@/theme';
 import { useSync } from '@/sync/provider';
 import { Text } from './Text';
 
@@ -24,6 +24,7 @@ export function SyncBadge({ onPress }: { onPress?: () => void }) {
   return (
     <Pressable
       onPress={onPress}
+      hitSlop={onPress === undefined ? undefined : BADGE_HIT_SLOP}
       accessibilityRole={onPress === undefined ? 'text' : 'button'}
       accessibilityLabel={message ?? label}
       style={{

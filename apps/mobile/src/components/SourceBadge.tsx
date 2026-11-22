@@ -1,7 +1,7 @@
 /** The data-quality tier, visible on every food (spec 2.5). */
 import { Pressable, View } from 'react-native';
 import { QUALITY_TIER_BADGES, type QualityTier } from '@nt/core';
-import { radii, spacing, useTheme } from '../theme';
+import { BADGE_HIT_SLOP, radii, spacing, useTheme } from '../theme';
 import { Text } from './Text';
 
 export function SourceBadge({ tier, onPress }: { tier: QualityTier | string | null; onPress?: () => void }) {
@@ -30,6 +30,7 @@ export function SourceBadge({ tier, onPress }: { tier: QualityTier | string | nu
     <Pressable
       onLongPress={onPress}
       onPress={onPress}
+      hitSlop={BADGE_HIT_SLOP}
       accessibilityRole="button"
       accessibilityLabel={`Data source: ${label}`}
       accessibilityHint="Shows where this number comes from"
