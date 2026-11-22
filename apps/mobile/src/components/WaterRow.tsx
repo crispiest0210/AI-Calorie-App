@@ -22,7 +22,13 @@ export function WaterRow({ progress, presets, onAdd, onOpen }: WaterRowProps) {
 
   return (
     <View style={{ gap: spacing.md }}>
-      <Pressable onPress={onOpen} accessibilityRole="button" accessibilityLabel={summary} accessibilityHint="Opens today’s water entries">
+      <Pressable
+        onPress={onOpen}
+        accessibilityRole="button"
+        accessibilityLabel={summary}
+        accessibilityHint="Opens today’s water entries"
+        style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}
+      >
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: spacing.xs }}>
           <Text variant="label" tone="muted">
             Water

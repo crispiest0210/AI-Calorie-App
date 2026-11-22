@@ -5,6 +5,7 @@
 import { fireEvent, render, screen } from '@testing-library/react-native';
 import type { WaterProgress } from '@nt/core';
 import { WaterRow } from '@/components/WaterRow';
+import { MIN_TOUCH_TARGET } from '@/theme';
 
 const presets = [
   { id: 'a', label: null, amountMl: 250 },
@@ -47,5 +48,15 @@ describe('WaterRow', () => {
     expect(onAdd).toHaveBeenCalledWith(500);
     expect(screen.getByRole('button', { name: 'Add 250 millilitres of water' })).toBeTruthy();
     expect(onAdd).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the summary and every preset at least the minimum touch target tall', () => {
+    render(<WaterRow progress={progress(0, 2000)} presets={presets} onAdd={() => {}} onOpen={() => {}} />);
+    for (const name of ['Water: 0 of 2000 millilitres', 'Add 250 millilitres of water', 'Add 500 millilitres of water']) {
+      const button = screen.getByRole('button', { name });
+      const style = typeof button.props.style === 'function' ? button.props.style({ pressed: false }) : button.props.style;
+      const flat = Object.assign({}, ...[style].flat(Infinity));
+      expect(flat.minHeight).toBeGreaterThanOrEqual(MIN_TOUCH_TARGET);
+    }
   });
 });
