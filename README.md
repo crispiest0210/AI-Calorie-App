@@ -6,7 +6,9 @@ to a named database record; nothing is estimated or inferred.
 Built from the [Product & Architecture Spec](https://claude.ai/artifact/27veyRAvDFfsyEg52tw4b9).
 This repository implements **Phases 0–4**: the foundations, the offline MVP,
 accounts and sync, recipes, trends and the performance pass, and the photo
-analysis beta. Phase 5 (production hardening) is next.
+analysis beta. Phase 5 (production hardening) is next. See
+[Status & next steps](#status--next-steps) for what is still open before an
+MVP release.
 
 ---
 
@@ -24,8 +26,8 @@ network and no telemetry.
 | F5 Today: totals, remaining, per-meal breakdown | Done |
 | F6 Water quick-adds and custom amounts | Done |
 | F7 Custom food from a nutrition label | Done |
-| F8 Offline logging and search | Done — there is no network code in the app at all |
-| F12 History | Done as a 30-day list; charts are Phase 3 |
+| F8 Offline logging and search | Done — logging and search never touch the network; only sync, barcode lookup and photo analysis do |
+| F12 History | Done — a 30-day list |
 | Quick add (calories without a food) | Done |
 | F9 Barcode scan → branded food | Done |
 | F10 Account and multi-device sync | Done |
@@ -75,12 +77,28 @@ pnpm catalog:build    # → apps/mobile/assets/catalog.sqlite
 Then press `i` or `a` in the Expo CLI. The first launch copies the bundled
 catalog into place; everything after that is local reads and writes.
 
+Note that `catalog:build` overwrites the committed
+`apps/mobile/assets/catalog.sqlite`; only run it when you mean to change the
+shipped catalog. `pnpm catalog:seed -- --out=/tmp/fixture-catalog.sqlite`
+builds a 583-food catalog from the committed fixtures without touching it
+(verified 2026-11-24; it also writes `catalog-quarantine.json` next to the
+output).
+
+Requirements: Node >= 22 and pnpm 12 (`packageManager` pins pnpm 12.5.1).
+
 ```bash
 pnpm -r run typecheck
 pnpm -r run test            # engine, database, importer, UI, API
-pnpm --filter @nt/core test:coverage   # 100% branches — the Phase 0 gate
+pnpm --filter @nt/core test:coverage   # 100% lines/branches/functions — the Phase 0 gate
 pnpm lint
 ```
+
+All four were run locally on 2026-11-24 (Node 22.6, pnpm 12.5.1, macOS) and
+pass: 1,137 tests (core 296, db 190, mobile 432 in 62 suites, api 174,
+fdc-import 21, photo-eval 24), lint clean, coverage 100%. The Metro bundle
+step from CI (`pnpm --filter @nt/mobile exec expo export --platform ios
+--output-dir /tmp/export`), `catalog:fetch`/`catalog:build` and starting the
+app were not re-run.
 
 The API tests need a real Postgres, because row-level security is what they
 check and nothing in memory enforces it. They start an embedded server on their
@@ -322,7 +340,9 @@ the other two are a config change, not a rewrite.
 
 ## Not verified here
 
-Every automated test passes and the app bundles for iOS and Android, but:
+Every automated test passes locally (see [Running it](#running-it)), but CI
+on GitHub has not passed yet (see [Status & next steps](#status--next-steps)),
+and:
 
 - It has not been run against a real Supabase project. Auth is exercised with
   locally-signed HS256 tokens, which is exactly what Supabase issues, but the
@@ -346,3 +366,67 @@ Every automated test passes and the app bundles for iOS and Android, but:
 - Motion is stubbed out under Jest: Reanimated 4 cannot be imported in that
   environment, so `apps/mobile/__mocks__` stands in for it and animation itself
   is only verified by running the app.
+
+## Status & next steps
+
+*Last reviewed 2026-11-24, at commit `8d5b0e9`.*
+
+**Current state: feature-complete through Phase 4, not yet releasable.** All
+the spec's features are implemented and the local suite is green, but nothing
+has been run on a real device, against a hosted Supabase project, or against a
+live vision model, and CI has never passed on `main`.
+
+- **CI is red for a config reason, not a test failure.** Every run on `main`
+  stops at `pnpm/action-setup@v4` with "Multiple versions of pnpm specified":
+  the workflow passes `version: 12` while `package.json` pins
+  `packageManager: pnpm@12.5.1`. The typecheck, lint, test, coverage, catalog
+  and bundle steps never get to run in CI. The secret scan job passes.
+- **Recent work (Oct 21 – Nov 24)** has been a long run of small hardening
+  commits: locale-safe number entry and a retry screen on database failure,
+  stricter shared Zod schemas for sync and the API, safer `PORT`/storage
+  configuration in `apps/api/src/server.ts`, touch-target and screen-reader
+  fixes, and extra tests. Many came from automated `claude/*` branches merged
+  on 2026-11-04.
+- **Open branches.** About 30 `origin/claude/hopeful-thompson-*` branches
+  exist. Most are fully merged. Nine carry one unmerged commit each; most look
+  superseded by similar commits on `main`, but at least two have changes
+  `main` lacks: `ug2sob` (zero-pad years below 1000 in `localDateOf`) and
+  `rzp9ak` (stricter `gtin` and portion label checks in `foodDetailResponse`).
+- **Audit.** `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md` is a detailed audit from
+  2026-10-20 (findings AUD-001 to AUD-036, work packages WP-1 to WP-12, a
+  go/no-go checklist). It predates about 300 commits, so some findings are
+  fixed (the API entry point, storage and retention sweeper, number-entry
+  crashes, the core coverage gate). Spot checks on 2026-11-24 found these
+  still open: AUD-001 (idempotency key reuse can drop a newer entry), AUD-008
+  (the water chip and one-tap re-log write to today, not the viewed day; the
+  day does not advance after midnight), AUD-027 (camera permission text says
+  photos are never taken) and AUD-033 (`catalog.sqlite-shm`/`-wal` are
+  tracked). Other findings have not been re-checked.
+
+Next steps, in priority order:
+
+- [ ] Make CI run: remove `with: version: 12` from both `pnpm/action-setup@v4`
+      steps in `.github/workflows/ci.yml` (or drop `packageManager`), push,
+      and fix whatever the now-reachable steps report.
+- [ ] Commit `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md` (currently untracked), then
+      re-check each AUD finding against `main` and mark it fixed or open.
+- [ ] Fix AUD-008: pass the viewed date through every write path (water chip
+      in `apps/mobile/src/components/DayView.tsx`, recent re-log in
+      `apps/mobile/app/log.tsx`) and advance the selected day after midnight
+      in `apps/mobile/app/(tabs)/index.tsx`.
+- [ ] Fix AUD-001 in `packages/db/src/sync/engine.ts`: bind the stored
+      idempotency key to the exact batch it was sent with, and add the
+      lost-response regression test.
+- [ ] Review the nine unmerged `claude/hopeful-thompson-*` commits; cherry-pick
+      `ug2sob` and `rzp9ak` if still wanted, then delete the merged branches.
+- [ ] Untrack `apps/mobile/assets/catalog.sqlite-shm` and `-wal`, and open the
+      catalog read-only in `packages/db/test/performance.test.ts` (AUD-033).
+- [ ] Correct the camera permission text in `apps/mobile/app.json` now that
+      photo analysis takes photos (AUD-027).
+- [ ] Run the app on a real device: two weeks of daily use, the speed targets,
+      and the VoiceOver/TalkBack checklist (spec Phase 1 exit criteria).
+- [ ] Stand up a hosted Supabase project and deploy the API; deployment target
+      is TBD. Then validate email sign-in, sync, barcode lookup and photo
+      storage end to end.
+- [ ] Collect the labeled photo set (spec: 100 weighed meals), wire `--live`
+      into `tools/photo-eval`, and record a baseline before any photo beta.
