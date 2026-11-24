@@ -242,6 +242,15 @@ function hasIngredient(tx: Writer, recipeId: string, ingredientId: string): bool
     .get();
 }
 
+/** True when `recipeId` already appears anywhere inside `foodId`'s ingredient tree. */
+function containsRecipe(db: Db, foodId: string, recipeId: string, seen = new Set<string>()): boolean {
+  if (foodId === recipeId) return true;
+  if (seen.has(foodId)) return false;
+  seen.add(foodId);
+  const children = db.select({ id: recipeIngredient.ingredientFoodId }).from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, foodId)).all();
+  return children.some((child) => containsRecipe(db, child.id, recipeId, seen));
+}
+
 export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string, rawGrams: Num, now = Date.now()): string {
   const grams = positiveNum('grams', rawGrams);
   const position = db.select().from(recipeIngredient).where(eq(recipeIngredient.recipeFoodId, recipeId)).all().length;
@@ -253,6 +262,7 @@ export function addIngredient(db: Db, recipeId: string, ingredientFoodId: string
     if (ingredientFoodId === recipeId) throw new RangeError('a recipe cannot be an ingredient of itself');
     const ingredient = tx.select({ id: food.id }).from(food).where(and(eq(food.id, ingredientFoodId), isNull(food.deletedAt))).get();
     if (!ingredient) throw new Error(`ingredient food ${ingredientFoodId} not found`);
+    if (containsRecipe(tx, ingredientFoodId, recipeId)) throw new RangeError('a recipe cannot contain a recipe that contains it');
     tx.insert(recipeIngredient).values({ id, recipeFoodId: recipeId, ingredientFoodId, grams, position, updatedAt: now }).run();
     recompute(tx, db, recipeId, now);
     enqueue(tx, 'food', recipeId, 'upsert', now);

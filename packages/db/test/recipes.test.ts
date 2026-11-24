@@ -186,6 +186,17 @@ describe('recipes', () => {
     expect(outbox.pendingCount(db)).toBe(queued);
   });
 
+  it('refuses an ingredient cycle through another recipe', () => {
+    const { db, rice, id: a } = kitchen();
+    const b = recipes.createRecipe(db, { name: 'Sauce', servings: '1', sourceReleaseId: RELEASE_ID });
+    recipes.addIngredient(db, b, rice, '50');
+    recipes.addIngredient(db, a, b, '100');
+    const queued = outbox.pendingCount(db);
+    expect(() => recipes.addIngredient(db, b, a, '100')).toThrow(/contains it/);
+    expect(recipes.readRecipe(db, b)!.ingredients).toHaveLength(1);
+    expect(outbox.pendingCount(db)).toBe(queued);
+  });
+
   it('refuses a recipe as its own ingredient and unknown or deleted ingredient foods', () => {
     const { db, rice, id } = kitchen();
     foods.softDeleteFood(db, rice);
