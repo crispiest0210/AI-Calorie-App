@@ -36,6 +36,16 @@ type Range = '7' | '30';
 
 const MACROS: NutrientCode[] = ['protein_g', 'carb_g', 'fat_g'];
 
+/** A logged day's total for one nutrient, or null when the day has no entries or some entry did not report it. */
+function reportedTotal(
+  day: { entries: unknown[]; totals: { total: { values: Partial<Record<NutrientCode, string>>; incomplete: NutrientCode[] } } },
+  code: NutrientCode,
+): number | null {
+  if (day.entries.length === 0 || day.totals.total.incomplete.includes(code)) return null;
+  const value = day.totals.total.values[code];
+  return value === undefined ? null : Number.parseFloat(value);
+}
+
 export default function HistoryScreen() {
   const router = useRouter();
   const { colors } = useTheme();
@@ -76,20 +86,24 @@ export default function HistoryScreen() {
 
   const chartDays: TrendDay[] = days.map((day) => ({
     date: day.date,
-    energy: day.entries.length === 0 ? null : Number.parseFloat(day.totals.total.values.energy_kcal ?? '0'),
+    energy: reportedTotal(day, 'energy_kcal'),
     target: day.energy?.reference === undefined || day.energy.reference === null ? null : Number.parseFloat(day.energy.reference),
   }));
 
-  /** Averaged over days actually logged: dividing by blank days invents a fast. */
+  /**
+   * Averaged over days that logged and fully report the nutrient: dividing by
+   * blank days invents a fast, and a missing nutrient is not a zero.
+   */
   const macroAverage = (code: NutrientCode): { value: number; target: number | null } | null => {
-    if (loggedDays.length === 0) return null;
-    const total = loggedDays.reduce((sum, day) => sum + Number.parseFloat(day.totals.total.values[code] ?? '0'), 0);
-    const targets = loggedDays
+    const reporting = loggedDays.filter((day) => reportedTotal(day, code) !== null);
+    if (reporting.length === 0) return null;
+    const total = reporting.reduce((sum, day) => sum + (reportedTotal(day, code) ?? 0), 0);
+    const targets = reporting
       .map((day) => resolveProfile(day.profile).find((t) => t.nutrientCode === code)?.value)
       .filter((v): v is string => v != null)
       .map(Number.parseFloat);
     return {
-      value: total / loggedDays.length,
+      value: total / reporting.length,
       target: targets.length === 0 ? null : targets.reduce((a, b) => a + b, 0) / targets.length,
     };
   };

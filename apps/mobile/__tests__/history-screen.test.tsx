@@ -80,6 +80,23 @@ describe('HistoryScreen', () => {
     expect(screen.getAllByText('nothing logged')).toHaveLength(6);
   });
 
+  it('leaves a nutrient out of the average on days that did not report it', () => {
+    const quickAdd = {
+      ...oats,
+      id: 'e2',
+      entryKind: 'quick',
+      grams: null,
+      nutrientsPer100g: null,
+      nutrientsAbsolute: { energy_kcal: '500' },
+      localDate: localDateOf(new Date(Date.now() - 86_400_000)),
+    };
+    mockEntries = [oats, quickAdd];
+    mockProfiles = [profile];
+    render(<HistoryScreen />);
+    expect(screen.getByLabelText('Protein: 20 g, of 100 g target')).toBeTruthy();
+    expect(screen.getByText('2 of 7 days logged · water target met on 0')).toBeTruthy();
+  });
+
   it('counts days that met the water target', () => {
     mockEntries = [oats];
     mockProfiles = [profile];
