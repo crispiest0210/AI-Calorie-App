@@ -11,7 +11,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "dev.nutritiontracker.app",
       "infoPlist": {
-        "NSCameraUsageDescription": "Scan a barcode to look up a packaged food. Photos are never taken or stored."
+        "NSCameraUsageDescription": "Scan a barcode to look up a packaged food, or take a photo of a meal to have it analyzed. Photos are uploaded for analysis and deleted automatically."
       }
     },
     "android": {
@@ -25,7 +25,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Scan a barcode to look up a packaged food. Photos are never taken or stored."
+          "cameraPermission": "Scan a barcode to look up a packaged food, or take a photo of a meal to have it analyzed. Photos are uploaded for analysis and deleted automatically."
         }
       ]
     ],
