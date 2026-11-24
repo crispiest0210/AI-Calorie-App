@@ -97,6 +97,14 @@ describe('LogSheet', () => {
     expect(screen.getByText('Nothing here yet.')).toBeTruthy();
   });
 
+  it('configures the search box for typing food names', () => {
+    render(<LogSheet />);
+    const box = screen.getByLabelText('Search foods');
+    expect(box.props.returnKeyType).toBe('search');
+    expect(box.props.autoCapitalize).toBe('none');
+    expect(box.props.autoCorrect).toBe(false);
+  });
+
   it('re-logs a recent with its last amount in one tap', () => {
     mockLast = { amountValue: '50', amountUnit: 'g', portionId: null, grams: '50' };
     mockDetail = { name: 'Oats', sourceReleaseId: 'rel-1', nutrientsPer100g: { energy_kcal: '380' } };

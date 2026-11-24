@@ -124,6 +124,8 @@ export default function LogSheet() {
           placeholderTextColor={colors.textFaint}
           autoFocus
           autoCorrect={false}
+          autoCapitalize="none"
+          returnKeyType="search"
           accessibilityLabel="Search foods"
           clearButtonMode="while-editing"
           style={[
