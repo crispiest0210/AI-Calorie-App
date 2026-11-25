@@ -31,6 +31,14 @@ export function localDateOf(instant: Date = new Date()): LocalDate {
   return `${instant.getFullYear()}-${pad(instant.getMonth() + 1)}-${pad(instant.getDate())}`;
 }
 
+/**
+ * When to stamp an entry logged "on" `date`: now if it is today, otherwise
+ * noon of that day, so a past-day write stays on that day in any time zone.
+ */
+export function instantForLogging(date: LocalDate, now: Date = new Date()): Date {
+  return date === localDateOf(now) ? now : new Date(`${date}T12:00:00`);
+}
+
 export function tzOffsetMinutesOf(instant: Date = new Date()): number {
   // Date#getTimezoneOffset is minutes *behind* UTC; store the conventional sign.
   return -instant.getTimezoneOffset();

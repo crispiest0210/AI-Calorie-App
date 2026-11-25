@@ -7,7 +7,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MEAL_SLOTS, MEAL_SLOT_LABELS, localDateOf, pluralize, type MealSlot } from '@nt/core';
+import { MEAL_SLOTS, MEAL_SLOT_LABELS, instantForLogging, localDateOf, pluralize, type MealSlot } from '@nt/core';
 import { foods as foodsRepo, entries as entriesRepo, recipes as recipesRepo, type FoodSummary } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { useUiStore } from '@/state/ui';
@@ -107,6 +107,7 @@ export default function LogSheet() {
         foodName: detail.name,
         sourceReleaseId: detail.sourceReleaseId,
         mealSlot,
+        at: instantForLogging(date),
         amountValue: last.amountValue,
         amountUnit: last.amountUnit as never,
         portionId: last.portionId,
@@ -117,7 +118,7 @@ export default function LogSheet() {
       successFeedback();
       router.back();
     },
-    [db, mealSlot, openAmount, router],
+    [db, mealSlot, date, openAmount, router],
   );
 
   const showingResults = results !== null;

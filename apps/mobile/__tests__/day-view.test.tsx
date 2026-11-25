@@ -117,10 +117,10 @@ describe('DayView', () => {
     expect(useUiStore.getState().pendingMealSlot).toBe('dinner');
   });
 
-  it('logs a water preset against the database', () => {
+  it('logs a water preset against the viewed day, not today', () => {
     renderDay([]);
     fireEvent.press(screen.getByLabelText('Add 500 millilitres of water'));
-    expect(mockAddWater).toHaveBeenCalledWith({ marker: 'db' }, 500);
+    expect(mockAddWater).toHaveBeenCalledWith({ marker: 'db' }, 500, new Date('2026-10-17T12:00:00'));
   });
 
   it('says so when yesterday has nothing to copy, with no undo action', () => {

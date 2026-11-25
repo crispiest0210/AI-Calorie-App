@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { MEAL_SLOTS, MEAL_SLOT_LABELS, NUTRIENT_DEFS, isPositive, localDateOf, parseUserNumber, type MealSlot, type NutrientMap } from '@nt/core';
+import { MEAL_SLOTS, MEAL_SLOT_LABELS, NUTRIENT_DEFS, instantForLogging, isPositive, localDateOf, parseUserNumber, type MealSlot, type NutrientMap } from '@nt/core';
 import { entries as entriesRepo } from '@nt/db';
 import { useDb } from '@/db/provider';
 import { spacing } from '@/theme';
@@ -50,7 +50,7 @@ export default function QuickAddScreen() {
       mealSlot,
       nutrients,
       label,
-      at: date === localDateOf() ? new Date() : new Date(`${date}T12:00:00`),
+      at: instantForLogging(date),
     });
     successFeedback();
     router.dismissAll();

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { addDays, daysBetween, formatDayLabel, formatTimeOfDay, isLocalDate, lastNDays, localDateOf, tzOffsetMinutesOf } from '../src/dates';
+import { addDays, daysBetween, formatDayLabel, formatTimeOfDay, instantForLogging, isLocalDate, lastNDays, localDateOf, tzOffsetMinutesOf } from '../src/dates';
 
 describe('local dates', () => {
   it('validates YYYY-MM-DD', () => {
@@ -76,5 +76,20 @@ describe('local dates', () => {
     expect(formatTimeOfDay(new Date(2026, 8, 20, 0, 5).getTime())).toBe('12:05 AM');
     expect(formatTimeOfDay(new Date(2026, 8, 20, 12, 0).getTime())).toBe('12:00 PM');
     expect(formatTimeOfDay(new Date(2026, 8, 20, 13, 7).getTime())).toBe('1:07 PM');
+  });
+});
+
+describe('instantForLogging', () => {
+  const now = new Date(2026, 8, 20, 15, 30);
+
+  it('uses the current time for today', () => {
+    expect(instantForLogging('2026-09-20', now)).toBe(now);
+  });
+
+  it('uses local noon for any other day', () => {
+    const past = instantForLogging('2026-09-18', now);
+    expect(localDateOf(past)).toBe('2026-09-18');
+    expect(past.getHours()).toBe(12);
+    expect(past.getMinutes()).toBe(0);
   });
 });

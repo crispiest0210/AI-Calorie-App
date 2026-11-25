@@ -10,6 +10,7 @@ import {
   MEAL_SLOTS,
   addDays,
   formatDayLabel,
+  instantForLogging,
   localDateOf,
   pluralize,
   totalOf,
@@ -115,7 +116,7 @@ export function DayView({ date, showDateNav }: { date: LocalDate; showDateNav: b
           <WaterRow
             progress={day.water}
             presets={presets}
-            onAdd={(ml) => waterRepo.addWater(db, ml)}
+            onAdd={(ml) => waterRepo.addWater(db, ml, instantForLogging(date))}
             onOpen={() => router.push({ pathname: '/water', params: { date } })}
           />
         </Card>

@@ -6,7 +6,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
-import { formatEnergy, formatGrams, formatRange, localDateOf, type MealSlot } from '@nt/core';
+import { formatEnergy, formatGrams, formatRange, instantForLogging, type MealSlot } from '@nt/core';
 import { entries as entriesRepo, foods as foodsRepo } from '@nt/db';
 import { useUiStore } from '@/state/ui';
 import { useDb, useDbQuery } from '@/db/provider';
@@ -72,7 +72,7 @@ export default function PhotoReviewScreen() {
   }, [photoPick, choose]);
 
   const confirm = useCallback(async () => {
-    const at = params.date === undefined || params.date === localDateOf() ? new Date() : new Date(`${params.date}T12:00:00`);
+    const at = params.date === undefined ? new Date() : instantForLogging(params.date);
     for (const entry of toConfirmedEntries(review)) {
       entriesRepo.logFood(db, {
         foodId: entry.foodId,

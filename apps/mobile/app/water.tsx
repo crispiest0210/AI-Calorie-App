@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { dec, formatTimeOfDay, localDateOf, parseUserNumber } from '@nt/core';
+import { dec, formatTimeOfDay, instantForLogging, localDateOf, parseUserNumber } from '@nt/core';
 import { WATER_ML_MAX, WATER_ML_MIN, water as waterRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { spacing, useTheme } from '@/theme';
@@ -36,7 +36,7 @@ export default function WaterScreen() {
         <Button
           label={`Add ${valid ? amount : 0} mL`}
           disabled={!valid}
-          onPress={() => waterRepo.addWater(db, amount, date === localDateOf() ? new Date() : new Date(`${date}T12:00:00`))}
+          onPress={() => waterRepo.addWater(db, amount, instantForLogging(date))}
         />
       </Card>
 

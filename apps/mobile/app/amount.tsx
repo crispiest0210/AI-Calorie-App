@@ -16,6 +16,7 @@ import {
   defaultAmount,
   formatWithUnit,
   gramsToUnit,
+  instantForLogging,
   localDateOf,
   parseUserNumber,
   resolveGrams,
@@ -131,7 +132,7 @@ export default function AmountScreen() {
       grams: resolved.grams,
       gramsProvenance: resolved.provenance,
       nutrientsPer100g: food.nutrientsPer100g,
-      at: date === localDateOf() ? new Date() : new Date(`${date}T12:00:00`),
+      at: instantForLogging(date),
     });
     successFeedback();
     router.dismissAll();
