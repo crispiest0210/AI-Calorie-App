@@ -1,5 +1,5 @@
-import { useLocalSearchParams } from 'expo-router';
-import { isLocalDate, localDateOf } from '@nt/core';
+import { Stack, useLocalSearchParams } from 'expo-router';
+import { formatDayLabel, isLocalDate, localDateOf } from '@nt/core';
 import { DayView } from '@/components/DayView';
 
 export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoundary';
@@ -7,6 +7,12 @@ export { RouteErrorBoundary as ErrorBoundary } from '@/components/RouteErrorBoun
 /** A past day, editable, in the same layout as Today (spec 5.2). */
 export default function PastDayScreen() {
   const { date } = useLocalSearchParams<{ date: string }>();
-  const safeDate = typeof date === 'string' && isLocalDate(date) ? date : localDateOf();
-  return <DayView date={safeDate} showDateNav={false} />;
+  const today = localDateOf();
+  const safeDate = typeof date === 'string' && isLocalDate(date) ? date : today;
+  return (
+    <>
+      <Stack.Screen options={{ title: formatDayLabel(safeDate, today) }} />
+      <DayView date={safeDate} showDateNav={false} />
+    </>
+  );
 }
