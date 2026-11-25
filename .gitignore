@@ -8,6 +8,8 @@ coverage/
 data/fdc/
 *.sqlite
 *.sqlite-journal
+*.sqlite-shm
+*.sqlite-wal
 !apps/mobile/assets/catalog.sqlite
 .DS_Store
 data/fdc/*.done

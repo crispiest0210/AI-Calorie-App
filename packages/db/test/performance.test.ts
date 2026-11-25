@@ -32,8 +32,9 @@ const SAVE_BUDGET_MS = 50 / PHONE_SLOWDOWN;
 const COLD_READ_BUDGET_MS = 2000 / PHONE_SLOWDOWN;
 
 function openCatalog(): Db {
-  const sqlite = new Database(CATALOG);
-  sqlite.pragma('journal_mode = WAL');
+  // Read-only: the bundled catalog is a checked-in asset, and a writable
+  // handle would leave -shm/-wal files beside it.
+  const sqlite = new Database(CATALOG, { readonly: true });
   return drizzle(sqlite, { schema }) as unknown as Db;
 }
 

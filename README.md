@@ -399,8 +399,8 @@ live vision model, and CI has never passed on `main`.
   crashes, the core coverage gate). Spot checks on 2026-11-24 found these
   still open: AUD-001 (idempotency key reuse can drop a newer entry), AUD-008
   (the water chip and one-tap re-log write to today, not the viewed day; the
-  day does not advance after midnight) and AUD-033 (`catalog.sqlite-shm`/`-wal` are
-  tracked). Other findings have not been re-checked.
+  day does not advance after midnight). AUD-033 (tracked `catalog.sqlite-shm`/`-wal`)
+  is now fixed. Other findings have not been re-checked.
 
 Next steps, in priority order:
 
@@ -418,8 +418,6 @@ Next steps, in priority order:
       lost-response regression test.
 - [ ] Review the nine unmerged `claude/hopeful-thompson-*` commits; cherry-pick
       `ug2sob` and `rzp9ak` if still wanted, then delete the merged branches.
-- [ ] Untrack `apps/mobile/assets/catalog.sqlite-shm` and `-wal`, and open the
-      catalog read-only in `packages/db/test/performance.test.ts` (AUD-033).
 - [ ] Run the app on a real device: two weeks of daily use, the speed targets,
       and the VoiceOver/TalkBack checklist (spec Phase 1 exit criteria).
 - [ ] Stand up a hosted Supabase project and deploy the API; deployment target
