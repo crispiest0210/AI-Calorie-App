@@ -41,6 +41,12 @@ describe('WaterRow', () => {
     expect(onOpen).toHaveBeenCalledTimes(1);
   });
 
+  it('describes the water entries it opens without claiming they are today\u2019s', () => {
+    render(<WaterRow progress={progress(0, 2000)} presets={presets} onAdd={() => {}} onOpen={() => {}} />);
+    const summary = screen.getByRole('button', { name: 'Water: 0 of 2000 millilitres' });
+    expect(summary.props.accessibilityHint).toBe('Opens the water entries for this day');
+  });
+
   it('adds the tapped preset amount with a labelled button per preset', () => {
     const onAdd = jest.fn();
     render(<WaterRow progress={progress(0, 2000)} presets={presets} onAdd={onAdd} onOpen={() => {}} />);

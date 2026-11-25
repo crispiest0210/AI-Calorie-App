@@ -26,7 +26,7 @@ export function WaterRow({ progress, presets, onAdd, onOpen }: WaterRowProps) {
         onPress={onOpen}
         accessibilityRole="button"
         accessibilityLabel={summary}
-        accessibilityHint="Opens today’s water entries"
+        accessibilityHint="Opens the water entries for this day"
         style={{ minHeight: MIN_TOUCH_TARGET, justifyContent: 'center' }}
       >
         <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: spacing.xs }}>
