@@ -3,11 +3,12 @@
  * user is actually logging is shown large. Nothing reaches the log until
  * Confirm, and Confirm stays disabled while anything is unresolved.
  */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { formatEnergy, formatGrams, formatRange, localDateOf, type MealSlot } from '@nt/core';
 import { entries as entriesRepo, foods as foodsRepo } from '@nt/db';
+import { useUiStore } from '@/state/ui';
 import { useDb, useDbQuery } from '@/db/provider';
 import { useSession } from '@/auth/provider';
 import { config } from '@/config';
@@ -61,6 +62,14 @@ export default function PhotoReviewScreen() {
     },
     [db, update],
   );
+
+  // A food picked in the Log sheet comes back through the UI store.
+  const photoPick = useUiStore((state) => state.photoPick);
+  useEffect(() => {
+    if (photoPick === null) return;
+    choose(photoPick.itemId, photoPick.foodId);
+    useUiStore.getState().setPhotoPick(null);
+  }, [photoPick, choose]);
 
   const confirm = useCallback(async () => {
     const at = params.date === undefined || params.date === localDateOf() ? new Date() : new Date(`${params.date}T12:00:00`);

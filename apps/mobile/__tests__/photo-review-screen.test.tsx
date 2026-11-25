@@ -31,6 +31,7 @@ jest.mock('@nt/db', () => ({
 }));
 
 import PhotoReviewScreen from '../app/photo-review';
+import { useUiStore } from '@/state/ui';
 
 const metrics = {
   frame: { x: 0, y: 0, width: 393, height: 852 },
@@ -78,6 +79,7 @@ describe('PhotoReviewScreen', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     mockParams = {};
+    useUiStore.setState({ photoPick: null });
     mockGetAccessToken.mockResolvedValue('token');
     mockFetch.mockResolvedValue({ ok: true });
     globalThis.fetch = mockFetch as unknown as typeof fetch;
@@ -121,6 +123,17 @@ describe('PhotoReviewScreen', () => {
     fireEvent.press(screen.getByLabelText('Remove mystery'));
     expect(screen.queryByLabelText('Remove mystery')).toBeNull();
     expect(screen.getByRole('button', { name: 'Confirm and log' })).toBeDisabled();
+  });
+
+  it('resolves an item with the food picked in the Log sheet', () => {
+    setDraft([draftItem('i1', 'mystery', { matchStatus: 'unmatched', candidates: [] })]);
+    render();
+    expect(screen.getByRole('button', { name: 'Confirm and log' })).toBeDisabled();
+
+    act(() => useUiStore.getState().setPhotoPick({ itemId: 'i1', foodId: 'picked-food' }));
+    expect(screen.getByText('Food picked-food')).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Confirm and log' })).toBeEnabled();
+    expect(useUiStore.getState().photoPick).toBeNull();
   });
 
   it('logs each accepted item with the chosen meal, tells the server, and dismisses', async () => {

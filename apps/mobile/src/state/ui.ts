@@ -11,6 +11,9 @@ interface UiState {
   pendingMealSlot: MealSlot;
   setSelectedDate: (date: LocalDate) => void;
   setPendingMealSlot: (slot: MealSlot) => void;
+  /** A food picked in the Log sheet for a photo-review item, waiting for that screen to take it. */
+  photoPick: { itemId: string; foodId: string } | null;
+  setPhotoPick: (pick: { itemId: string; foodId: string } | null) => void;
 }
 
 export const useUiStore = create<UiState>((set) => ({
@@ -18,6 +21,8 @@ export const useUiStore = create<UiState>((set) => ({
   pendingMealSlot: 'breakfast',
   setSelectedDate: (selectedDate) => set({ selectedDate }),
   setPendingMealSlot: (pendingMealSlot) => set({ pendingMealSlot }),
+  photoPick: null,
+  setPhotoPick: (photoPick) => set({ photoPick }),
 }));
 
 /** The meal a new entry lands in when the user has not picked one. */

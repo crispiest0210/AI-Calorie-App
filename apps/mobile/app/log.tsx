@@ -10,6 +10,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { MEAL_SLOTS, MEAL_SLOT_LABELS, localDateOf, pluralize, type MealSlot } from '@nt/core';
 import { foods as foodsRepo, entries as entriesRepo, recipes as recipesRepo, type FoodSummary } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
+import { useUiStore } from '@/state/ui';
 import { MIN_TOUCH_TARGET, radii, spacing, typography, useTheme } from '@/theme';
 import { successFeedback } from '@/hooks/useHaptics';
 import { useDebounced } from '@/hooks/useDebounced';
@@ -35,7 +36,7 @@ export default function LogSheet() {
   const db = useDb();
   const router = useRouter();
   const { colors } = useTheme();
-  const params = useLocalSearchParams<{ date?: string; mealSlot?: string; pickFor?: string }>();
+  const params = useLocalSearchParams<{ date?: string; mealSlot?: string; pickFor?: string; itemId?: string }>();
   /** When set, this sheet is picking an ingredient for a recipe, not logging. */
   const pickForRecipe = params.pickFor ?? null;
   const date = params.date ?? localDateOf();
@@ -72,6 +73,13 @@ export default function LogSheet() {
 
   const openAmount = useCallback(
     (foodId: string) => {
+      if (pickForRecipe === 'photo' && params.itemId !== undefined) {
+        // Hand the choice back to the photo review screen that opened this sheet.
+        useUiStore.getState().setPhotoPick({ itemId: params.itemId, foodId });
+        successFeedback();
+        router.back();
+        return;
+      }
       if (pickForRecipe !== null) {
         // Ingredients start at 100 g and are adjusted on the recipe itself,
         // which is where the effect on the totals is visible.
@@ -82,7 +90,7 @@ export default function LogSheet() {
       }
       router.push({ pathname: '/amount', params: { foodId, mealSlot, date } });
     },
-    [db, pickForRecipe, router, mealSlot, date],
+    [db, pickForRecipe, params.itemId, router, mealSlot, date],
   );
 
   /** One-tap re-log: reuse the last amount this food was logged with. */
