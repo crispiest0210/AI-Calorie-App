@@ -6,6 +6,8 @@
 import { fireEvent, render as rtlRender, screen } from '@testing-library/react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+import { useUiStore } from '@/state/ui';
+
 const mockPush = jest.fn();
 const mockBack = jest.fn();
 const mockLogFood = jest.fn();
@@ -150,5 +152,17 @@ describe('LogSheet', () => {
     expect(mockAddIngredient).toHaveBeenCalledWith({ marker: 'db' }, 'recipe-9', 'food-1', '100');
     expect(mockBack).toHaveBeenCalled();
     expect(mockLogFood).not.toHaveBeenCalled();
+  });
+
+  it('hands the picked food back to the photo review instead of touching a recipe', () => {
+    mockParams = { pickFor: 'photo', itemId: 'i1' };
+    useUiStore.getState().setPhotoPick(null);
+    render(<LogSheet />);
+    fireEvent.press(screen.getByRole('button', { name: /^Oats/ }));
+    expect(useUiStore.getState().photoPick).toEqual({ itemId: 'i1', foodId: 'food-1' });
+    expect(mockAddIngredient).not.toHaveBeenCalled();
+    expect(mockLogFood).not.toHaveBeenCalled();
+    expect(mockBack).toHaveBeenCalled();
+    useUiStore.getState().setPhotoPick(null);
   });
 });
