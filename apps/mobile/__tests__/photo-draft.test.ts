@@ -189,11 +189,31 @@ describe('building the review list', () => {
     const [review] = toReviewItems(db, draftOf(unsure));
     expect(review?.chosenFoodId).toBeNull();
     expect(review?.food).toBeNull();
-    expect(foodDetail).not.toHaveBeenCalled();
+    expect(review?.candidates.map((c) => c.foodId)).toEqual(['rice']);
   });
 
   it('leaves an unmatched item unresolved', () => {
     const reviews = toReviewItems(db, draftOf(serverItem({ matchStatus: 'unmatched', candidates: [] })));
+    expect(reviews[0]?.chosenFoodId).toBeNull();
+    expect(canConfirm(reviews)).toBe(false);
+  });
+
+  it('does not offer a candidate this device has no food for', () => {
+    foodDetail.mockImplementation((_db: Db, id: string) => (id === 'remote' ? null : food(id, '130')));
+    const candidates = [
+      { foodId: 'remote', name: 'Remote only', score: 0.95, qualityTier: 'lab' },
+      { foodId: 'rice', name: 'Rice', score: 0.9, qualityTier: 'lab' },
+    ];
+    const [review] = toReviewItems(db, draftOf(serverItem({ candidates })));
+    expect(review?.candidates.map((c) => c.foodId)).toEqual(['rice']);
+    expect(review?.chosenFoodId).toBe('rice');
+    expect(review?.food?.id).toBe('rice');
+  });
+
+  it('leaves the item unresolved when none of its candidates are on this device', () => {
+    foodDetail.mockReturnValue(null);
+    const reviews = toReviewItems(db, draftOf(serverItem()));
+    expect(reviews[0]?.candidates).toEqual([]);
     expect(reviews[0]?.chosenFoodId).toBeNull();
     expect(canConfirm(reviews)).toBe(false);
   });

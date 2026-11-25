@@ -49,20 +49,27 @@ export interface ReviewItem extends ServerDraftItem {
 
 export function toReviewItems(db: Db, draft: ServerDraft): ReviewItem[] {
   return draft.items.map((item) => {
+    // Candidates are ids from the server's catalog. One this device does not
+    // have cannot be priced or logged, so it is not offered as an option.
+    const local = item.candidates.flatMap((candidate) => {
+      const food = foodsRepo.foodDetail(db, candidate.foodId);
+      return food === null ? [] : [{ candidate, food }];
+    });
+
     /*
      * A confident match is pre-selected so the common case is one tap. An
      * "unsure" one is not, even when a candidate scored well: the spec makes
      * the user resolve those, and pre-selecting would quietly decide for them.
      */
-    const autoChosen =
-      item.matchStatus === 'matched' && item.identification.band !== 'unsure' ? (item.candidates[0]?.foodId ?? null) : null;
+    const autoChosen = item.matchStatus === 'matched' && item.identification.band !== 'unsure' ? (local[0] ?? null) : null;
 
     return {
       ...item,
-      chosenFoodId: autoChosen,
+      candidates: local.map((entry) => entry.candidate),
+      chosenFoodId: autoChosen?.candidate.foodId ?? null,
       grams: item.portionGrams.estimate,
       gramsUntouched: true,
-      food: autoChosen === null ? null : foodsRepo.foodDetail(db, autoChosen),
+      food: autoChosen?.food ?? null,
     };
   });
 }
