@@ -1,8 +1,8 @@
-/** Today's water entries, with a custom amount and per-entry removal (F6). */
+/** Water entries for the viewed day (today by default), with a custom amount and per-entry removal (F6). */
 import { useState } from 'react';
 import { View } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
-import { dec, formatTimeOfDay, instantForLogging, localDateOf, parseUserNumber } from '@nt/core';
+import { dec, formatDayLabel, formatTimeOfDay, instantForLogging, localDateOf, parseUserNumber } from '@nt/core';
 import { WATER_ML_MAX, WATER_ML_MIN, water as waterRepo } from '@nt/db';
 import { useDb, useDbQuery } from '@/db/provider';
 import { spacing, useTheme } from '@/theme';
@@ -17,7 +17,8 @@ export default function WaterScreen() {
   const db = useDb();
   const { colors } = useTheme();
   const params = useLocalSearchParams<{ date?: string }>();
-  const date = params.date ?? localDateOf();
+  const today = localDateOf();
+  const date = params.date ?? today;
   const [custom, setCustom] = useState('300');
 
   const entries = useDbQuery((database) => waterRepo.waterForDate(database, date), [date]);
@@ -30,7 +31,7 @@ export default function WaterScreen() {
     <Screen>
       <Card style={{ gap: spacing.lg }}>
         <Text variant="title" numeric>
-          {total} mL today
+          {total} mL {date === today ? 'today' : `· ${formatDayLabel(date, today)}`}
         </Text>
         <NumberField label="Custom amount" value={custom} onChange={setCustom} suffix="mL" step={50} />
         <Button

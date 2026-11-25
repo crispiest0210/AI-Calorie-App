@@ -53,6 +53,13 @@ describe('WaterScreen', () => {
     expect(screen.getByText('No water logged yet.')).toBeTruthy();
   });
 
+  it('labels the total with the viewed day instead of today', () => {
+    mockParams = { date: '2020-01-05' };
+    mockTotal = 400;
+    render(<WaterScreen />);
+    expect(screen.getByText('400 mL · Sun, Jan 5')).toBeTruthy();
+  });
+
   it('adds the default 300 mL for today', () => {
     render(<WaterScreen />);
     fireEvent.press(screen.getByRole('button', { name: 'Add 300 mL' }));
