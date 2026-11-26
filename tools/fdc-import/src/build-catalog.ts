@@ -8,6 +8,7 @@
  */
 import { gzipSync } from 'node:zlib';
 import { mkdirSync, readFileSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 import Database from 'better-sqlite3';
 import { drizzle } from 'drizzle-orm/better-sqlite3';
@@ -18,6 +19,8 @@ import { stableId } from './stable-ids';
 
 const ROOT = path.resolve(import.meta.dirname, '..', '..', '..');
 const DEFAULT_OUT = path.join(ROOT, 'apps', 'mobile', 'assets', 'catalog.sqlite');
+/** A fixture build is a 583-food sample, so it must never replace the shipped catalog by default. */
+const FIXTURE_OUT = path.join(tmpdir(), 'fixture-catalog.sqlite');
 /**
  * Spec 2.3 budgets the bundled catalog at "< 15 MB compressed", and 2.13
  * budgets the whole app download at 60 MB. Both are about what ships, so the
@@ -47,7 +50,7 @@ function parseArgs(argv: readonly string[]): Options {
   return {
     source,
     dir: dir === undefined ? path.join(ROOT, source === 'bulk' ? 'data/fdc' : 'fixtures') : resolve(dir),
-    out: flags.get('out') === undefined ? DEFAULT_OUT : resolve(flags.get('out')!),
+    out: flags.get('out') === undefined ? (source === 'bulk' ? DEFAULT_OUT : FIXTURE_OUT) : resolve(flags.get('out')!),
     // Versioned by what went into it, never by the build date: a rebuild from
     // the same datasets has to produce the same file for CI to verify it.
     version: flags.get('version') ?? 'pending',

@@ -79,10 +79,10 @@ catalog into place; everything after that is local reads and writes.
 
 Note that `catalog:build` overwrites the committed
 `apps/mobile/assets/catalog.sqlite`; only run it when you mean to change the
-shipped catalog. `pnpm catalog:seed -- --out=/tmp/fixture-catalog.sqlite`
-builds a 583-food catalog from the committed fixtures without touching it
-(verified 2026-11-24; it also writes `catalog-quarantine.json` next to the
-output).
+shipped catalog. `pnpm catalog:seed` builds a 583-food catalog from the committed fixtures into
+the OS temp directory (`fixture-catalog.sqlite`) without touching it; pass
+`--out=<path>` to choose another location. It also writes
+`catalog-quarantine.json` next to the output.
 
 Requirements: Node >= 22 and pnpm 12 (`packageManager` pins pnpm 12.5.1).
 

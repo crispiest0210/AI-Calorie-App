@@ -18,6 +18,10 @@ describe('argument parsing', () => {
     expect(parseArgs([])).toMatchObject({ source: 'fixtures' });
     expect(parseArgs(['--source=bulk', '--dir=/tmp/x', '--version=14.3'])).toMatchObject({ source: 'bulk', dir: '/tmp/x', version: '14.3' });
     expect(parseArgs(['nonsense'])).toMatchObject({ source: 'fixtures' });
+    // A fixture build never defaults to the shipped catalog; a bulk build does.
+    expect(parseArgs([]).out).not.toMatch(/assets[\\/]catalog\.sqlite$/);
+    expect(parseArgs(['--source=bulk']).out).toMatch(/assets[\\/]catalog\.sqlite$/);
+    expect(parseArgs(['--out=/tmp/o.sqlite']).out).toBe('/tmp/o.sqlite');
   });
 });
 
