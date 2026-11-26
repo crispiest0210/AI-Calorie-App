@@ -26,9 +26,13 @@ function pad(n: number): string {
   return String(n).padStart(2, '0');
 }
 
+function formatDate(y: number, m: number, d: number): LocalDate {
+  return `${String(y).padStart(4, '0')}-${pad(m)}-${pad(d)}`;
+}
+
 /** The local calendar date of an instant, as the device's clock sees it. */
 export function localDateOf(instant: Date = new Date()): LocalDate {
-  return `${String(instant.getFullYear()).padStart(4, '0')}-${pad(instant.getMonth() + 1)}-${pad(instant.getDate())}`;
+  return formatDate(instant.getFullYear(), instant.getMonth() + 1, instant.getDate());
 }
 
 /**
@@ -47,7 +51,7 @@ export function tzOffsetMinutesOf(instant: Date = new Date()): number {
 export function addDays(date: LocalDate, days: number): LocalDate {
   const [y, m, d] = date.split('-').map(Number) as [number, number, number];
   const shifted = new Date(utcMs(y, m, d + days));
-  return `${String(shifted.getUTCFullYear()).padStart(4, '0')}-${pad(shifted.getUTCMonth() + 1)}-${pad(shifted.getUTCDate())}`;
+  return formatDate(shifted.getUTCFullYear(), shifted.getUTCMonth() + 1, shifted.getUTCDate());
 }
 
 export function daysBetween(from: LocalDate, to: LocalDate): number {
