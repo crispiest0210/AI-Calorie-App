@@ -376,11 +376,11 @@ the spec's features are implemented and the local suite is green, but nothing
 has been run on a real device, against a hosted Supabase project, or against a
 live vision model, and CI has never passed on `main`.
 
-- **CI is red for a config reason, not a test failure.** Every run on `main`
-  stops at `pnpm/action-setup@v4` with "Multiple versions of pnpm specified":
-  the workflow passes `version: 12` while `package.json` pins
-  `packageManager: pnpm@12.5.1`. The typecheck, lint, test, coverage, catalog
-  and bundle steps never get to run in CI. The secret scan job passes.
+- **CI config is fixed but unverified.** The `version: 12` that clashed with
+  `packageManager: pnpm@12.5.1` is gone from the workflow, so `pnpm/action-setup@v4`
+  reads the version from `package.json`. No run on `main` has been checked since,
+  so the typecheck, lint, test, coverage, catalog and bundle steps may still
+  report problems.
 - **Recent work (Oct 21 – Nov 24)** has been a long run of small hardening
   commits: locale-safe number entry and a retry screen on database failure,
   stricter shared Zod schemas for sync and the API, safer `PORT`/storage
@@ -389,35 +389,33 @@ live vision model, and CI has never passed on `main`.
   on 2026-11-04.
 - **Open branches.** About 30 `origin/claude/hopeful-thompson-*` branches
   exist. Most are fully merged. Nine carry one unmerged commit each; most look
-  superseded by similar commits on `main`, but at least two have changes
-  `main` lacks: `ug2sob` (zero-pad years below 1000 in `localDateOf`) and
-  `rzp9ak` (stricter `gtin` and portion label checks in `foodDetailResponse`).
+  superseded by similar commits on `main`, but at least one has changes
+  `main` lacks: `rzp9ak` (stricter `gtin` and portion label checks in
+  `foodDetailResponse`). The `ug2sob` change (zero-pad years in `localDateOf`)
+  has since landed on `main`.
 - **Audit.** `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md` is a detailed audit from
   2026-10-20 (findings AUD-001 to AUD-036, work packages WP-1 to WP-12, a
   go/no-go checklist). It predates about 300 commits, so some findings are
   fixed (the API entry point, storage and retention sweeper, number-entry
   crashes, the core coverage gate). Spot checks on 2026-11-24 found these
-  still open: AUD-001 (idempotency key reuse can drop a newer entry), AUD-008
-  (the water chip and one-tap re-log write to today, not the viewed day; the
-  day does not advance after midnight). AUD-033 (tracked `catalog.sqlite-shm`/`-wal`)
+  still open: AUD-001 (idempotency key reuse can drop a newer entry). AUD-008's
+  water chip and one-tap re-log now write to the viewed day; the post-midnight
+  day advance has not been re-checked. AUD-033 (tracked `catalog.sqlite-shm`/`-wal`)
   is now fixed. Other findings have not been re-checked.
 
 Next steps, in priority order:
 
-- [ ] Make CI run: remove `with: version: 12` from both `pnpm/action-setup@v4`
-      steps in `.github/workflows/ci.yml` (or drop `packageManager`), push,
-      and fix whatever the now-reachable steps report.
-- [ ] Commit `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md` (currently untracked), then
-      re-check each AUD finding against `main` and mark it fixed or open.
-- [ ] Fix AUD-008: pass the viewed date through every write path (water chip
-      in `apps/mobile/src/components/DayView.tsx`, recent re-log in
-      `apps/mobile/app/log.tsx`) and advance the selected day after midnight
-      in `apps/mobile/app/(tabs)/index.tsx`.
+- [ ] Confirm CI is green on `main` now that the `pnpm/action-setup` version
+      clash is fixed, and fix whatever the now-reachable steps report.
+- [ ] Re-check each AUD finding in `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md`
+      (now committed) against `main` and mark it fixed or open.
+- [ ] Re-check the post-midnight day advance in
+      `apps/mobile/app/(tabs)/index.tsx` (the rest of AUD-008 is fixed).
 - [ ] Fix AUD-001 in `packages/db/src/sync/engine.ts`: bind the stored
       idempotency key to the exact batch it was sent with, and add the
       lost-response regression test.
 - [ ] Review the nine unmerged `claude/hopeful-thompson-*` commits; cherry-pick
-      `ug2sob` and `rzp9ak` if still wanted, then delete the merged branches.
+      `rzp9ak` if still wanted, then delete the merged branches.
 - [ ] Run the app on a real device: two weeks of daily use, the speed targets,
       and the VoiceOver/TalkBack checklist (spec Phase 1 exit criteria).
 - [ ] Stand up a hosted Supabase project and deploy the API; deployment target
