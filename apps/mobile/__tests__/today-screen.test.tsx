@@ -54,6 +54,24 @@ describe('TodayScreen', () => {
     expect(useUiStore.getState().selectedDate).toBe('2020-05-05');
   });
 
+  it('moves from the previous day to the new today after midnight, but leaves other past days alone', () => {
+    jest.useFakeTimers().setSystemTime(new Date(2026, 5, 15, 23, 50));
+    try {
+      act(() => useUiStore.setState({ selectedDate: '2026-06-15' }));
+      render(<TodayScreen />);
+      jest.setSystemTime(new Date(2026, 5, 16, 0, 10));
+      act(() => mockFocusCallback?.());
+      expect(useUiStore.getState().selectedDate).toBe('2026-06-16');
+
+      act(() => useUiStore.setState({ selectedDate: '2026-06-10' }));
+      jest.setSystemTime(new Date(2026, 5, 17, 0, 10));
+      act(() => mockFocusCallback?.());
+      expect(useUiStore.getState().selectedDate).toBe('2026-06-10');
+    } finally {
+      jest.useRealTimers();
+    }
+  });
+
   it('seeds the pending meal slot from the time of day', () => {
     jest.useFakeTimers().setSystemTime(new Date(2026, 5, 15, 12, 30));
     try {
