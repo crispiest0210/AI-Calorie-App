@@ -28,7 +28,7 @@ function pad(n: number): string {
 
 /** The local calendar date of an instant, as the device's clock sees it. */
 export function localDateOf(instant: Date = new Date()): LocalDate {
-  return `${instant.getFullYear()}-${pad(instant.getMonth() + 1)}-${pad(instant.getDate())}`;
+  return `${String(instant.getFullYear()).padStart(4, '0')}-${pad(instant.getMonth() + 1)}-${pad(instant.getDate())}`;
 }
 
 /**

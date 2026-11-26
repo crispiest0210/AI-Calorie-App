@@ -19,6 +19,13 @@ describe('local dates', () => {
     expect(typeof tzOffsetMinutesOf()).toBe('number');
   });
 
+  it('pads years below 1000 so the result stays a valid LocalDate', () => {
+    const instant = new Date(0);
+    instant.setFullYear(50, 0, 1);
+    expect(localDateOf(instant)).toBe('0050-01-01');
+    expect(isLocalDate(localDateOf(instant))).toBe(true);
+  });
+
   it('adds days across month and year ends', () => {
     expect(addDays('2026-09-30', 1)).toBe('2026-10-01');
     expect(addDays('2026-01-01', -1)).toBe('2025-12-31');
