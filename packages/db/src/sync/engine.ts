@@ -15,6 +15,7 @@ import { SyncError, type Transport } from './transport';
 
 export const CURSOR_KEY = 'sync.pull_cursor';
 const IDEMPOTENCY_KEY = 'sync.push_idempotency_key';
+const IDEMPOTENCY_BATCH = 'sync.push_idempotency_batch';
 
 export interface SyncResult {
   pushed: number;
@@ -69,8 +70,15 @@ export async function push(db: Db, transport: Transport): Promise<number> {
     // The key is stored before the request and cleared only after it succeeds,
     // so a retry after a dropped connection replays the stored response rather
     // than applying the batch twice (spec 4.1).
-    const idempotencyKey = getSetting(db, IDEMPOTENCY_KEY) || uuidv7();
+    // The key is bound to the exact batch it was first sent with: if the push
+    // response was lost and the outbox has since changed, the server would
+    // replay the old response and we would delete rows it never received.
+    const batchFingerprint = JSON.stringify(changes);
+    const storedKey = getSetting(db, IDEMPOTENCY_KEY);
+    const reusable = storedKey && getSetting(db, IDEMPOTENCY_BATCH) === batchFingerprint;
+    const idempotencyKey = reusable ? storedKey : uuidv7();
     setSetting(db, IDEMPOTENCY_KEY, idempotencyKey);
+    setSetting(db, IDEMPOTENCY_BATCH, batchFingerprint);
 
     const response = await transport.push({ changes }, idempotencyKey);
 
@@ -79,6 +87,7 @@ export async function push(db: Db, transport: Transport): Promise<number> {
       for (const assigned of response.assigned) applyServerRev(tx, assigned);
     });
     setSetting(db, IDEMPOTENCY_KEY, '');
+    setSetting(db, IDEMPOTENCY_BATCH, '');
     pushed += response.assigned.length;
   }
 }

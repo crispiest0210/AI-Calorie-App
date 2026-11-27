@@ -397,7 +397,7 @@ live vision model, and CI has never passed on `main`.
   go/no-go checklist). It predates about 300 commits, so some findings are
   fixed (the API entry point, storage and retention sweeper, number-entry
   crashes, the core coverage gate). Spot checks on 2026-11-24 found these
-  still open: AUD-001 (idempotency key reuse can drop a newer entry). AUD-008's
+  still open: AUD-001 is now fixed (the stored idempotency key is bound to its batch). AUD-008's
   water chip and one-tap re-log now write to the viewed day; the post-midnight
   day advance now moves a viewer sitting on yesterday's "today" to the new day. AUD-033 (tracked `catalog.sqlite-shm`/`-wal`)
   is now fixed. Other findings have not been re-checked.
@@ -408,9 +408,6 @@ Next steps, in priority order:
       clash is fixed, and fix whatever the now-reachable steps report.
 - [ ] Re-check each AUD finding in `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md`
       (now committed) against `main` and mark it fixed or open.
-- [ ] Fix AUD-001 in `packages/db/src/sync/engine.ts`: bind the stored
-      idempotency key to the exact batch it was sent with, and add the
-      lost-response regression test.
 - [ ] Review the nine unmerged `claude/hopeful-thompson-*` commits; delete the
       merged branches (`rzp9ak` has already landed on `main`).
 - [ ] Run the app on a real device: two weeks of daily use, the speed targets,

@@ -83,6 +83,24 @@ describe('push', () => {
     await push(db, next);
     expect(next.push.mock.calls[0]?.[1]).not.toBe(failing.push.mock.calls[0]?.[1]);
   });
+
+  it('uses a fresh key when the outbox changed after a lost response', async () => {
+    const { db } = freshDb();
+    water.addWater(db, 250);
+    const lost = fakeTransport({
+      push: vi.fn(async () => {
+        throw new SyncError('offline', 'response lost');
+      }),
+    });
+    await expect(push(db, lost)).rejects.toMatchObject({ kind: 'offline' });
+
+    const newId = water.addWater(db, 100);
+    const retry = fakeTransport();
+    await push(db, retry);
+    expect(retry.push.mock.calls[0]?.[1]).not.toBe(lost.push.mock.calls[0]?.[1]);
+    const [request] = retry.push.mock.calls[0] as [PushRequest, string];
+    expect(request.changes.map((c) => c.row.id)).toContain(newId);
+  });
 });
 
 describe('pull', () => {
