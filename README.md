@@ -389,10 +389,9 @@ live vision model, and CI has never passed on `main`.
   on 2026-11-04.
 - **Open branches.** About 30 `origin/claude/hopeful-thompson-*` branches
   exist. Most are fully merged. Nine carry one unmerged commit each; most look
-  superseded by similar commits on `main`, but at least one has changes
-  `main` lacks: `rzp9ak` (stricter `gtin` and portion label checks in
-  `foodDetailResponse`). The `ug2sob` change (zero-pad years in `localDateOf`)
-  has since landed on `main`.
+  superseded by similar commits on `main`. The `rzp9ak` change (stricter
+  `gtin` and portion label checks in `foodDetailResponse`) and the `ug2sob`
+  change (zero-pad years in `localDateOf`) have since landed on `main`.
 - **Audit.** `docs/CODEBASE_AUDIT_AND_MVP_PLAN.md` is a detailed audit from
   2026-10-20 (findings AUD-001 to AUD-036, work packages WP-1 to WP-12, a
   go/no-go checklist). It predates about 300 commits, so some findings are
@@ -412,8 +411,8 @@ Next steps, in priority order:
 - [ ] Fix AUD-001 in `packages/db/src/sync/engine.ts`: bind the stored
       idempotency key to the exact batch it was sent with, and add the
       lost-response regression test.
-- [ ] Review the nine unmerged `claude/hopeful-thompson-*` commits; cherry-pick
-      `rzp9ak` if still wanted, then delete the merged branches.
+- [ ] Review the nine unmerged `claude/hopeful-thompson-*` commits; delete the
+      merged branches (`rzp9ak` has already landed on `main`).
 - [ ] Run the app on a real device: two weeks of daily use, the speed targets,
       and the VoiceOver/TalkBack checklist (spec Phase 1 exit criteria).
 - [ ] Stand up a hosted Supabase project and deploy the API; deployment target
