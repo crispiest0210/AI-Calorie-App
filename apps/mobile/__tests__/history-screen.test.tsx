@@ -119,6 +119,19 @@ describe('HistoryScreen', () => {
     expect(screen.getByLabelText('Today, 800 calories, 1 entry, over target')).toBeTruthy();
   });
 
+  it('also says "over target" in visible text, not only by colour', () => {
+    mockEntries = [oats];
+    mockProfiles = [{ ...profile, targets: [{ nutrientCode: 'energy_kcal', kind: 'target', value: '500', basis: 'absolute' }] }];
+    render(<HistoryScreen />);
+    expect(screen.getByText(/· over target$/)).toBeTruthy();
+  });
+
+  it('shows no over-target text on a day within target', () => {
+    mockEntries = [oats];
+    render(<HistoryScreen />);
+    expect(screen.queryByText(/over target/)).toBeNull();
+  });
+
   it('opens the tapped day', () => {
     mockEntries = [oats];
     render(<HistoryScreen />);

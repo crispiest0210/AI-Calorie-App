@@ -187,7 +187,7 @@ export default function HistoryScreen() {
                 <View style={{ gap: 2 }}>
                   <Text variant="label">{formatDayLabel(day.date, today)}</Text>
                   <Text variant="caption" tone="faint" numeric>
-                    {day.entries.length === 0 ? 'nothing logged' : `${pluralize(day.entries.length, 'entry', 'entries')} · ${day.waterMl} mL water`}
+                    {day.entries.length === 0 ? 'nothing logged' : `${pluralize(day.entries.length, 'entry', 'entries')} · ${day.waterMl} mL water${over ? ' · over target' : ''}`}
                   </Text>
                 </View>
                 <Text variant="heading" numeric tone={over ? 'over' : day.entries.length === 0 ? 'faint' : 'default'}>
