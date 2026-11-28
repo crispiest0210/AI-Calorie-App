@@ -91,6 +91,9 @@ export default function ScanScreen() {
 
         successFeedback();
         router.replace({ pathname: '/amount', params: { foodId: food.id, mealSlot: params.mealSlot, date: params.date } });
+      } catch {
+        // Offline, a timeout or a malformed body: never leave "Looking it up…" showing.
+        setStatus('Lookup failed. Check your connection, or add it from the label.');
       } finally {
         busy.current = false;
       }

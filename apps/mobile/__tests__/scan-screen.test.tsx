@@ -142,6 +142,20 @@ describe('ScanScreen', () => {
     expect(mockReplace).not.toHaveBeenCalled();
   });
 
+  it('reports a failed lookup when the request itself throws (offline)', async () => {
+    render();
+    mockFetch.mockRejectedValueOnce(new TypeError('Network request failed'));
+    await act(async () => mockOnScanned?.({ data: '12345678' }));
+    expect(screen.getByText(/Lookup failed/)).toBeTruthy();
+    expect(screen.queryByText(/Looking it up/)).toBeNull();
+    expect(mockReplace).not.toHaveBeenCalled();
+
+    // The scanner is released, so a retry works.
+    mockFetch.mockResolvedValueOnce({ status: 404, ok: false });
+    await act(async () => mockOnScanned?.({ data: '12345678' }));
+    expect(screen.getByText(/No product for that barcode/)).toBeTruthy();
+  });
+
   it('does not cache a product while the catalog is still loading', async () => {
     mockUserRelease = null;
     mockFetch.mockResolvedValue({ status: 200, ok: true, json: async () => food });
