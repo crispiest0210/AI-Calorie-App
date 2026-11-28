@@ -90,13 +90,18 @@ export default function PhotoReviewScreen() {
     successFeedback();
 
     // Tell the server the draft is done, which starts the retention clock.
-    const token = await getAccessToken();
-    if (token !== null) {
-      await fetch(`${config.apiBaseUrl}/v1/photo-analyses/${params.analysisId}/resolve`, {
-        method: 'POST',
-        headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
-        body: JSON.stringify({ status: 'confirmed' }),
-      }).catch(() => undefined);
+    // Best effort: the entries are already logged, so a failure here must not strand the screen.
+    try {
+      const token = await getAccessToken();
+      if (token !== null) {
+        await fetch(`${config.apiBaseUrl}/v1/photo-analyses/${params.analysisId}/resolve`, {
+          method: 'POST',
+          headers: { authorization: `Bearer ${token}`, 'content-type': 'application/json' },
+          body: JSON.stringify({ status: 'confirmed' }),
+        });
+      }
+    } catch {
+      // The server's retention sweep still cleans up an unresolved draft.
     }
     router.dismissAll();
   }, [db, getAccessToken, params.analysisId, params.date, params.mealSlot, review, router]);

@@ -169,6 +169,17 @@ describe('PhotoReviewScreen', () => {
     expect(mockLogFood.mock.calls[0]![1]).toMatchObject({ grams: '150', gramsProvenance: 'ai_adjusted' });
   });
 
+  it('still dismisses when fetching the access token throws after logging', async () => {
+    setDraft([draftItem('i1', 'rice')]);
+    mockGetAccessToken.mockRejectedValue(new Error('keychain locked'));
+    render();
+    fireEvent.press(screen.getByRole('button', { name: 'Confirm and log' }));
+
+    await waitFor(() => expect(mockDismissAll).toHaveBeenCalled());
+    expect(mockLogFood).toHaveBeenCalledTimes(1);
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
   it('still logs and dismisses when signed out, without calling the server', async () => {
     setDraft([draftItem('i1', 'rice')]);
     mockGetAccessToken.mockResolvedValue(null);
