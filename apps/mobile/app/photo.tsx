@@ -44,7 +44,10 @@ export default function PhotoScreen() {
 
     try {
       const shot = await camera.current.takePictureAsync({ quality: 0.9, exif: false });
-      if (shot === undefined) return;
+      if (shot === undefined) {
+        setStatus(null);
+        return;
+      }
 
       /*
        * Resized and re-encoded here, which also drops EXIF — including the GPS
@@ -86,6 +89,10 @@ export default function PhotoScreen() {
         pathname: '/photo-review',
         params: { analysisId, draft: await runResponse.text(), mealSlot: params.mealSlot, date: params.date },
       });
+    } catch {
+      // Offline, a failed upload or a camera error would otherwise leave the
+      // last progress line ("Uploading…") on screen with no way to tell.
+      setStatus(FAILURE_COPY.upstream_unavailable!);
     } finally {
       setBusy(false);
     }

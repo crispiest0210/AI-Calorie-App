@@ -112,6 +112,16 @@ describe('PhotoScreen', () => {
     expect(mockReplace).not.toHaveBeenCalled();
   });
 
+  it('replaces the progress line with an error when a request throws, e.g. offline', async () => {
+    mockFetch.mockRejectedValueOnce(new TypeError('Network request failed'));
+    render();
+    await analyse();
+    expect(screen.queryByText('Uploading…')).toBeNull();
+    expect(screen.getByText(/analysis service is unreachable/)).toBeTruthy();
+    expect(mockReplace).not.toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Analyse this meal' }).props.accessibilityState?.disabled).toBeFalsy();
+  });
+
   it('maps an analysis failure code to its copy and falls back for unknown ones', async () => {
     mockFetch
       .mockResolvedValueOnce({ ok: true, json: async () => ({ analysisId: 'a1', uploadUrl: 'https://up.test/a1' }) })
@@ -171,6 +181,7 @@ describe('PhotoScreen', () => {
     render();
     await analyse();
     expect(mockManipulate).not.toHaveBeenCalled();
+    expect(screen.queryByText('Preparing the photo…')).toBeNull();
     expect(screen.getByRole('button', { name: 'Analyse this meal' }).props.accessibilityState?.disabled).toBeFalsy();
   });
 });
