@@ -56,6 +56,8 @@ export default function SettingsScreen() {
         return;
       }
       await Share.share({ message: await response.text(), title: 'Nutrition Tracker export' });
+    } catch {
+      Alert.alert('Export failed', 'Check your connection and try again.');
     } finally {
       setBusy(null);
     }
@@ -90,6 +92,8 @@ export default function SettingsScreen() {
                 }
                 await signOut();
                 Alert.alert('Account deleted', 'Your data on this device is still here. Delete the app to remove it.');
+              } catch {
+                Alert.alert('Could not delete', 'Check your connection and try again.');
               } finally {
                 setBusy(null);
               }
