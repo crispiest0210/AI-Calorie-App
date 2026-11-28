@@ -122,6 +122,15 @@ describe('ScanScreen', () => {
     expect(lookup().props.accessibilityState?.disabled).toBeFalsy();
   });
 
+  it('shows the lookup result for a typed barcode when the camera is not allowed', async () => {
+    mockPermission = { granted: false };
+    mockFetch.mockResolvedValueOnce({ status: 404, ok: false });
+    render();
+    fireEvent.changeText(screen.getByLabelText('Or type the barcode number'), '12345678');
+    await act(async () => fireEvent.press(screen.getByRole('button', { name: 'Look it up' })));
+    expect(screen.getByText(/No product for that barcode/)).toBeTruthy();
+  });
+
   it('asks for sign-in when there is no access token, without calling the API', async () => {
     mockGetAccessToken.mockResolvedValue(null);
     render();

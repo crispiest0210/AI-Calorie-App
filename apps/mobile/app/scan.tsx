@@ -123,6 +123,7 @@ export default function ScanScreen() {
           <Text variant="heading">Camera access</Text>
           <Text tone="muted">Scanning needs the camera. You can also type the number underneath the barcode.</Text>
           <Button label="Allow camera" onPress={() => void requestPermission()} />
+          <StatusLine status={status} />
           <ManualEntry value={manual} onChange={setManual} onSubmit={() => void lookup(manual)} />
         </Card>
       </Screen>
@@ -137,15 +138,20 @@ export default function ScanScreen() {
         onBarcodeScanned={({ data }) => void lookup(data)}
       />
       <View style={{ padding: spacing.lg, gap: spacing.md, backgroundColor: colors.surface }}>
-        {status !== null && (
-          <Text variant="label" tone="over" accessibilityLiveRegion="polite">
-            {status}
-          </Text>
-        )}
+        <StatusLine status={status} />
         <ManualEntry value={manual} onChange={setManual} onSubmit={() => void lookup(manual)} />
         <Button label="Add from label instead" variant="secondary" onPress={() => router.replace({ pathname: '/custom-food', params })} />
       </View>
     </View>
+  );
+}
+
+function StatusLine({ status }: { status: string | null }) {
+  if (status === null) return null;
+  return (
+    <Text variant="label" tone="over" accessibilityLiveRegion="polite">
+      {status}
+    </Text>
   );
 }
 
